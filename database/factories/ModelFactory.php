@@ -101,8 +101,8 @@ $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker)
 
 //舞姬与科技中间表，多对多
 $factory->define(\App\Models\DancerTechnology::class, function (Faker\Generator $faker) {
-    $dancer_ids = \App\Models\Dancer::lists('id')->toArray();
-    $technology_ids = \App\Models\Technology::lists('id')->toArray();
+    $dancer_ids = \App\Models\Dancer::pluck('id')->toArray();
+    $technology_ids = \App\Models\Technology::pluck('id')->toArray();
 
     return [
         'dancer_id' => $faker->randomElement($dancer_ids),
@@ -113,8 +113,8 @@ $factory->define(\App\Models\DancerTechnology::class, function (Faker\Generator 
 
 //科技与特性中间表，多对多
 $factory->define(\App\Models\TechnologyEffect::class, function (Faker\Generator $faker) {
-    $technology_ids =\App\Models\Technology::lists('id')->toArray();
-    $effect_ids =\App\Models\Effect::lists('id')->toArray();
+    $technology_ids =\App\Models\Technology::pluck('id')->toArray();
+    $effect_ids =\App\Models\Effect::pluck('id')->toArray();
 
     return [
         'technology_id' => $faker->randomElement($technology_ids),
