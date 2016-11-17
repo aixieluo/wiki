@@ -11,9 +11,9 @@
 |
 */
 
+
 Route::get('/', function () {
-    dd(\App\Models\Dancer::pluck('id')->toArray());
-    return view('welcome');
+    return view('home.index');
 });
 
 Auth::routes();

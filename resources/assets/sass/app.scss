@@ -7,3 +7,123 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+//通用背景颜色表
+$hue: #ab2b2b;
+$bgc: #ebebeb;
+$card-bgc: #FFFFFF;
+$box-borderc: #DDDDDD;
+
+//通用文字颜色表
+$white-fc: #FFFFFF;
+$head-list-fc: #EEEEEE;
+
+//间距
+$spacing: 30px;
+$spacing2: 35px;
+
+//响应式界限
+$screen-xs-max: 767px;
+$screen-sm-min: 768px;
+$screen-sm-max: 993px;
+$screen-md-min: 992px;
+$screen-md-max: 1199px;
+$screen-lg-min: 1200px;
+
+body{
+  background-color: $bgc;
+}
+
+header{
+  background-color: $hue;
+  text-align: center;
+  $headerLen: 42px;
+  padding-top: $headerLen;
+  padding-bottom: $headerLen;
+  h1{
+    color: #FFFFFF;
+  }
+}
+
+nav{
+  font-size: 14px;
+  text-align: center;
+  background-color: $card-bgc;
+  border-top: 1px solid #ebebeb;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e1e1e1;
+  .navbar-header{
+
+  }
+  .navbar-toggle-button{
+    text-align: center;
+    i{
+      font-size: 2em;
+      height: 56px;
+      line-height: 56px;
+    }
+  }
+}
+.navbar-collapse{
+  .menu{
+    margin: 0;
+    padding: 0;
+    li{
+      display: inline-block;
+      position: relative;
+      &.active{
+        margin-bottom: -2px;
+        border-bottom: 2px solid $hue;
+      }
+      a{
+        color: #505050;
+        line-height: 4em;
+        display: block;
+        padding: 0 21px;
+      }
+    }
+  }
+}
+
+
+/*********************************************舞姬*********************************************/
+
+.xd-detail{
+  $ano: 120px;
+  .nav-tabs{
+    margin-bottom: 15px;
+  }
+  .d-ano{
+    width: $ano;
+    text-align: center;
+  }
+  .d-avatar{
+    img{
+      width: $ano;
+      height: $ano;
+      display: block;
+    }
+  }
+  .d-name,.d-outfit{
+    margin-top: 15px;
+  }
+  .d-intro{
+    width: 100%;
+  }
+  .d-ci{
+  }
+  .d-attribute{
+    width: 100%;
+    tr+tr{
+      border-top: 1px dashed #ddd;
+    }
+    th{
+      padding: 6px 10px;
+    }
+    td{
+      height: 30px;
+      padding: 0 10px;
+    }
+  }
+}
