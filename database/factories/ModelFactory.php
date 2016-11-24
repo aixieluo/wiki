@@ -82,7 +82,7 @@ $factory->define(\App\Models\Effect::class, function (Faker\Generator $faker) {
 
 //基本属性表，多态关联
 $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker) {
-    $type = $faker->randomElement(["App\Model\Dancer", "App\Model\Technology"]);
+    $type = $faker->randomElement(["App\Models\Dancer", "App\Models\Technology"]);
 
     return [
         'attributeable_id' => $faker->numberBetween(1, 30),

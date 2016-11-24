@@ -14,4 +14,12 @@ class Effect extends Model
     protected $fillable = [
         'name', 'describe'
     ];
+
+    /**
+     * 特性
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function effects(){
+        return $this->belongsToMany('App\Models\Effect');
+    }
 }

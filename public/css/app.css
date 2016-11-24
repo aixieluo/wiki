@@ -1,5 +1,52 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+/* latin-ext */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Raleway Light"), local("Raleway-Light"), url(../fonts/raleway/Raleway-Light-1.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Raleway Light"), local("Raleway-Light"), url(../fonts/raleway/Raleway-Light-2.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+
+/* latin-ext */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Raleway"), local("Raleway-Regular"), url(../fonts/raleway/Raleway-Regular-1.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Raleway"), local("Raleway-Regular"), url(../fonts/raleway/Raleway-Regular-2.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+
+/* latin-ext */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Raleway SemiBold"), local("Raleway-SemiBold"), url(../fonts/raleway/Raleway-SemiBold-1.woff2) format("woff2");
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF; }
+
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  src: local("Raleway SemiBold"), local("Raleway-SemiBold"), url(../fonts/raleway/Raleway-SemiBold-2.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; }
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -2293,7 +2340,7 @@ output {
   padding-top: 7px;
   font-size: 14px;
   line-height: 1.6;
-  color: #555555; }
+  color: #ccc; }
 
 .form-control {
   display: block;
@@ -2302,7 +2349,7 @@ output {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.6;
-  color: #555555;
+  color: #ccc;
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccd0d2;
@@ -3446,7 +3493,7 @@ tbody.collapse.in {
   font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: #555555;
+  color: #ccc;
   text-align: center;
   background-color: #eeeeee;
   border: 1px solid #ccd0d2;
@@ -3561,7 +3608,7 @@ tbody.collapse.in {
       .nav-tabs > li > a:hover {
         border-color: #eeeeee #eeeeee #ddd; }
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-      color: #555555;
+      color: #ccc;
       background-color: #f5f8fa;
       border: 1px solid #ddd;
       border-bottom-color: transparent;
@@ -5834,5 +5881,3 @@ nav {
   .xd-detail .d-attribute td {
     height: 30px;
     padding: 0 10px; }
-
-/*# sourceMappingURL=app.css.map */

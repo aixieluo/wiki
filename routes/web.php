@@ -16,6 +16,16 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+Route::group(['namespace'=>'Home'], function (){
+    //auth login register
+    Auth::routes();
+
+    //
+    Route::get('home', 'HomeController@index');
+
+    //dancer
+    Route::resource('dancer', 'DancerController');
+});
+

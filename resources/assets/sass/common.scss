@@ -1,0 +1,35 @@
+
+// Fonts
+@import "fonts";
+
+// Variables
+@import "variables";
+
+//SassCore
+@import "sassCore/function";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+//通用背景颜色表
+$hue: #ab2b2b;
+$bgc: #ebebeb;
+$card-bgc: #FFFFFF;
+$box-borderc: #DDDDDD;
+
+//通用文字颜色表
+$white-fc: #FFFFFF;
+$head-list-fc: #EEEEEE;
+
+//间距
+$spacing: 30px;
+$spacing2: 35px;
+
+//响应式界限
+$screen-xs-max: 767px;
+$screen-sm-min: 768px;
+$screen-sm-max: 991px;
+$screen-md-min: 992px;
+$screen-md-max: 1199px;
+$screen-lg-min: 1200px;

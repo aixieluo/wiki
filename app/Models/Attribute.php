@@ -15,4 +15,12 @@ class Attribute extends Model
         'attributeable_id', 'attributeable_type', 'fire', 'penetrate', 'durable', 'armor', 'hit', 'dodge', 'concealment', 'spy'
     ];
 
+    /**
+     * 获取所属的attributeable模型
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function attributeable(){
+        return $this->morphTO();
+    }
+
 }
