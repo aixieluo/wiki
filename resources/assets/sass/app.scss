@@ -56,10 +56,13 @@ nav{
 }
 
 
-/*********************************************舞姬*********************************************/
-
+/*********************舞姬详情*********************/
 .xd-detail{
   $ano: 120px;
+  .f-wrap{
+    background-color: #FFF;
+    padding: 20px;
+  }
   .nav-tabs{
     margin-bottom: 15px;
   }
@@ -71,7 +74,7 @@ nav{
     img{
       width: $ano;
       height: $ano;
-      display: block;
+      display: inline-block;
     }
   }
   .d-name,.d-outfit{
@@ -96,3 +99,4 @@ nav{
     }
   }
 }
+/*********************舞姬详情*********************/

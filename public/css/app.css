@@ -5853,7 +5853,11 @@ nav {
       display: block;
       padding: 0 21px; }
 
-/*********************************************舞姬*********************************************/
+/*********************舞姬详情*********************/
+.xd-detail .f-wrap {
+  background-color: #FFF;
+  padding: 20px; }
+
 .xd-detail .nav-tabs {
   margin-bottom: 15px; }
 
@@ -5864,7 +5868,7 @@ nav {
 .xd-detail .d-avatar img {
   width: 120px;
   height: 120px;
-  display: block; }
+  display: inline-block; }
 
 .xd-detail .d-name, .xd-detail .d-outfit {
   margin-top: 15px; }
@@ -5881,3 +5885,5 @@ nav {
   .xd-detail .d-attribute td {
     height: 30px;
     padding: 0 10px; }
+
+/*********************舞姬详情*********************/

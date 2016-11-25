@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}"/>
+    <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
 </head>
 <body>
 <header>
-    <h1>钢铁华尔兹资讯站</h1>
+    {{--<h1>钢铁华尔兹资讯站</h1>--}}
 </header>
 
 <nav class="main-navigation">
