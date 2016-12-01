@@ -1,6 +1,6 @@
 
 // Fonts
-@import "fonts";
+//@import "fonts";
 
 // Variables
 @import "variables";
@@ -10,6 +10,7 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/font-awesome/scss/font-awesome";
 
 
 //通用背景颜色表
@@ -33,3 +34,11 @@ $screen-sm-max: 991px;
 $screen-md-min: 992px;
 $screen-md-max: 1199px;
 $screen-lg-min: 1200px;
+
+.xwrap{
+    $wrap: 35px;
+    background-color: #FFF;
+    padding: $wrap;
+    margin-bottom: $wrap;
+    @include border-radius(4px);
+}

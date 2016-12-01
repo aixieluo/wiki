@@ -1,36 +1,41 @@
 @import "common";
 
 body{
-  background-color: $bgc;
+    background-color: $bgc;
 }
 
+.noborder{
+    border: 0;
+}
+
+/*********************头部*********************/
 header{
-  background-color: $hue;
-  text-align: center;
-  $headerLen: 42px;
-  padding-top: $headerLen;
-  padding-bottom: $headerLen;
+    background-color: $hue;
+    text-align: center;
+    $headerLen: 42px;
+    padding-top: $headerLen;
+    padding-bottom: $headerLen;
   h1{
-    color: #FFFFFF;
+      color: #FFFFFF;
   }
 }
 
-nav{
+.main-navigation{
   font-size: 14px;
   text-align: center;
   background-color: $card-bgc;
   border-top: 1px solid #ebebeb;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
   border-bottom: 2px solid #e1e1e1;
   .navbar-header{
 
   }
   .navbar-toggle-button{
-    text-align: center;
+      text-align: center;
     i{
-      font-size: 2em;
-      height: 56px;
-      line-height: 56px;
+        font-size: 2em;
+        height: 56px;
+        line-height: 56px;
     }
   }
 }
@@ -54,15 +59,11 @@ nav{
     }
   }
 }
-
+/*********************头部*********************/
 
 /*********************舞姬详情*********************/
 .xd-detail{
   $ano: 120px;
-  .f-wrap{
-    background-color: #FFF;
-    padding: 20px;
-  }
   .nav-tabs{
     margin-bottom: 15px;
   }
@@ -85,18 +86,9 @@ nav{
   }
   .d-ci{
   }
-  .d-attribute{
-    width: 100%;
-    tr+tr{
-      border-top: 1px dashed #ddd;
+    .lv-ipt{
+        border: 0;
+        width: 30px;
     }
-    th{
-      padding: 6px 10px;
-    }
-    td{
-      height: 30px;
-      padding: 0 10px;
-    }
-  }
 }
 /*********************舞姬详情*********************/
