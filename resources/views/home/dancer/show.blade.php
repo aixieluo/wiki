@@ -62,6 +62,35 @@
                     </table>
                 </div>
             </div>
+            <h3>科技</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>弹药</td>
+                            <td>XXXX破甲弹</td>
+                        </tr>
+                        <tr>
+                            <td>装甲</td>
+                            <td>XXXX破甲弹</td>
+                        </tr>
+                        <tr>
+                            <td>引擎</td>
+                            <td>XXXX破甲弹</td>
+                        </tr>
+                        <tr>
+                            <td>车身</td>
+                            <td>XXXX破甲弹</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <h3>研发需求</h3>
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
