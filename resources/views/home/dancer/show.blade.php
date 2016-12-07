@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-2 col-md-offset-1">
                     <div class="d-avator text-center">
-                        <img class="img-circle img-thumbnail" src="{{ $dancer->images->get('avator') }}" />
+{{--                        <img class="img-circle img-thumbnail" src="{{ $dancer->images->get('avator') }}" />--}}
                     </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1">
@@ -20,25 +20,21 @@
                         </tr>
                         <tr>
                             <td>军阶</td>
-                            <td>=-=</td>
-                            <td>稀有度</td>
                             <td>{{ $dancer->rarity }}</td>
-                        </tr>
-                        <tr>
                             <td>类型</td>
                             <td>{{ $dancer->type }}</td>
+                        </tr>
+                        <tr>
                             <td>国别</td>
                             <td>{{ $dancer->country }}</td>
-                        </tr>
-                        <tr>
                             <td>隶属机构</td>
                             <td>{{ $dancer->subjection }}</td>
-                            <td>配音</td>
-                            <td>=-=</td>
                         </tr>
                         <tr>
+                            <td>配音</td>
+                            <td>=-=</td>
                             <td>画师</td>
-                            <td>S.V.S</td>
+                            <td>=-=</td>
                         </tr>
                     </table>
                 </div>
@@ -56,9 +52,13 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-xs-6"><i class="fa fa-star" aria-hidden="true"></i></div>
-                        <div class="col-xs-6 text-right">Lv.<input class="lv-ipt" type="tel" value="1" maxlength="3" max="99" min="1"></div>
+                    <div class="clearfix">
+                        <div class="pull-left"><i class="fa fa-star" aria-hidden="true"></i></div>
+                        <div class="pull-right">
+                            <button class="btn-arrow" type="button"><i class="fa fa-arrow-down"></i></button>
+                            <span>Lv.<input class="lv-ipt" type="tel" value="1" maxlength="2" max="99" min="1"></span>
+                            <button class="btn-arrow" type="button"><i class="fa fa-arrow-up"></i></button>
+                        </div>
                     </div>
                     <table class="table table-bordered">
                         <tr>

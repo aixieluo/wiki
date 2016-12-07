@@ -56,7 +56,7 @@ class DancerController extends Controller
         }])->with('technologies')->findOrFail($id);
         $dancer->images = $dancer->images->pluck('path', 'type');
         $dancer->attributes = $dancer->attributes->get(0);
-        dd($dancer->technologies->toArray());
+//        dd($dancer->technologies->toArray());
         return view('home.dancer.show', compact('dancer'));
     }
 

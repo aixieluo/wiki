@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EffectsTableSeeder::class);
         $this->call(ImagesTableSeeder::class);
         $this->call(TechnologiesTableSeeder::class);
-        $this->call(TechnologyEffectsTableSeeder::class);
         $this->call(DancerTechnologiesTableSeeder::class);
     }
 }
