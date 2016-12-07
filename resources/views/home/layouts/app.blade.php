@@ -9,7 +9,7 @@
 </head>
 <body>
 <header>
-    <h1>钢铁华尔兹资讯站</h1>
+    {{--<h1>钢铁华尔兹资讯站</h1>--}}
 </header>
 
 <nav class="main-navigation">
@@ -19,13 +19,13 @@
                 <div class="navbar-header">
 							<span role="button" class="navbar-toggle-button" data-toggle="collapse" data-target="#mainMenu" aria-expanded="false">
 								<span class="sr-only">切换导航</span>
-						       	<i class="icon-list"></i>
+						       	<i class="fa fa-list"></i>
 							</span>
                 </div>
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="menu">
                         <li role="presentation"><a href="{{ url('/') }}">游戏简介</a></li>
-                        <li role="presentation"><a href="{{ route('dancer.index') }}">钢舞姬</a></li>
+                        <li class="active" role="presentation"><a href="{{ route('dancer.index') }}">钢舞姬</a></li>
                         <li role="presentation"><a href="#">地形与关卡</a></li>
                         <li role="presentation"><a href="#">建筑</a></li>
                         <li role="presentation"><a href="#">科技</a></li>

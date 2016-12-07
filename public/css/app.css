@@ -10746,7 +10746,10 @@ body {
   border: 0;
 }
 
-/*********************头部*********************/
+.noline {
+  text-decoration: none !important;
+}
+
 header {
   background-color: #ab2b2b;
   text-align: center;
@@ -10795,6 +10798,7 @@ header h1 {
 .navbar-collapse .menu li a {
   color: #505050;
   line-height: 4em;
+  text-decoration: none;
   display: block;
   padding: 0 21px;
 }
@@ -10805,34 +10809,35 @@ header h1 {
   }
 }
 
-/*********************头部*********************/
+@media (max-width: 767px) {
+  .navbar-collapse .menu li {
+    display: block;
+  }
+}
+
+@media (min-width: 767px) {
+  .navbar-toggle-button {
+    display: none;
+  }
+}
+
 /*********************舞姬详情*********************/
 .xd-detail .nav-tabs {
   margin-bottom: 15px;
 }
 
-.xd-detail .d-ano {
-  width: 120px;
-  text-align: center;
+.xd-detail .d-avator {
+  margin-bottom: 15px;
 }
 
-.xd-detail .d-avatar img {
-  width: 120px;
-  height: 120px;
+.xd-detail .d-avator img {
   display: inline-block;
-}
-
-.xd-detail .d-name, .xd-detail .d-outfit {
-  margin-top: 15px;
-}
-
-.xd-detail .d-intro {
-  width: 100%;
 }
 
 .xd-detail .lv-ipt {
   border: 0;
-  width: 30px;
+  background-color: transparent;
+  width: 4em;
 }
 
 @media (max-width: 991px) {
@@ -10842,3 +10847,14 @@ header h1 {
 }
 
 /*********************舞姬详情*********************/
+/*********************舞姬列表*********************/
+.xd-list .between {
+  display: -webkit-box;
+  display: -moz-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+}
+
+/*********************舞姬列表*********************/

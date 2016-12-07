@@ -5,23 +5,52 @@
     <div class="container">
         <div class="xwrap">
             <div class="row">
-                <div class="col-md-2">
-                    <div class="text-center">
+                <div class="col-md-2 col-md-offset-1">
+                    <div class="d-avator text-center">
                         <img class="img-circle img-thumbnail" src="{{ $dancer->images->get('avator') }}" />
-                        <div class="d-name"><span class="label label-success">{{ $dancer->name }}</span></div>
-                        <div class="d-outfit"><span class="label label-danger">{{ $dancer->dance_outfit }}</span></div>
                     </div>
                 </div>
-                <div class="col-md-5"></div>
+                <div class="col-md-6 col-md-offset-1">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>姓名</td>
+                            <td>{{ $dancer->name }}</td>
+                            <td>舞装</td>
+                            <td>{{ $dancer->dance_outfit }}</td>
+                        </tr>
+                        <tr>
+                            <td>军阶</td>
+                            <td>=-=</td>
+                            <td>稀有度</td>
+                            <td>{{ $dancer->rarity }}</td>
+                        </tr>
+                        <tr>
+                            <td>类型</td>
+                            <td>{{ $dancer->type }}</td>
+                            <td>国别</td>
+                            <td>{{ $dancer->country }}</td>
+                        </tr>
+                        <tr>
+                            <td>隶属机构</td>
+                            <td>{{ $dancer->subjection }}</td>
+                            <td>配音</td>
+                            <td>=-=</td>
+                        </tr>
+                        <tr>
+                            <td>画师</td>
+                            <td>S.V.S</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div class="page-header">
                 <h3>人物简介</h3>
             </div>
-            <p class="well">暗杀的金坷垃随机到萨克雷机读卡老实交代卡时间段拉萨觉得了卡就是考虑到</p>
+            <p class="well">{{ $dancer->introduction }}</p>
             <div class="page-header">
                 <h3>性格设定</h3>
             </div>
-            <p class="well">暗杀的金坷垃随机到萨克雷机读卡老实交代卡时间段拉萨觉得了卡就是考虑到</p>
+            <p class="well">{{ $dancer->character }}</p>
             <div class="page-header">
                 <h3>基础属性</h3>
             </div>
@@ -65,15 +94,15 @@
                     <table class="table table-bordered">
                         <tr>
                             <td>火力</td>
-                            <td>12</td>
+                            <td>{{ $dancer->grow_fire }}</td>
                             <td>穿甲</td>
-                            <td>12</td>
+                            <td>{{ $dancer->grow_penetrate }}</td>
                         </tr>
                         <tr>
                             <td>耐久</td>
-                            <td>12</td>
+                            <td>{{ $dancer->grow_durable }}</td>
                             <td>装甲</td>
-                            <td>12</td>
+                            <td>{{ $dancer->grow_armor }}</td>
                         </tr>
                     </table>
                 </div>
@@ -82,17 +111,30 @@
                 <h3>装备槽</h3>
             </div>
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
+                            @for($i=0; $i<$dancer->barbette; $i++)
                             <td>炮座</td>
-                            <td>炮座</td>
-                            <td>炮座</td>
-                        </tr>
-                        <tr>
-                            <td>炮座</td>
-                            <td>炮座</td>
-                            <td>炮座</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->refit; $i++)
+                            <td>改装</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->outside; $i++)
+                            <td>外身</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->inwall; $i++)
+                            <td>内壁</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->inwarehouse; $i++)
+                            <td>内仓</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->carriage; $i++)
+                            <td>炮架</td>
+                            @endfor
+                            @for($i=0; $i<$dancer->special; $i++)
+                            <td>特殊</td>
+                            @endfor
                         </tr>
                     </table>
                 </div>

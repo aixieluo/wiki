@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTechnologiesTable extends Migration
+class CreateEffectablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTechnologiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('technologies', function (Blueprint $table) {
+        Schema::create('effectables', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('科技名称');
-            $table->integer('rank')->comment('阶级');
-            $table->string('category')->comment('科技类别');
-            $table->string('type')->comment('科技类型');
+            $table->integer('effect_id')->comment('特性ID');
+            $table->integer('effectable_id')->comment('关联表的字段ID');
+            $table->string('effectable_type')->comment('关联表的模型名');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateTechnologiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('technologies');
+        Schema::dropIfExists('effectables');
     }
 }

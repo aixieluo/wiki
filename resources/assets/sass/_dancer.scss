@@ -1,0 +1,33 @@
+
+/*********************舞姬详情*********************/
+.xd-detail{
+    .nav-tabs{
+        margin-bottom: 15px;
+    }
+    .d-avator{
+        margin-bottom: 15px;
+        img{
+            display: inline-block;
+        }
+    }
+    .lv-ipt{
+        border: 0;
+        background-color: transparent;
+        width: 4em;
+    }
+}
+@media (max-width: 991px) {
+    .xwrap{
+        padding: 15px;
+    }
+}
+/*********************舞姬详情*********************/
+
+/*********************舞姬列表*********************/
+.xd-list{
+    .between{
+        @include display-flex();
+        @include justify-content(space-between);
+    }
+}
+/*********************舞姬列表*********************/

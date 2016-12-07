@@ -30,4 +30,11 @@ class Technology extends Model
     public function attributes(){
         return $this->morphMany('App\Models\Attribute','attributeable');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function effects(){
+        return $this->belongsToMany('App\Models\Effect');
+    }
 }

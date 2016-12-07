@@ -42,3 +42,15 @@ $screen-lg-min: 1200px;
     margin-bottom: $wrap;
     @include border-radius(4px);
 }
+
+body{
+    background-color: $bgc;
+}
+
+.noborder{
+    border: 0;
+}
+
+.noline{
+    text-decoration: none !important;
+}

@@ -1,0 +1,70 @@
+header{
+    background-color: $hue;
+    text-align: center;
+    $headerLen: 42px;
+    padding-top: $headerLen;
+    padding-bottom: $headerLen;
+    h1{
+        color: #FFFFFF;
+    }
+}
+
+.main-navigation{
+    font-size: 14px;
+    text-align: center;
+    background-color: $card-bgc;
+    border-top: 1px solid #ebebeb;
+    margin-bottom: 35px;
+    border-bottom: 2px solid #e1e1e1;
+    .navbar-header{
+
+    }
+    .navbar-toggle-button{
+        text-align: center;
+        i{
+            font-size: 2em;
+            height: 56px;
+            line-height: 56px;
+        }
+    }
+}
+.navbar-collapse{
+    .menu{
+        margin: 0;
+        padding: 0;
+        li{
+            display: inline-block;
+            position: relative;
+            &.active{
+                margin-bottom: -2px;
+                border-bottom: 2px solid $hue;
+            }
+            a{
+                color: #505050;
+                line-height: 4em;
+                text-decoration: none;
+                display: block;
+                padding: 0 21px;
+            }
+        }
+    }
+}
+@media (max-width: 991px) {
+    .main-navigation{
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 767px) {
+    .navbar-collapse{
+        .menu{
+            li{
+                display: block;
+            }
+        }
+    }
+}
+@media (min-width: 767px) {
+    .navbar-toggle-button{
+        display: none;
+    }
+}
