@@ -51,12 +51,12 @@ class DancerController extends Controller
      */
     public function show($id)
     {
-        $dancer = Dancer::with('images')->with(['attributes'=>function ($query){
-            $query->first();
-        }])->with('technologies')->findOrFail($id);
+        $dancer = Dancer::with('images')->with('attributes')->with(['technologies'=>function ($query){
+            $query->with('attributes')->with('effects');
+        }])->findOrFail($id);
         $dancer->images = $dancer->images->pluck('path', 'type');
-        $dancer->attributes = $dancer->attributes->get(0);
-//        dd($dancer->technologies->toArray());
+        $dancer->attributes = $dancer->attributes->first();
+//        dd($dancer->toArray());
         return view('home.dancer.show', compact('dancer'));
     }
 

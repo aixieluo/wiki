@@ -17,9 +17,9 @@ class Effect extends Model
 
     /**
      * 特性
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function effects(){
-        return $this->belongsToMany('App\Models\Effect');
+    public function technologies(){
+        return $this->morphedByMany('App\Models\Technology', 'effectable');
     }
 }

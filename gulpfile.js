@@ -18,6 +18,6 @@ elixir.config.sourcemaps = false;
 
 elixir(mix => {
     mix.sass('app.scss')
-        .webpack(['app.js', 'common.js'], '/public/js/app.js');
+        .webpack(['app.js', 'common.js'], 'public/js/app.js');
         // .version(['css/app.css', 'js/app.js'], 'public');
 });

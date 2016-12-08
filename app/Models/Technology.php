@@ -32,9 +32,10 @@ class Technology extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * 获取特性
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function effects(){
-        return $this->belongsToMany('App\Models\Effect');
+        return $this->morphToMany('App\Models\Effect', 'effectable');
     }
 }
