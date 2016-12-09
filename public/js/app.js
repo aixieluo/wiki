@@ -2621,7 +2621,7 @@ if (typeof jQuery === 'undefined') {
         demo: function demo () {
             var this$1 = this;
 
-            this.$http.get('http://45.32.57.20/api/dancer/attributes', {
+            this.$http.post('http://localhost/api/dancer/attributes', {
                 params: {
                     id: 5,
                 }
@@ -2701,9 +2701,9 @@ __webpack_require__(13);
  */
 
 Vue.http.interceptors.push(function (request, next) {
-    // request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-    request.headers.set('X-CSRF-TOKEN', $('meta[name="_token"]').attr('content'));
-    console.log($('meta[name="_token"]').attr('content'));
+    request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    // request.headers.set('X-CSRF-TOKEN', $('meta[name="_token"]').attr('content'));
+    // console.log($('meta[name="_token"]').attr('content'));
 
     next();
 });

@@ -17,4 +17,4 @@ Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::resource('dancer', 'Api\DancerController@attributes');
+Route::post('dancer/attributes', 'Api\DancerController@attributes');

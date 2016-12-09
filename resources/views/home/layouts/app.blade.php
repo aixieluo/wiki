@@ -6,7 +6,12 @@
     <meta name="_token" content="{{ csrf_token() }}"/>
     <title></title>
     <link rel="stylesheet" type="text/css" href="/css/app.css"/>
-
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 </head>
 <body>
 <div id="app">

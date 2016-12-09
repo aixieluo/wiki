@@ -79,7 +79,7 @@
         },
         methods: {
             demo () {
-                this.$http.get('http://45.32.57.20/api/dancer/attributes', {
+                this.$http.post('http://localhost/api/dancer/attributes', {
                     params: {
                         id: 5,
                     }
