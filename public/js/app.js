@@ -112,7 +112,7 @@ Vue.component('example', __webpack_require__(10));
 Vue.component('attributes', __webpack_require__(9));
 
 var app = new Vue({
-    el: '#app'
+    el: '#app',
 });
 
 
@@ -2580,18 +2580,64 @@ if (typeof jQuery === 'undefined') {
 //
 //
 
-    /* harmony default export */ exports["default"] = {
-        mounted: function mounted () {
+/* harmony default export */ exports["default"] = {
+    mounted: function mounted () {
+        this.demo();
+    },
+    data: function data () {
+        return {
+            dancer: {},
+            attributes: {},
+            lv: 0,
+        }
+    },
+    computed: {
+        sumFire: function sumFire () {
+            return this.lv*this.dancer.grow_fire+this.attributes.fire;
+        },
+        sumPenetrate: function sumPenetrate () {
+            return this.lv*this.dancer.grow_penetrate+this.attributes.penetrate;
+        },
+        sumDurable: function sumDurable () {
+            return this.lv*this.dancer.grow_durable+this.attributes.durable;
+        },
+        sumArmor: function sumArmor () {
+            return this.lv*this.dancer.grow_armor+this.attributes.armor;
+        },
+        sumHit: function sumHit () {
+            return this.attributes.hit;
+        },
+        sumDodge: function sumDodge () {
+            return this.attributes.dodge;
+        },
+        sumConcealment: function sumConcealment () {
+            return this.attributes.concealment;
+        },
+        sumSpy: function sumSpy () {
+            return this.attributes.spy;
+        },
+    },
+    methods: {
+        demo: function demo () {
+            var this$1 = this;
+
             this.$http.get('http://localhost/api/dancer/attributes', {
                 params: {
-                    id: 1,
+                    id: 5,
                 }
             }).then(function (response){
-//                this.$set('dancer', response.data);
-//                this.dancer = response.data;
+                this$1.dancer = response.data;
+                this$1.attributes = response.data.attributes[0];
             });
         }
-    };
+    },
+    watch: {
+        lv: function (val, oldVal) {
+            console.log(!isNaN(val));
+            this.lv = !isNaN(val)&&val>=0?val:oldVal;
+        }
+    }
+};
 
 
 /***/ },
@@ -2656,6 +2702,8 @@ __webpack_require__(13);
 
 Vue.http.interceptors.push(function (request, next) {
     // request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+    request.headers.set('X-CSRF-TOKEN', $('meta[name="_token"]').attr('content'));
+    console.log($('meta[name="_token"]').attr('content'));
 
     next();
 });
@@ -30069,45 +30117,93 @@ module.exports={render:function (){var _vm=this;
     staticClass: "row"
   }, [_vm._h('div', {
     staticClass: "col-md-6"
-  }, [_vm._m(0), " ", _vm._h('table', {
+  }, [_vm._h('div', {
+    staticClass: "clearfix"
+  }, [_vm._m(0), " ", _vm._h('div', {
+    staticClass: "pull-right"
+  }, [_vm._h('button', {
+    staticClass: "btn-arrow",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.lv > 0 ? _vm.lv-- : _vm.lv
+      }
+    }
+  }, [_vm._h('i', {
+    staticClass: "fa fa-arrow-down"
+  })]), " ", _vm._h('span', ["Lv.", _vm._h('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.lv),
+      expression: "lv"
+    }],
+    staticClass: "lv-ipt",
+    attrs: {
+      "type": "tel",
+      "maxlength": "2",
+      "max": "99",
+      "min": "0"
+    },
+    domProps: {
+      "value": _vm._s(_vm.lv)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.lv = $event.target.value
+      }
+    }
+  })]), " ", _vm._h('button', {
+    staticClass: "btn-arrow",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": function($event) {
+        _vm.lv < 99 ? _vm.lv++ : _vm.lv
+      }
+    }
+  }, [_vm._h('i', {
+    staticClass: "fa fa-arrow-up"
+  })])])]), " ", _vm._h('table', {
     staticClass: "table table-bordered"
-  }, [_vm._h('tbody', [_vm._h('tr', [_vm._h('td', ["火力"]), " ", _vm._h('td', [_vm._s(1)]), " ", _vm._h('td', ["穿甲"]), " ", _vm._h('td', [_vm._s(1)]), " ", _vm._h('td', ["耐久"]), " ", _vm._h('td', [_vm._s(1)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(1)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(1)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(1)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(1)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(1)])])])])])])
+  }, [_vm._h('tbody', [_vm._h('tr', [_vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, ["火力"]), " ", _vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, [_vm._s(_vm.sumFire)]), " ", _vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, ["穿甲"]), " ", _vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, [_vm._s(_vm.sumPenetrate)]), " ", _vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, ["耐久"]), " ", _vm._h('td', {
+    attrs: {
+      "width": "1px"
+    }
+  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)])])])])])])
 },staticRenderFns: [function (){var _vm=this;
   return _vm._h('div', {
-    staticClass: "clearfix"
-  }, [_vm._h('div', {
     staticClass: "pull-left"
   }, [_vm._h('i', {
     staticClass: "fa fa-star",
     attrs: {
       "aria-hidden": "true"
     }
-  })]), " ", _vm._h('div', {
-    staticClass: "pull-right"
-  }, [_vm._h('button', {
-    staticClass: "btn-arrow",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._h('i', {
-    staticClass: "fa fa-arrow-down"
-  })]), " ", _vm._h('span', ["Lv.", _vm._h('input', {
-    staticClass: "lv-ipt",
-    attrs: {
-      "type": "tel",
-      "value": "1",
-      "maxlength": "2",
-      "max": "99",
-      "min": "1"
-    }
-  })]), " ", _vm._h('button', {
-    staticClass: "btn-arrow",
-    attrs: {
-      "type": "button"
-    }
-  }, [_vm._h('i', {
-    staticClass: "fa fa-arrow-up"
-  })])])])
+  })])
 }]}
 if (false) {
   module.hot.accept()
