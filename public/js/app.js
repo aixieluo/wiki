@@ -2621,7 +2621,7 @@ if (typeof jQuery === 'undefined') {
         demo: function demo () {
             var this$1 = this;
 
-            this.$http.get('http://localhost/api/dancer/attributes', {
+            this.$http.get('http://45.32.57.20/api/dancer/attributes', {
                 params: {
                     id: 5,
                 }
