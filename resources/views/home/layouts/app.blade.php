@@ -32,7 +32,7 @@
                     <div class="collapse navbar-collapse" id="mainMenu">
                         <ul class="menu">
                             <li role="presentation"><a href="{{ url('/') }}">游戏简介</a></li>
-                            <li class="active" role="presentation"><a href="{{ route('dancer.index') }}">钢舞姬</a></li>
+                            <li role="presentation"><a href="{{ route('dancer.index') }}">钢舞姬</a></li>
                             <li role="presentation"><a href="#">地形与关卡</a></li>
                             <li role="presentation"><a href="#">建筑</a></li>
                             <li role="presentation"><a href="#">科技</a></li>

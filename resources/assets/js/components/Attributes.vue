@@ -79,10 +79,8 @@
         },
         methods: {
             demo () {
-                this.$http.post('http://localhost/api/dancer/attributes', {
-                    params: {
-                        id: 5,
-                    }
+                this.$http.post('http://'+location.host+'/api/dancer/attributes', {
+                    id: 5,
                 }).then((response)=>{
                     this.dancer = response.data;
                     this.attributes = response.data.attributes[0];
@@ -91,7 +89,6 @@
         },
         watch: {
             lv: function (val, oldVal) {
-                console.log(!isNaN(val));
                 this.lv = !isNaN(val)&&val>=0?val:oldVal;
             }
         }

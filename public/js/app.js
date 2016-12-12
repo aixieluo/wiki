@@ -2621,10 +2621,8 @@ if (typeof jQuery === 'undefined') {
         demo: function demo () {
             var this$1 = this;
 
-            this.$http.post('http://localhost/api/dancer/attributes', {
-                params: {
-                    id: 5,
-                }
+            this.$http.post('http://'+location.host+'/api/dancer/attributes', {
+                id: 5,
             }).then(function (response){
                 this$1.dancer = response.data;
                 this$1.attributes = response.data.attributes[0];
@@ -2633,7 +2631,6 @@ if (typeof jQuery === 'undefined') {
     },
     watch: {
         lv: function (val, oldVal) {
-            console.log(!isNaN(val));
             this.lv = !isNaN(val)&&val>=0?val:oldVal;
         }
     }
