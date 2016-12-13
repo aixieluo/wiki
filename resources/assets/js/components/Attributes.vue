@@ -82,8 +82,7 @@
                 this.$http.post('http://'+location.host+'/api/dancer/attributes', {
                     id: 5,
                 }).then((response)=>{
-                    this.dancer = response.data;
-                    this.attributes = response.data.attributes[0];
+                    this.attributes = response.data;
                 });
             }
         },

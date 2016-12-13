@@ -9,4 +9,6 @@ class DancerTechnology extends Model
     protected $fillable = ['dancer_id', 'technology_id'];
 
     protected $table = 'dancer_technology';
+
+    public $timestamps = false;
 }

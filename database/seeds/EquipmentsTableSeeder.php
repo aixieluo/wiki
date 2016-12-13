@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DancersTableSeeder extends Seeder
+class EquipmentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class DancersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Dancer::class, 10)->create();
+        factory(\App\Models\Equipment::class, 50)->create();
     }
 }

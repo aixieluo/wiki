@@ -19,7 +19,7 @@ class CreateDancerTechnologyTable extends Migration
             $table->integer('technology_id')->unsigned();
             $table->foreign('dancer_id')->references('id')->on('dancers')->onDelete('cascade');
             $table->foreign('technology_id')->references('id')->on('technologies')->onDelete('cascade');
-            $table->timestamps();
+//            $table->timestamps();
         });
     }
 

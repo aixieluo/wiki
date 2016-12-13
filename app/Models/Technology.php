@@ -16,7 +16,8 @@ class Technology extends Model
     ];
 
     /**
-     * 舞姬
+     * 获取所有可以装备该科技的舞姬
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function dancers(){
@@ -24,7 +25,8 @@ class Technology extends Model
     }
 
     /**
-     * 获取所有属性
+     * 获取基础属性
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function attributes(){
@@ -33,6 +35,7 @@ class Technology extends Model
 
     /**
      * 获取特性
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function effects(){

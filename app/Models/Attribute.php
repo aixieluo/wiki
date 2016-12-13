@@ -17,10 +17,12 @@ class Attribute extends Model
 
     /**
      * 获取所属的attributeable模型
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function attributeable(){
         return $this->morphTO();
     }
+
 
 }

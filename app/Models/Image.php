@@ -15,6 +15,10 @@ class Image extends Model
         'imageable_id', 'imageable_type', 'type', 'path'
     ];
 
+    /**
+     * 找到某图片对应的模型
+     *
+     */
     public function imageable (){
         $this->morphTo();
     }

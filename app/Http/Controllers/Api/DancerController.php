@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 class DancerController extends Controller
 {
     public function attributes (Request $request){
-        return Dancer::with('attributes')->find($request->id);
+        $attribute = new Dancer();
+        return $attribute->basicAttributes($request->id);
     }
 }

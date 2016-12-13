@@ -25,14 +25,12 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
 
 //舞姬表
 $factory->define(\App\Models\Dancer::class, function (Faker\Generator $faker) {
-    $type = ["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"];
-
     return [
         'name' => $faker->name,
         'dance_outfit' => $faker->name,
-        'type' => $faker->randomElement($type),
+        'type' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
         'country' => $faker->countryCode,
-        'rarity' => $faker->randomElement(array( 1, 2, 3 )),
+        'rarity' => $faker->randomElement([1, 2, 3]),
         'subjection' => "S.V.S",
         'introduction' => $faker->sentence(20),
         'character' => $faker->sentence(20),
@@ -71,22 +69,12 @@ $factory->define(\App\Models\Technology::class, function (Faker\Generator $faker
 });
 
 
-//特性表
-$factory->define(\App\Models\Effect::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'describe' => $faker->sentence,
-    ];
-});
-
 
 //基本属性表，多态关联
 $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker) {
-    $type = $faker->randomElement(["App\Models\Dancer", "App\Models\Technology"]);
-
     return [
         'attributeable_id' => $faker->numberBetween(1, 30),
-        'attributeable_type' => $type,
+        'attributeable_type' => $faker->randomElement(["App\Models\Dancer", "App\Models\Technology"]),
         'fire' => $faker->numberBetween(1, 10),
         'penetrate' => $faker->numberBetween(1, 10),
         'durable' => $faker->numberBetween(1, 10),
@@ -101,12 +89,9 @@ $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker)
 
 //舞姬与科技中间表，多对多
 $factory->define(\App\Models\DancerTechnology::class, function (Faker\Generator $faker) {
-    $dancer_ids = \App\Models\Dancer::pluck('id')->toArray();
-    $technology_ids = \App\Models\Technology::pluck('id')->toArray();
-
     return [
-        'dancer_id' => $faker->randomElement($dancer_ids),
-        'technology_id' => $faker->randomElement($technology_ids),
+        'dancer_id' => $faker->randomElement(\App\Models\Dancer::pluck('id')->toArray()),
+        'technology_id' => $faker->randomElement(\App\Models\Technology::pluck('id')->toArray()),
     ];
 });
 
@@ -120,5 +105,49 @@ $factory->define(\App\Models\Image::class, function (Faker\Generator $faker) {
         ]),
         'type' => 'avator',
         'path' => $faker->imageUrl(256,256),
+    ];
+});
+
+
+//装备表
+$factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'lv' => $faker->numberBetween(0, 10),
+        'describe' => $faker->sentence(20),
+        'price' => 450,
+    ];
+});
+
+//装备槽表
+$factory->define(\App\Models\Slot::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->randomElement(['炮座', '改装', '外身', '内壁', '内仓', '炮架', '特殊']),
+    ];
+});
+
+//装备与装备槽中间表,多对多
+$factory->define(\App\Models\EquipmentSlot::class, function (Faker\Generator $faker) {
+    return [
+        'equipment_id' => $faker->randomElement(\App\Models\Equipment::pluck('id')->toArray()),
+        'slot_id' => $faker->randomElement(\App\Models\Slot::pluck('id')->toArray()),
+    ];
+});
+
+
+//特性表
+$factory->define(\App\Models\Effect::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'describe' => $faker->sentence,
+    ];
+});
+
+//特性多态关联中间表
+$factory->define(\App\Models\Effectable::class, function (Faker\Generator $faker) {
+    return [
+        'effect_id' => $faker->randomElement(\App\Models\Effect::pluck('id')->toArray()),
+        'effectable_id' => $faker->randomElement(\App\Models\Technology::pluck('id')->toArray()),
+        'effectable_type' => $faker->randomElement(['App\Models\Technology', 'App\Models\Equipment']),
     ];
 });
