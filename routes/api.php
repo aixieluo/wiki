@@ -17,4 +17,11 @@ Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+
+/*part dancer*/
+
+//获取某辆车的基础属性
 Route::post('dancer/attributes', 'Api\DancerController@attributes');
+//获取某辆车的成长属性
+Route::post('dancer/grow', 'Api\DancerController@grow');
+

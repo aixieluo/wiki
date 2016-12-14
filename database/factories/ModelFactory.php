@@ -73,7 +73,7 @@ $factory->define(\App\Models\Technology::class, function (Faker\Generator $faker
 //基本属性表，多态关联
 $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker) {
     return [
-        'attributeable_id' => $faker->numberBetween(1, 30),
+        'attributeable_id' => $faker->numberBetween(1, 10),
         'attributeable_type' => $faker->randomElement(["App\Models\Dancer", "App\Models\Technology"]),
         'fire' => $faker->numberBetween(1, 10),
         'penetrate' => $faker->numberBetween(1, 10),
@@ -113,7 +113,7 @@ $factory->define(\App\Models\Image::class, function (Faker\Generator $faker) {
 $factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'lv' => $faker->numberBetween(0, 10),
+        'lv' => $faker->numberBetween(1, 10),
         'describe' => $faker->sentence(20),
         'price' => 450,
     ];

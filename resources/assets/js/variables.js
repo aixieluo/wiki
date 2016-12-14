@@ -1,0 +1,1 @@
+export var host = "http://" + location.host;

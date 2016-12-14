@@ -19,3 +19,4 @@ Vue.component('attributes', require('./components/Attributes.vue'));
 const app = new Vue({
     el: '#app',
 });
+

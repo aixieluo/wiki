@@ -47,78 +47,7 @@
                 <h3>性格设定</h3>
             </div>
             <p class="well">{{ $dancer->character }}</p>
-            <div class="page-header">
-                <h3>基础属性</h3>
-            </div>
-            <attributes></attributes>
-            {{--<div class="row">--}}
-                {{--<div class="col-md-6">--}}
-                    {{--<div class="clearfix">--}}
-                        {{--<div class="pull-left"><i class="fa fa-star" aria-hidden="true"></i></div>--}}
-                        {{--<div class="pull-right">--}}
-                            {{--<button class="btn-arrow" type="button"><i class="fa fa-arrow-down"></i></button>--}}
-                            {{--<span>Lv.<input class="lv-ipt" type="tel" value="1" maxlength="2" max="99" min="1"></span>--}}
-                            {{--<button class="btn-arrow" type="button"><i class="fa fa-arrow-up"></i></button>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<table class="table table-bordered">--}}
-                        {{--<tr>--}}
-                            {{--<td>火力</td>--}}
-                            {{--<td>{{ $dancer->attributes->fire }}</td>--}}
-                            {{--<td>穿甲</td>--}}
-                            {{--<td>{{ $dancer->attributes->penetrate }}</td>--}}
-                            {{--<td>耐久</td>--}}
-                            {{--<td>{{ $dancer->attributes->durable }}</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<td>装甲</td>--}}
-                            {{--<td>{{ $dancer->attributes->armor }}</td>--}}
-                            {{--<td>命中</td>--}}
-                            {{--<td>{{ $dancer->attributes->hit }}</td>--}}
-                            {{--<td>闪避</td>--}}
-                            {{--<td>{{ $dancer->attributes->dodge }}</td>--}}
-                        {{--</tr>--}}
-                        {{--<tr>--}}
-                            {{--<td>隐蔽</td>--}}
-                            {{--<td>{{ $dancer->attributes->concealment }}</td>--}}
-                            {{--<td>侦查</td>--}}
-                            {{--<td>{{ $dancer->attributes->spy }}</td>--}}
-                        {{--</tr>--}}
-                    {{--</table>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            <div class="page-header">
-                <h3>装备槽</h3>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            @for($i=0; $i<$dancer->barbette; $i++)
-                            <td>炮座</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->refit; $i++)
-                            <td>改装</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->outside; $i++)
-                            <td>外身</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->inwall; $i++)
-                            <td>内壁</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->inwarehouse; $i++)
-                            <td>内仓</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->carriage; $i++)
-                            <td>炮架</td>
-                            @endfor
-                            @for($i=0; $i<$dancer->special; $i++)
-                            <td>特殊</td>
-                            @endfor
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <attributes dancer-id="{{ $dancer->id }}"></attributes>
             <div class="page-header">
                 <h3>科技</h3>
             </div>
