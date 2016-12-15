@@ -110,6 +110,7 @@ __webpack_require__(6);
 
 Vue.component('example', __webpack_require__(13));
 Vue.component('attributes', __webpack_require__(12));
+Vue.component('equipment', __webpack_require__(24));
 
 var app = new Vue({
     el: '#app',
@@ -2610,6 +2611,11 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2628,35 +2634,48 @@ if (typeof jQuery === 'undefined') {
             attributes: {},
             grows: {},
             lv: 0,
+            demo2: 1,
         }
     },
     computed: {
         sumFire: function sumFire () {
-            return this.lv*this.grows.grow_fire+this.attributes.fire;
+            var sum = this.lv*this.grows.grow_fire+this.attributes.fire;
+            return sum;
         },
         sumPenetrate: function sumPenetrate () {
-            return this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+            var sum = this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+            return sum;
         },
         sumDurable: function sumDurable () {
-            return this.lv*this.grows.grow_durable+this.attributes.durable;
+            var sum = this.lv*this.grows.grow_durable+this.attributes.durable;
+            return sum;
         },
         sumArmor: function sumArmor () {
-            return this.lv*this.grows.grow_armor+this.attributes.armor;
+            var sum = this.lv*this.grows.grow_armor+this.attributes.armor;
+            return sum;
         },
         sumHit: function sumHit () {
-            return this.attributes.hit;
+            var sum = this.attributes.hit;
+            return sum;
         },
         sumDodge: function sumDodge () {
-            return this.attributes.dodge;
+            var sum = this.attributes.dodge;
+            return sum;
         },
         sumConcealment: function sumConcealment () {
-            return this.attributes.concealment;
+            var sum = this.attributes.concealment;
+            return sum;
         },
         sumSpy: function sumSpy () {
-            return this.attributes.spy;
+            var sum = this.attributes.spy;
+            return sum;
         },
     },
     methods: {
+        demo1: function demo1 (demo3) {
+            console.log(4);
+            this.demo2 = demo3;
+        },
         ready: function ready () {
             var this$1 = this;
 
@@ -2675,6 +2694,7 @@ if (typeof jQuery === 'undefined') {
         }
     },
     watch: {
+        //监听lv的变化，当lv不是数字时，还原原先的值
         lv: function (val, oldVal) {
             this.lv = !isNaN(val)&&val>=0?val:oldVal;
         }
@@ -2781,7 +2801,7 @@ exports = module.exports = __webpack_require__(9)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -30317,7 +30337,21 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "width": "1px"
     }
-  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)])])])])])]), " ", _vm._m(2), " ", _vm._m(3)])
+  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)])])])])])]), " ", _vm._m(2), " ", _vm._m(3), " ", _vm._h('div', {
+    staticClass: "panel-group",
+    attrs: {
+      "id": "accordion",
+      "role": "tablist",
+      "aria-multiselectable": "true"
+    }
+  }, [_vm._h('equipment', {
+    attrs: {
+      "demo2": "1"
+    },
+    on: {
+      "demo": _vm.demo1
+    }
+  }), " ", _vm._h('div', [_vm._s(_vm.demo2)])])])
 },staticRenderFns: [function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
@@ -40307,6 +40341,103 @@ module.exports = function(module) {
 __webpack_require__(1);
 module.exports = __webpack_require__(2);
 
+
+/***/ },
+/* 22 */,
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ exports["default"] = {
+    props: {
+        demo2: {
+            default: 0
+        }
+    },
+    methods: {
+        demo: function demo (){
+            console.log(2);
+            this.$emit('demo1')
+        }
+    }
+};
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(23)
+
+/* template */
+var __vue_template__ = __webpack_require__(25)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "D:\\workspace\\wiki\\resources\\assets\\js\\components\\Equioment.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5b252765", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-5b252765", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] Equioment.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;
+  return _vm._h("div")
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5b252765", module.exports)
+  }
+}
 
 /***/ }
 /******/ ]);

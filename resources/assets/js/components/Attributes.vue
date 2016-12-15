@@ -64,6 +64,9 @@
             </div>
         </div>
 
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        </div>
+
 
     </div>
 </template>
@@ -86,32 +89,41 @@
                 attributes: {},
                 grows: {},
                 lv: 0,
+                demo2: 1,
             }
         },
         computed: {
             sumFire () {
-                return this.lv*this.grows.grow_fire+this.attributes.fire;
+                let sum = this.lv*this.grows.grow_fire+this.attributes.fire;
+                return sum;
             },
             sumPenetrate () {
-                return this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+                let sum = this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+                return sum;
             },
             sumDurable () {
-                return this.lv*this.grows.grow_durable+this.attributes.durable;
+                let sum = this.lv*this.grows.grow_durable+this.attributes.durable;
+                return sum;
             },
             sumArmor () {
-                return this.lv*this.grows.grow_armor+this.attributes.armor;
+                let sum = this.lv*this.grows.grow_armor+this.attributes.armor;
+                return sum;
             },
             sumHit () {
-                return this.attributes.hit;
+                let sum = this.attributes.hit;
+                return sum;
             },
             sumDodge () {
-                return this.attributes.dodge;
+                let sum = this.attributes.dodge;
+                return sum;
             },
             sumConcealment () {
-                return this.attributes.concealment;
+                let sum = this.attributes.concealment;
+                return sum;
             },
             sumSpy () {
-                return this.attributes.spy;
+                let sum = this.attributes.spy;
+                return sum;
             },
         },
         methods: {
@@ -131,6 +143,7 @@
             }
         },
         watch: {
+            //监听lv的变化，当lv不是数字时，还原原先的值
             lv: function (val, oldVal) {
                 this.lv = !isNaN(val)&&val>=0?val:oldVal;
             }
