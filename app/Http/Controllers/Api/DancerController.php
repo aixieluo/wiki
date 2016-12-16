@@ -9,24 +9,44 @@ use App\Http\Controllers\Controller;
 class DancerController extends Controller
 {
     /**
-     * 获取某辆车的属性
+     * @var Dancer 模型Dancer的对象
+     */
+    private $dancer;
+
+    /**
+     * DancerController constructor.
+     */
+    public function __construct (){
+        $this->dancer = new Dancer();
+    }
+
+    /**
+     * 获取舞姬的属性
      *
      * @param Request $request
      * @return mixed
      */
     public function attributes (Request $request){
-        $dancer = new Dancer();
-        return $dancer->basicAttributes($request->id);
+        return $this->dancer->basicAttributes($request->id);
     }
 
     /**
-     * 获取某辆车的成长属性
+     * 获取舞姬的成长属性
      *
      * @param Request $request
      * @return mixed
      */
-    public function grow (Request $request){
-        $dancer = new Dancer();
-        return $dancer->growAttributes($request->id);
+    public function growAttributes (Request $request){
+        return $this->dancer->growAttributes($request->id);
+    }
+
+    /**
+     * 获取舞姬的各装备槽个数
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function equipmentSlots (Request $request){
+        return $this->dancer->equipmentSlots($request->id);
     }
 }

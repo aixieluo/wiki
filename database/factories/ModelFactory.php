@@ -114,6 +114,7 @@ $factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker)
     return [
         'name' => $faker->name,
         'lv' => $faker->numberBetween(1, 10),
+        'rank' => $faker->boolean(),
         'describe' => $faker->sentence(20),
         'price' => 450,
     ];

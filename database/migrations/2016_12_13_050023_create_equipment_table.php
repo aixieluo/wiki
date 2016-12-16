@@ -17,6 +17,8 @@ class CreateEquipmentTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('装备名称');
             $table->integer('lv')->comment('装备等级');
+            $table->boolean('rank')->comment('是否为高级装备');
+            $table->string('main_slot')->comment('装备的主要位置');
             $table->string('describe')->comment('装备描述');
             $table->integer('price')->comment('出售单价');
             $table->timestamps();

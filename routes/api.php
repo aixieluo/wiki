@@ -17,11 +17,25 @@ Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
+Route::group(['namespace'=>'Api'], function () {
+    /*part dancer start*/
 
-/*part dancer*/
+    //获取舞姬的基础属性
+    Route::post('dancer/attributes', 'DancerController@attributes');
+    //获取舞姬的成长属性
+    Route::post('dancer/growAttributes', 'DancerController@growAttributes');
+    //获取舞姬的各装备槽个数
+    Route::post('dancer/equipmentSlots', 'DancerController@equipmentSlots');
 
-//获取某辆车的基础属性
-Route::post('dancer/attributes', 'Api\DancerController@attributes');
-//获取某辆车的成长属性
-Route::post('dancer/grow', 'Api\DancerController@grow');
+    /*part dancer end*/
+
+
+
+    /*part equipment start*/
+
+    //获取某位置的所有装备
+    Route::post('equipment/part/list/', 'EquipmentController@equipmentList');
+
+    /*part equipment end*/
+});
 

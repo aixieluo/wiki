@@ -45,8 +45,8 @@ class Dancer extends Model
     /**
      * 获取舞姬的信息
      *
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Collection|Model
+     * @param $id 舞姬id
+     * @return \Illuminate\Database\Eloquent\Collection|Model 舞姬信息
      */
     public function own($id){
         $own = $this->findOrFail($id);
@@ -56,8 +56,8 @@ class Dancer extends Model
     /**
      * 获取舞姬相关图片
      *
-     * @param $id
-     * @return mixed
+     * @param $id 舞姬id
+     * @return mixed 舞姬相关的图片
      */
     public function photos($id){
         $photos = $this->findOrFail($id)->images()->get()->pluck('path', 'type');
@@ -67,22 +67,34 @@ class Dancer extends Model
     /**
      * 获取舞姬的基本属性
      *
-     * @param $id
-     * @return mixed
+     * @param $id 舞姬id
+     * @return mixed 舞姬基本属性
      */
     public function basicAttributes($id)
     {
-        return $this->findOrFail($id)->attributes()->first();
+        return $this->findOrFail($id)
+            ->attributes()
+            ->select('fire', 'penetrate', 'durable', 'armor', 'hit', 'dodge', 'concealment', 'spy')
+            ->first();
     }
 
     /**
      * 获取舞姬的成长属性
      *
-     * @param $id
-     * @return mixed
+     * @param $id 舞姬id
+     * @return mixed 舞姬成长属性
      */
     public function growAttributes($id){
-        $grow = $this->select('grow_fire', 'grow_penetrate', 'grow_durable', 'grow_armor')->findOrFail($id);
-        return $grow;
+        return $this->select('grow_fire', 'grow_penetrate', 'grow_durable', 'grow_armor')->findOrFail($id);
+    }
+
+    /**
+     *获取舞姬各装备槽个数
+     *
+     * @param $id 舞姬id
+     * @return mixed 舞姬各装备槽个数
+     */
+    public function equipmentSlots ($id){
+        return $this->select('barbette', 'refit', 'outside', 'inwall', 'inwarehouse', 'carriage', 'special')->findOrFail($id);
     }
 }

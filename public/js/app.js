@@ -61,11 +61,297 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 26);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return host; });
+var host = "http://" + location.host;
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+	var sourceMap = obj.sourceMap;
+
+	if (media) {
+		styleElement.setAttribute("media", media);
+	}
+
+	if (sourceMap) {
+		// https://developer.chrome.com/devtools/docs/javascript-debugging
+		// this makes source maps inside style tags work properly in Chrome
+		css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 var g;
@@ -90,7 +376,7 @@ module.exports = g;
 
 
 /***/ },
-/* 1 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 
@@ -100,7 +386,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(6);
+__webpack_require__(10);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -108,9 +394,9 @@ __webpack_require__(6);
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', __webpack_require__(13));
-Vue.component('attributes', __webpack_require__(12));
-Vue.component('equipment', __webpack_require__(24));
+Vue.component('example', __webpack_require__(17));
+Vue.component('attributes', __webpack_require__(15));
+Vue.component('equipment', __webpack_require__(16));
 
 var app = new Vue({
     el: '#app',
@@ -119,7 +405,7 @@ var app = new Vue({
 
 
 /***/ },
-/* 2 */
+/* 5 */
 /***/ function(module, exports) {
 
 var themeApp = {
@@ -153,7 +439,7 @@ $(function () {
 })
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports) {
 
 /*!
@@ -2536,11 +2822,14 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ },
-/* 4 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+//
+//
+//
 //
 //
 //
@@ -2617,6 +2906,7 @@ if (typeof jQuery === 'undefined') {
 //
 //
 
+//域名路由
 
 
 /* harmony default export */ exports["default"] = {
@@ -2633,8 +2923,32 @@ if (typeof jQuery === 'undefined') {
             dancer: {},
             attributes: {},
             grows: {},
+            equipmentSlots: {},
             lv: 0,
-            demo2: 1,
+        }
+    },
+    methods: {
+        ready: function ready () {
+            var this$1 = this;
+
+            //获取基础属性
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/attributes', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.attributes = response.data;
+            });
+            //获取成长属性
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/growAttributes', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.grows = response.data;
+            });
+            //获取舞姬各装备槽个数
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/equipmentSlots', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.equipmentSlots = response.data;
+            });
         }
     },
     computed: {
@@ -2671,28 +2985,6 @@ if (typeof jQuery === 'undefined') {
             return sum;
         },
     },
-    methods: {
-        demo1: function demo1 (demo3) {
-            console.log(4);
-            this.demo2 = demo3;
-        },
-        ready: function ready () {
-            var this$1 = this;
-
-            //获取基础属性
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/attributes', {
-                id: this.dancerId,
-            }).then(function (response){
-                this$1.attributes = response.data;
-            });
-            //获取成长属性
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/grow', {
-                id: this.dancerId,
-            }).then(function (response){
-                this$1.grows = response.data;
-            });
-        }
-    },
     watch: {
         //监听lv的变化，当lv不是数字时，还原原先的值
         lv: function (val, oldVal) {
@@ -2703,7 +2995,78 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ },
-/* 5 */
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+//域名路由
+
+
+/* harmony default export */ exports["default"] = {
+    props: {
+        id: {
+            required: true,
+        },
+        type: {
+            required: true,
+        },
+        dancerId: {
+            required: true,
+        }
+    },
+    data: function data() {
+        return {
+            equipment: {},
+            equipped: {},
+            isActive: false,
+        }
+    },
+    mounted: function mounted() {
+        this.ready();
+    },
+    methods: {
+        ready: function ready() {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/equipment/part/list', {
+                slot: this.type,
+            }).then(function (response){
+                this$1.equipment = response.data;
+            });
+        },
+        equip: function equip(aEquipment) {
+            this.equipped = aEquipment;
+        }
+    }
+};
+
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2732,11 +3095,11 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ },
-/* 6 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(11);
+window._ = __webpack_require__(14);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -2744,8 +3107,8 @@ window._ = __webpack_require__(11);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(10);
-__webpack_require__(3);
+window.$ = window.jQuery = __webpack_require__(13);
+__webpack_require__(6);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -2753,8 +3116,8 @@ __webpack_require__(3);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(19);
-__webpack_require__(16);
+window.Vue = __webpack_require__(24);
+__webpack_require__(21);
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -2785,85 +3148,35 @@ Vue.http.interceptors.push(function (request, next) {
 
 
 /***/ },
-/* 7 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return host; });
-var host = "http://" + location.host;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(9)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ },
-/* 9 */
-/***/ function(module, exports) {
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
 
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function() {
-	var list = [];
+exports = module.exports = __webpack_require__(1)();
+// imports
 
-	// return the list of modules as css string
-	list.toString = function toString() {
-		var result = [];
-		for(var i = 0; i < this.length; i++) {
-			var item = this[i];
-			if(item[2]) {
-				result.push("@media " + item[2] + "{" + item[1] + "}");
-			} else {
-				result.push(item[1]);
-			}
-		}
-		return result.join("");
-	};
 
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
+// module
+exports.push([module.i, "\n.panel a[data-toggle=\"collapse\"] {\n    text-decoration: none;\n    display: block;\n}\n.equipment-wrap {\n    padding-left: 5px;\n    padding-right: 5px;\n}\n", ""]);
+
+// exports
 
 
 /***/ },
-/* 10 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13089,7 +13402,7 @@ return jQuery;
 
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30158,23 +30471,23 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(20)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(25)(module)))
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(18)
+__webpack_require__(22)
 
 /* script */
-__vue_exports__ = __webpack_require__(4)
+__vue_exports__ = __webpack_require__(7)
 
 /* template */
-var __vue_template__ = __webpack_require__(14)
+var __vue_template__ = __webpack_require__(18)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30208,17 +30521,64 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 13 */
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* styles */
+__webpack_require__(23)
+
+/* script */
+__vue_exports__ = __webpack_require__(8)
+
+/* template */
+var __vue_template__ = __webpack_require__(19)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "D:\\workspace\\wiki\\resources\\assets\\js\\components\\Equipment.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-212cd334", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-212cd334", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] Equipment.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ },
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* script */
-__vue_exports__ = __webpack_require__(5)
+__vue_exports__ = __webpack_require__(9)
 
 /* template */
-var __vue_template__ = __webpack_require__(15)
+var __vue_template__ = __webpack_require__(20)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30252,7 +30612,7 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 14 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -30337,21 +30697,70 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "width": "1px"
     }
-  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)])])])])])]), " ", _vm._m(2), " ", _vm._m(3), " ", _vm._h('div', {
+  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)]), " ", _vm._h('td', ["射程"]), " ", _vm._h('td', [_vm._s(555)])])])])])]), " ", _vm._m(2), " ", _vm._h('div', {
     staticClass: "panel-group",
     attrs: {
-      "id": "accordion",
+      "id": "equipments",
       "role": "tablist",
       "aria-multiselectable": "true"
     }
-  }, [_vm._h('equipment', {
-    attrs: {
-      "demo2": "1"
-    },
-    on: {
-      "demo": _vm.demo1
-    }
-  }), " ", _vm._h('div', [_vm._s(_vm.demo2)])])])
+  }, [_vm._l((_vm.equipmentSlots.barbette), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'barbette' + num,
+        "type": "炮座",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["炮座" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.refit), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'refit' + num,
+        "type": "改装",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["改装" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.outside), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'outside' + num,
+        "type": "外身",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["外身" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.inwall), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'inwall' + num,
+        "type": "内壁",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["内壁" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.inwarehouse), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'inwarehouse' + num,
+        "type": "内仓",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["内仓" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.carriage), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'carriage' + num,
+        "type": "炮架",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["炮架" + _vm._s(num)])])
+  }), " ", _vm._l((_vm.equipmentSlots.special), function(num) {
+    return _vm._h('equipment', {
+      attrs: {
+        "id": 'special' + num,
+        "type": "特殊",
+        "dancerId": _vm.dancerId
+      }
+    }, [_vm._h('span', ["特殊" + _vm._s(num)])])
+  })])])
 },staticRenderFns: [function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
@@ -30369,14 +30778,6 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
   }, [_vm._h('h3', ["装备槽"])])
-},function (){var _vm=this;
-  return _vm._h('div', {
-    staticClass: "row"
-  }, [_vm._h('div', {
-    staticClass: "col-md-12"
-  }, [_vm._h('table', {
-    staticClass: "table table-bordered"
-  }, [_vm._h('tbody', [_vm._h('tr', [_vm._h('td', ["炮座"]), " ", _vm._h('td', ["改装"]), " ", _vm._h('td', ["外身"]), " ", _vm._h('td', ["内壁"]), " ", _vm._h('td', ["内仓"]), " ", _vm._h('td', ["炮架"]), " ", _vm._h('td', ["特殊"])])])])])])
 }]}
 if (false) {
   module.hot.accept()
@@ -30386,7 +30787,61 @@ if (false) {
 }
 
 /***/ },
-/* 15 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;
+  return _vm._h('div', {
+    staticClass: "panel panel-default"
+  }, [_vm._h('div', {
+    staticClass: "panel-heading",
+    attrs: {
+      "role": "tab"
+    }
+  }, [_vm._h('h4', {
+    staticClass: "panel-title"
+  }, [_vm._h('a', {
+    attrs: {
+      "data-toggle": "collapse",
+      "data-parent": "#equipments",
+      "href": '#' + _vm.id,
+      "aria-expanded": "true",
+      "aria-controls": _vm.id
+    }
+  }, [_vm._t("default"), " ", (_vm.equipped.name) ? _vm._h('span', [_vm._s(_vm.equipped.name)]) : _vm._e()])])]), " ", _vm._h('div', {
+    staticClass: "panel-collapse collapse",
+    attrs: {
+      "id": _vm.id,
+      "role": "tabpanel",
+      "aria-labelledby": "headingOne"
+    }
+  }, [_vm._h('div', {
+    staticClass: "panel-body"
+  }, [_vm._h('ul', {
+    staticClass: "list-unstyled"
+  }, [_vm._l((_vm.equipment), function(aEquipment) {
+    return _vm._h('li', {
+      staticClass: "pull-left equipment-wrap",
+      class: {
+        active: _vm.isActive
+      },
+      on: {
+        "click": function($event) {
+          _vm.equip(aEquipment)
+        }
+      }
+    }, ["\n                    " + _vm._s(aEquipment.name) + "\n                "])
+  })])])])])
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-212cd334", module.exports)
+  }
+}
+
+/***/ },
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -30414,7 +30869,7 @@ if (false) {
 }
 
 /***/ },
-/* 16 */
+/* 21 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -31938,238 +32393,16 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = plugin;
 
 /***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-var stylesInDom = {},
-	memoize = function(fn) {
-		var memo;
-		return function () {
-			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-			return memo;
-		};
-	},
-	isOldIE = memoize(function() {
-		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-	}),
-	getHeadElement = memoize(function () {
-		return document.head || document.getElementsByTagName("head")[0];
-	}),
-	singletonElement = null,
-	singletonCounter = 0,
-	styleElementsInsertedAtTop = [];
-
-module.exports = function(list, options) {
-	if(typeof DEBUG !== "undefined" && DEBUG) {
-		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the bottom of <head>.
-	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-	var styles = listToStyles(list);
-	addStylesToDom(styles, options);
-
-	return function update(newList) {
-		var mayRemove = [];
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-		if(newList) {
-			var newStyles = listToStyles(newList);
-			addStylesToDom(newStyles, options);
-		}
-		for(var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-			if(domStyle.refs === 0) {
-				for(var j = 0; j < domStyle.parts.length; j++)
-					domStyle.parts[j]();
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-}
-
-function addStylesToDom(styles, options) {
-	for(var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-		if(domStyle) {
-			domStyle.refs++;
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles(list) {
-	var styles = [];
-	var newStyles = {};
-	for(var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-		if(!newStyles[id])
-			styles.push(newStyles[id] = {id: id, parts: [part]});
-		else
-			newStyles[id].parts.push(part);
-	}
-	return styles;
-}
-
-function insertStyleElement(options, styleElement) {
-	var head = getHeadElement();
-	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-	if (options.insertAt === "top") {
-		if(!lastStyleElementInsertedAtTop) {
-			head.insertBefore(styleElement, head.firstChild);
-		} else if(lastStyleElementInsertedAtTop.nextSibling) {
-			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			head.appendChild(styleElement);
-		}
-		styleElementsInsertedAtTop.push(styleElement);
-	} else if (options.insertAt === "bottom") {
-		head.appendChild(styleElement);
-	} else {
-		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-	}
-}
-
-function removeStyleElement(styleElement) {
-	styleElement.parentNode.removeChild(styleElement);
-	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-	if(idx >= 0) {
-		styleElementsInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement(options) {
-	var styleElement = document.createElement("style");
-	styleElement.type = "text/css";
-	insertStyleElement(options, styleElement);
-	return styleElement;
-}
-
-function addStyle(obj, options) {
-	var styleElement, update, remove;
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-		styleElement = singletonElement || (singletonElement = createStyleElement(options));
-		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-	} else {
-		styleElement = createStyleElement(options);
-		update = applyToTag.bind(null, styleElement);
-		remove = function() {
-			removeStyleElement(styleElement);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle(newObj) {
-		if(newObj) {
-			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-				return;
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag(styleElement, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = styleElement.childNodes;
-		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-		if (childNodes.length) {
-			styleElement.insertBefore(cssNode, childNodes[index]);
-		} else {
-			styleElement.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag(styleElement, obj) {
-	var css = obj.css;
-	var media = obj.media;
-	var sourceMap = obj.sourceMap;
-
-	if (media) {
-		styleElement.setAttribute("media", media);
-	}
-
-	if (sourceMap) {
-		// https://developer.chrome.com/devtools/docs/javascript-debugging
-		// this makes source maps inside style tags work properly in Chrome
-		css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	if (styleElement.styleSheet) {
-		styleElement.styleSheet.cssText = css;
-	} else {
-		while(styleElement.firstChild) {
-			styleElement.removeChild(styleElement.firstChild);
-		}
-		styleElement.appendChild(document.createTextNode(css));
-	}
-}
-
-
-/***/ },
-/* 18 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(17)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -32186,7 +32419,33 @@ if(false) {
 }
 
 /***/ },
-/* 19 */
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(12);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-212cd334!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Equipment.vue", function() {
+			var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-212cd334!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Equipment.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -40306,10 +40565,10 @@ return Vue$3;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 20 */
+/* 25 */
 /***/ function(module, exports) {
 
 module.exports = function(module) {
@@ -40335,109 +40594,12 @@ module.exports = function(module) {
 
 
 /***/ },
-/* 21 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+__webpack_require__(4);
+module.exports = __webpack_require__(5);
 
-
-/***/ },
-/* 22 */,
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ exports["default"] = {
-    props: {
-        demo2: {
-            default: 0
-        }
-    },
-    methods: {
-        demo: function demo (){
-            console.log(2);
-            this.$emit('demo1')
-        }
-    }
-};
-
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = {}
-
-/* script */
-__vue_exports__ = __webpack_require__(23)
-
-/* template */
-var __vue_template__ = __webpack_require__(25)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "D:\\workspace\\wiki\\resources\\assets\\js\\components\\Equioment.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5b252765", __vue_options__)
-  } else {
-    hotAPI.reload("data-v-5b252765", __vue_options__)
-  }
-})()}
-if (__vue_options__.functional) {console.error("[vue-loader] Equioment.vue: functional components are not supported and should be defined in plain js files using render functions.")}
-
-module.exports = __vue_exports__
-
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;
-  return _vm._h("div")
-},staticRenderFns: []}
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5b252765", module.exports)
-  }
-}
 
 /***/ }
 /******/ ]);

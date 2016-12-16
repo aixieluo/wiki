@@ -36,6 +36,8 @@
                         <td>{{ sumConcealment }}</td>
                         <td>侦查</td>
                         <td>{{ sumSpy }}</td>
+                        <td>射程</td>
+                        <td>{{ 555 }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -46,25 +48,28 @@
         <div class="page-header">
             <h3>装备槽</h3>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr>
-                            <td>炮座</td>
-                            <td>改装</td>
-                            <td>外身</td>
-                            <td>内壁</td>
-                            <td>内仓</td>
-                            <td>炮架</td>
-                            <td>特殊</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel-group" id="equipments" role="tablist" aria-multiselectable="true">
+            <equipment v-for="num in equipmentSlots.barbette" :id="'barbette'+num" type="炮座" :dancerId="dancerId">
+                <span>炮座{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.refit" :id="'refit'+num" type="改装" :dancerId="dancerId">
+                <span>改装{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.outside" :id="'outside'+num" type="外身" :dancerId="dancerId">
+                <span>外身{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.inwall" :id="'inwall'+num" type="内壁" :dancerId="dancerId">
+                <span>内壁{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.inwarehouse" :id="'inwarehouse'+num" type="内仓" :dancerId="dancerId">
+                <span>内仓{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.carriage" :id="'carriage'+num" type="炮架" :dancerId="dancerId">
+                <span>炮架{{ num }}</span>
+            </equipment>
+            <equipment v-for="num in equipmentSlots.special" :id="'special'+num" type="特殊" :dancerId="dancerId">
+                <span>特殊{{ num }}</span>
+            </equipment>
         </div>
 
 
@@ -72,6 +77,7 @@
 </template>
 
 <script>
+    //域名路由
     import {host} from "../variables"
 
     export default {
@@ -88,8 +94,30 @@
                 dancer: {},
                 attributes: {},
                 grows: {},
+                equipmentSlots: {},
                 lv: 0,
-                demo2: 1,
+            }
+        },
+        methods: {
+            ready () {
+                //获取基础属性
+                this.$http.post(host+'/api/dancer/attributes', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.attributes = response.data;
+                });
+                //获取成长属性
+                this.$http.post(host+'/api/dancer/growAttributes', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.grows = response.data;
+                });
+                //获取舞姬各装备槽个数
+                this.$http.post(host+'/api/dancer/equipmentSlots', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.equipmentSlots = response.data;
+                });
             }
         },
         computed: {
@@ -125,22 +153,6 @@
                 let sum = this.attributes.spy;
                 return sum;
             },
-        },
-        methods: {
-            ready () {
-                //获取基础属性
-                this.$http.post(host+'/api/dancer/attributes', {
-                    id: this.dancerId,
-                }).then((response)=>{
-                    this.attributes = response.data;
-                });
-                //获取成长属性
-                this.$http.post(host+'/api/dancer/grow', {
-                    id: this.dancerId,
-                }).then((response)=>{
-                    this.grows = response.data;
-                });
-            }
         },
         watch: {
             //监听lv的变化，当lv不是数字时，还原原先的值

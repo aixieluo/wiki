@@ -18,7 +18,12 @@ class Slot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function equipments(){
+    public function equipment() {
         return $this->belongsToMany('App\Models\Equipment');
+    }
+
+
+    public function equipmentList($slot) {
+        return $this->where('name', $slot)->first()->equipment()->get();
     }
 }
