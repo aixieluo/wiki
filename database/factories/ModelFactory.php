@@ -115,6 +115,7 @@ $factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker)
         'name' => $faker->name,
         'lv' => $faker->numberBetween(1, 10),
         'rank' => $faker->boolean(),
+        'main_slot' => $faker->boolean(),
         'describe' => $faker->sentence(20),
         'price' => 450,
     ];
