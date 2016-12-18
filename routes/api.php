@@ -35,6 +35,7 @@ Route::group(['namespace'=>'Api'], function () {
 
     //获取某位置的所有装备
     Route::post('equipment/part/list/', 'EquipmentController@equipmentList');
+    Route::post('equipment/attributes', 'EquipmentController@equipmentAttributes');
 
     /*part equipment end*/
 });

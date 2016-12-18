@@ -541,6 +541,17 @@ $(function () {
             attributes: {},
             grows: {},
             equipmentSlots: {},
+            equipment: [],
+            equipmentAttributes: {
+                fire: 0,
+                penetrate: 0,
+                durable: 0,
+                armor: 0,
+                hit: 0,
+                dodge: 0,
+                concealment: 0,
+                spy: 0,
+            },
             lv: 0,
         }
     },
@@ -566,39 +577,94 @@ $(function () {
             }).then(function (response){
                 this$1.equipmentSlots = response.data;
             });
-        }
+        },
+        equipmentList: function equipmentList(equipment) {
+            var this$1 = this;
+
+            var flag = true;
+            this.equipment.forEach(function (item, key){
+                if(item.slot==equipment.slot) {
+                    this$1.equipment[key] = equipment;
+                    flag = false;
+                }
+            });
+            if(flag) {
+                this.equipment.push(equipment);
+            }
+            var sumFire = 0,
+                sumPenetrate = 0,
+                sumDurable = 0,
+                sumArmor = 0,
+                sumHit = 0,
+                sumDodge = 0,
+                sumConcealment = 0,
+                sumSpy = 0;
+            this.equipment.forEach(function (item){
+                sumFire += item.fire;
+                sumPenetrate += item.penetrate;
+                sumDurable += item.durable;
+                sumArmor += item.armor;
+                sumHit += item.hit;
+                sumDodge += item.dodge;
+                sumConcealment += item.concealment;
+                sumSpy += item.spy;
+            });
+
+
+            this.equipmentAttributes.fire = sumFire;
+            this.equipmentAttributes.penetrate = sumPenetrate;
+            this.equipmentAttributes.durable = sumDurable;
+            this.equipmentAttributes.armor = sumArmor;
+            this.equipmentAttributes.hit = sumHit;
+            this.equipmentAttributes.dodge = sumDodge;
+            this.equipmentAttributes.concealment = sumConcealment;
+            this.equipmentAttributes.spy = sumSpy;
+
+        },
     },
     computed: {
         sumFire: function sumFire () {
-            var sum = this.lv*this.grows.grow_fire+this.attributes.fire;
+            var sum = this.attributes.fire;
+            sum += this.lv*this.grows.grow_fire;
+            sum += this.equipmentAttributes.fire;
             return sum;
         },
         sumPenetrate: function sumPenetrate () {
-            var sum = this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+            var sum = this.attributes.penetrate;
+            sum += this.lv*this.grows.grow_penetrate;
+            sum += this.equipmentAttributes.penetrate;
             return sum;
         },
         sumDurable: function sumDurable () {
-            var sum = this.lv*this.grows.grow_durable+this.attributes.durable;
+            var sum = this.attributes.durable;
+            sum += this.lv*this.grows.grow_durable;
+            sum += this.equipmentAttributes.durable;
             return sum;
         },
         sumArmor: function sumArmor () {
-            var sum = this.lv*this.grows.grow_armor+this.attributes.armor;
+            var sum = this.attributes.armor;
+            sum += this.lv*this.grows.grow_armor;
+            sum += this.equipmentAttributes.armor;
             return sum;
         },
         sumHit: function sumHit () {
             var sum = this.attributes.hit;
+            sum += this.equipmentAttributes.hit;
             return sum;
         },
         sumDodge: function sumDodge () {
             var sum = this.attributes.dodge;
+            sum += this.equipmentAttributes.dodge;
             return sum;
         },
         sumConcealment: function sumConcealment () {
             var sum = this.attributes.concealment;
+            sum += this.equipmentAttributes.concealment;
             return sum;
         },
         sumSpy: function sumSpy () {
             var sum = this.attributes.spy;
+            sum += this.equipmentAttributes.spy;
             return sum;
         },
     },
@@ -617,6 +683,7 @@ $(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+//
 //
 //
 //
@@ -659,6 +726,17 @@ $(function () {
         return {
             equipment: {},
             equipped: {},
+            equipmentInfo: {
+                fire: 0,
+                penetrate: 0,
+                durable: 0,
+                armor: 0,
+                hit: 0,
+                dodge: 0,
+                concealment: 0,
+                spy: 0,
+                slot: this.id
+            },
             isActive: false,
         }
     },
@@ -677,7 +755,39 @@ $(function () {
         },
         equip: function equip(aEquipment) {
             this.equipped = aEquipment;
-        }
+            this.attributes(aEquipment);
+        },
+        attributes: function attributes(aEquipment) {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/equipment/attributes', {
+                name: aEquipment.name,
+                lv: aEquipment.lv,
+                rank: aEquipment.rank,
+            }).then(function (response){
+                this$1.equipmentInfo = response.data;
+                this$1.equipmentInfo.slot = this$1.id;
+                this$1.getEquipment();
+            });
+        },
+        getEquipment: function getEquipment() {
+            this.$emit('getEquipment', this.equipmentInfo);
+        },
+        resetEquipmentInfo: function resetEquipmentInfo() {
+            this.equipped = {};
+            this.equipmentInfo = {
+                fire: 0,
+                penetrate: 0,
+                durable: 0,
+                armor: 0,
+                hit: 0,
+                dodge: 0,
+                concealment: 0,
+                spy: 0,
+                slot: this.id
+            };
+            this.getEquipment();
+        },
     }
 };
 
@@ -787,7 +897,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -40607,7 +40717,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-body"
   }, [_c('ul', {
     staticClass: "list-unstyled"
-  }, _vm._l((_vm.equipment), function(aEquipment) {
+  }, [_c('li', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.equipped.name),
+      expression: "equipped.name"
+    }],
+    staticClass: "pull-left equipment-wrap",
+    on: {
+      "click": function($event) {
+        _vm.resetEquipmentInfo()
+      }
+    }
+  }, [_vm._v("卸下装备")]), _vm._v(" "), _vm._l((_vm.equipment), function(aEquipment) {
     return _c('li', {
       staticClass: "pull-left equipment-wrap",
       class: {
@@ -40619,7 +40742,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("\n                    " + _vm._s(aEquipment.name) + "\n                ")])
-  }))])])])
+  })], true)])])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -40727,6 +40850,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'barbette' + num,
         "type": "炮座",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("炮座" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.refit), function(num) {
@@ -40735,6 +40861,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'refit' + num,
         "type": "改装",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("改装" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.outside), function(num) {
@@ -40743,6 +40872,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'outside' + num,
         "type": "外身",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("外身" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.inwall), function(num) {
@@ -40751,6 +40883,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'inwall' + num,
         "type": "内壁",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("内壁" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.inwarehouse), function(num) {
@@ -40759,6 +40894,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'inwarehouse' + num,
         "type": "内仓",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("内仓" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.carriage), function(num) {
@@ -40767,6 +40905,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'carriage' + num,
         "type": "炮架",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("炮架" + _vm._s(num))])])
   }), _vm._v(" "), _vm._l((_vm.equipmentSlots.special), function(num) {
@@ -40775,6 +40916,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "id": 'special' + num,
         "type": "特殊",
         "dancerId": _vm.dancerId
+      },
+      on: {
+        "getEquipment": _vm.equipmentList
       }
     }, [_c('span', [_vm._v("特殊" + _vm._s(num))])])
   })], true)])

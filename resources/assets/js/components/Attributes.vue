@@ -49,25 +49,25 @@
             <h3>装备槽</h3>
         </div>
         <div class="panel-group" id="equipments" role="tablist" aria-multiselectable="true">
-            <equipment v-for="num in equipmentSlots.barbette" :id="'barbette'+num" type="炮座" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.barbette" :id="'barbette'+num" type="炮座" :dancerId="dancerId">
                 <span>炮座{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.refit" :id="'refit'+num" type="改装" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.refit" :id="'refit'+num" type="改装" :dancerId="dancerId">
                 <span>改装{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.outside" :id="'outside'+num" type="外身" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.outside" :id="'outside'+num" type="外身" :dancerId="dancerId">
                 <span>外身{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.inwall" :id="'inwall'+num" type="内壁" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.inwall" :id="'inwall'+num" type="内壁" :dancerId="dancerId">
                 <span>内壁{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.inwarehouse" :id="'inwarehouse'+num" type="内仓" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.inwarehouse" :id="'inwarehouse'+num" type="内仓" :dancerId="dancerId">
                 <span>内仓{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.carriage" :id="'carriage'+num" type="炮架" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.carriage" :id="'carriage'+num" type="炮架" :dancerId="dancerId">
                 <span>炮架{{ num }}</span>
             </equipment>
-            <equipment v-for="num in equipmentSlots.special" :id="'special'+num" type="特殊" :dancerId="dancerId">
+            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.special" :id="'special'+num" type="特殊" :dancerId="dancerId">
                 <span>特殊{{ num }}</span>
             </equipment>
         </div>
@@ -95,6 +95,17 @@
                 attributes: {},
                 grows: {},
                 equipmentSlots: {},
+                equipment: [],
+                equipmentAttributes: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
                 lv: 0,
             }
         },
@@ -118,39 +129,92 @@
                 }).then((response)=>{
                     this.equipmentSlots = response.data;
                 });
-            }
+            },
+            equipmentList(equipment) {
+                let flag = true;
+                this.equipment.forEach((item, key)=>{
+                    if(item.slot==equipment.slot) {
+                        this.equipment[key] = equipment;
+                        flag = false;
+                    }
+                });
+                if(flag) {
+                    this.equipment.push(equipment);
+                }
+                let sumFire = 0,
+                    sumPenetrate = 0,
+                    sumDurable = 0,
+                    sumArmor = 0,
+                    sumHit = 0,
+                    sumDodge = 0,
+                    sumConcealment = 0,
+                    sumSpy = 0;
+                this.equipment.forEach((item)=>{
+                    sumFire += item.fire;
+                    sumPenetrate += item.penetrate;
+                    sumDurable += item.durable;
+                    sumArmor += item.armor;
+                    sumHit += item.hit;
+                    sumDodge += item.dodge;
+                    sumConcealment += item.concealment;
+                    sumSpy += item.spy;
+                });
+
+
+                this.equipmentAttributes.fire = sumFire;
+                this.equipmentAttributes.penetrate = sumPenetrate;
+                this.equipmentAttributes.durable = sumDurable;
+                this.equipmentAttributes.armor = sumArmor;
+                this.equipmentAttributes.hit = sumHit;
+                this.equipmentAttributes.dodge = sumDodge;
+                this.equipmentAttributes.concealment = sumConcealment;
+                this.equipmentAttributes.spy = sumSpy;
+
+            },
         },
         computed: {
             sumFire () {
-                let sum = this.lv*this.grows.grow_fire+this.attributes.fire;
+                let sum = this.attributes.fire;
+                sum += this.lv*this.grows.grow_fire;
+                sum += this.equipmentAttributes.fire;
                 return sum;
             },
             sumPenetrate () {
-                let sum = this.lv*this.grows.grow_penetrate+this.attributes.penetrate;
+                let sum = this.attributes.penetrate;
+                sum += this.lv*this.grows.grow_penetrate;
+                sum += this.equipmentAttributes.penetrate;
                 return sum;
             },
             sumDurable () {
-                let sum = this.lv*this.grows.grow_durable+this.attributes.durable;
+                let sum = this.attributes.durable;
+                sum += this.lv*this.grows.grow_durable;
+                sum += this.equipmentAttributes.durable;
                 return sum;
             },
             sumArmor () {
-                let sum = this.lv*this.grows.grow_armor+this.attributes.armor;
+                let sum = this.attributes.armor;
+                sum += this.lv*this.grows.grow_armor;
+                sum += this.equipmentAttributes.armor;
                 return sum;
             },
             sumHit () {
                 let sum = this.attributes.hit;
+                sum += this.equipmentAttributes.hit;
                 return sum;
             },
             sumDodge () {
                 let sum = this.attributes.dodge;
+                sum += this.equipmentAttributes.dodge;
                 return sum;
             },
             sumConcealment () {
                 let sum = this.attributes.concealment;
+                sum += this.equipmentAttributes.concealment;
                 return sum;
             },
             sumSpy () {
                 let sum = this.attributes.spy;
+                sum += this.equipmentAttributes.spy;
                 return sum;
             },
         },

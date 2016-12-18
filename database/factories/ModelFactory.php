@@ -74,7 +74,7 @@ $factory->define(\App\Models\Technology::class, function (Faker\Generator $faker
 $factory->define(\App\Models\Attribute::class, function (Faker\Generator $faker) {
     return [
         'attributeable_id' => $faker->numberBetween(1, 10),
-        'attributeable_type' => $faker->randomElement(["App\Models\Dancer", "App\Models\Technology"]),
+        'attributeable_type' => $faker->randomElement(["App\Models\Dancer", "App\Models\Technology", "App\Models\Equipment"]),
         'fire' => $faker->numberBetween(1, 10),
         'penetrate' => $faker->numberBetween(1, 10),
         'durable' => $faker->numberBetween(1, 10),

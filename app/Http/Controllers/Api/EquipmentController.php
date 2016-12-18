@@ -31,4 +31,8 @@ class EquipmentController extends Controller
     public function equipmentList(Request $request) {
         return $this->slot->equipmentList($request->slot);
     }
+
+    public function equipmentAttributes(Request $request) {
+        return $this->equipment->equipmentAttributes($request->name, $request->lv, $request->rank);
+    }
 }
