@@ -11,6 +11,6 @@ class EquipmentSlotsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\EquipmentSlot::class, 350)->create();
+        factory(\App\Models\EquipmentSlot::class, 20)->create();
     }
 }

@@ -5,6 +5,18 @@
                 <a data-toggle="collapse" data-parent="#equipments" :href="'#'+id" aria-expanded="true" :aria-controls="id">
                     <slot></slot>
                     <span v-if="equipped.name">{{ equipped.name }}</span>
+                    <div v-show="equipped.name" class="btn-group" :class="id">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            S{{ lv }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li v-for="n in 10"><a href="javascript:;" @click.stop="lvToggle(n)">S{{ n }}</a></li>
+                        </ul>
+                    </div>
+                    <div v-show="equipped.name" class="btn-group">
+                        <span @click.stop.prevent="rank=0" class="btn btn-default" :class="{ active: !rank }">普通</span>
+                        <span @click.stop.prevent="rank=1" class="btn btn-default" :class="{ active: rank }">高级</span>
+                    </div>
                 </a>
             </h4>
         </div>
@@ -52,6 +64,8 @@
                     spy: 0,
                     slot: this.id
                 },
+                lv: 1,
+                rank: 0,
                 isActive: false,
             }
         },
@@ -59,6 +73,10 @@
             this.ready();
         },
         methods: {
+            lvToggle(n) {
+                this.lv = n;
+                document.querySelector('.'+this.id).classList.remove('open');
+            },
             ready() {
                 this.$http.post(host+'/api/equipment/part/list', {
                     slot: this.type,
@@ -68,13 +86,13 @@
             },
             equip(aEquipment) {
                 this.equipped = aEquipment;
-                this.attributes(aEquipment);
+                this.attributes();
             },
-            attributes(aEquipment) {
+            attributes() {
                 this.$http.post(host+'/api/equipment/attributes', {
-                    name: aEquipment.name,
-                    lv: aEquipment.lv,
-                    rank: aEquipment.rank,
+                    name: this.equipped.name,
+                    lv: this.lv,
+                    rank: this.rank,
                 }).then((response)=>{
                     this.equipmentInfo = response.data;
                     this.equipmentInfo.slot = this.id;
@@ -99,7 +117,15 @@
                 };
                 this.getEquipment();
             },
-        }
+        },
+        watch: {
+            lv() {
+                this.attributes();
+            },
+            rank() {
+                this.attributes();
+            }
+        },
     }
 </script>
 
