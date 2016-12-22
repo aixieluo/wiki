@@ -20,7 +20,7 @@ class Dancer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function attributes(){
+    public function attributes() {
         return $this->morphMany('App\Models\Attribute','attributeable');
     }
 
@@ -29,7 +29,7 @@ class Dancer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function technologies(){
+    public function technologies() {
         return $this->belongsToMany('App\Models\Technology');
     }
 
@@ -38,7 +38,7 @@ class Dancer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function images(){
+    public function images() {
         return $this->morphMany('App\Models\Image', 'imageable');
     }
 
@@ -48,7 +48,7 @@ class Dancer extends Model
      * @param $id 舞姬id
      * @return \Illuminate\Database\Eloquent\Collection|Model 舞姬信息
      */
-    public function own($id){
+    public function own($id) {
         $own = $this->findOrFail($id);
         return $own;
     }
@@ -59,7 +59,7 @@ class Dancer extends Model
      * @param $id 舞姬id
      * @return mixed 舞姬相关的图片
      */
-    public function photos($id){
+    public function photos($id) {
         $photos = $this->findOrFail($id)->images()->get()->pluck('path', 'type');
         return $photos;
     }
@@ -70,8 +70,7 @@ class Dancer extends Model
      * @param $id 舞姬id
      * @return mixed 舞姬基本属性
      */
-    public function basicAttributes($id)
-    {
+    public function basicAttributes($id) {
         return $this->findOrFail($id)
             ->attributes()
             ->select('fire', 'penetrate', 'durable', 'armor', 'hit', 'dodge', 'concealment', 'spy')
@@ -84,7 +83,7 @@ class Dancer extends Model
      * @param $id 舞姬id
      * @return mixed 舞姬成长属性
      */
-    public function growAttributes($id){
+    public function growAttributes($id) {
         return $this->select('grow_fire', 'grow_penetrate', 'grow_durable', 'grow_armor')->findOrFail($id);
     }
 
@@ -94,7 +93,17 @@ class Dancer extends Model
      * @param $id 舞姬id
      * @return mixed 舞姬各装备槽个数
      */
-    public function equipmentSlots ($id){
+    public function equipmentSlots($id) {
         return $this->select('barbette', 'refit', 'outside', 'inwall', 'inwarehouse', 'carriage', 'special')->findOrFail($id);
+    }
+
+    /**
+     * 获取舞姬的稀有度
+     *
+     * @param $id 舞姬id
+     * @return mixed 舞姬稀有度
+     */
+    public function rarity($id) {
+        return $this->select('rarity')->findOrFail($id);
     }
 }

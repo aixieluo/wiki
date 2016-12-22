@@ -70,7 +70,43 @@
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return host; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return starIncrease; });
+//服务器域名地址
 var host = "http://" + location.host;
+
+//亮星加成
+var starIncrease = [
+    {
+        fire: 0,
+        penetrate: 0,
+        durable: 0,
+        armor: 0,
+        hit: 0,
+        dodge: 0,
+        concealment: 0,
+        spy: 0,
+    },
+    {
+        fire: 0,
+        penetrate: 0.28,
+        durable: 0.78,
+        armor: 0.28,
+        hit: 0.42,
+        dodge: 0.32,
+        concealment: 0,
+        spy: 0,
+    },
+    {
+        fire: 0,
+        penetrate: 0.58,
+        durable: 1.59,
+        armor: 0.58,
+        hit: 1,
+        dodge: 0.82,
+        concealment: 0,
+        spy: 0,
+    }
+];
 
 /***/ },
 /* 1 */
@@ -2827,6 +2863,10 @@ if (typeof jQuery === 'undefined') {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(27);
+//
+//
+//
 //
 //
 //
@@ -2909,6 +2949,7 @@ if (typeof jQuery === 'undefined') {
 //域名路由
 
 
+
 /* harmony default export */ exports["default"] = {
     props: {
         'dancerId': {
@@ -2935,6 +2976,8 @@ if (typeof jQuery === 'undefined') {
                 concealment: 0,
                 spy: 0,
             },
+            rarity: 1,
+            selectRarity: 1,
             lv: 0,
         }
     },
@@ -2960,7 +3003,14 @@ if (typeof jQuery === 'undefined') {
             }).then(function (response){
                 this$1.equipmentSlots = response.data;
             });
+            //获取舞姬稀有度
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/rarity', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.rarity = response.data.rarity;
+            });
         },
+        //存储目前装备的装备列表
         equipmentList: function equipmentList(equipment) {
             var this$1 = this;
 
@@ -2982,6 +3032,7 @@ if (typeof jQuery === 'undefined') {
                 sumDodge = 0,
                 sumConcealment = 0,
                 sumSpy = 0;
+            //将存储下来的装备列表中的装备的属性加成计算出来
             this.equipment.forEach(function (item){
                 sumFire += item.fire;
                 sumPenetrate += item.penetrate;
@@ -3007,47 +3058,63 @@ if (typeof jQuery === 'undefined') {
     },
     computed: {
         sumFire: function sumFire () {
-            var sum = this.attributes.fire;
-            sum += this.lv*this.grows.grow_fire;
-            sum += this.equipmentAttributes.fire;
+            var basic = this.attributes.fire;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].fire));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_fire));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.fire);
             return sum;
         },
         sumPenetrate: function sumPenetrate () {
-            var sum = this.attributes.penetrate;
-            sum += this.lv*this.grows.grow_penetrate;
-            sum += this.equipmentAttributes.penetrate;
+            var basic = this.attributes.penetrate;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].penetrate));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_penetrate));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.penetrate);
             return sum;
         },
         sumDurable: function sumDurable () {
-            var sum = this.attributes.durable;
-            sum += this.lv*this.grows.grow_durable;
-            sum += this.equipmentAttributes.durable;
+            var basic = this.attributes.durable;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].durable));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_durable));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.durable);
             return sum;
         },
         sumArmor: function sumArmor () {
-            var sum = this.attributes.armor;
-            sum += this.lv*this.grows.grow_armor;
-            sum += this.equipmentAttributes.armor;
+            var basic = this.attributes.armor;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].armor));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_armor));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.armor);
             return sum;
         },
         sumHit: function sumHit () {
-            var sum = this.attributes.hit;
-            sum += this.equipmentAttributes.hit;
+            var basic = this.attributes.hit;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].hit));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.hit);
             return sum;
         },
         sumDodge: function sumDodge () {
-            var sum = this.attributes.dodge;
-            sum += this.equipmentAttributes.dodge;
+            var basic = this.attributes.dodge;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].dodge));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.dodge);
             return sum;
         },
         sumConcealment: function sumConcealment () {
-            var sum = this.attributes.concealment;
-            sum += this.equipmentAttributes.concealment;
+            var basic = this.attributes.concealment;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].concealment));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.concealment);
             return sum;
         },
         sumSpy: function sumSpy () {
-            var sum = this.attributes.spy;
-            sum += this.equipmentAttributes.spy;
+            var basic = this.attributes.spy;
+            var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].spy));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.spy);
             return sum;
         },
     },
@@ -3141,6 +3208,7 @@ if (typeof jQuery === 'undefined') {
         this.ready();
     },
     methods: {
+        //选择装备等级后重置选择按钮的文本
         lvToggle: function lvToggle(n) {
             this.lv = n;
             document.querySelector('.'+this.id).classList.remove('open');
@@ -3148,16 +3216,19 @@ if (typeof jQuery === 'undefined') {
         ready: function ready() {
             var this$1 = this;
 
+            //根据装备的槽位获取该槽位所有的装备
             this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/equipment/part/list', {
                 slot: this.type,
             }).then(function (response){
                 this$1.equipment = response.data;
             });
         },
+        //装备一件装备，并将其属性存储下来
         equip: function equip(aEquipment) {
             this.equipped = aEquipment;
             this.attributes();
         },
+        //获取存储装备的属性
         attributes: function attributes() {
             var this$1 = this;
 
@@ -3171,9 +3242,11 @@ if (typeof jQuery === 'undefined') {
                 this$1.getEquipment();
             });
         },
+        //触发父页面的getEquipment事件，将装备属性传回父页面
         getEquipment: function getEquipment() {
             this.$emit('getEquipment', this.equipmentInfo);
         },
+        //卸下装备后重置属性为空
         resetEquipmentInfo: function resetEquipmentInfo() {
             this.equipped = {};
             this.equipmentInfo = {
@@ -3191,9 +3264,11 @@ if (typeof jQuery === 'undefined') {
         },
     },
     watch: {
+        //当装备等级发生改变时重新获取装备属性
         lv: function lv() {
             this.attributes();
         },
+        //当装备级别发生改变时重新获取装备属性
         rank: function rank() {
             this.attributes();
         }
@@ -3292,7 +3367,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -30758,7 +30833,33 @@ module.exports={render:function (){var _vm=this;
     staticClass: "col-md-6"
   }, [_vm._h('div', {
     staticClass: "clearfix"
-  }, [_vm._m(1), " ", _vm._h('div', {
+  }, [_vm._h('div', {
+    staticClass: "pull-left clearfix"
+  }, [_vm._l((_vm.selectRarity), function(n) {
+    return _vm._h('i', {
+      staticClass: "fa fa-star pull-left",
+      attrs: {
+        "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectRarity = n
+        }
+      }
+    })
+  }), " ", _vm._l(((_vm.rarity - _vm.selectRarity)), function(n) {
+    return _vm._h('i', {
+      staticClass: "fa fa-star-o pull-left",
+      attrs: {
+        "aria-hidden": "true"
+      },
+      on: {
+        "click": function($event) {
+          _vm.selectRarity = ++n
+        }
+      }
+    })
+  })]), " ", _vm._h('div', {
     staticClass: "pull-right"
   }, [_vm._h('button', {
     staticClass: "btn-arrow",
@@ -30833,7 +30934,7 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "width": "1px"
     }
-  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)]), " ", _vm._h('td', ["射程"]), " ", _vm._h('td', [_vm._s(555)])])])])])]), " ", _vm._m(2), " ", _vm._h('div', {
+  }, [_vm._s(_vm.sumDurable)])]), " ", _vm._h('tr', [_vm._h('td', ["装甲"]), " ", _vm._h('td', [_vm._s(_vm.sumArmor)]), " ", _vm._h('td', ["命中"]), " ", _vm._h('td', [_vm._s(_vm.sumHit)]), " ", _vm._h('td', ["闪避"]), " ", _vm._h('td', [_vm._s(_vm.sumDodge)])]), " ", _vm._h('tr', [_vm._h('td', ["隐蔽"]), " ", _vm._h('td', [_vm._s(_vm.sumConcealment)]), " ", _vm._h('td', ["侦查"]), " ", _vm._h('td', [_vm._s(_vm.sumSpy)]), " ", _vm._h('td', ["射程"]), " ", _vm._h('td', [_vm._s(555)])])])])])]), " ", _vm._m(1), " ", _vm._h('div', {
     staticClass: "panel-group",
     attrs: {
       "id": "equipments",
@@ -30922,15 +31023,6 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
   }, [_vm._h('h3', ["基础属性"])])
-},function (){var _vm=this;
-  return _vm._h('div', {
-    staticClass: "pull-left"
-  }, [_vm._h('i', {
-    staticClass: "fa fa-star",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
 },function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
@@ -40836,6 +40928,110 @@ module.exports = function(module) {
 __webpack_require__(4);
 module.exports = __webpack_require__(5);
 
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ exports["a"] = numAdd;
+/* unused harmony export numSub */
+/* harmony export (immutable) */ exports["b"] = numMulti;
+/* unused harmony export numDiv */
+
+/**
+ * 加法运算，避免数据相加小数点后产生多位数和计算精度损失。
+ *
+ * @param num1加数1 | num2加数2
+ */
+function numAdd(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum, baseNum1, baseNum2;
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+    return (num1 * baseNum + num2 * baseNum) / baseNum;
+}
+/**
+ * 加法运算，避免数据相减小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被减数 | num2减数
+ */
+function numSub(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum, baseNum1, baseNum2;
+    var precision;// 精度
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+    precision = (baseNum1 >= baseNum2) ? baseNum1 : baseNum2;
+    return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
+}
+/**
+ * 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被乘数 | num2乘数
+ */
+function numMulti(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum = 0;
+    try {
+        baseNum += num1.toString().split(".")[1].length;
+    } catch (e) {
+    }
+    try {
+        baseNum += num2.toString().split(".")[1].length;
+    } catch (e) {
+    }
+    return Number(num1.toString().replace(".", "")) * Number(num2.toString().replace(".", "")) / Math.pow(10, baseNum);
+}
+/**
+ * 除法运算，避免数据相除小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被除数 | num2除数
+ */
+function numDiv(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=1;
+
+    var baseNum1 = 0, baseNum2 = 0;
+    var baseNum3, baseNum4;
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum3 = Number(num1.toString().replace(".", ""));
+    baseNum4 = Number(num2.toString().replace(".", ""));
+    return (baseNum3 / baseNum4) * pow(10, baseNum2 - baseNum1);
+}
 
 /***/ }
 /******/ ]);

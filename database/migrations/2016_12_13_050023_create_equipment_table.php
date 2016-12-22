@@ -15,7 +15,7 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('装备名称');
+            $table->string('name')->comment('装备名称');//瑕疵，装备名称重复，没有提取出来
             $table->integer('lv')->comment('装备等级');
             $table->boolean('rank')->comment('是否为高级装备');
             $table->boolean('main_slot')->comment('装备的主要位置');

@@ -73,21 +73,25 @@
             this.ready();
         },
         methods: {
+            //选择装备等级后重置选择按钮的文本
             lvToggle(n) {
                 this.lv = n;
                 document.querySelector('.'+this.id).classList.remove('open');
             },
             ready() {
+                //根据装备的槽位获取该槽位所有的装备
                 this.$http.post(host+'/api/equipment/part/list', {
                     slot: this.type,
                 }).then((response)=>{
                     this.equipment = response.data;
                 });
             },
+            //装备一件装备，并将其属性存储下来
             equip(aEquipment) {
                 this.equipped = aEquipment;
                 this.attributes();
             },
+            //获取存储装备的属性
             attributes() {
                 this.$http.post(host+'/api/equipment/attributes', {
                     name: this.equipped.name,
@@ -99,9 +103,11 @@
                     this.getEquipment();
                 });
             },
+            //触发父页面的getEquipment事件，将装备属性传回父页面
             getEquipment() {
                 this.$emit('getEquipment', this.equipmentInfo);
             },
+            //卸下装备后重置属性为空
             resetEquipmentInfo() {
                 this.equipped = {};
                 this.equipmentInfo = {
@@ -119,9 +125,11 @@
             },
         },
         watch: {
+            //当装备等级发生改变时重新获取装备属性
             lv() {
                 this.attributes();
             },
+            //当装备级别发生改变时重新获取装备属性
             rank() {
                 this.attributes();
             }

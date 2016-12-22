@@ -26,6 +26,8 @@ Route::group(['namespace'=>'Api'], function () {
     Route::post('dancer/growAttributes', 'DancerController@growAttributes');
     //获取舞姬的各装备槽个数
     Route::post('dancer/equipmentSlots', 'DancerController@equipmentSlots');
+    //获取舞姬稀有度
+    Route::post('dancer/rarity', 'DancerController@rarity');
 
     /*part dancer end*/
 

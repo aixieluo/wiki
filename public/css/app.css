@@ -10845,6 +10845,11 @@ header h1 {
   border: 0;
 }
 
+.xd-detail .fa-star, .xd-detail .fa-star-o {
+  font-size: 18px;
+  cursor: pointer;
+}
+
 @media (max-width: 991px) {
   .xwrap {
     padding: 15px;

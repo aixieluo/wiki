@@ -16,7 +16,7 @@ class DancerController extends Controller
     /**
      * DancerController constructor.
      */
-    public function __construct (){
+    public function __construct() {
         $this->dancer = new Dancer();
     }
 
@@ -26,7 +26,7 @@ class DancerController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function attributes (Request $request){
+    public function attributes(Request $request) {
         return $this->dancer->basicAttributes($request->id);
     }
 
@@ -36,7 +36,7 @@ class DancerController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function growAttributes (Request $request){
+    public function growAttributes(Request $request) {
         return $this->dancer->growAttributes($request->id);
     }
 
@@ -46,7 +46,17 @@ class DancerController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function equipmentSlots (Request $request){
+    public function equipmentSlots(Request $request) {
         return $this->dancer->equipmentSlots($request->id);
+    }
+
+    /**
+     * 获取舞姬稀有度
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function rarity(Request $request) {
+        return $this->dancer->rarity($request->id);
     }
 }

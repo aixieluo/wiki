@@ -6,7 +6,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="clearfix">
-                    <div class="pull-left"><i class="fa fa-star" aria-hidden="true"></i></div>
+                    <div class="pull-left clearfix">
+                        <i v-for="n in selectRarity" @click="selectRarity=n" class="fa fa-star pull-left" aria-hidden="true"></i>
+                        <i v-for="n in (rarity-selectRarity)" @click="selectRarity = ++n" class="fa fa-star-o pull-left" aria-hidden="true"></i>
+                    </div>
                     <div class="pull-right">
                         <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i></button>
                         <span>Lv.<input class="lv-ipt" type="tel" v-model="lv" maxlength="2" max="99" min="0"></span>
@@ -78,7 +81,8 @@
 
 <script>
     //域名路由
-    import {host} from "../variables"
+    import {host, starIncrease} from "../variables"
+    import {numAdd, numSub, numMulti} from "../arithmetic"
 
     export default {
         props: {
@@ -106,6 +110,8 @@
                     concealment: 0,
                     spy: 0,
                 },
+                rarity: 1,
+                selectRarity: 1,
                 lv: 0,
             }
         },
@@ -129,7 +135,14 @@
                 }).then((response)=>{
                     this.equipmentSlots = response.data;
                 });
+                //获取舞姬稀有度
+                this.$http.post(host+'/api/dancer/rarity', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.rarity = response.data.rarity;
+                });
             },
+            //存储目前装备的装备列表
             equipmentList(equipment) {
                 let flag = true;
                 this.equipment.forEach((item, key)=>{
@@ -149,6 +162,7 @@
                     sumDodge = 0,
                     sumConcealment = 0,
                     sumSpy = 0;
+                //将存储下来的装备列表中的装备的属性加成计算出来
                 this.equipment.forEach((item)=>{
                     sumFire += item.fire;
                     sumPenetrate += item.penetrate;
@@ -174,47 +188,63 @@
         },
         computed: {
             sumFire () {
-                let sum = this.attributes.fire;
-                sum += this.lv*this.grows.grow_fire;
-                sum += this.equipmentAttributes.fire;
+                let basic = this.attributes.fire;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
+                sum = numAdd(sum, numMulti(this.lv, this.grows.grow_fire));
+                sum = numAdd(sum, this.equipmentAttributes.fire);
                 return sum;
             },
             sumPenetrate () {
-                let sum = this.attributes.penetrate;
-                sum += this.lv*this.grows.grow_penetrate;
-                sum += this.equipmentAttributes.penetrate;
+                let basic = this.attributes.penetrate;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].penetrate));
+                sum = numAdd(sum, numMulti(this.lv, this.grows.grow_penetrate));
+                sum = numAdd(sum, this.equipmentAttributes.penetrate);
                 return sum;
             },
             sumDurable () {
-                let sum = this.attributes.durable;
-                sum += this.lv*this.grows.grow_durable;
-                sum += this.equipmentAttributes.durable;
+                let basic = this.attributes.durable;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].durable));
+                sum = numAdd(sum, numMulti(this.lv, this.grows.grow_durable));
+                sum = numAdd(sum, this.equipmentAttributes.durable);
                 return sum;
             },
             sumArmor () {
-                let sum = this.attributes.armor;
-                sum += this.lv*this.grows.grow_armor;
-                sum += this.equipmentAttributes.armor;
+                let basic = this.attributes.armor;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].armor));
+                sum = numAdd(sum, numMulti(this.lv, this.grows.grow_armor));
+                sum = numAdd(sum, this.equipmentAttributes.armor);
                 return sum;
             },
             sumHit () {
-                let sum = this.attributes.hit;
-                sum += this.equipmentAttributes.hit;
+                let basic = this.attributes.hit;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].hit));
+                sum = numAdd(sum, this.equipmentAttributes.hit);
                 return sum;
             },
             sumDodge () {
-                let sum = this.attributes.dodge;
-                sum += this.equipmentAttributes.dodge;
+                let basic = this.attributes.dodge;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].dodge));
+                sum = numAdd(sum, this.equipmentAttributes.dodge);
                 return sum;
             },
             sumConcealment () {
-                let sum = this.attributes.concealment;
-                sum += this.equipmentAttributes.concealment;
+                let basic = this.attributes.concealment;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].concealment));
+                sum = numAdd(sum, this.equipmentAttributes.concealment);
                 return sum;
             },
             sumSpy () {
-                let sum = this.attributes.spy;
-                sum += this.equipmentAttributes.spy;
+                let basic = this.attributes.spy;
+                let sum = basic;
+                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].spy));
+                sum = numAdd(sum, this.equipmentAttributes.spy);
                 return sum;
             },
         },

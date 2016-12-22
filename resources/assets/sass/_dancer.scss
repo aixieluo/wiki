@@ -19,6 +19,10 @@
         background-color: transparent;
         border: 0;
     }
+    .fa-star,.fa-star-o{
+        font-size: 18px;
+        cursor: pointer;
+    }
 }
 @media (max-width: 991px) {
     .xwrap{
