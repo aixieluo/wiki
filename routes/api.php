@@ -40,5 +40,8 @@ Route::group(['namespace'=>'Api'], function () {
     Route::post('equipment/attributes', 'EquipmentController@equipmentAttributes');
 
     /*part equipment end*/
+
+
+    Route::post('tactic/names', 'TacticController@tacticNames');
 });
 

@@ -75,6 +75,11 @@
             </equipment>
         </div>
 
+        <div class="page-header">
+            <h3>战术</h3>
+        </div>
+        <tactic :dancerId="dancerId"></tactic>
+
 
     </div>
 </template>

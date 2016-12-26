@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Tactic extends Model
 {
     /**
-     * The attributes that are mass assignable.
+     * 拒绝自动填充的字段名单
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'lv'
-    ];
+    protected $guarded = [];
+
+    public function tacticNames() {
+        return $this->where('lv', 1)->select('name')->get();
+    }
 }

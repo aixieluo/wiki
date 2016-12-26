@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -422,7 +422,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(10);
+__webpack_require__(12);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -430,9 +430,10 @@ __webpack_require__(10);
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', __webpack_require__(17));
-Vue.component('attributes', __webpack_require__(15));
-Vue.component('equipment', __webpack_require__(16));
+Vue.component('example', __webpack_require__(20));
+Vue.component('attributes', __webpack_require__(18));
+Vue.component('equipment', __webpack_require__(19));
+Vue.component('tactic', __webpack_require__(21));
 
 var app = new Vue({
     el: '#app',
@@ -2863,7 +2864,12 @@ if (typeof jQuery === 'undefined') {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(11);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3309,8 +3315,180 @@ if (typeof jQuery === 'undefined') {
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-window._ = __webpack_require__(14);
+
+//域名路由
+
+
+/* harmony default export */ exports["default"] = {
+    props: {
+        'dancerId': {
+            required: true,
+        },
+    },
+    mounted: function mounted () {
+        this.ready();
+    },
+    data: function data() {
+        return {
+            tacticNames: [],
+            tacticSelected: '请选择一个战术',
+        }
+    },
+    methods: {
+        ready: function ready() {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/tactic/names', {}).then(function (response){
+                this$1.tacticNames = response.data;
+            });
+        }
+    }
+};
+
+
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ exports["a"] = numAdd;
+/* unused harmony export numSub */
+/* harmony export (immutable) */ exports["b"] = numMulti;
+/* unused harmony export numDiv */
+
+/**
+ * 加法运算，避免数据相加小数点后产生多位数和计算精度损失。
+ *
+ * @param num1加数1 | num2加数2
+ */
+function numAdd(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum, baseNum1, baseNum2;
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+    return (num1 * baseNum + num2 * baseNum) / baseNum;
+}
+/**
+ * 加法运算，避免数据相减小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被减数 | num2减数
+ */
+function numSub(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum, baseNum1, baseNum2;
+    var precision;// 精度
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+    precision = (baseNum1 >= baseNum2) ? baseNum1 : baseNum2;
+    return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
+}
+/**
+ * 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被乘数 | num2乘数
+ */
+function numMulti(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=0;
+
+    var baseNum = 0;
+    try {
+        baseNum += num1.toString().split(".")[1].length;
+    } catch (e) {
+    }
+    try {
+        baseNum += num2.toString().split(".")[1].length;
+    } catch (e) {
+    }
+    return Number(num1.toString().replace(".", "")) * Number(num2.toString().replace(".", "")) / Math.pow(10, baseNum);
+}
+/**
+ * 除法运算，避免数据相除小数点后产生多位数和计算精度损失。
+ *
+ * @param num1被除数 | num2除数
+ */
+function numDiv(num1, num2) {
+    if ( num1 === void 0 ) num1=0;
+    if ( num2 === void 0 ) num2=1;
+
+    var baseNum1 = 0, baseNum2 = 0;
+    var baseNum3, baseNum4;
+    try {
+        baseNum1 = num1.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum1 = 0;
+    }
+    try {
+        baseNum2 = num2.toString().split(".")[1].length;
+    } catch (e) {
+        baseNum2 = 0;
+    }
+    baseNum3 = Number(num1.toString().replace(".", ""));
+    baseNum4 = Number(num2.toString().replace(".", ""));
+    return (baseNum3 / baseNum4) * pow(10, baseNum2 - baseNum1);
+}
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+
+window._ = __webpack_require__(17);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -3318,7 +3496,7 @@ window._ = __webpack_require__(14);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(13);
+window.$ = window.jQuery = __webpack_require__(16);
 __webpack_require__(6);
 
 /**
@@ -3327,8 +3505,8 @@ __webpack_require__(6);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(24);
-__webpack_require__(21);
+window.Vue = __webpack_require__(30);
+__webpack_require__(26);
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -3359,7 +3537,7 @@ Vue.http.interceptors.push(function (request, next) {
 
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -3367,13 +3545,13 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)();
@@ -3387,7 +3565,21 @@ exports.push([module.i, "\n.panel a[data-toggle=\"collapse\"] {\n    text-decora
 
 
 /***/ },
-/* 13 */
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.xbtn-wrapper{\n    padding-bottom: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13613,7 +13805,7 @@ return jQuery;
 
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30682,23 +30874,23 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(25)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(31)(module)))
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(22)
+__webpack_require__(27)
 
 /* script */
 __vue_exports__ = __webpack_require__(7)
 
 /* template */
-var __vue_template__ = __webpack_require__(18)
+var __vue_template__ = __webpack_require__(22)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30732,20 +30924,20 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(23)
+__webpack_require__(28)
 
 /* script */
 __vue_exports__ = __webpack_require__(8)
 
 /* template */
-var __vue_template__ = __webpack_require__(19)
+var __vue_template__ = __webpack_require__(23)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30779,7 +30971,7 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 17 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -30789,7 +30981,7 @@ var __vue_styles__ = {}
 __vue_exports__ = __webpack_require__(9)
 
 /* template */
-var __vue_template__ = __webpack_require__(20)
+var __vue_template__ = __webpack_require__(24)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30823,7 +31015,54 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 18 */
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* styles */
+__webpack_require__(29)
+
+/* script */
+__vue_exports__ = __webpack_require__(10)
+
+/* template */
+var __vue_template__ = __webpack_require__(25)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "D:\\workspace\\wiki\\resources\\assets\\js\\components\\Tactic.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98d68ae0", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-98d68ae0", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] Tactic.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ },
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31018,7 +31257,11 @@ module.exports={render:function (){var _vm=this;
         "getEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["特殊" + _vm._s(num)])])
-  })])])
+  })]), " ", _vm._m(2), " ", _vm._h('tactic', {
+    attrs: {
+      "dancerId": _vm.dancerId
+    }
+  })])
 },staticRenderFns: [function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
@@ -31027,6 +31270,10 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
   }, [_vm._h('h3', ["装备槽"])])
+},function (){var _vm=this;
+  return _vm._h('div', {
+    staticClass: "page-header"
+  }, [_vm._h('h3', ["战术"])])
 }]}
 if (false) {
   module.hot.accept()
@@ -31036,7 +31283,7 @@ if (false) {
 }
 
 /***/ },
-/* 19 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31169,7 +31416,7 @@ if (false) {
 }
 
 /***/ },
-/* 20 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31197,7 +31444,73 @@ if (false) {
 }
 
 /***/ },
-/* 21 */
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;
+  return _vm._h('div', [_vm._h('div', {
+    staticClass: "xbtn-wrapper"
+  }, [_vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n                    " + _vm._s(_vm.tacticSelected) + "\n                    ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((_vm.tacticNames), function(tacticName) {
+    return _vm._h('li', [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(tacticName.name)])])
+  })])]), " ", _vm._m(0)])]), " ", _vm._h('div', {
+    staticClass: "well"
+  }, ["123123"])])
+},staticRenderFns: [function (){var _vm=this;
+  return _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n                    Lv.1\n                    ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._h('li', [_vm._h('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, ["Lv.2"])]), " ", _vm._h('li', [_vm._h('a', {
+    attrs: {
+      "href": "javascript:;"
+    }
+  }, ["Lv.3"])])])])
+}]}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-98d68ae0", module.exports)
+  }
+}
+
+/***/ },
+/* 26 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -32721,13 +33034,13 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = plugin;
 
 /***/ },
-/* 22 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(11);
+var content = __webpack_require__(13);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -32747,13 +33060,13 @@ if(false) {
 }
 
 /***/ },
-/* 23 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -32773,7 +33086,33 @@ if(false) {
 }
 
 /***/ },
-/* 24 */
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(15);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-98d68ae0!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tactic.vue", function() {
+			var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-98d68ae0!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tactic.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -40896,7 +41235,7 @@ return Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 25 */
+/* 31 */
 /***/ function(module, exports) {
 
 module.exports = function(module) {
@@ -40922,116 +41261,12 @@ module.exports = function(module) {
 
 
 /***/ },
-/* 26 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 __webpack_require__(4);
 module.exports = __webpack_require__(5);
 
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ exports["a"] = numAdd;
-/* unused harmony export numSub */
-/* harmony export (immutable) */ exports["b"] = numMulti;
-/* unused harmony export numDiv */
-
-/**
- * 加法运算，避免数据相加小数点后产生多位数和计算精度损失。
- *
- * @param num1加数1 | num2加数2
- */
-function numAdd(num1, num2) {
-    if ( num1 === void 0 ) num1=0;
-    if ( num2 === void 0 ) num2=0;
-
-    var baseNum, baseNum1, baseNum2;
-    try {
-        baseNum1 = num1.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum1 = 0;
-    }
-    try {
-        baseNum2 = num2.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum2 = 0;
-    }
-    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
-    return (num1 * baseNum + num2 * baseNum) / baseNum;
-}
-/**
- * 加法运算，避免数据相减小数点后产生多位数和计算精度损失。
- *
- * @param num1被减数 | num2减数
- */
-function numSub(num1, num2) {
-    if ( num1 === void 0 ) num1=0;
-    if ( num2 === void 0 ) num2=0;
-
-    var baseNum, baseNum1, baseNum2;
-    var precision;// 精度
-    try {
-        baseNum1 = num1.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum1 = 0;
-    }
-    try {
-        baseNum2 = num2.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum2 = 0;
-    }
-    baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
-    precision = (baseNum1 >= baseNum2) ? baseNum1 : baseNum2;
-    return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
-}
-/**
- * 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。
- *
- * @param num1被乘数 | num2乘数
- */
-function numMulti(num1, num2) {
-    if ( num1 === void 0 ) num1=0;
-    if ( num2 === void 0 ) num2=0;
-
-    var baseNum = 0;
-    try {
-        baseNum += num1.toString().split(".")[1].length;
-    } catch (e) {
-    }
-    try {
-        baseNum += num2.toString().split(".")[1].length;
-    } catch (e) {
-    }
-    return Number(num1.toString().replace(".", "")) * Number(num2.toString().replace(".", "")) / Math.pow(10, baseNum);
-}
-/**
- * 除法运算，避免数据相除小数点后产生多位数和计算精度损失。
- *
- * @param num1被除数 | num2除数
- */
-function numDiv(num1, num2) {
-    if ( num1 === void 0 ) num1=0;
-    if ( num2 === void 0 ) num2=1;
-
-    var baseNum1 = 0, baseNum2 = 0;
-    var baseNum3, baseNum4;
-    try {
-        baseNum1 = num1.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum1 = 0;
-    }
-    try {
-        baseNum2 = num2.toString().split(".")[1].length;
-    } catch (e) {
-        baseNum2 = 0;
-    }
-    baseNum3 = Number(num1.toString().replace(".", ""));
-    baseNum4 = Number(num2.toString().replace(".", ""));
-    return (baseNum3 / baseNum4) * pow(10, baseNum2 - baseNum1);
-}
 
 /***/ }
 /******/ ]);
