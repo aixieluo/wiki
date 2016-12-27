@@ -2988,7 +2988,21 @@ if (typeof jQuery === 'undefined') {
             //存储当前页面上舞姬所装备的装备
             equipment: [],
             //存储当前页面上舞姬所装备的装备所有的属性加成之和
-            equipmentAttributes: {},
+            //此处存在疑惑，为什么此处子节点必须定义出来computed才能检测到变化，而战术和辎械出不需要预先定义子节点
+            equipmentAttributes: {
+                fire: 0,
+                penetrate: 0,
+                durable: 0,
+                armor: 0,
+                hit: 0,
+                dodge: 0,
+                concealment: 0,
+                spy: 0,
+            },
+            demo: {
+                fire: 0,
+            },
+            fire: 0,
             //存储当前选择的战术的属性
             tacticAttributes: {},
             //存储当前选择的辎械的属性
@@ -3059,9 +3073,7 @@ if (typeof jQuery === 'undefined') {
                 sumSpy += item.spy;
             });
 
-
             this.equipmentAttributes.fire = sumFire;
-            console.log('2this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
             this.equipmentAttributes.penetrate = sumPenetrate;
             this.equipmentAttributes.durable = sumDurable;
             this.equipmentAttributes.armor = sumArmor;
@@ -3086,9 +3098,7 @@ if (typeof jQuery === 'undefined') {
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.fire_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].fire));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_fire));
-            console.log('1this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.fire);
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.fire, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.fire_down)));
             return sum;
         },
         sumPenetrate: function sumPenetrate () {
@@ -3689,7 +3699,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

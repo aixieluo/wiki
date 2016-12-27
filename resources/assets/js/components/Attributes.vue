@@ -120,7 +120,21 @@
                 //存储当前页面上舞姬所装备的装备
                 equipment: [],
                 //存储当前页面上舞姬所装备的装备所有的属性加成之和
-                equipmentAttributes: {},
+                //此处存在疑惑，为什么此处子节点必须定义出来computed才能检测到变化，而战术和辎械出不需要预先定义子节点
+                equipmentAttributes: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
+                demo: {
+                    fire: 0,
+                },
+                fire: 0,
                 //存储当前选择的战术的属性
                 tacticAttributes: {},
                 //存储当前选择的辎械的属性
@@ -187,9 +201,7 @@
                     sumSpy += item.spy;
                 });
 
-
                 this.equipmentAttributes.fire = sumFire;
-                console.log('2this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
                 this.equipmentAttributes.penetrate = sumPenetrate;
                 this.equipmentAttributes.durable = sumDurable;
                 this.equipmentAttributes.armor = sumArmor;
@@ -214,9 +226,7 @@
                 sum = numAdd(sum, numMulti(basic, this.skillAttributes.fire_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_fire));
-                console.log('1this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
-                sum = numAdd(sum, this.equipmentAttributes.fire);
-                sum = numSub(sum, numMulti(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.fire, numSub(1, this.tacticAttributes.fire_down)));
                 return sum;
             },
             sumPenetrate () {
