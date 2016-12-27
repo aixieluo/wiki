@@ -61,7 +61,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 32);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -422,7 +422,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(12);
+__webpack_require__(13);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -430,10 +430,11 @@ __webpack_require__(12);
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', __webpack_require__(20));
-Vue.component('attributes', __webpack_require__(18));
-Vue.component('equipment', __webpack_require__(19));
-Vue.component('tactic', __webpack_require__(21));
+Vue.component('example', __webpack_require__(22));
+Vue.component('attributes', __webpack_require__(20));
+Vue.component('equipment', __webpack_require__(21));
+Vue.component('tactic', __webpack_require__(24));
+Vue.component('skill', __webpack_require__(23));
 
 var app = new Vue({
     el: '#app',
@@ -2864,7 +2865,11 @@ if (typeof jQuery === 'undefined') {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(12);
+//
+//
+//
+//
 //
 //
 //
@@ -2968,23 +2973,26 @@ if (typeof jQuery === 'undefined') {
     data: function data () {
         return {
             dancer: {},
+            //舞姬基础属性
             attributes: {},
+            //舞姬成长属性
             grows: {},
-            equipmentSlots: {},
-            equipment: [],
-            equipmentAttributes: {
-                fire: 0,
-                penetrate: 0,
-                durable: 0,
-                armor: 0,
-                hit: 0,
-                dodge: 0,
-                concealment: 0,
-                spy: 0,
-            },
+            //稀有度默认1
             rarity: 1,
+            //亮星等级，默认1
             selectRarity: 1,
+            //舞姬等级，默认0
             lv: 0,
+            //装备槽个数
+            equipmentSlots: {},
+            //存储当前页面上舞姬所装备的装备
+            equipment: [],
+            //存储当前页面上舞姬所装备的装备所有的属性加成之和
+            equipmentAttributes: {},
+            //存储当前选择的战术的属性
+            tacticAttributes: {},
+            //存储当前选择的辎械的属性
+            skillAttributes: {},
         }
     },
     methods: {
@@ -3016,6 +3024,7 @@ if (typeof jQuery === 'undefined') {
                 this$1.rarity = response.data.rarity;
             });
         },
+
         //存储目前装备的装备列表
         equipmentList: function equipmentList(equipment) {
             var this$1 = this;
@@ -3052,6 +3061,7 @@ if (typeof jQuery === 'undefined') {
 
 
             this.equipmentAttributes.fire = sumFire;
+            console.log('2this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
             this.equipmentAttributes.penetrate = sumPenetrate;
             this.equipmentAttributes.durable = sumDurable;
             this.equipmentAttributes.armor = sumArmor;
@@ -3061,66 +3071,90 @@ if (typeof jQuery === 'undefined') {
             this.equipmentAttributes.spy = sumSpy;
 
         },
+        getTacticAttributes: function getTacticAttributes(attributes) {
+            this.tacticAttributes = attributes;
+        },
+        getSkillAttributes: function getSkillAttributes(attributes) {
+            this.skillAttributes = attributes;
+        },
     },
     computed: {
         sumFire: function sumFire () {
             var basic = this.attributes.fire;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.fire_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.fire_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].fire));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_fire));
+            console.log('1this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.fire);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
             return sum;
         },
         sumPenetrate: function sumPenetrate () {
             var basic = this.attributes.penetrate;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.penetrate_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.penetrate_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].penetrate));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_penetrate));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.penetrate);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.penetrate, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.penetrate_down)));
             return sum;
         },
         sumDurable: function sumDurable () {
             var basic = this.attributes.durable;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.durable_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.durable_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].durable));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_durable));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.durable);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.durable, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.durable_down)));
             return sum;
         },
         sumArmor: function sumArmor () {
             var basic = this.attributes.armor;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.armor_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.armor_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].armor));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.lv, this.grows.grow_armor));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.armor);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.armor, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.armor_down)));
             return sum;
         },
         sumHit: function sumHit () {
             var basic = this.attributes.hit;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.hit_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.hit_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].hit));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.hit);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.hit, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.hit_down)));
             return sum;
         },
         sumDodge: function sumDodge () {
             var basic = this.attributes.dodge;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.dodge_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.dodge_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].dodge));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.dodge);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.dodge, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.dodge_down)));
             return sum;
         },
         sumConcealment: function sumConcealment () {
             var basic = this.attributes.concealment;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.concealment_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.concealment_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].concealment));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.concealment);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.concealment, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.concealment_down)));
             return sum;
         },
         sumSpy: function sumSpy () {
             var basic = this.attributes.spy;
             var sum = basic;
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.tacticAttributes.spy_up));
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, this.skillAttributes.spy_up));
             sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(basic, __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* starIncrease */][this.selectRarity-1].spy));
-            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, this.equipmentAttributes.spy);
+            sum = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["a" /* numAdd */])(sum, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["b" /* numMulti */])(this.equipmentAttributes.spy, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__arithmetic__["c" /* numSub */])(1, this.tacticAttributes.spy_down)));
             return sum;
         },
     },
@@ -3245,12 +3279,12 @@ if (typeof jQuery === 'undefined') {
             }).then(function (response){
                 this$1.equipmentInfo = response.data;
                 this$1.equipmentInfo.slot = this$1.id;
-                this$1.getEquipment();
+                this$1.sendEquipment();
             });
         },
-        //触发父页面的getEquipment事件，将装备属性传回父页面
-        getEquipment: function getEquipment() {
-            this.$emit('getEquipment', this.equipmentInfo);
+        //触发父页面的setEquipment事件，将装备属性传回父页面
+        sendEquipment: function sendEquipment() {
+            this.$emit('setEquipment', this.equipmentInfo);
         },
         //卸下装备后重置属性为空
         resetEquipmentInfo: function resetEquipmentInfo() {
@@ -3266,7 +3300,7 @@ if (typeof jQuery === 'undefined') {
                 spy: 0,
                 slot: this.id
             };
-            this.getEquipment();
+            this.sendEquipment();
         },
     },
     watch: {
@@ -3345,7 +3379,6 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
-//
 
 
 //域名路由
@@ -3353,28 +3386,50 @@ if (typeof jQuery === 'undefined') {
 
 /* harmony default export */ exports["default"] = {
     props: {
-        'dancerId': {
-            required: true,
-        },
+
     },
     mounted: function mounted () {
         this.ready();
     },
     data: function data() {
         return {
-            tacticNames: [],
-            tacticSelected: '请选择一个战术',
+            skillNames: [],
+            skillSelected: '请选择一个辎械',
+            lv: 1,
+            attributes: {},
         }
     },
     methods: {
         ready: function ready() {
             var this$1 = this;
 
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/tactic/names', {}).then(function (response){
-                this$1.tacticNames = response.data;
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/skill/names', {}).then(function (response){
+                this$1.skillNames = response.data;
             });
+        },
+        getAttributes: function getAttributes() {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/skill/attributes', {
+                name: this.skillSelected,
+                lv: this.lv
+            }).then(function (response){
+                this$1.attributes = response.data;
+                this$1.sendAttributes();
+            });
+        },
+        sendAttributes: function sendAttributes() {
+            this.$emit('setSkillAttributes', this.attributes);
         }
-    }
+    },
+    watch: {
+        skillSelected: function skillSelected() {
+            this.getAttributes();
+        },
+        lv: function lv() {
+            this.getAttributes();
+        }
+    },
 };
 
 
@@ -3384,8 +3439,97 @@ if (typeof jQuery === 'undefined') {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+//域名路由
+
+
+/* harmony default export */ exports["default"] = {
+    props: {
+
+    },
+    mounted: function mounted () {
+        this.ready();
+    },
+    data: function data() {
+        return {
+            tacticNames: [],
+            tacticSelected: '请选择一个战术',
+            lv: 1,
+            attributes: {},
+        }
+    },
+    methods: {
+        ready: function ready() {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/tactic/names', {}).then(function (response){
+                this$1.tacticNames = response.data;
+            });
+        },
+        getAttributes: function getAttributes() {
+            var this$1 = this;
+
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/tactic/attributes', {
+            name: this.tacticSelected,
+            lv: this.lv
+        }).then(function (response){
+                this$1.attributes = response.data;
+                this$1.sendAttributes();
+            });
+        },
+        sendAttributes: function sendAttributes() {
+            this.$emit('setTacticAttributes', this.attributes);
+        }
+    },
+    watch: {
+        tacticSelected: function tacticSelected() {
+            this.getAttributes();
+        },
+        lv: function lv() {
+            this.getAttributes();
+        }
+    },
+};
+
+
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
 /* harmony export (immutable) */ exports["a"] = numAdd;
-/* unused harmony export numSub */
+/* harmony export (immutable) */ exports["c"] = numSub;
 /* harmony export (immutable) */ exports["b"] = numMulti;
 /* unused harmony export numDiv */
 
@@ -3484,11 +3628,11 @@ function numDiv(num1, num2) {
 }
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(17);
+window._ = __webpack_require__(19);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -3496,7 +3640,7 @@ window._ = __webpack_require__(17);
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = __webpack_require__(16);
+window.$ = window.jQuery = __webpack_require__(18);
 __webpack_require__(6);
 
 /**
@@ -3505,8 +3649,8 @@ __webpack_require__(6);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(30);
-__webpack_require__(26);
+window.Vue = __webpack_require__(35);
+__webpack_require__(30);
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
@@ -3537,20 +3681,6 @@ Vue.http.interceptors.push(function (request, next) {
 
 
 /***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(1)();
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -3559,7 +3689,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n.panel a[data-toggle=\"collapse\"] {\n    text-decoration: none;\n    display: block;\n}\n.equipment-wrap {\n    padding-left: 5px;\n    padding-right: 5px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -3580,6 +3710,34 @@ exports.push([module.i, "\n.xbtn-wrapper{\n    padding-bottom: 10px;\n}\n", ""])
 
 /***/ },
 /* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.panel a[data-toggle=\"collapse\"] {\n    text-decoration: none;\n    display: block;\n}\n.equipment-wrap {\n    padding-left: 5px;\n    padding-right: 5px;\n}\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.xbtn-wrapper{\n    padding-bottom: 10px;\n}\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13805,7 +13963,7 @@ return jQuery;
 
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30874,23 +31032,23 @@ return jQuery;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(31)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(36)(module)))
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(27)
+__webpack_require__(31)
 
 /* script */
 __vue_exports__ = __webpack_require__(7)
 
 /* template */
-var __vue_template__ = __webpack_require__(22)
+var __vue_template__ = __webpack_require__(25)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30924,20 +31082,20 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(28)
+__webpack_require__(33)
 
 /* script */
 __vue_exports__ = __webpack_require__(8)
 
 /* template */
-var __vue_template__ = __webpack_require__(23)
+var __vue_template__ = __webpack_require__(27)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -30971,7 +31129,7 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -30981,7 +31139,7 @@ var __vue_styles__ = {}
 __vue_exports__ = __webpack_require__(9)
 
 /* template */
-var __vue_template__ = __webpack_require__(24)
+var __vue_template__ = __webpack_require__(28)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -31015,20 +31173,67 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* styles */
-__webpack_require__(29)
+__webpack_require__(32)
 
 /* script */
 __vue_exports__ = __webpack_require__(10)
 
 /* template */
-var __vue_template__ = __webpack_require__(25)
+var __vue_template__ = __webpack_require__(26)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "D:\\workspace\\wiki\\resources\\assets\\js\\components\\Skill.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b7f01a9", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-1b7f01a9", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] Skill.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* styles */
+__webpack_require__(34)
+
+/* script */
+__vue_exports__ = __webpack_require__(11)
+
+/* template */
+var __vue_template__ = __webpack_require__(29)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -31062,7 +31267,7 @@ module.exports = __vue_exports__
 
 
 /***/ },
-/* 22 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31074,27 +31279,16 @@ module.exports={render:function (){var _vm=this;
     staticClass: "clearfix"
   }, [_vm._h('div', {
     staticClass: "pull-left clearfix"
-  }, [_vm._l((_vm.selectRarity), function(n) {
+  }, [_vm._l((_vm.rarity), function(n) {
     return _vm._h('i', {
       staticClass: "fa fa-star pull-left",
+      class: [_vm.selectRarity < n ? 'fa-star-o' : ''],
       attrs: {
         "aria-hidden": "true"
       },
       on: {
         "click": function($event) {
           _vm.selectRarity = n
-        }
-      }
-    })
-  }), " ", _vm._l(((_vm.rarity - _vm.selectRarity)), function(n) {
-    return _vm._h('i', {
-      staticClass: "fa fa-star-o pull-left",
-      attrs: {
-        "aria-hidden": "true"
-      },
-      on: {
-        "click": function($event) {
-          _vm.selectRarity = ++n
         }
       }
     })
@@ -31188,7 +31382,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["炮座" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.refit), function(num) {
@@ -31199,7 +31393,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["改装" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.outside), function(num) {
@@ -31210,7 +31404,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["外身" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.inwall), function(num) {
@@ -31221,7 +31415,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["内壁" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.inwarehouse), function(num) {
@@ -31232,7 +31426,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["内仓" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.carriage), function(num) {
@@ -31243,7 +31437,7 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["炮架" + _vm._s(num)])])
   }), " ", _vm._l((_vm.equipmentSlots.special), function(num) {
@@ -31254,12 +31448,16 @@ module.exports={render:function (){var _vm=this;
         "dancerId": _vm.dancerId
       },
       on: {
-        "getEquipment": _vm.equipmentList
+        "setEquipment": _vm.equipmentList
       }
     }, [_vm._h('span', ["特殊" + _vm._s(num)])])
   })]), " ", _vm._m(2), " ", _vm._h('tactic', {
-    attrs: {
-      "dancerId": _vm.dancerId
+    on: {
+      "setTacticAttributes": _vm.getTacticAttributes
+    }
+  }), " ", _vm._m(3), " ", _vm._h('skill', {
+    on: {
+      "setSkillAttributes": _vm.getSkillAttributes
     }
   })])
 },staticRenderFns: [function (){var _vm=this;
@@ -31274,6 +31472,10 @@ module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
     staticClass: "page-header"
   }, [_vm._h('h3', ["战术"])])
+},function (){var _vm=this;
+  return _vm._h('div', {
+    staticClass: "page-header"
+  }, [_vm._h('h3', ["辎械"])])
 }]}
 if (false) {
   module.hot.accept()
@@ -31283,7 +31485,87 @@ if (false) {
 }
 
 /***/ },
-/* 23 */
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;
+  return _vm._h('div', [_vm._h('div', {
+    staticClass: "xbtn-wrapper"
+  }, [_vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n                    " + _vm._s(_vm.skillSelected) + "\n                    ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((_vm.skillNames), function(skillName) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.skillSelected = skillName.name
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(skillName.name)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n                    Lv." + _vm._s(_vm.lv) + "\n                    ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((10), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.lv = n
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, ["Lv." + _vm._s(n)])])
+  })])])])]), " ", _vm._h('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.attributes.describe),
+      expression: "attributes.describe"
+    }],
+    staticClass: "well"
+  }, [_vm._s(_vm.attributes.describe)])])
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1b7f01a9", module.exports)
+  }
+}
+
+/***/ },
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31416,7 +31698,7 @@ if (false) {
 }
 
 /***/ },
-/* 24 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31444,7 +31726,7 @@ if (false) {
 }
 
 /***/ },
-/* 25 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;
@@ -31468,16 +31750,18 @@ module.exports={render:function (){var _vm=this;
       "role": "menu"
     }
   }, [_vm._l((_vm.tacticNames), function(tacticName) {
-    return _vm._h('li', [_vm._h('a', {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.tacticSelected = tacticName.name
+        }
+      }
+    }, [_vm._h('a', {
       attrs: {
         "href": "javascript:;"
       }
     }, [_vm._s(tacticName.name)])])
-  })])]), " ", _vm._m(0)])]), " ", _vm._h('div', {
-    staticClass: "well"
-  }, ["123123"])])
-},staticRenderFns: [function (){var _vm=this;
-  return _vm._h('div', {
+  })])]), " ", _vm._h('div', {
     staticClass: "btn-group"
   }, [_vm._h('button', {
     staticClass: "btn btn-default dropdown-toggle",
@@ -31485,23 +31769,35 @@ module.exports={render:function (){var _vm=this;
       "type": "button",
       "data-toggle": "dropdown"
     }
-  }, ["\n                    Lv.1\n                    ", _vm._h('span', {
+  }, ["\n                    Lv." + _vm._s(_vm.lv) + "\n                    ", _vm._h('span', {
     staticClass: "caret"
   })]), " ", _vm._h('ul', {
     staticClass: "dropdown-menu",
     attrs: {
       "role": "menu"
     }
-  }, [_vm._h('li', [_vm._h('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, ["Lv.2"])]), " ", _vm._h('li', [_vm._h('a', {
-    attrs: {
-      "href": "javascript:;"
-    }
-  }, ["Lv.3"])])])])
-}]}
+  }, [_vm._l((10), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.lv = n
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, ["Lv." + _vm._s(n)])])
+  })])])])]), " ", _vm._h('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.attributes.describe),
+      expression: "attributes.describe"
+    }],
+    staticClass: "well"
+  }, [_vm._s(_vm.attributes.describe)])])
+},staticRenderFns: []}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -31510,7 +31806,7 @@ if (false) {
 }
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -33034,13 +33330,13 @@ if (typeof window !== 'undefined' && window.Vue) {
 module.exports = plugin;
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(13);
+var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -33060,13 +33356,39 @@ if(false) {
 }
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(14);
+var content = __webpack_require__(15);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1b7f01a9!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Skill.vue", function() {
+			var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-1b7f01a9!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Skill.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(16);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -33086,13 +33408,13 @@ if(false) {
 }
 
 /***/ },
-/* 29 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(15);
+var content = __webpack_require__(17);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(2)(content, {});
@@ -33112,7 +33434,7 @@ if(false) {
 }
 
 /***/ },
-/* 30 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -41235,7 +41557,7 @@ return Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 31 */
+/* 36 */
 /***/ function(module, exports) {
 
 module.exports = function(module) {
@@ -41261,7 +41583,7 @@ module.exports = function(module) {
 
 
 /***/ },
-/* 32 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 __webpack_require__(4);

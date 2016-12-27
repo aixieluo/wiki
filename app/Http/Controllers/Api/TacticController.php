@@ -17,4 +17,8 @@ class TacticController extends Controller
     public function tacticNames() {
         return $this->tactic->tacticNames();
     }
+
+    public function tacticAttributes(Request $request) {
+        return $this->tactic->tacticAttributes($request->name, $request->lv);
+    }
 }

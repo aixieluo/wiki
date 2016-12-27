@@ -7,8 +7,7 @@
             <div class="col-md-6">
                 <div class="clearfix">
                     <div class="pull-left clearfix">
-                        <i v-for="n in selectRarity" @click="selectRarity=n" class="fa fa-star pull-left" aria-hidden="true"></i>
-                        <i v-for="n in (rarity-selectRarity)" @click="selectRarity = ++n" class="fa fa-star-o pull-left" aria-hidden="true"></i>
+                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
                     </div>
                     <div class="pull-right">
                         <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i></button>
@@ -52,25 +51,25 @@
             <h3>装备槽</h3>
         </div>
         <div class="panel-group" id="equipments" role="tablist" aria-multiselectable="true">
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.barbette" :id="'barbette'+num" type="炮座" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.barbette" :id="'barbette'+num" type="炮座" :dancerId="dancerId">
                 <span>炮座{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.refit" :id="'refit'+num" type="改装" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.refit" :id="'refit'+num" type="改装" :dancerId="dancerId">
                 <span>改装{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.outside" :id="'outside'+num" type="外身" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.outside" :id="'outside'+num" type="外身" :dancerId="dancerId">
                 <span>外身{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.inwall" :id="'inwall'+num" type="内壁" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.inwall" :id="'inwall'+num" type="内壁" :dancerId="dancerId">
                 <span>内壁{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.inwarehouse" :id="'inwarehouse'+num" type="内仓" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.inwarehouse" :id="'inwarehouse'+num" type="内仓" :dancerId="dancerId">
                 <span>内仓{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.carriage" :id="'carriage'+num" type="炮架" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.carriage" :id="'carriage'+num" type="炮架" :dancerId="dancerId">
                 <span>炮架{{ num }}</span>
             </equipment>
-            <equipment @getEquipment="equipmentList" v-for="num in equipmentSlots.special" :id="'special'+num" type="特殊" :dancerId="dancerId">
+            <equipment @setEquipment="equipmentList" v-for="num in equipmentSlots.special" :id="'special'+num" type="特殊" :dancerId="dancerId">
                 <span>特殊{{ num }}</span>
             </equipment>
         </div>
@@ -78,7 +77,12 @@
         <div class="page-header">
             <h3>战术</h3>
         </div>
-        <tactic :dancerId="dancerId"></tactic>
+        <tactic @setTacticAttributes="getTacticAttributes"></tactic>
+
+        <div class="page-header">
+            <h3>辎械</h3>
+        </div>
+        <skill @setSkillAttributes="getSkillAttributes"></skill>
 
 
     </div>
@@ -101,23 +105,26 @@
         data () {
             return {
                 dancer: {},
+                //舞姬基础属性
                 attributes: {},
+                //舞姬成长属性
                 grows: {},
-                equipmentSlots: {},
-                equipment: [],
-                equipmentAttributes: {
-                    fire: 0,
-                    penetrate: 0,
-                    durable: 0,
-                    armor: 0,
-                    hit: 0,
-                    dodge: 0,
-                    concealment: 0,
-                    spy: 0,
-                },
+                //稀有度默认1
                 rarity: 1,
+                //亮星等级，默认1
                 selectRarity: 1,
+                //舞姬等级，默认0
                 lv: 0,
+                //装备槽个数
+                equipmentSlots: {},
+                //存储当前页面上舞姬所装备的装备
+                equipment: [],
+                //存储当前页面上舞姬所装备的装备所有的属性加成之和
+                equipmentAttributes: {},
+                //存储当前选择的战术的属性
+                tacticAttributes: {},
+                //存储当前选择的辎械的属性
+                skillAttributes: {},
             }
         },
         methods: {
@@ -147,6 +154,7 @@
                     this.rarity = response.data.rarity;
                 });
             },
+
             //存储目前装备的装备列表
             equipmentList(equipment) {
                 let flag = true;
@@ -181,6 +189,7 @@
 
 
                 this.equipmentAttributes.fire = sumFire;
+                console.log('2this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
                 this.equipmentAttributes.penetrate = sumPenetrate;
                 this.equipmentAttributes.durable = sumDurable;
                 this.equipmentAttributes.armor = sumArmor;
@@ -190,66 +199,90 @@
                 this.equipmentAttributes.spy = sumSpy;
 
             },
+            getTacticAttributes(attributes) {
+                this.tacticAttributes = attributes;
+            },
+            getSkillAttributes(attributes) {
+                this.skillAttributes = attributes;
+            },
         },
         computed: {
             sumFire () {
                 let basic = this.attributes.fire;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.fire_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.fire_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_fire));
+                console.log('1this.equipmentAttributes.fire='+this.equipmentAttributes.fire);
                 sum = numAdd(sum, this.equipmentAttributes.fire);
+                sum = numSub(sum, numMulti(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
                 return sum;
             },
             sumPenetrate () {
                 let basic = this.attributes.penetrate;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.penetrate_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.penetrate_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].penetrate));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_penetrate));
-                sum = numAdd(sum, this.equipmentAttributes.penetrate);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.penetrate, numSub(1, this.tacticAttributes.penetrate_down)));
                 return sum;
             },
             sumDurable () {
                 let basic = this.attributes.durable;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.durable_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.durable_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].durable));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_durable));
-                sum = numAdd(sum, this.equipmentAttributes.durable);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.durable, numSub(1, this.tacticAttributes.durable_down)));
                 return sum;
             },
             sumArmor () {
                 let basic = this.attributes.armor;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.armor_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.armor_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].armor));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_armor));
-                sum = numAdd(sum, this.equipmentAttributes.armor);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.armor, numSub(1, this.tacticAttributes.armor_down)));
                 return sum;
             },
             sumHit () {
                 let basic = this.attributes.hit;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.hit_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.hit_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].hit));
-                sum = numAdd(sum, this.equipmentAttributes.hit);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.hit, numSub(1, this.tacticAttributes.hit_down)));
                 return sum;
             },
             sumDodge () {
                 let basic = this.attributes.dodge;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.dodge_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.dodge_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].dodge));
-                sum = numAdd(sum, this.equipmentAttributes.dodge);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.dodge, numSub(1, this.tacticAttributes.dodge_down)));
                 return sum;
             },
             sumConcealment () {
                 let basic = this.attributes.concealment;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.concealment_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.concealment_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].concealment));
-                sum = numAdd(sum, this.equipmentAttributes.concealment);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.concealment, numSub(1, this.tacticAttributes.concealment_down)));
                 return sum;
             },
             sumSpy () {
                 let basic = this.attributes.spy;
                 let sum = basic;
+                sum = numAdd(sum, numMulti(basic, this.tacticAttributes.spy_up));
+                sum = numAdd(sum, numMulti(basic, this.skillAttributes.spy_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].spy));
-                sum = numAdd(sum, this.equipmentAttributes.spy);
+                sum = numAdd(sum, numMulti(this.equipmentAttributes.spy, numSub(1, this.tacticAttributes.spy_down)));
                 return sum;
             },
         },

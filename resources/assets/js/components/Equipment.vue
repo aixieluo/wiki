@@ -100,12 +100,12 @@
                 }).then((response)=>{
                     this.equipmentInfo = response.data;
                     this.equipmentInfo.slot = this.id;
-                    this.getEquipment();
+                    this.sendEquipment();
                 });
             },
-            //触发父页面的getEquipment事件，将装备属性传回父页面
-            getEquipment() {
-                this.$emit('getEquipment', this.equipmentInfo);
+            //触发父页面的setEquipment事件，将装备属性传回父页面
+            sendEquipment() {
+                this.$emit('setEquipment', this.equipmentInfo);
             },
             //卸下装备后重置属性为空
             resetEquipmentInfo() {
@@ -121,7 +121,7 @@
                     spy: 0,
                     slot: this.id
                 };
-                this.getEquipment();
+                this.sendEquipment();
             },
         },
         watch: {

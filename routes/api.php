@@ -43,5 +43,10 @@ Route::group(['namespace'=>'Api'], function () {
 
 
     Route::post('tactic/names', 'TacticController@tacticNames');
+    Route::post('tactic/attributes', 'TacticController@tacticAttributes');
+
+
+    Route::post('skill/names', 'SkillController@skillNames');
+    Route::post('skill/attributes', 'SkillController@skillAttributes');
 });
 
