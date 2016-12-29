@@ -18,6 +18,7 @@ Vue.component('attributes', require('./components/Attributes.vue'));
 Vue.component('equipment', require('./components/Equipment.vue'));
 Vue.component('tactic', require('./components/Tactic.vue'));
 Vue.component('skill', require('./components/Skill.vue'));
+Vue.component('technology', require('./components/Technology.vue'));
 
 const app = new Vue({
     el: '#app',

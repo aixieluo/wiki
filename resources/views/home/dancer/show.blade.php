@@ -49,31 +49,6 @@
             <p class="well">{{ $dancer->character }}</p>
             <attributes dancer-id="{{ $dancer->id }}"></attributes>
             <div class="page-header">
-                <h3>科技</h3>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td>弹药</td>
-                            <td>XXXX破甲弹</td>
-                        </tr>
-                        <tr>
-                            <td>装甲</td>
-                            <td>XXXX破甲弹</td>
-                        </tr>
-                        <tr>
-                            <td>引擎</td>
-                            <td>XXXX破甲弹</td>
-                        </tr>
-                        <tr>
-                            <td>车身</td>
-                            <td>XXXX破甲弹</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="page-header">
                 <h3>属性成长</h3>
             </div>
             <div class="row">

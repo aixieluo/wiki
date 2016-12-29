@@ -75,6 +75,15 @@
         </div>
 
         <div class="page-header">
+            <h3>科技</h3>
+        </div>
+        <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
+            <technology id="ap" :dancerId="dancerId">主炮-破甲弹</technology>
+        </div>
+
+
+
+        <div class="page-header">
             <h3>战术</h3>
         </div>
         <tactic @setTacticAttributes="getTacticAttributes"></tactic>
