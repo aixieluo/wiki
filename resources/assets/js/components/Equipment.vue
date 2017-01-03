@@ -1,36 +1,43 @@
 <template>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#equipments" :href="'#'+id" aria-expanded="true" :aria-controls="id">
-                    <slot></slot>
-                    <span v-if="equipped.name">{{ equipped.name }}</span>
-                    <div v-show="equipped.name" class="btn-group" :class="id">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            S{{ lv }} <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li v-for="n in 10"><a href="javascript:;" @click.stop="lvToggle(n)">S{{ n }}</a></li>
+    <div class="row">
+        <div class="col-md-9 mt5">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#equipments" :href="'#'+id" aria-expanded="true" :aria-controls="id">
+                            <slot></slot>
+                            <span v-if="equipped.name">{{ equipped.name }}</span>
+                        </a>
+                    </h4>
+                </div>
+                <div :id="id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <li @click="resetEquipmentInfo()" v-show="equipped.name" class="pull-left equipment-wrap">卸下装备</li>
+                            <li @click="equip(aEquipment)" v-for="aEquipment in equipment" class="pull-left equipment-wrap" :class="{active: isActive}">
+                                {{ aEquipment.name }}
+                            </li>
                         </ul>
                     </div>
-                    <div v-show="equipped.name" class="btn-group">
-                        <span @click.stop.prevent="rank=0" class="btn btn-default" :class="{ active: !rank }">普通</span>
-                        <span @click.stop.prevent="rank=1" class="btn btn-default" :class="{ active: rank }">高级</span>
-                    </div>
-                </a>
-            </h4>
+                </div>
+            </div>
         </div>
-        <div :id="id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-                <ul class="list-unstyled">
-                    <li @click="resetEquipmentInfo()" v-show="equipped.name" class="pull-left equipment-wrap">卸下装备</li>
-                    <li @click="equip(aEquipment)" v-for="aEquipment in equipment" class="pull-left equipment-wrap" :class="{active: isActive}">
-                        {{ aEquipment.name }}
-                    </li>
+        <div class="col-md-3 mt5">
+            <div v-show="equipped.name" class="btn-group" :class="id">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    S{{ lv }} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li v-for="n in 10"><a href="javascript:;" @click="lv=n">S{{ n }}</a></li>
                 </ul>
+            </div>
+            <div v-show="equipped.name" class="btn-group">
+                <span @click="rank=0" class="btn btn-default" :class="{ active: !rank }">普通</span>
+                <span @click="rank=1" class="btn btn-default" :class="{ active: rank }">高级</span>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -73,11 +80,6 @@
             this.ready();
         },
         methods: {
-            //选择装备等级后重置选择按钮的文本
-            lvToggle(n) {
-                this.lv = n;
-                document.querySelector('.'+this.id).classList.remove('open');
-            },
             ready() {
                 //根据装备的槽位获取该槽位所有的装备
                 this.$http.post(host+'/api/equipment/part/list', {

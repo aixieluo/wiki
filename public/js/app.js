@@ -2966,6 +2966,7 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
 
 //域名路由
 
@@ -3228,6 +3229,13 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 //域名路由
 
@@ -3268,11 +3276,6 @@ if (typeof jQuery === 'undefined') {
         this.ready();
     },
     methods: {
-        //选择装备等级后重置选择按钮的文本
-        lvToggle: function lvToggle(n) {
-            this.lv = n;
-            document.querySelector('.'+this.id).classList.remove('open');
-        },
         ready: function ready() {
             var this$1 = this;
 
@@ -3576,13 +3579,46 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //域名路由
 
 
 /* harmony default export */ exports["default"] = {
     props: {
-        id: {
+        technologyName: {
             required: true,
         },
         dancerId: {
@@ -3591,13 +3627,22 @@ if (typeof jQuery === 'undefined') {
     },
     data: function data() {
         return {
-
+            technology: {
+                name: this.technologyName,
+                lv1: 0,
+                get1: 0,
+                lv2: 0,
+                get2: 0,
+                lv3: 0,
+                get3: 0,
+            }
         }
     },
+    mounted: function mounted() {
+
+    },
     methods: {
-        lvToggle: function lvToggle() {
-            document.querySelector('.'+this.id).classList.remove('open');
-        }
+
     }
 };
 
@@ -3769,7 +3814,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -31584,10 +31629,10 @@ module.exports={render:function (){var _vm=this;
     }
   }, [_vm._h('technology', {
     attrs: {
-      "id": "ap",
+      "technologyName": "ap",
       "dancerId": _vm.dancerId
     }
-  }, ["主炮-破甲弹"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
+  }, ["常规弹(AP)"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
     on: {
       "setTacticAttributes": _vm.getTacticAttributes
     }
@@ -31710,6 +31755,10 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
+    staticClass: "row"
+  }, [_vm._h('div', {
+    staticClass: "col-md-9 mt5"
+  }, [_vm._h('div', {
     staticClass: "panel panel-default"
   }, [_vm._h('div', {
     staticClass: "panel-heading",
@@ -31726,73 +31775,7 @@ module.exports={render:function (){var _vm=this;
       "aria-expanded": "true",
       "aria-controls": _vm.id
     }
-  }, [_vm._t("default"), " ", (_vm.equipped.name) ? _vm._h('span', [_vm._s(_vm.equipped.name)]) : _vm._e(), " ", _vm._h('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.equipped.name),
-      expression: "equipped.name"
-    }],
-    staticClass: "btn-group",
-    class: _vm.id
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
-    }
-  }, ["\n                        S" + _vm._s(_vm.lv) + " ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((10), function(n) {
-    return _vm._h('li', [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      },
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.lvToggle(n)
-        }
-      }
-    }, ["S" + _vm._s(n)])])
-  })])]), " ", _vm._h('div', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.equipped.name),
-      expression: "equipped.name"
-    }],
-    staticClass: "btn-group"
-  }, [_vm._h('span', {
-    staticClass: "btn btn-default",
-    class: {
-      active: !_vm.rank
-    },
-    on: {
-      "click": function($event) {
-        $event.stopPropagation();
-        $event.preventDefault();
-        _vm.rank = 0
-      }
-    }
-  }, ["普通"]), " ", _vm._h('span', {
-    staticClass: "btn btn-default",
-    class: {
-      active: _vm.rank
-    },
-    on: {
-      "click": function($event) {
-        $event.stopPropagation();
-        $event.preventDefault();
-        _vm.rank = 1
-      }
-    }
-  }, ["高级"])])])])]), " ", _vm._h('div', {
+  }, [_vm._t("default"), " ", (_vm.equipped.name) ? _vm._h('span', [_vm._s(_vm.equipped.name)]) : _vm._e()])])]), " ", _vm._h('div', {
     staticClass: "panel-collapse collapse",
     attrs: {
       "id": _vm.id,
@@ -31827,8 +31810,71 @@ module.exports={render:function (){var _vm=this;
           _vm.equip(aEquipment)
         }
       }
-    }, ["\n                    " + _vm._s(aEquipment.name) + "\n                "])
-  })])])])])
+    }, ["\n                            " + _vm._s(aEquipment.name) + "\n                        "])
+  })])])])])]), " ", _vm._h('div', {
+    staticClass: "col-md-3 mt5"
+  }, [_vm._h('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.equipped.name),
+      expression: "equipped.name"
+    }],
+    staticClass: "btn-group",
+    class: _vm.id
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n                S" + _vm._s(_vm.lv) + " ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((10), function(n) {
+    return _vm._h('li', [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      },
+      on: {
+        "click": function($event) {
+          _vm.lv = n
+        }
+      }
+    }, ["S" + _vm._s(n)])])
+  })])]), " ", _vm._h('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.equipped.name),
+      expression: "equipped.name"
+    }],
+    staticClass: "btn-group"
+  }, [_vm._h('span', {
+    staticClass: "btn btn-default",
+    class: {
+      active: !_vm.rank
+    },
+    on: {
+      "click": function($event) {
+        _vm.rank = 0
+      }
+    }
+  }, ["普通"]), " ", _vm._h('span', {
+    staticClass: "btn btn-default",
+    class: {
+      active: _vm.rank
+    },
+    on: {
+      "click": function($event) {
+        _vm.rank = 1
+      }
+    }
+  }, ["高级"])])])])
 },staticRenderFns: []}
 if (false) {
   module.hot.accept()
@@ -31843,67 +31889,173 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
-    staticClass: "panel panel-default"
-  }, [_vm._h('div', {
-    staticClass: "panel-heading",
-    attrs: {
-      "role": "tab"
-    }
-  }, [_vm._h('h4', {
-    staticClass: "panel-title"
-  }, [_vm._h('a', {
-    attrs: {
-      "data-toggle": "collapse",
-      "data-parent": "#technologies",
-      "href": '#' + _vm.id,
-      "aria-expanded": "true",
-      "aria-controls": _vm.id
-    }
-  }, [_vm._t("default"), " ", _vm._h('div', {
-    staticClass: "btn-group",
-    class: _vm.id
-  }, [_vm._m(0), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((10), function(n) {
-    return _vm._h('li', [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      },
-      on: {
-        "click": function($event) {
-          $event.stopPropagation();
-          _vm.lvToggle($event)
-        }
-      }
-    }, ["Lv." + _vm._s(n)])])
-  })])])])])]), " ", _vm._h('div', {
-    staticClass: "panel-collapse collapse",
-    attrs: {
-      "id": _vm.id,
-      "role": "tabpanel",
-      "aria-labelledby": "headingOne"
-    }
-  }, [_vm._m(1)])])
-},staticRenderFns: [function (){var _vm=this;
-  return _vm._h('button', {
+    staticClass: "btn-group mt5"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default"
+  }, [_vm._t("default")]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
     staticClass: "btn btn-default dropdown-toggle",
     attrs: {
       "type": "button",
       "data-toggle": "dropdown"
     }
-  }, ["\n                        Lv.1 ", _vm._h('span', {
+  }, ["\n            一期Lv." + _vm._s(_vm.technology.lv1) + "\n            ", _vm._h('span', {
     staticClass: "caret"
-  })])
-},function (){var _vm=this;
-  return _vm._h('div', {
-    staticClass: "panel-body"
-  }, [_vm._h('ul', {
-    staticClass: "list-unstyled"
-  }, [_vm._h('li', ["1"])])])
-}]}
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((17), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.lv1 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n            一期GET:" + _vm._s(_vm.technology.get1) + "\n            ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((11), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.get1 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n            二期Lv." + _vm._s(_vm.technology.lv2) + "\n            ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((17), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.lv2 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n            二期GET:" + _vm._s(_vm.technology.get2) + "\n            ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((11), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.get2 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n            三期Lv." + _vm._s(_vm.technology.lv3) + "\n            ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((17), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.lv3 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])]), " ", _vm._h('div', {
+    staticClass: "btn-group"
+  }, [_vm._h('button', {
+    staticClass: "btn btn-default dropdown-toggle",
+    attrs: {
+      "type": "button",
+      "data-toggle": "dropdown"
+    }
+  }, ["\n            三期GET:" + _vm._s(_vm.technology.get3) + "\n            ", _vm._h('span', {
+    staticClass: "caret"
+  })]), " ", _vm._h('ul', {
+    staticClass: "dropdown-menu",
+    attrs: {
+      "role": "menu"
+    }
+  }, [_vm._l((11), function(n) {
+    return _vm._h('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology.get3 = n - 1
+        }
+      }
+    }, [_vm._h('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._s(n - 1)])])
+  })])])])
+},staticRenderFns: []}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

@@ -78,8 +78,9 @@
             <h3>科技</h3>
         </div>
         <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
-            <technology id="ap" :dancerId="dancerId">主炮-破甲弹</technology>
+            <technology technologyName="ap" :dancerId="dancerId">常规弹(AP)</technology>
         </div>
+
 
 
 
