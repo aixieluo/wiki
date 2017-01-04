@@ -28,6 +28,10 @@ Route::group(['namespace'=>'Api'], function () {
     Route::post('dancer/equipmentSlots', 'DancerController@equipmentSlots');
     //获取舞姬稀有度
     Route::post('dancer/rarity', 'DancerController@rarity');
+    //获取舞姬各科技各级别的大件个数
+    Route::post('dancer/technologyPartNumber', 'DancerController@technologyPartNumber');
+    //获取与舞姬相关联的科技种类
+    Route::post('dancer/technologyParts', 'DancerController@technologyPart');
 
     /*part dancer end*/
 

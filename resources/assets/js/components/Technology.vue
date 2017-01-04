@@ -16,7 +16,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li v-for="n in 11" @click="technology.get1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                <li v-for="n in lvArr[0]" @click="technology.get1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
             </ul>
         </div>
         <div class="btn-group">
@@ -34,7 +34,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li v-for="n in 11" @click="technology.get2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                <li v-for="n in lvArr[1]" @click="technology.get2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
             </ul>
         </div>
         <div class="btn-group">
@@ -52,7 +52,7 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li v-for="n in 11" @click="technology.get3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                <li v-for="n in lvArr[2]" @click="technology.get3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
             </ul>
         </div>
     </div>
@@ -69,6 +69,9 @@
             },
             dancerId: {
                 required: true,
+            },
+            technologyPartMaxNum: {
+                required: true,
             }
         },
         data() {
@@ -81,7 +84,8 @@
                     get2: 0,
                     lv3: 0,
                     get3: 0,
-                }
+                },
+                lvArr: [0, 0, 0],
             }
         },
         mounted() {
@@ -89,6 +93,19 @@
         },
         methods: {
 
+        },
+        watch: {
+            technologyPartMaxNum() {
+                let arr = this.technologyPartMaxNum;
+                let technologyName = this.technologyName;
+                let lvArr = [];
+                arr.forEach(function (v) {
+                    if (v.part==technologyName) {
+                        lvArr[v.rank-1] = v.num+1;
+                    }
+                });
+                this.lvArr =lvArr;
+            }
         }
     }
 

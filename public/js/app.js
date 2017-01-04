@@ -2978,10 +2978,10 @@ if (typeof jQuery === 'undefined') {
             required: true,
         },
     },
-    mounted: function mounted () {
+    mounted: function mounted() {
         this.ready();
     },
-    data: function data () {
+    data: function data() {
         return {
             dancer: {},
             //舞姬基础属性
@@ -3018,6 +3018,10 @@ if (typeof jQuery === 'undefined') {
             tacticAttributes: {},
             //存储当前选择的辎械的属性
             skillAttributes: {},
+            //舞姬科技大件最大GET个数
+            technologyPartMaxNum: [],
+            //获取与舞姬相关联的科技种类
+            technologyParts: [],
         }
     },
     methods: {
@@ -3047,6 +3051,18 @@ if (typeof jQuery === 'undefined') {
                 id: this.dancerId,
             }).then(function (response){
                 this$1.rarity = response.data.rarity;
+            });
+            //获取舞姬科技大件最大GET个数
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/technologyPartNumber', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.technologyPartMaxNum = response.data;
+            });
+            //获取与舞姬相关联的科技种类
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/technologyParts', {
+                id: this.dancerId,
+            }).then(function (response){
+                this$1.technologyParts = response.data;
             });
         },
 
@@ -3623,6 +3639,9 @@ if (typeof jQuery === 'undefined') {
         },
         dancerId: {
             required: true,
+        },
+        technologyPartMaxNum: {
+            required: true,
         }
     },
     data: function data() {
@@ -3635,7 +3654,8 @@ if (typeof jQuery === 'undefined') {
                 get2: 0,
                 lv3: 0,
                 get3: 0,
-            }
+            },
+            lvArr: [0, 0, 0],
         }
     },
     mounted: function mounted() {
@@ -3643,6 +3663,19 @@ if (typeof jQuery === 'undefined') {
     },
     methods: {
 
+    },
+    watch: {
+        technologyPartMaxNum: function technologyPartMaxNum() {
+            var arr = this.technologyPartMaxNum;
+            var technologyName = this.technologyName;
+            var lvArr = [];
+            arr.forEach(function (v) {
+                if (v.part==technologyName) {
+                    lvArr[v.rank-1] = v.num+1;
+                }
+            });
+            this.lvArr =lvArr;
+        }
     }
 };
 
@@ -3814,7 +3847,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -31629,10 +31662,11 @@ module.exports={render:function (){var _vm=this;
     }
   }, [_vm._h('technology', {
     attrs: {
-      "technologyName": "ap",
+      "technologyName": "综合引擎",
+      "technologyPartMaxNum": _vm.technologyPartMaxNum,
       "dancerId": _vm.dancerId
     }
-  }, ["常规弹(AP)"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
+  }, ["综合引擎"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
     on: {
       "setTacticAttributes": _vm.getTacticAttributes
     }
@@ -31934,7 +31968,7 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "role": "menu"
     }
-  }, [_vm._l((11), function(n) {
+  }, [_vm._l((_vm.lvArr[0]), function(n) {
     return _vm._h('li', {
       on: {
         "click": function($event) {
@@ -31988,7 +32022,7 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "role": "menu"
     }
-  }, [_vm._l((11), function(n) {
+  }, [_vm._l((_vm.lvArr[1]), function(n) {
     return _vm._h('li', {
       on: {
         "click": function($event) {
@@ -32042,7 +32076,7 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "role": "menu"
     }
-  }, [_vm._l((11), function(n) {
+  }, [_vm._l((_vm.lvArr[2]), function(n) {
     return _vm._h('li', {
       on: {
         "click": function($event) {

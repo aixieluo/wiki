@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Dancer extends Model
 {
@@ -105,5 +106,35 @@ class Dancer extends Model
      */
     public function rarity($id) {
         return $this->select('rarity')->findOrFail($id);
+    }
+
+    /**
+     * 获取舞姬各科技各级别的大件个数
+     *
+     * @param $id 舞姬id
+     * @return mixed 舞姬各科技各级别的大件个数
+     */
+    public function technologyPartNumber($id) {
+        return DB::table('dancer_technology')
+            ->join('dancers', 'dancer_technology.dancer_id', '=', 'dancers.id')
+            ->join('technologies', 'dancer_technology.technology_id', '=', 'technologies.id')
+            ->select(DB::raw('count(*) as num, technologies.type as part, technologies.rank as rank'))
+            ->where('dancers.id', $id)
+            ->groupBy('technologies.type', 'technologies.rank')
+            ->get();
+    }
+
+    /**
+     * 获取与舞姬相关联的科技种类
+     *
+     * @param $id 舞姬id
+     * @return mixed 与舞姬相关联的科技种类
+     */
+    public function technologyParts($id) {
+        return $this->findOrFail($id)
+            ->technologies()
+            ->distinct()
+            ->orderBy('type')
+            ->pluck('type');
     }
 }

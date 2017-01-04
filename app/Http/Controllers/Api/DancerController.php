@@ -59,4 +59,24 @@ class DancerController extends Controller
     public function rarity(Request $request) {
         return $this->dancer->rarity($request->id);
     }
+
+    /**
+     * 获取舞姬各科技各级别的大件个数
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function technologyPartNumber(Request $request) {
+        return $this->dancer->technologyPartNumber($request->id);
+    }
+
+    /**
+     * 获取与舞姬相关联的科技种类
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function technologyParts(Request $request) {
+        return $this->dancer->technologyPart($request->id);
+    }
 }

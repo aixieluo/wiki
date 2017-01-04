@@ -78,7 +78,7 @@
             <h3>科技</h3>
         </div>
         <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
-            <technology technologyName="ap" :dancerId="dancerId">常规弹(AP)</technology>
+            <technology technologyName="综合引擎" :technologyPartMaxNum="technologyPartMaxNum" :dancerId="dancerId">综合引擎</technology>
         </div>
 
 
@@ -109,10 +109,10 @@
                 required: true,
             },
         },
-        mounted () {
+        mounted() {
             this.ready();
         },
-        data () {
+        data() {
             return {
                 dancer: {},
                 //舞姬基础属性
@@ -149,6 +149,10 @@
                 tacticAttributes: {},
                 //存储当前选择的辎械的属性
                 skillAttributes: {},
+                //舞姬科技大件最大GET个数
+                technologyPartMaxNum: [],
+                //获取与舞姬相关联的科技种类
+                technologyParts: [],
             }
         },
         methods: {
@@ -176,6 +180,18 @@
                     id: this.dancerId,
                 }).then((response)=>{
                     this.rarity = response.data.rarity;
+                });
+                //获取舞姬科技大件最大GET个数
+                this.$http.post(host+'/api/dancer/technologyPartNumber', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.technologyPartMaxNum = response.data;
+                });
+                //获取与舞姬相关联的科技种类
+                this.$http.post(host+'/api/dancer/technologyParts', {
+                    id: this.dancerId,
+                }).then((response)=>{
+                    this.technologyParts = response.data;
                 });
             },
 

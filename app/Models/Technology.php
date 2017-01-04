@@ -20,7 +20,7 @@ class Technology extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function dancers(){
+    public function dancers() {
         return $this->belongsToMany('App\Models\Dancer');
     }
 
@@ -29,7 +29,7 @@ class Technology extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function attributes(){
+    public function attributes() {
         return $this->morphMany('App\Models\Attribute','attributeable');
     }
 
@@ -38,7 +38,7 @@ class Technology extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function effects(){
+    public function effects() {
         return $this->morphToMany('App\Models\Effect', 'effectable');
     }
 }
