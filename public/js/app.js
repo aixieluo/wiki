@@ -2867,6 +2867,63 @@ if (typeof jQuery === 'undefined') {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__arithmetic__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__initia__ = __webpack_require__(41);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2972,6 +3029,7 @@ if (typeof jQuery === 'undefined') {
 
 
 
+
 /* harmony default export */ exports["default"] = {
     props: {
         'dancerId': {
@@ -3022,6 +3080,8 @@ if (typeof jQuery === 'undefined') {
             technologyPartMaxNum: [],
             //获取与舞姬相关联的科技种类
             technologyParts: [],
+            //科技等级和GET量
+            technology: __WEBPACK_IMPORTED_MODULE_2__initia__["a" /* technologyInitia */],
         }
     },
     methods: {
@@ -3629,55 +3689,58 @@ if (typeof jQuery === 'undefined') {
 //
 //
 
-//域名路由
+    //域名路由
+    
 
-
-/* harmony default export */ exports["default"] = {
-    props: {
-        technologyName: {
-            required: true,
-        },
-        dancerId: {
-            required: true,
-        },
-        technologyPartMaxNum: {
-            required: true,
-        }
-    },
-    data: function data() {
-        return {
-            technology: {
-                name: this.technologyName,
-                lv1: 0,
-                get1: 0,
-                lv2: 0,
-                get2: 0,
-                lv3: 0,
-                get3: 0,
+    /* harmony default export */ exports["default"] = {
+        props: {
+            technologyName: {
+                required: true,
             },
-            lvArr: [0, 0, 0],
-        }
-    },
-    mounted: function mounted() {
+            dancerId: {
+                required: true,
+            },
+            technologyPartMaxNum: {
+                required: true,
+            }
+        },
+        data: function data() {
+            return {
+                technology: {
+                    name: this.technologyName,
+                    lv1: 0,
+                    get1: 0,
+                    lv2: 0,
+                    get2: 0,
+                    lv3: 0,
+                    get3: 0,
+                },
+                lvArr: [0, 0, 0],
+            }
+        },
+        mounted: function mounted() {
 
-    },
-    methods: {
+        },
+        methods: {
 
-    },
-    watch: {
-        technologyPartMaxNum: function technologyPartMaxNum() {
-            var arr = this.technologyPartMaxNum;
-            var technologyName = this.technologyName;
-            var lvArr = [];
-            arr.forEach(function (v) {
-                if (v.part==technologyName) {
-                    lvArr[v.rank-1] = v.num+1;
+        },
+        watch: {
+            technologyPartMaxNum: function technologyPartMaxNum() {
+                var arr = this.technologyPartMaxNum;
+                var technologyName = this.technologyName;
+//                let lvArr = [];
+//                arr.forEach((v)=>{
+//                    if (v.part==technologyName) {
+//                        lvArr[v.rank-1] = v.num+1;
+//                    }
+//                });
+//                this.lvArr =lvArr;
+                for(var key in arr) {
+                    console.log(key);
                 }
-            });
-            this.lvArr =lvArr;
+            }
         }
-    }
-};
+    };
 
 
 
@@ -3847,7 +3910,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -31660,13 +31723,175 @@ module.exports={render:function (){var _vm=this;
       "role": "tablist",
       "aria-multiselectable": "true"
     }
-  }, [_vm._h('technology', {
-    attrs: {
-      "technologyName": "综合引擎",
-      "technologyPartMaxNum": _vm.technologyPartMaxNum,
-      "dancerId": _vm.dancerId
-    }
-  }, ["综合引擎"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
+  }, [_vm._l((_vm.technologyPartMaxNum), function(maxNum) {
+    return _vm._h('div', {
+      staticClass: "btn-group mt5"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default"
+    }, [_vm._s(maxNum[0]['part'])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    一期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv1) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((17), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].lv1 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    一期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get1) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((3), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].get1 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    二期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv2) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((17), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].lv2 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    二期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get2) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((2), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].get2 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    三期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv3) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((17), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].lv3 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])]), " ", _vm._h('div', {
+      staticClass: "btn-group"
+    }, [_vm._h('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown"
+      }
+    }, ["\n                    三期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get3) + "\n                    ", _vm._h('span', {
+      staticClass: "caret"
+    })]), " ", _vm._h('ul', {
+      staticClass: "dropdown-menu",
+      attrs: {
+        "role": "menu"
+      }
+    }, [_vm._l((2), function(n) {
+      return _vm._h('li', {
+        on: {
+          "click": function($event) {
+            _vm.technology[maxNum[0]['part']].get3 = n - 1
+          }
+        }
+      }, [_vm._h('a', {
+        attrs: {
+          "href": "javascript:;"
+        }
+      }, [_vm._s(n - 1)])])
+    })])])])
+  })]), " ", _vm._m(3), " ", _vm._h('tactic', {
     on: {
       "setTacticAttributes": _vm.getTacticAttributes
     }
@@ -41988,6 +42213,30 @@ module.exports = function(module) {
 
 __webpack_require__(4);
 module.exports = __webpack_require__(5);
+
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return technologyInitia; });
+//科技等级和各级别大件个数上限
+var technologyInitia = {}
+
+var technologies = ["AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH", "标准防护", "重装防护", "轻薄防护", "综合车体", "综合引擎"];
+technologies.forEach(function (v){
+    technologyInitia[v]={
+        name: v,
+        lv1: 0,
+        get1: 0,
+        lv2: 0,
+        get2: 0,
+        lv3: 0,
+        get3: 0,
+    }
+});
+
 
 
 /***/ }

@@ -115,13 +115,17 @@ class Dancer extends Model
      * @return mixed 舞姬各科技各级别的大件个数
      */
     public function technologyPartNumber($id) {
-        return DB::table('dancer_technology')
-            ->join('dancers', 'dancer_technology.dancer_id', '=', 'dancers.id')
-            ->join('technologies', 'dancer_technology.technology_id', '=', 'technologies.id')
-            ->select(DB::raw('count(*) as num, technologies.type as part, technologies.rank as rank'))
-            ->where('dancers.id', $id)
-            ->groupBy('technologies.type', 'technologies.rank')
-            ->get();
+        return
+            DB::table('dancer_technology')
+                ->join('dancers', 'dancer_technology.dancer_id', '=', 'dancers.id')
+                ->join('technologies', 'dancer_technology.technology_id', '=', 'technologies.id')
+                ->select(DB::raw('count(*) as num, technologies.type as part, technologies.rank as rank'))
+                ->where('dancers.id', $id)
+                ->groupBy('technologies.type', 'technologies.rank')
+                ->get()
+                ->groupBy('part')
+                ->toArray();
+
     }
 
     /**

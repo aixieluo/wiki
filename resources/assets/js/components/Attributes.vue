@@ -78,7 +78,63 @@
             <h3>科技</h3>
         </div>
         <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
-            <technology technologyName="综合引擎" :technologyPartMaxNum="technologyPartMaxNum" :dancerId="dancerId">综合引擎</technology>
+            <div v-for="maxNum in technologyPartMaxNum" class="btn-group mt5">
+                <button class="btn btn-default">{{ maxNum[0]['part'] }}</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        一期Lv.{{ technology[maxNum[0]['part']].lv1 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        一期GET:{{ technology[maxNum[0]['part']].get1 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 3" @click="technology[maxNum[0]['part']].get1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        二期Lv.{{ technology[maxNum[0]['part']].lv2 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        二期GET:{{ technology[maxNum[0]['part']].get2 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 2" @click="technology[maxNum[0]['part']].get2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        三期Lv.{{ technology[maxNum[0]['part']].lv3 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        三期GET:{{ technology[maxNum[0]['part']].get3 }}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li v-for="n in 2" @click="technology[maxNum[0]['part']].get3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
 
@@ -102,6 +158,7 @@
     //域名路由
     import {host, starIncrease} from "../variables"
     import {numAdd, numSub, numMulti} from "../arithmetic"
+    import {technologyInitia} from "../initia"
 
     export default {
         props: {
@@ -153,6 +210,8 @@
                 technologyPartMaxNum: [],
                 //获取与舞姬相关联的科技种类
                 technologyParts: [],
+                //科技等级和GET量
+                technology: technologyInitia,
             }
         },
         methods: {

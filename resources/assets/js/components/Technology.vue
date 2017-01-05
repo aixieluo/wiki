@@ -98,13 +98,16 @@
             technologyPartMaxNum() {
                 let arr = this.technologyPartMaxNum;
                 let technologyName = this.technologyName;
-                let lvArr = [];
-                arr.forEach(function (v) {
-                    if (v.part==technologyName) {
-                        lvArr[v.rank-1] = v.num+1;
-                    }
-                });
-                this.lvArr =lvArr;
+//                let lvArr = [];
+//                arr.forEach((v)=>{
+//                    if (v.part==technologyName) {
+//                        lvArr[v.rank-1] = v.num+1;
+//                    }
+//                });
+//                this.lvArr =lvArr;
+                for(let key in arr) {
+                    console.log(key);
+                }
             }
         }
     }
