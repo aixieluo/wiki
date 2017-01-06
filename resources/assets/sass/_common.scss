@@ -47,6 +47,10 @@ body{
     background-color: $bgc;
 }
 
+a{
+    outline: 0 !important;
+}
+
 .noborder{
     border: 0;
 }

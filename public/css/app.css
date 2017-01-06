@@ -10742,6 +10742,10 @@ body {
   background-color: #ebebeb;
 }
 
+a {
+  outline: 0 !important;
+}
+
 .noborder {
   border: 0;
 }
