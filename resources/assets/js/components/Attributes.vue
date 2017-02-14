@@ -79,7 +79,7 @@
         </div>
         <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
             <div v-for="maxNum in technologyPartMaxNum" class="btn-group mt5">
-                <button class="btn btn-default">{{ maxNum[0]['part'] }}</button>
+                <button class="btn btn-default tec-name">{{ maxNum[0]['part'] }}</button>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         一期Lv.{{ technology[maxNum[0]['part']].lv1 }}
@@ -137,7 +137,9 @@
             </div>
         </div>
 
-
+        <technology id="artillery" :dancerId="dancerId" type="主炮">
+            <span>主炮</span>
+        </technology>
 
 
 

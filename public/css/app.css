@@ -10858,6 +10858,16 @@ header h1 {
   cursor: pointer;
 }
 
+.xd-detail #technologies .tec-name {
+  min-width: 82px;
+  text-align: center;
+}
+
+.xd-detail #technologies .btn-default.dropdown-toggle {
+  min-width: 112px;
+  text-align: center;
+}
+
 @media (max-width: 991px) {
   .xwrap {
     padding: 15px;

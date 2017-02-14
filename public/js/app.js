@@ -3025,6 +3025,8 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
+//
 
 //域名路由
 
@@ -3648,100 +3650,46 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-    //域名路由
-    
+//域名路由
 
-    /* harmony default export */ exports["default"] = {
-        props: {
-            technologyName: {
-                required: true,
-            },
-            dancerId: {
-                required: true,
-            },
-            technologyPartMaxNum: {
-                required: true,
-            }
-        },
-        data: function data() {
-            return {
-                technology: {
-                    name: this.technologyName,
-                    lv1: 0,
-                    get1: 0,
-                    lv2: 0,
-                    get2: 0,
-                    lv3: 0,
-                    get3: 0,
-                },
-                lvArr: [0, 0, 0],
-            }
-        },
-        mounted: function mounted() {
 
+/* harmony default export */ exports["default"] = {
+    props: {
+        id: {
+            required: true,
         },
-        methods: {
-
+        dancerId: {
+            required: true,
         },
-        watch: {
-            technologyPartMaxNum: function technologyPartMaxNum() {
-                var arr = this.technologyPartMaxNum;
-                var technologyName = this.technologyName;
-//                let lvArr = [];
-//                arr.forEach((v)=>{
-//                    if (v.part==technologyName) {
-//                        lvArr[v.rank-1] = v.num+1;
-//                    }
-//                });
-//                this.lvArr =lvArr;
-                for(var key in arr) {
-                    console.log(key);
-                }
-            }
+        type: {
+            required: true,
         }
-    };
+    },
+    data: function data() {
+        return {
+
+        }
+    },
+    mounted: function mounted() {
+        this.ready();
+    },
+    methods: {
+        ready: function ready() {
+            var this$1 = this;
+
+            //根据装备的槽位获取该槽位所有的装备
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/equipment/part/list', {
+                slot: this.type,
+            }).then(function (response){
+                this$1.equipment = response.data;
+            });
+        }
+    },
+    watch: {
+
+    }
+};
 
 
 
@@ -3935,7 +3883,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -31752,7 +31700,7 @@ module.exports={render:function (){var _vm=this;
     return _vm._h('div', {
       staticClass: "btn-group mt5"
     }, [_vm._h('button', {
-      staticClass: "btn btn-default"
+      staticClass: "btn btn-default tec-name"
     }, [_vm._s(maxNum[0]['part'])]), " ", _vm._h('div', {
       staticClass: "btn-group"
     }, [_vm._h('button', {
@@ -31916,7 +31864,13 @@ module.exports={render:function (){var _vm=this;
         }
       }, [_vm._s(n - 1)])])
     })])])])
-  })]), " ", _vm._m(3), " ", _vm._h('tactic', {
+  })]), " ", _vm._h('technology', {
+    attrs: {
+      "id": "artillery",
+      "dancerId": _vm.dancerId,
+      "type": "主炮"
+    }
+  }, [_vm._h('span', ["主炮"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
     on: {
       "setTacticAttributes": _vm.getTacticAttributes
     }
@@ -32173,173 +32127,36 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;
   return _vm._h('div', {
-    staticClass: "btn-group mt5"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default"
-  }, [_vm._t("default")]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
+    staticClass: "panel panel-default"
+  }, [_vm._h('div', {
+    staticClass: "panel-heading",
     attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
+      "role": "tab"
     }
-  }, ["\n            一期Lv." + _vm._s(_vm.technology.lv1) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
+  }, [_vm._h('h4', {
+    staticClass: "panel-title"
+  }, [_vm._h('a', {
     attrs: {
-      "role": "menu"
+      "data-toggle": "collapse",
+      "href": '#' + _vm.id,
+      "aria-expanded": "true",
+      "aria-controls": _vm.id
     }
-  }, [_vm._l((17), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.lv1 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
+  }, [_vm._t("default")])])]), " ", _vm._h('div', {
+    staticClass: "panel-collapse collapse",
     attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
+      "id": _vm.id,
+      "role": "tabpanel",
+      "aria-labelledby": "headingOne"
     }
-  }, ["\n            一期GET:" + _vm._s(_vm.technology.get1) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((_vm.lvArr[0]), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.get1 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
-    }
-  }, ["\n            二期Lv." + _vm._s(_vm.technology.lv2) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((17), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.lv2 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
-    }
-  }, ["\n            二期GET:" + _vm._s(_vm.technology.get2) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((_vm.lvArr[1]), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.get2 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
-    }
-  }, ["\n            三期Lv." + _vm._s(_vm.technology.lv3) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((17), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.lv3 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])]), " ", _vm._h('div', {
-    staticClass: "btn-group"
-  }, [_vm._h('button', {
-    staticClass: "btn btn-default dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown"
-    }
-  }, ["\n            三期GET:" + _vm._s(_vm.technology.get3) + "\n            ", _vm._h('span', {
-    staticClass: "caret"
-  })]), " ", _vm._h('ul', {
-    staticClass: "dropdown-menu",
-    attrs: {
-      "role": "menu"
-    }
-  }, [_vm._l((_vm.lvArr[2]), function(n) {
-    return _vm._h('li', {
-      on: {
-        "click": function($event) {
-          _vm.technology.get3 = n - 1
-        }
-      }
-    }, [_vm._h('a', {
-      attrs: {
-        "href": "javascript:;"
-      }
-    }, [_vm._s(n - 1)])])
-  })])])])
-},staticRenderFns: []}
+  }, [_vm._m(0)])])
+},staticRenderFns: [function (){var _vm=this;
+  return _vm._h('div', {
+    staticClass: "panel-body"
+  }, [_vm._h('ul', {
+    staticClass: "list-unstyled"
+  })])
+}]}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
