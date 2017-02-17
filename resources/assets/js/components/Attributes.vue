@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <technology id="artillery" :dancerId="dancerId" type="主炮">
+        <technology id="artillery" :dancerId="dancerId" category="主炮">
             <span>主炮</span>
         </technology>
 

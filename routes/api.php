@@ -31,7 +31,9 @@ Route::group(['namespace'=>'Api'], function () {
     //获取舞姬各科技各级别的大件个数
     Route::post('dancer/technologyPartNumber', 'DancerController@technologyPartNumber');
     //获取与舞姬相关联的科技种类
-    Route::post('dancer/technologyParts', 'DancerController@technologyPart');
+    Route::post('dancer/technologyParts', 'DancerController@technologyParts');
+    //获取某舞姬某科技的所有大件
+    Route::post('dancer/technologySlots', 'DancerController@technologySlots');
 
     /*part dancer end*/
 

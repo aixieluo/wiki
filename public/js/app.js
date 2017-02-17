@@ -3650,6 +3650,8 @@ if (typeof jQuery === 'undefined') {
 //
 //
 //
+//
+//
 
 //域名路由
 
@@ -3662,13 +3664,13 @@ if (typeof jQuery === 'undefined') {
         dancerId: {
             required: true,
         },
-        type: {
+        category: {
             required: true,
         }
     },
     data: function data() {
         return {
-
+            technologies: {}
         }
     },
     mounted: function mounted() {
@@ -3679,10 +3681,11 @@ if (typeof jQuery === 'undefined') {
             var this$1 = this;
 
             //根据装备的槽位获取该槽位所有的装备
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/equipment/part/list', {
-                slot: this.type,
+            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__variables__["a" /* host */]+'/api/dancer/technologySlots', {
+                id: this.dancerId,
+                category: this.category,
             }).then(function (response){
-                this$1.equipment = response.data;
+                this$1.technologies = response.data;
             });
         }
     },
@@ -31467,6 +31470,9 @@ module.exports = __vue_exports__
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
+/* styles */
+__webpack_require__(43)
+
 /* script */
 __vue_exports__ = __webpack_require__(12)
 
@@ -31868,7 +31874,7 @@ module.exports={render:function (){var _vm=this;
     attrs: {
       "id": "artillery",
       "dancerId": _vm.dancerId,
-      "type": "主炮"
+      "category": "主炮"
     }
   }, [_vm._h('span', ["主炮"])]), " ", _vm._m(3), " ", _vm._h('tactic', {
     on: {
@@ -32149,14 +32155,16 @@ module.exports={render:function (){var _vm=this;
       "role": "tabpanel",
       "aria-labelledby": "headingOne"
     }
-  }, [_vm._m(0)])])
-},staticRenderFns: [function (){var _vm=this;
-  return _vm._h('div', {
+  }, [_vm._h('div', {
     staticClass: "panel-body"
   }, [_vm._h('ul', {
     staticClass: "list-unstyled"
-  })])
-}]}
+  }, [_vm._l((_vm.technologies), function(technology) {
+    return _vm._h('li', {
+      staticClass: "pull-left technology-wrap"
+    }, ["\n                    " + _vm._s(technology.name) + "\n                "])
+  })])])])])
+},staticRenderFns: []}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -42056,6 +42064,46 @@ module.exports = function(module) {
 __webpack_require__(4);
 module.exports = __webpack_require__(5);
 
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)();
+// imports
+
+
+// module
+exports.push([module.i, "\n.technology-wrap{\n    padding-left: 5px;\n    padding-right: 5px;\n}\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(42);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-26170464!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Technology.vue", function() {
+			var newContent = require("!!./../../../../node_modules/css-loader/index.js!./../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-26170464!./../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Technology.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
 
 /***/ }
 /******/ ]);

@@ -141,4 +141,12 @@ class Dancer extends Model
             ->orderBy('type')
             ->pluck('type');
     }
+
+    public function technologySlots($id, $category) {
+        return $this->findOrFail($id)
+            ->technologies()
+            ->where('category', $category)
+            ->with('attributes')
+            ->get();
+    }
 }

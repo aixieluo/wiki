@@ -10,7 +10,9 @@
         <div :id="id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
                 <ul class="list-unstyled">
-
+                    <li @click="setTechnology(technology)" v-for="technology in technologies" class="pull-left technology-wrap">
+                        {{ technology.name }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -29,13 +31,14 @@
             dancerId: {
                 required: true,
             },
-            type: {
+            category: {
                 required: true,
             }
         },
         data() {
             return {
-
+                technologies: {},
+                technology: {},
             }
         },
         mounted() {
@@ -44,11 +47,15 @@
         methods: {
             ready() {
                 //根据装备的槽位获取该槽位所有的装备
-                this.$http.post(host+'/api/equipment/part/list', {
-                    slot: this.type,
+                this.$http.post(host+'/api/dancer/technologySlots', {
+                    id: this.dancerId,
+                    category: this.category,
                 }).then((response)=>{
-                    this.equipment = response.data;
+                    this.technologies = response.data;
                 });
+            },
+            setTechnology() {
+
             }
         },
         watch: {
@@ -57,3 +64,10 @@
     }
 
 </script>
+
+<style>
+    .technology-wrap{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+</style>
