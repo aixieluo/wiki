@@ -4,6 +4,7 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" :href="'#'+id" aria-expanded="true" :aria-controls="id">
                     <slot></slot>
+                    <span v-if="technology.name">{{ technology.name }}</span>
                 </a>
             </h4>
         </div>
@@ -54,8 +55,8 @@
                     this.technologies = response.data;
                 });
             },
-            setTechnology() {
-
+            setTechnology(technology) {
+                this.technology = technology;
             }
         },
         watch: {
