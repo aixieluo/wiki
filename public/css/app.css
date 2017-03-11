@@ -10742,6 +10742,10 @@ body {
   background-color: #ebebeb;
 }
 
+a {
+  outline: 0 !important;
+}
+
 .noborder {
   border: 0;
 }
@@ -10852,6 +10856,16 @@ header h1 {
 .xd-detail .fa-star, .xd-detail .fa-star-o {
   font-size: 18px;
   cursor: pointer;
+}
+
+.xd-detail #technologies .tec-name {
+  min-width: 82px;
+  text-align: center;
+}
+
+.xd-detail #technologies .btn-default.dropdown-toggle {
+  min-width: 112px;
+  text-align: center;
 }
 
 @media (max-width: 991px) {

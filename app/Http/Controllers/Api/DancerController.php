@@ -77,6 +77,16 @@ class DancerController extends Controller
      * @return mixed
      */
     public function technologyParts(Request $request) {
-        return $this->dancer->technologyPart($request->id);
+        return $this->dancer->technologyParts($request->id);
+    }
+
+    /**
+     * 获取某舞姬的某科技所有大件
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function technologySlots(Request $request) {
+        return $this->dancer->technologySlots($request->id, $request->category);
     }
 }
