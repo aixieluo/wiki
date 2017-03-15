@@ -146,8 +146,7 @@ class Dancer extends Model
         return $this->findOrFail($id)
             ->technologies()
             ->where('category', $category)
-            ->with(['attributes'=>function($query){
-                $query->first();
-            }])->get();
+            ->with('attributes')
+            ->get();
     }
 }
