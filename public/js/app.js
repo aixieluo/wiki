@@ -688,10 +688,6 @@ $(function () {
                 concealment: 0,
                 spy: 0,
             },
-            demo: {
-                fire: 0,
-            },
-            fire: 0,
             //存储当前选择的战术的属性
             tacticAttributes: {},
             //存储当前选择的辎械的属性
@@ -702,6 +698,8 @@ $(function () {
             technologyParts: [],
             //科技等级和GET量
             technology: __WEBPACK_IMPORTED_MODULE_2__initia__["a" /* technologyInitia */],
+            //存储当前页面舞姬装备的科技大件
+            technologySlots: [],
         }
     },
     methods: {
@@ -789,6 +787,20 @@ $(function () {
             this.equipmentAttributes.concealment = sumConcealment;
             this.equipmentAttributes.spy = sumSpy;
 
+        },
+        technologyList: function technologyList(attribute, category, type) {
+            this.technologySlots[category] = {
+                type: type,
+                fire: attribute.fire,
+                penetrate: attribute.penetrate,
+                durable: attribute.durable,
+                armor: attribute.armor,
+                hit: attribute.hit,
+                dodge: attribute.dodge,
+                concealment: attribute.concealment,
+                spy: attribute.spy,
+            };
+            console.log(this.technologySlots["主炮"].fire);
         },
         getTacticAttributes: function getTacticAttributes(attributes) {
             this.tacticAttributes = attributes;
@@ -1309,6 +1321,10 @@ $(function () {
         },
         setTechnology: function setTechnology(technology) {
             this.technology = technology;
+            this.sendTechnology();
+        },
+        sendTechnology: function sendTechnology() {
+            this.$emit('setTechnology', this.technology.attributes[0], this.technology.category, this.technology.type);
         }
     },
     watch: {
@@ -1508,7 +1524,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -42802,6 +42818,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "artillery",
       "dancerId": _vm.dancerId,
       "category": "主炮"
+    },
+    on: {
+      "setTechnology": _vm.technologyList
     }
   }, [_c('span', [_vm._v("主炮")])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('tactic', {
     on: {

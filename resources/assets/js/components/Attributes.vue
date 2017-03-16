@@ -137,7 +137,7 @@
             </div>
         </div>
 
-        <technology id="artillery" :dancerId="dancerId" category="主炮">
+        <technology @setTechnology="technologyList" id="artillery" :dancerId="dancerId" category="主炮">
             <span>主炮</span>
         </technology>
 
@@ -201,10 +201,6 @@
                     concealment: 0,
                     spy: 0,
                 },
-                demo: {
-                    fire: 0,
-                },
-                fire: 0,
                 //存储当前选择的战术的属性
                 tacticAttributes: {},
                 //存储当前选择的辎械的属性
@@ -215,6 +211,8 @@
                 technologyParts: [],
                 //科技等级和GET量
                 technology: technologyInitia,
+                //存储当前页面舞姬装备的科技大件
+                technologySlots: [],
             }
         },
         methods: {
@@ -298,6 +296,20 @@
                 this.equipmentAttributes.concealment = sumConcealment;
                 this.equipmentAttributes.spy = sumSpy;
 
+            },
+            technologyList(attribute, category, type) {
+                this.technologySlots[category] = {
+                    type: type,
+                    fire: attribute.fire,
+                    penetrate: attribute.penetrate,
+                    durable: attribute.durable,
+                    armor: attribute.armor,
+                    hit: attribute.hit,
+                    dodge: attribute.dodge,
+                    concealment: attribute.concealment,
+                    spy: attribute.spy,
+                };
+                console.log(this.technologySlots["主炮"].fire);
             },
             getTacticAttributes(attributes) {
                 this.tacticAttributes = attributes;

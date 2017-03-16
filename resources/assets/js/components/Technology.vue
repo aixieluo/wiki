@@ -57,6 +57,10 @@
             },
             setTechnology(technology) {
                 this.technology = technology;
+                this.sendTechnology();
+            },
+            sendTechnology() {
+                this.$emit('setTechnology', this.technology.attributes[0], this.technology.category, this.technology.type);
             }
         },
         watch: {
