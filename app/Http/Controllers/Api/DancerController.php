@@ -67,7 +67,15 @@ class DancerController extends Controller
      * @return mixed
      */
     public function technologyPartNumber(Request $request) {
-        return $this->dancer->technologyPartNumber($request->id);
+        $parts = $this->dancer->technologyPartNumber($request->id);
+        $partNumber = array();
+        foreach ( $parts as $part ) {
+            $partNumber[$part['type']]['rank'.$part['rank']] = 0;
+        }
+        foreach ( $parts as $part ) {
+            $partNumber[$part['type']]['rank'.$part['rank']]++;
+        }
+        return $partNumber;
     }
 
     /**

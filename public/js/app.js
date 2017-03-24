@@ -644,6 +644,24 @@ $(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 //域名路由
 
@@ -1524,7 +1542,7 @@ exports = module.exports = __webpack_require__(1)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -42645,12 +42663,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "tablist",
       "aria-multiselectable": "true"
     }
-  }, _vm._l((_vm.technologyPartMaxNum), function(maxNum) {
+  }, _vm._l((_vm.technologyPartMaxNum), function(maxNum, part) {
     return _c('div', {
       staticClass: "btn-group mt5"
     }, [_c('button', {
       staticClass: "btn btn-default tec-name"
-    }, [_vm._v(_vm._s(maxNum[0]['part']))]), _vm._v(" "), _c('div', {
+    }, [_vm._v(_vm._s(part))]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42658,26 +42676,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    一期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv1) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    一期Lv." + _vm._s(_vm.technology[part].lv1) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((17), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].lv1 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((16), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].lv1 = n - 1
+            _vm.technology[part].lv1 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))]), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42685,26 +42713,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    一期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get1) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    一期GET:" + _vm._s(_vm.technology[part].get1) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((3), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].get1 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((maxNum['rank1']), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].get1 = n - 1
+            _vm.technology[part].get1 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))]), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42712,26 +42750,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    二期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv2) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    二期Lv." + _vm._s(_vm.technology[part].lv2) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((17), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].lv2 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((16), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].lv2 = n - 1
+            _vm.technology[part].lv2 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))]), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42739,26 +42787,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    二期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get2) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    二期GET:" + _vm._s(_vm.technology[part].get2) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((2), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].get2 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((maxNum['rank2']), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].get2 = n - 1
+            _vm.technology[part].get2 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))]), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42766,26 +42824,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    三期Lv." + _vm._s(_vm.technology[maxNum[0]['part']].lv3) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    三期Lv." + _vm._s(_vm.technology[part].lv3) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((17), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].lv3 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((16), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].lv3 = n - 1
+            _vm.technology[part].lv3 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))]), _vm._v(" "), _c('div', {
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)]), _vm._v(" "), _c('div', {
       staticClass: "btn-group"
     }, [_c('button', {
       staticClass: "btn btn-default dropdown-toggle",
@@ -42793,26 +42861,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "type": "button",
         "data-toggle": "dropdown"
       }
-    }, [_vm._v("\n                    三期GET:" + _vm._s(_vm.technology[maxNum[0]['part']].get3) + "\n                    "), _c('span', {
+    }, [_vm._v("\n                    三期GET:" + _vm._s(_vm.technology[part].get3) + "\n                    "), _c('span', {
       staticClass: "caret"
     })]), _vm._v(" "), _c('ul', {
       staticClass: "dropdown-menu",
       attrs: {
         "role": "menu"
       }
-    }, _vm._l((2), function(n) {
+    }, [_c('li', {
+      on: {
+        "click": function($event) {
+          _vm.technology[part].get3 = 0
+        }
+      }
+    }, [_c('a', {
+      attrs: {
+        "href": "javascript:;"
+      }
+    }, [_vm._v(_vm._s(0))])]), _vm._v(" "), _vm._l((maxNum['rank3']), function(n) {
       return _c('li', {
         on: {
           "click": function($event) {
-            _vm.technology[maxNum[0]['part']].get3 = n - 1
+            _vm.technology[part].get3 = n
           }
         }
       }, [_c('a', {
         attrs: {
           "href": "javascript:;"
         }
-      }, [_vm._v(_vm._s(n - 1))])])
-    }))])])
+      }, [_vm._v(_vm._s(n))])])
+    })], 2)])])
   })), _vm._v(" "), _c('technology', {
     attrs: {
       "id": "artillery",
@@ -42822,7 +42900,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "setTechnology": _vm.technologyList
     }
-  }, [_c('span', [_vm._v("主炮")])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('tactic', {
+  }, [_c('span', [_vm._v("主炮")])]), _vm._v(" "), _c('technology', {
+    attrs: {
+      "id": "guard",
+      "dancerId": _vm.dancerId,
+      "category": "防护"
+    },
+    on: {
+      "setTechnology": _vm.technologyList
+    }
+  }, [_c('span', [_vm._v("防护")])]), _vm._v(" "), _c('technology', {
+    attrs: {
+      "id": "bodywork",
+      "dancerId": _vm.dancerId,
+      "category": "车体"
+    },
+    on: {
+      "setTechnology": _vm.technologyList
+    }
+  }, [_c('span', [_vm._v("车体")])]), _vm._v(" "), _c('technology', {
+    attrs: {
+      "id": "engine",
+      "dancerId": _vm.dancerId,
+      "category": "引擎"
+    },
+    on: {
+      "setTechnology": _vm.technologyList
+    }
+  }, [_c('span', [_vm._v("引擎")])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('tactic', {
     on: {
       "setTacticAttributes": _vm.getTacticAttributes
     }

@@ -78,60 +78,66 @@
             <h3>科技</h3>
         </div>
         <div class="panel-group" id="technologies" role="tablist" aria-multiselectable="true">
-            <div v-for="maxNum in technologyPartMaxNum" class="btn-group mt5">
-                <button class="btn btn-default tec-name">{{ maxNum[0]['part'] }}</button>
+            <div v-for="(maxNum, part) in technologyPartMaxNum" class="btn-group mt5">
+                <button class="btn btn-default tec-name">{{ part }}</button>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        一期Lv.{{ technology[maxNum[0]['part']].lv1 }}
+                        一期Lv.{{ technology[part].lv1 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].lv1=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in 16" @click="technology[part].lv1=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        一期GET:{{ technology[maxNum[0]['part']].get1 }}
+                        一期GET:{{ technology[part].get1 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 3" @click="technology[maxNum[0]['part']].get1=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].get1=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in maxNum['rank1']" @click="technology[part].get1=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        二期Lv.{{ technology[maxNum[0]['part']].lv2 }}
+                        二期Lv.{{ technology[part].lv2 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].lv2=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in 16" @click="technology[part].lv2=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        二期GET:{{ technology[maxNum[0]['part']].get2 }}
+                        二期GET:{{ technology[part].get2 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 2" @click="technology[maxNum[0]['part']].get2=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].get2=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in maxNum['rank2']" @click="technology[part].get2=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        三期Lv.{{ technology[maxNum[0]['part']].lv3 }}
+                        三期Lv.{{ technology[part].lv3 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 17" @click="technology[maxNum[0]['part']].lv3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].lv3=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in 16" @click="technology[part].lv3=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        三期GET:{{ technology[maxNum[0]['part']].get3 }}
+                        三期GET:{{ technology[part].get3 }}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li v-for="n in 2" @click="technology[maxNum[0]['part']].get3=n-1"><a href="javascript:;">{{ n-1 }}</a></li>
+                        <li @click="technology[part].get3=0"><a href="javascript:;">{{ 0 }}</a></li>
+                        <li v-for="n in maxNum['rank3']" @click="technology[part].get3=n"><a href="javascript:;">{{ n }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -139,6 +145,18 @@
 
         <technology @setTechnology="technologyList" id="artillery" :dancerId="dancerId" category="主炮">
             <span>主炮</span>
+        </technology>
+
+        <technology @setTechnology="technologyList" id="guard" :dancerId="dancerId" category="防护">
+            <span>防护</span>
+        </technology>
+
+        <technology @setTechnology="technologyList" id="bodywork" :dancerId="dancerId" category="车体">
+            <span>车体</span>
+        </technology>
+
+        <technology @setTechnology="technologyList" id="engine" :dancerId="dancerId" category="引擎">
+            <span>引擎</span>
         </technology>
 
 

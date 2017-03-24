@@ -116,16 +116,10 @@ class Dancer extends Model
      */
     public function technologyPartNumber($id) {
         return
-            DB::table('dancer_technology')
-                ->join('dancers', 'dancer_technology.dancer_id', '=', 'dancers.id')
-                ->join('technologies', 'dancer_technology.technology_id', '=', 'technologies.id')
-                ->select(DB::raw('count(*) as num, technologies.type as part, technologies.rank as rank'))
-                ->where('dancers.id', $id)
-                ->groupBy('technologies.type', 'technologies.rank')
-                ->get()
-                ->groupBy('part')
-                ->toArray();
-
+            $this->findOrFail($id)
+                ->technologies()
+                ->orderBy('category', 'type')
+                ->get();
     }
 
     /**
