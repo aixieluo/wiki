@@ -4,14 +4,15 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" :href="'#'+id" aria-expanded="true" :aria-controls="id">
                     <slot></slot>
-                    <span v-if="technology.name">{{ technology.name }}</span>
+                    <span v-if="name">{{ name }}</span>
                 </a>
             </h4>
         </div>
         <div :id="id" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
                 <ul class="list-unstyled">
-                    <li @click="setTechnology(technology)" v-for="technology in technologies" class="pull-left technology-wrap">
+                    <li  v-if="name" @click="resetTechnology()" class="pull-left technology-wrap">卸下装备</li>
+                    <li @click="setTechnology1(technology)" v-for="technology in technologies" class="pull-left technology-wrap">
                         {{ technology.name }}
                     </li>
                 </ul>
@@ -38,8 +39,20 @@
         },
         data() {
             return {
+                name: "",
+                type: "",
                 technologies: {},
-                technology: {},
+                technologyInfo: {},
+                resetTechnologyInfo: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
             }
         },
         mounted() {
@@ -55,12 +68,18 @@
                     this.technologies = response.data;
                 });
             },
-            setTechnology(technology) {
-                this.technology = technology;
+            setTechnology1(technology) {
+                this.name = technology.name;
+                this.type = technology.type;
+                this.technologyInfo = technology.attributes[0];
                 this.sendTechnology();
             },
+            resetTechnology() {
+                this.name = "";
+                this.$emit('setTechnology', this.resetTechnologyInfo, this.category, this.type);
+            },
             sendTechnology() {
-                this.$emit('setTechnology', this.technology.attributes[0], this.technology.category, this.technology.type);
+                this.$emit('setTechnology', this.technologyInfo, this.category, this.type);
             }
         },
         watch: {

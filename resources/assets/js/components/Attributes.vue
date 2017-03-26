@@ -22,14 +22,15 @@
                         <td width="1px">{{ sumFire }}</td>
                         <td width="1px">穿甲</td>
                         <td width="1px">{{ sumPenetrate }}</td>
-                        <td width="1px">耐久</td>
-                        <td width="1px">{{ sumDurable }}</td>
+                        <td width="1px">命中</td>
+                        <td width="1px">{{ sumHit }}</td>
+
                     </tr>
                     <tr>
+                        <td>耐久</td>
+                        <td>{{ sumDurable }}</td>
                         <td>装甲</td>
                         <td>{{ sumArmor }}</td>
-                        <td>命中</td>
-                        <td>{{ sumHit }}</td>
                         <td>闪避</td>
                         <td>{{ sumDodge }}</td>
                     </tr>
@@ -231,6 +232,62 @@
                 technology: technologyInitia,
                 //存储当前页面舞姬装备的科技大件
                 technologySlots: [],
+                //存储当前装备主炮大件属性
+                technologyArtillery: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
+                //存储当前装备防护大件属性
+                technologyGuard: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
+                //存储当前装备车体大件
+                technologyBodywork: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
+                //存储当前装备引擎大件属性
+                technologyEngine: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
+                //存储当前页面上舞姬所装备的科技大件所有的属性加成之和
+                //此处存在疑惑，为什么此处子节点必须定义出来computed才能检测到变化，而战术和辎械出不需要预先定义子节点
+                technologyAttributes: {
+                    fire: 0,
+                    penetrate: 0,
+                    durable: 0,
+                    armor: 0,
+                    hit: 0,
+                    dodge: 0,
+                    concealment: 0,
+                    spy: 0,
+                },
             }
         },
         methods: {
@@ -316,18 +373,68 @@
 
             },
             technologyList(attribute, category, type) {
-                this.technologySlots[category] = {
-                    type: type,
-                    fire: attribute.fire,
-                    penetrate: attribute.penetrate,
-                    durable: attribute.durable,
-                    armor: attribute.armor,
-                    hit: attribute.hit,
-                    dodge: attribute.dodge,
-                    concealment: attribute.concealment,
-                    spy: attribute.spy,
-                };
-                console.log(this.technologySlots["主炮"].fire);
+                switch (category) {
+                    case '主炮': this.technologyArtillery = {
+                        fire: attribute.fire,
+                        penetrate: attribute.penetrate,
+                        durable: attribute.durable,
+                        armor: attribute.armor,
+                        hit: attribute.hit,
+                        dodge: attribute.dodge,
+                        concealment: attribute.concealment,
+                        spy: attribute.spy,
+                    };
+                        break;
+                    case '防护': this.technologyGuard = {
+                        fire: attribute.fire,
+                        penetrate: attribute.penetrate,
+                        durable: attribute.durable,
+                        armor: attribute.armor,
+                        hit: attribute.hit,
+                        dodge: attribute.dodge,
+                        concealment: attribute.concealment,
+                        spy: attribute.spy,
+                    };
+                        break;
+                    case '车体': this.technologyBodywork = {
+                        fire: attribute.fire,
+                        penetrate: attribute.penetrate,
+                        durable: attribute.durable,
+                        armor: attribute.armor,
+                        hit: attribute.hit,
+                        dodge: attribute.dodge,
+                        concealment: attribute.concealment,
+                        spy: attribute.spy,
+                    };
+                        break;
+                    case '引擎': this.technologyEngine = {
+                        fire: attribute.fire,
+                        penetrate: attribute.penetrate,
+                        durable: attribute.durable,
+                        armor: attribute.armor,
+                        hit: attribute.hit,
+                        dodge: attribute.dodge,
+                        concealment: attribute.concealment,
+                        spy: attribute.spy,
+                    };
+                        break;
+                }
+                let sumFire = 0,
+                    sumPenetrate = 0,
+                    sumDurable = 0,
+                    sumArmor = 0,
+                    sumHit = 0,
+                    sumDodge = 0,
+                    sumConcealment = 0,
+                    sumSpy = 0;
+                this.technologyAttributes.fire = this.technologyArtillery.fire + this.technologyGuard.fire + this.technologyBodywork.fire + this.technologyEngine.fire;
+                this.technologyAttributes.penetrate = this.technologyArtillery.penetrate + this.technologyGuard.penetrate + this.technologyBodywork.penetrate + this.technologyEngine.penetrate;
+                this.technologyAttributes.durable = this.technologyArtillery.durable + this.technologyGuard.durable + this.technologyBodywork.durable + this.technologyEngine.durable;
+                this.technologyAttributes.armor = this.technologyArtillery.armor + this.technologyGuard.armor + this.technologyBodywork.armor + this.technologyEngine.armor;
+                this.technologyAttributes.hit = this.technologyArtillery.hit + this.technologyGuard.hit + this.technologyBodywork.hit + this.technologyEngine.hit;
+                this.technologyAttributes.dodge = this.technologyArtillery.dodge + this.technologyGuard.dodge + this.technologyBodywork.dodge + this.technologyEngine.dodge;
+                this.technologyAttributes.concealment = this.technologyArtillery.concealment + this.technologyGuard.concealment + this.technologyBodywork.concealment + this.technologyEngine.concealment;
+                this.technologyAttributes.spy = this.technologyArtillery.spy + this.technologyGuard.spy + this.technologyBodywork.spy + this.technologyEngine.spy;
             },
             getTacticAttributes(attributes) {
                 this.tacticAttributes = attributes;
@@ -345,6 +452,7 @@
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_fire));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.fire, numSub(1, this.tacticAttributes.fire_down)));
+                sum = numAdd(sum, this.technologyAttributes.fire);
                 return sum;
             },
             sumPenetrate () {
@@ -355,6 +463,7 @@
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].penetrate));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_penetrate));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.penetrate, numSub(1, this.tacticAttributes.penetrate_down)));
+                sum = numAdd(sum, this.technologyAttributes.penetrate);
                 return sum;
             },
             sumDurable () {
@@ -365,6 +474,7 @@
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].durable));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_durable));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.durable, numSub(1, this.tacticAttributes.durable_down)));
+                sum = numAdd(sum, this.technologyAttributes.durable);
                 return sum;
             },
             sumArmor () {
@@ -375,6 +485,7 @@
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].armor));
                 sum = numAdd(sum, numMulti(this.lv, this.grows.grow_armor));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.armor, numSub(1, this.tacticAttributes.armor_down)));
+                sum = numAdd(sum, this.technologyAttributes.armor);
                 return sum;
             },
             sumHit () {
@@ -384,6 +495,7 @@
                 sum = numAdd(sum, numMulti(basic, this.skillAttributes.hit_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].hit));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.hit, numSub(1, this.tacticAttributes.hit_down)));
+                sum = numAdd(sum, this.technologyAttributes.hit);
                 return sum;
             },
             sumDodge () {
@@ -393,6 +505,7 @@
                 sum = numAdd(sum, numMulti(basic, this.skillAttributes.dodge_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].dodge));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.dodge, numSub(1, this.tacticAttributes.dodge_down)));
+                sum = numAdd(sum, this.technologyAttributes.dodge);
                 return sum;
             },
             sumConcealment () {
@@ -402,6 +515,7 @@
                 sum = numAdd(sum, numMulti(basic, this.skillAttributes.concealment_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].concealment));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.concealment, numSub(1, this.tacticAttributes.concealment_down)));
+                sum = numAdd(sum, this.technologyAttributes.concealment);
                 return sum;
             },
             sumSpy () {
@@ -411,6 +525,7 @@
                 sum = numAdd(sum, numMulti(basic, this.skillAttributes.spy_up));
                 sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].spy));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.spy, numSub(1, this.tacticAttributes.spy_down)));
+                sum = numAdd(sum, this.technologyAttributes.spy);
                 return sum;
             },
         },
