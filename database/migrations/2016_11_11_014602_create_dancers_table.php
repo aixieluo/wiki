@@ -17,9 +17,9 @@ class CreateDancersTable extends Migration
             $table->increments('id');
             $table->string('name')->comment('舞姬姓名');
             $table->string('dance_outfit')->comment('舞装名称');
-            $table->string('type')->comment('类型');
-            $table->string('country')->comment('国籍');
-            $table->integer('rarity')->comment('稀有度');
+            $table->integer('dancer_type_id')->unsigned()->comment('类型外键');
+            $table->integer('country_id')->unsigned()->comment('国籍外键');
+            $table->integer('rarity_id')->unsigned()->comment('稀有度外键');
             $table->string('subjection')->comment('隶属机构');
             $table->string('introduction')->comment('人物介绍');
             $table->string('character')->comment('人物性格');
@@ -34,6 +34,9 @@ class CreateDancersTable extends Migration
             $table->integer('inwarehouse')->comment('内仓');
             $table->integer('carriage')->comment('炮架');
             $table->integer('special')->comment('特殊');
+            $table->foreign('dancer_type_id')->references('id')->on('dancer_types')->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->foreign('rarity_id')->references('id')->on('rarities')->onDelete('cascade');
             $table->timestamps();
         });
     }

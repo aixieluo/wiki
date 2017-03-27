@@ -22,15 +22,35 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+//舞姬类型表
+$factory->define(\App\Models\DancerType::class, function (Faker\Generator $faker) {
+    return [
+        'type' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
+    ];
+});
+
+//舞姬国籍表
+$factory->define(\App\Models\Country::class, function (Faker\Generator $faker) {
+    return [
+        'country' => $faker->country,
+    ];
+});
+
+//舞姬稀有度表
+$factory->define(\App\Models\Rarity::class, function (Faker\Generator $faker) {
+    return [
+        'rarity' => $faker->randomElement(["蓝", "紫", "橙"]),
+    ];
+});
 
 //舞姬表
 $factory->define(\App\Models\Dancer::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'dance_outfit' => $faker->name,
-        'type' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
-        'country' => $faker->countryCode,
-        'rarity' => $faker->randomElement([1, 2, 3]),
+        'dancer_type_id' => $faker->randomElement(\App\Models\DancerType::pluck('id')->toArray()),
+        'country_id' => $faker->randomElement(\App\Models\Country::pluck('id')->toArray()),
+        'rarity_id' => $faker->randomElement(\App\Models\Rarity::pluck('id')->toArray()),
         'subjection' => "S.V.S",
         'introduction' => $faker->sentence(20),
         'character' => $faker->sentence(20),
@@ -48,22 +68,33 @@ $factory->define(\App\Models\Dancer::class, function (Faker\Generator $faker) {
     ];
 });
 
+//科技类别表
+$factory->define(\App\Models\TechnologyCategory::class, function (Faker\Generator $faker) {
+    return [
+        'category' => $faker->randomElement(["主炮", "防护", "车体", "引擎"]),
+    ];
+});
 
-//科技表
-$factory->define(\App\Models\Technology::class, function (Faker\Generator $faker) {
-    $category = $faker->randomElement(["主炮", "防护", "车体", "引擎"]);
+//科技类型表
+$factory->define(\App\Models\TechnologyType::class, function (Faker\Generator $faker) {
     $arr = array(
         "主炮" => array("AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH"),
         "防护" => array("标准防护", "重装防护", "轻薄防护"),
         "车体" => array("综合车体"),
         "引擎" => array("综合引擎"),
     );
-    $type = $faker->randomElement($arr[$category]);
+    return [
+        'technology_categorie_id' => $faker->randomElement(\App\Models\TechnologyCategory::pluck('id')->toArray()),
+        'type' => $faker->randomElement(["AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH", "标准防护", "重装防护", "轻薄防护", "综合车体", "综合引擎"]),
+    ];
+});
 
+
+//科技表
+$factory->define(\App\Models\Technology::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'category' => $category,
-        'type' => $type,
+        'technology_type_id' => $faker->randomElement(\App\Models\TechnologyType::pluck('id')->toArray()),
         'rank' => $faker->numberBetween(1, 3),
     ];
 });

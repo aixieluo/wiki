@@ -15,10 +15,10 @@ class CreateTechnologiesTable extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('technology_type_id')->unsigned()->comment('科技类型外键');
             $table->string('name')->comment('科技名称');
             $table->integer('rank')->comment('阶级');
-            $table->string('category')->comment('科技类别');
-            $table->string('type')->comment('科技类型');
+            $table->foreign('technology_type_id')->references('id')->on('technology_types')->onDelete('cascade');
             $table->timestamps();
         });
     }
