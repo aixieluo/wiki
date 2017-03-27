@@ -98,15 +98,6 @@ class Dancer extends Model
         return $this->select('barbette', 'refit', 'outside', 'inwall', 'inwarehouse', 'carriage', 'special')->findOrFail($id);
     }
 
-    /**
-     * 获取舞姬的稀有度
-     *
-     * @param $id 舞姬id
-     * @return mixed 舞姬稀有度
-     */
-    public function rarity($id) {
-        return $this->select('rarity')->findOrFail($id);
-    }
 
     /**
      * 获取舞姬各科技各级别的大件个数

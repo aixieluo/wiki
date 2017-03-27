@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Dancer;
+use App\Models\Rarity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +15,16 @@ class DancerController extends Controller
     private $dancer;
 
     /**
+     * @var Rarity 模型Rarity的对象
+     */
+    private $rarity;
+
+    /**
      * DancerController constructor.
      */
     public function __construct() {
         $this->dancer = new Dancer();
+        $this->rarity = new Rarity();
     }
 
     /**
@@ -57,7 +64,7 @@ class DancerController extends Controller
      * @return mixed
      */
     public function rarity(Request $request) {
-        return $this->dancer->rarity($request->id);
+        return $this->rarity->rarity($request->id);
     }
 
     /**

@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <div class="clearfix">
                     <div class="pull-left clearfix">
-                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
+                        <i v-for="n in 3" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
                     </div>
                     <div class="pull-right">
                         <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i></button>

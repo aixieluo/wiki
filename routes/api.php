@@ -27,7 +27,7 @@ Route::group(['namespace'=>'Api'], function () {
     //获取舞姬的各装备槽个数
     Route::match(['get', 'post'], 'dancer/equipmentSlots', 'DancerController@equipmentSlots');
     //获取舞姬稀有度
-    Route::match(['get', 'post'], 'dancer/rarity', 'DancerController@rarity');
+    Route::match(['get', 'post'], 'rarity', 'DancerController@rarity');
     //获取舞姬各科技各级别的大件个数
     Route::match(['get', 'post'], 'dancer/technologyPartNumber', 'DancerController@technologyPartNumber');
     //获取与舞姬相关联的科技种类
