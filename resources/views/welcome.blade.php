@@ -73,6 +73,10 @@
                 </div>
             @endif
 
+                <form action="{{ url('/logout') }}">
+                    <input type="submit" value="退出">
+                </form>
+
             <div class="content">
                 <div class="title m-b-md">
                     Laravel

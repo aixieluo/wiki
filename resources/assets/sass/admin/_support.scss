@@ -1,0 +1,6 @@
+.login-avatar{
+    margin-bottom: 20px;
+    &>img{
+        @include border-radius(50%);
+    }
+}

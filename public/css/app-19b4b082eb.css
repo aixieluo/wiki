@@ -1,58 +1,4 @@
 @charset "UTF-8";
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  src: local("Raleway Light"), local("Raleway-Light"), url(../fonts/raleway/Raleway-Light-1.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  src: local("Raleway Light"), local("Raleway-Light"), url(../fonts/raleway/Raleway-Light-2.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Raleway"), local("Raleway-Regular"), url(../fonts/raleway/Raleway-Regular-1.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Raleway"), local("Raleway-Regular"), url(../fonts/raleway/Raleway-Regular-2.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
-/* latin-ext */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 600;
-  src: local("Raleway SemiBold"), local("Raleway-SemiBold"), url(../fonts/raleway/Raleway-SemiBold-1.woff2) format("woff2");
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 600;
-  src: local("Raleway SemiBold"), local("Raleway-SemiBold"), url(../fonts/raleway/Raleway-SemiBold-2.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -10796,11 +10742,22 @@ body {
   background-color: #ebebeb;
 }
 
+a {
+  outline: 0 !important;
+}
+
 .noborder {
   border: 0;
 }
 
-/*********************头部*********************/
+.noline {
+  text-decoration: none !important;
+}
+
+.mt5 {
+  margin-top: 5px;
+}
+
 header {
   background-color: #ab2b2b;
   text-align: center;
@@ -10849,33 +10806,83 @@ header h1 {
 .navbar-collapse .menu li a {
   color: #505050;
   line-height: 4em;
+  text-decoration: none;
   display: block;
   padding: 0 21px;
 }
 
-/*********************头部*********************/
+@media (max-width: 991px) {
+  .main-navigation {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-collapse .menu li {
+    display: block;
+  }
+}
+
+@media (min-width: 767px) {
+  .navbar-toggle-button {
+    display: none;
+  }
+}
+
 /*********************舞姬详情*********************/
 .xd-detail .nav-tabs {
   margin-bottom: 15px;
 }
 
-.xd-detail .d-ano {
-  width: 120px;
-  text-align: center;
+.xd-detail .d-avator {
+  margin-bottom: 15px;
 }
 
-.xd-detail .d-avatar img {
-  width: 120px;
-  height: 120px;
+.xd-detail .d-avator img {
   display: inline-block;
 }
 
-.xd-detail .d-name, .xd-detail .d-outfit {
-  margin-top: 15px;
+.xd-detail .lv-ipt {
+  border: 0;
+  background-color: transparent;
+  width: 20px;
 }
 
-.xd-detail .d-intro {
-  width: 100%;
+.xd-detail .btn-arrow {
+  background-color: transparent;
+  border: 0;
+}
+
+.xd-detail .fa-star, .xd-detail .fa-star-o {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.xd-detail #technologies .tec-name {
+  min-width: 82px;
+  text-align: center;
+}
+
+.xd-detail #technologies .btn-default.dropdown-toggle {
+  min-width: 112px;
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  .xwrap {
+    padding: 15px;
+  }
 }
 
 /*********************舞姬详情*********************/
+/*********************舞姬列表*********************/
+.xd-list .between {
+  display: -webkit-box;
+  display: -moz-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+}
+
+/*********************舞姬列表*********************/
