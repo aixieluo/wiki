@@ -29,3 +29,10 @@ Route::group(['namespace'=>'Home'], function (){
     Route::resource('dancer', 'DancerController');
 });
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\LoginController@login');
+    Route::post('/logout', 'Auth\LoginController@logout');
+
+    Route::get('/dash', 'DashboardController@index');
+});
