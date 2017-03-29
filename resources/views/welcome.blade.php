@@ -73,7 +73,8 @@
                 </div>
             @endif
 
-                <form action="{{ url('/logout') }}">
+                <form method="post" action="{{ url('/logout') }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="submit" value="退出">
                 </form>
 

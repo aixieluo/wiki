@@ -4,3 +4,18 @@
         @include border-radius(50%);
     }
 }
+
+.navbar-top-links li .logout {
+    padding: 20px 10px;
+    min-height: 50px;
+    background-color: transparent;
+    border: 0;
+}
+
+.nav.navbar-right > li .logout{
+    color: #999c9e;
+}
+
+.nav.navbar-top-links > li .logout:hover, .nav.navbar-top-links > li .logout:focus {
+    background-color: transparent;
+}

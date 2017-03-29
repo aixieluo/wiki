@@ -23,10 +23,10 @@ Route::group(['namespace'=>'Home'], function (){
     Auth::routes();
 
     //
-    Route::get('home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
 
     //dancer
-    Route::resource('dancer', 'DancerController');
+    Route::resource('/dancer', 'DancerController');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
@@ -35,4 +35,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/logout', 'Auth\LoginController@logout');
 
     Route::get('/dash', 'DashboardController@index');
+
+    Route::resource('/dancer', 'DancerController');
 });
