@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\DancerType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DancerController extends Controller
+class DancerTypeController extends Controller
 {
+
+    private $dancerType;
 
     public function __construct() {
         $this->middleware('auth.admin:admin');
+        $this->dancerType = new DancerType();
     }
 
     /**
@@ -19,7 +23,8 @@ class DancerController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('admin.dancerType.index');
     }
 
     /**
@@ -29,7 +34,7 @@ class DancerController extends Controller
      */
     public function create()
     {
-        return view('admin.dancer.create');
+        return view('admin.dancerType.create');
     }
 
     /**
@@ -87,5 +92,4 @@ class DancerController extends Controller
     {
         //
     }
-
 }

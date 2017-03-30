@@ -37,4 +37,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/dash', 'DashboardController@index');
 
     Route::resource('/dancer', 'DancerController');
+
+    Route::resource('/type', 'DancerTypeController');
 });

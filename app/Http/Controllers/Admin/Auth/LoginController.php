@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Http\Requests\DemoRequset;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -67,7 +68,7 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $request)
+    public function logout(Request $requesta)
     {
         $this->guard()->logout();
 

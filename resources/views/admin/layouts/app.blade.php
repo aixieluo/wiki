@@ -53,9 +53,14 @@
                     <li>
                         <a href="JavaScript:;"><i class="fa fa-th-large"></i> <span class="nav-label">钢舞姬</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{  url('/admin/dancer/create')  }}">基本信息</a></li>
-                            <li><a href="index_2.html">国籍</a></li>
-                            <li><a href="index_3.html">稀有度</a></li>
+                            <li><a href="{{ url('/admin/dancer/create') }}">添加</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="JavaScript:;"><i class="fa fa-th-large"></i> <span class="nav-label">车型</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{{ url('/admin/type') }}">列表</a></li>
+                            <li><a href="{{ url('/admin/type/create') }}">添加</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -165,6 +170,19 @@
                     </ul>
 
                 </nav>
+            </div>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Wiki编辑</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="{{ url('/admin/dash') }}">首页</a>
+                        </li>
+                        @yield('head')
+                    </ol>
+                </div>
+                <div class="col-lg-2"></div>
             </div>
 
             @yield('content')

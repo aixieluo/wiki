@@ -9,4 +9,5 @@ class DancerType extends Model
     protected $fillable= [
         'type'
     ];
+
 }

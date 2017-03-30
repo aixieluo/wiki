@@ -3,27 +3,21 @@
 @section('title', '创建新舞姬')
 
 @section('links')
+    @parent
 
 @endsection
 
+@section('head')
+    <li>
+        <a href="index.html">钢舞姬</a>
+    </li>
+    <li>
+        <strong>添加</strong>
+    </li>
+@endsection
+
 @section('content')
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>编辑</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="index.html">首页</a>
-                </li>
-                <li>
-                    <a href="index.html">钢舞姬</a>
-                </li>
-                <li>
-                    <strong>添加</strong>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
+
 
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
