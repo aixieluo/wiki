@@ -16,6 +16,7 @@ class CreateDancerTypesTable extends Migration
         Schema::create('dancer_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type')->comment('类型');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

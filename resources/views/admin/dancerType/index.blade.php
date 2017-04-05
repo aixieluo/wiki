@@ -9,7 +9,7 @@
 
 @section('head')
     <li>
-        <a href="index.html">车型</a>
+        <a href="{{ url('/admin/type') }}">车型</a>
     </li>
     <li>
         <strong>列表</strong>
@@ -46,35 +46,24 @@
 
                         <table class="table table-hover table-striped">
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>数据</th>
-                                <th>用户</th>
-                                <th>值</th>
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>车型</th>
+                                    <th>操作</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><span class="line">5,3,2,-1,-3,-2,2,3,5,2</span>
-                                </td>
-                                <td>张三</td>
-                                <td class="text-navy"> <i class="fa fa-level-up"></i> 40%</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td><span class="line">5,3,9,6,5,9,7,3,5,2</span>
-                                </td>
-                                <td>李四</td>
-                                <td class="text-warning"> <i class="fa fa-level-down"></i> -20%</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td><span class="line">1,6,3,9,5,9,5,3,9,6,4</span>
-                                </td>
-                                <td>王麻子</td>
-                                <td class="text-navy"> <i class="fa fa-level-up"></i> 26%</td>
-                            </tr>
+                            @foreach($list as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->type }}</td>
+                                    <td>
+                                        <a href="{{ url('/admin/type/'.$item->id.'/edit') }}">修改</a>
+                                        /
+                                        <a href="##">删除</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

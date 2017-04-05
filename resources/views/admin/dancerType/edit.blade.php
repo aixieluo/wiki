@@ -42,11 +42,11 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        {!! Form::open(['url' => '/admin/type',  'method' => 'post', 'class' => 'form-horizontal']) !!}
+                        {!! Form::open(['url' => '/admin/type/'.$dancerType->id,  'method' => 'put', 'class' => 'form-horizontal']) !!}
                         <div class="form-group">
                             {!! Form::label(NULL, '车型', ['class' => 'col-sm-2 control-label']) !!}
                             <div class="col-sm-10">
-                                {!! Form::text('type', '', ['class' => 'form-control', 'required' => 'true']) !!}
+                                {!! Form::text('type', $dancerType->type, ['class' => 'form-control', 'required' => 'true']) !!}
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

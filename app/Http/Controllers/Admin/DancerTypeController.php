@@ -23,8 +23,8 @@ class DancerTypeController extends Controller
      */
     public function index()
     {
-
-        return view('admin.dancerType.index');
+        $list = $this->dancerType->getList();
+        return view('admin.dancerType.index', compact('list'));
     }
 
     /**
@@ -45,7 +45,9 @@ class DancerTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->dancerType->type = $request->type;
+        $this->dancerType->save();
+        return redirect('/admin/type');
     }
 
     /**
@@ -56,7 +58,7 @@ class DancerTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('show');
     }
 
     /**
@@ -67,7 +69,8 @@ class DancerTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dancerType =  $this->dancerType->getOwn($id);
+        return view('admin.dancerType.edit', compact('dancerType'));
     }
 
     /**
@@ -79,7 +82,10 @@ class DancerTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dancerType = $this->dancerType->getOwn($id);
+        $dancerType->type = $request->type;
+        $dancerType->save();
+        return redirect('/admin/type');
     }
 
     /**
