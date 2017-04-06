@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta name="_token" content="{{ csrf_token() }}"/>
     <title>钢华Wiki - @yield('title')</title>
-    <link rel="stylesheet" href="{{ elixir('css/style.css') }}">
-    <link rel="stylesheet" href="{{ elixir('css/reference.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reference.css') }}">
     @section('links')
     @show
     <!-- Scripts -->
@@ -14,6 +14,8 @@
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
+
+        window.User = <?php echo Auth::user(); ?>
     </script>
 </head>
 <body>
@@ -190,7 +192,7 @@
         </div>
     </div>
 </div>
-<script src="{{ elixir('/js/manage.js') }}"></script>
+<script src="{{ asset('/js/manage.js') }}"></script>
 <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('js/plugins/hplus.js') }}"></script>

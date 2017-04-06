@@ -16,7 +16,17 @@ require('./public/common');
 
 Vue.component('dancerType', require('./components/admin/DancerTpe.vue'));
 
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+
+const router = new VueRouter({
+    routes // （缩写）相当于 routes: routes
+})
+
 const app = new Vue({
     el: '#app',
+    router
 });
 
