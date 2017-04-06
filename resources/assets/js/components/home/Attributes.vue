@@ -178,9 +178,9 @@
 
 <script>
     //域名路由
-    import {host, starIncrease} from "../variables"
-    import {numAdd, numSub, numMulti} from "../arithmetic"
-    import {technologyInitia} from "../initia"
+    import {host, starIncrease} from "../../public/variables"
+    import {numAdd, numSub, numMulti} from "../../public/arithmetic"
+    import {technologyInitia} from "../../home/initia"
 
     export default {
         props: {

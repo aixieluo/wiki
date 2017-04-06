@@ -14,12 +14,7 @@ require('./public/common');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/home/Example.vue'));
-Vue.component('attributes', require('./components/home/Attributes.vue'));
-Vue.component('equipment', require('./components/home/Equipment.vue'));
-Vue.component('tactic', require('./components/home/Tactic.vue'));
-Vue.component('skill', require('./components/home/Skill.vue'));
-Vue.component('technology', require('./components/home/Technology.vue'));
+Vue.component('dancerType', require('./components/admin/DancerTpe.vue'));
 
 const app = new Vue({
     el: '#app',

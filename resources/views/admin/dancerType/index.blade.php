@@ -27,13 +27,13 @@
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="form_basic.html#">选项1</a>
+                                <li><a href="javascript:;">选项1</a>
                                 </li>
-                                <li><a href="form_basic.html#">选项2</a>
+                                <li><a href="javascript:;">选项2</a>
                                 </li>
                             </ul>
                             {{--<a class="close-link">--}}
@@ -43,29 +43,7 @@
                     </div>
 
                     <div class="ibox-content">
-
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>车型</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($list as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->type }}</td>
-                                    <td>
-                                        <a href="{{ url('/admin/type/'.$item->id.'/edit') }}">修改</a>
-                                        /
-                                        <a href="##">删除</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        <dancer-type></dancer-type>
                     </div>
 
                 </div>

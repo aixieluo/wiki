@@ -23,8 +23,7 @@ class DancerTypeController extends Controller
      */
     public function index()
     {
-        $list = $this->dancerType->getList();
-        return view('admin.dancerType.index', compact('list'));
+        return view('admin.dancerType.index');
     }
 
     /**
@@ -58,7 +57,7 @@ class DancerTypeController extends Controller
      */
     public function show($id)
     {
-        dd('show');
+//        dd('show');
     }
 
     /**
@@ -96,6 +95,6 @@ class DancerTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

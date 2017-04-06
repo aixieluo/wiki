@@ -190,10 +190,9 @@
         </div>
     </div>
 </div>
-</body>
-<script src="{{ asset('js/plugins/jquery-2.1.1.min.js') }}"></script>
-<script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
+<script src="{{ elixir('/js/manage.js') }}"></script>
 <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('js/plugins/hplus.js') }}"></script>
+</body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Home;
 
 use App\Models\Equipment;
 use App\Models\Slot;

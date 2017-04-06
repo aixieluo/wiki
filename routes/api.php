@@ -17,7 +17,7 @@ Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::group(['namespace'=>'Api'], function () {
+Route::group(['namespace'=>'Api\Home'], function () {
     /*part dancer start*/
 
     //获取舞姬的基础属性
@@ -56,3 +56,6 @@ Route::group(['namespace'=>'Api'], function () {
     Route::match(['get', 'post'], 'skill/attributes', 'SkillController@skillAttributes');
 });
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Api\Admin'], function () {
+    Route::match(['get', 'post'], 'type/list', 'DancerTypeController@getList');
+});

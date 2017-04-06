@@ -15,8 +15,10 @@ var themeApp = {
     },
     initMenu (){
         var menuActiveHref = window.location.pathname == "/" ? window.location.origin : window.location.origin + window.location.pathname;
-        var currentMenu = $(".menu a[href='"+menuActiveHref+"']:first");
-        currentMenu.parent().addClass("active");
+        var currentMenu = $(".nav a[href='"+menuActiveHref+"']:first");
+        var currentMenu2 = $(".menu a[href='"+menuActiveHref+"']:first");
+        currentMenu.parents('li').addClass("active");
+        currentMenu2.closest('li').addClass("active");
     },
     init () {
         themeApp.backToTop();

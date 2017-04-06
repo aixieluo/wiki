@@ -18,8 +18,9 @@ elixir.config.sourcemaps = false;
 
 elixir(mix => {
     mix.sass('app.scss')
-        .sass('style.scss')
+        .sass('manage.scss')
         .styles(['animate.css','style.css',], 'public/css/reference.css')
-        .webpack(['app.js', 'common.js'], 'public/js/app.js')
-        .version(['css/app.css', 'css/style.css', 'css/reference.css', 'js/app.js'], 'public');
+        .webpack('app.js', 'public/js/app.js')
+        .webpack('manage.js', 'public/js/manage.js')
+        .version(['css/app.css', 'css/style.css', 'css/reference.css', 'js/app.js', 'js/manage.js'], 'public');
 });

@@ -23,7 +23,7 @@
 
 <script>
     //域名路由
-    import {host} from "../variables"
+    import {host} from "../../public/variables"
 
     export default {
         props: {
