@@ -21,6 +21,6 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('admin.welcome');
+        return view('dashboard.index');
     }
 }

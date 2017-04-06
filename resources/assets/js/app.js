@@ -5,8 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./public/bootstrap');
-require('./public/common');
+require('./bootstrap');
+require('./config/common');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,7 +14,6 @@ require('./public/common');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/home/Example.vue'));
 Vue.component('attributes', require('./components/home/Attributes.vue'));
 Vue.component('equipment', require('./components/home/Equipment.vue'));
 Vue.component('tactic', require('./components/home/Tactic.vue'));

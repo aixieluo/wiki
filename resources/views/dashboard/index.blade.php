@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta name="_token" content="{{ csrf_token() }}"/>
     <title>钢华Wiki - @yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reference.css') }}">
 
 
@@ -18,7 +18,7 @@
             csrfToken: "{{ csrf_token() }}"
         }
 
-        window.User = {!! Auth::user() !!}
+        window.User = {!! Auth::guest() !!}
 
     </script>
 </head>

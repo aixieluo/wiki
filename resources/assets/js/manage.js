@@ -5,8 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./public/bootstrap');
-require('./public/common');
+require('./bootstrap');
+require('./config/common');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,19 +14,20 @@ require('./public/common');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('dancerType', require('./components/admin/DancerTpe.vue'));
+Vue.component('dancerType', require('./views/Dashboard/DancerType.vue'));
 
 import VueRouter from 'vue-router'
+import routes from './routes'
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-    routes // （缩写）相当于 routes: routes
+    routes: routes // （缩写）相当于 routes: routes
 })
 
 const app = new Vue({
     el: '#app',
-    router
+    router: router
 });
 

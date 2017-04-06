@@ -34,9 +34,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::post('/login', 'Auth\LoginController@login');
     Route::post('/logout', 'Auth\LoginController@logout');
 
-    Route::get('/dash', 'DashboardController@index');
 
     Route::resource('/dancer', 'DancerController');
 
     Route::resource('/type', 'DancerTypeController');
 });
+
+Route::get('/dashboard', 'Admin\DashboardController@index');
