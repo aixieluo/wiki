@@ -40,4 +40,4 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::resource('/type', 'DancerTypeController');
 });
 
-Route::get('/dashboard', 'Admin\DashboardController@index');
+Route::get('/dashboard/{path?}', 'Admin\DashboardController@index')->where('path', '[\/\w\.-]+');

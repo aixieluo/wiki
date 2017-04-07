@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dash';
+    protected $redirectTo = '/dashboard';
     protected $username;
 
     /**
@@ -68,7 +68,7 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function logout(Request $requesta)
+    public function logout(Request $request)
     {
         $this->guard()->logout();
 

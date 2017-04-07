@@ -3,6 +3,7 @@
         <sidebar></sidebar>
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <navbar></navbar>
+            <router-view></router-view>
         </div>
     </div>
 </template>

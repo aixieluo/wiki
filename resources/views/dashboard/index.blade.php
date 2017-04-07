@@ -27,8 +27,6 @@
     <div id="app"></div>
 
     <script src="{{ asset('/js/manage.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('js/plugins/hplus.js') }}"></script>
+    {{--<script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>--}}
 </body>
 </html>

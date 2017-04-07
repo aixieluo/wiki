@@ -2,8 +2,8 @@
     <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="##"><i class="fa fa-bars"></i> </a>
-                <form role="search" class="navbar-form-custom" method="post" action="##">
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:;"><i class="fa fa-bars"></i> </a>
+                <form role="search" class="navbar-form-custom" method="post" action="javascript:;">
                     <div class="form-group">
                         <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
                     </div>
@@ -11,17 +11,17 @@
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message"><a href="##" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用钢华资讯站管理系统</span>
+                    <span class="m-r-sm text-muted welcome-message"><a href="javascript:;" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用钢华资讯站管理系统</span>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="##">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
                         <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="##" class="pull-left">
-                                    <img alt="image" class="img-circle" src="##">
+                                <a href="javascript:;" class="pull-left">
+                                    <img alt="image" class="img-circle" src="javascript:;">
                                 </a>
                                 <div class="media-body">
                                     <small class="pull-right">46小时前</small>
@@ -34,8 +34,8 @@
                         <li class="divider"></li>
                         <li>
                             <div class="dropdown-messages-box">
-                                <a href="##" class="pull-left">
-                                    <img alt="image" class="img-circle" src="##">
+                                <a href="javascript:;" class="pull-left">
+                                    <img alt="image" class="img-circle" src="javascript:;">
                                 </a>
                                 <div class="media-body ">
                                     <small class="pull-right text-navy">25小时前</small>
@@ -48,7 +48,7 @@
                         <li class="divider"></li>
                         <li>
                             <div class="text-center link-block">
-                                <a href="##">
+                                <a href="javascript:;">
                                     <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                                 </a>
                             </div>
@@ -56,12 +56,12 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="##">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
                         <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
-                            <a href="##">
+                            <a href="javascript:;">
                                 <div>
                                     <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                                     <span class="pull-right text-muted small">4分钟前</span>
@@ -70,7 +70,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="##">
+                            <a href="javascript:;">
                                 <div>
                                     <i class="fa fa-qq fa-fw"></i> 3条新回复
                                     <span class="pull-right text-muted small">12分钟钱</span>
@@ -80,7 +80,7 @@
                         <li class="divider"></li>
                         <li>
                             <div class="text-center link-block">
-                                <a href="##">
+                                <a href="javascript:;">
                                     <strong>查看所有 </strong>
                                     <i class="fa fa-angle-right"></i>
                                 </a>

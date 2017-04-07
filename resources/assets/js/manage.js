@@ -14,20 +14,21 @@ require('./config/common');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('dancerType', require('./views/Dashboard/DancerType.vue'));
+// Vue.component('dancerType', require('./views/Dashboard/DancerType.vue'));
 
 import VueRouter from 'vue-router'
 import routes from './routes'
+import App from './App.vue'
+
 
 Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-    routes: routes // （缩写）相当于 routes: routes
+    mode: 'history',
+    base: __dirname,
+    routes: routes
 })
 
-const app = new Vue({
-    el: '#app',
-    router: router
-});
+new Vue(Vue.util.extend({ router }, App)).$mount('#app')
 
