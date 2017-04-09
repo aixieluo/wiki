@@ -19,7 +19,7 @@
         <div>
             <div>
                 <div class="login-avatar">
-                    <img src="{{ asset('images/') }}">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491654452396&di=f014a7c1c29390ee1e933dc108307865&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fvideo%2F4e%2F4ee6ac4c2b9ca29c97c0d32d29b0abed.jpg">
                 </div>
             </div>
             <h3>钢华wiki</h3>

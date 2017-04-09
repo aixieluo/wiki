@@ -1,57 +1,14 @@
 <template>
     <div>
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Wiki编辑</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="">首页</a>
-                    </li>
-                    <li>
-                        <a href="">车型</a>
-                    </li>
-                    <li>
-                        <strong>列表</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2"></div>
-        </div>
+        <vue-head headTitle="车型"></vue-head>
 
-        <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title" style="display: flex;justify-content: space-between;align-items: center">
-                            <h5>基本属性</h5>
-                            <a href="dashboard" class="btn btn-primary">添加</a>
-                        </div>
+        <vue-table :fields="fields" :items="items" :itemActions="itemActions" @table-action="tableActions">
+            <template slot="buttons">
+                <router-link to="/dashboard/dancer/create" class="btn btn-primary">创建</router-link>
+            </template>
+        </vue-table>
 
-                        <div class="ibox-content">
-                            <table class="table table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>车型</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="n in 5">
-                                    <th>{{ n }}</th>
-                                    <th>{{ n }}</th>
-                                    <th>
-                                        <a href="">修改</a>
-                                    </th>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </template>
 
@@ -65,18 +22,47 @@
         },
         data() {
             return {
-                types: {},
+                fields: [
+                    {
+                        name: 'id',
+                        title: 'ID',
+                        titleClass: 'width-5-percent'
+                    },
+                    {
+                        name: 'type',
+                        title: '车型'
+                    },
+                    {
+                        name: '__actions',
+                        title: '操作'
+                    }
+                ],
+                itemActions: [
+                    { name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm' },
+                    { name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info btn-sm' },
+                    { name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm' }
+                ],
+                items: {}
             }
         },
         mounted () {
-//            this.ready();
+            this.ready();
         },
         methods: {
             ready() {
                 this.$http.post('/api/admin/type/list', {}).then((response)=>{
-                    this.types = response.data;
+                    this.items = response.data;
                 });
             },
+            tableActions(action, data) {
+                if (action == 'edit-item') {
+                    this.$router.push('/dashboard/dancers/' + data.id + '/edit');
+                } else if (action == 'delete-item') {
+                    console.log('进行了删除命令');
+                } else if (action == 'view-item') {
+                    window.open('/', '_blank');
+                }
+            }
         },
         computed: {
 

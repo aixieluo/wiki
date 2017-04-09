@@ -5,7 +5,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="javascript:;" />
+                            <img class="img-circle" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491654452396&di=f014a7c1c29390ee1e933dc108307865&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fvideo%2F4e%2F4ee6ac4c2b9ca29c97c0d32d29b0abed.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Beaut-zihan</strong>
@@ -30,12 +30,12 @@
                     </div>
 
                 </li>
-                <li>
-                    <a href="JavaScript:;"><i class="fa fa-th-large"></i> <span class="nav-label">钢舞姬</span> <span class="fa arrow"></span></a>
-                </li>
-                <li>
-                    <a href="JavaScript:;"><i class="fa fa-th-large"></i> <span class="nav-label">车型</span> <span class="fa arrow"></span></a>
-                </li>
+                <router-link v-for="menu in menus" tag="li" :to="menu.url">
+                    <a>
+                        <i class="fa fa-th-large"></i>
+                        <span class="nav-label">{{ menu.label }}</span>
+                    </a>
+                </router-link>
             </ul>
 
         </div>
@@ -43,7 +43,13 @@
 </template>
 
 <script>
-    export default {
+    import menus from '../../../config/menu'
 
+    export default {
+        data() {
+            return {
+                menus: menus,
+            }
+        }
     }
 </script>

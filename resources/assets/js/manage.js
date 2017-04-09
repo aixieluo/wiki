@@ -18,15 +18,20 @@ require('./config/common');
 
 import VueRouter from 'vue-router'
 import routes from './routes'
+
 import App from './App.vue'
 
 
 Vue.use(VueRouter)
 
+Vue.component('vue-head', require('./components/dashboard/Head.vue'));
+Vue.component('vue-table', require('./components/dashboard/Table.vue'));
+
 
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
+    linkActiveClass: 'active',
     routes: routes
 })
 
