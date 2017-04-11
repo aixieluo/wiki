@@ -17,9 +17,7 @@
     import {host, starIncrease} from "../../config/variables"
 
     export default {
-        props: {
-
-        },
+        props: {},
         data() {
             return {
                 fields: [
@@ -38,9 +36,9 @@
                     }
                 ],
                 itemActions: [
-                    { name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm' },
-                    { name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info btn-sm' },
-                    { name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm' }
+                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
                 ],
                 items: {}
             }
@@ -50,7 +48,7 @@
         },
         methods: {
             ready() {
-                this.$http.post('/api/admin/type/list', {}).then((response)=>{
+                this.$http.post('/api/admin/type/list', {}).then((response) => {
                     this.items = response.data;
                 });
             },
@@ -64,11 +62,7 @@
                 }
             }
         },
-        computed: {
-
-        },
-        watch: {
-
-        },
+        computed: {},
+        watch: {},
     }
 </script>
