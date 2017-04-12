@@ -8,6 +8,10 @@
 require('./bootstrap');
 require('./config/common');
 
+import httpPlugin from './plugins/http/index'
+
+Vue.use(httpPlugin)
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to

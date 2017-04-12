@@ -32,7 +32,7 @@
                 </li>
                 <router-link v-for="menu in menus" tag="li" :to="menu.url">
                     <a>
-                        <i class="fa fa-th-large"></i>
+                        <i :class="menu.icon"></i>
                         <span class="nav-label">{{ menu.label }}</span>
                     </a>
                 </router-link>

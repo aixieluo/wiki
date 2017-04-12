@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
         <sidebar></sidebar>
-        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div id="page-wrapper" class="gray-bg">
             <navbar></navbar>
             <router-view></router-view>
         </div>

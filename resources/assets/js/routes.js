@@ -13,25 +13,25 @@ export default [
             },
             {
                 path: 'home',
-                component: require('./views/dashboard/DancerType.vue')
+                component: require('./views/dashboard/home/home.vue')
             },
             {
                 path: 'dancer',
                 component: Parent,
                 children: [
                     {
-                        path: 'create',
-                        component: require('./views/dashboard/DancerType.vue')
+                        path: '/',
+                        component: require('./views/dashboard/dancer/dancer.vue'),
                     }
                 ]
             },
             {
-                path: 'users',
+                path: 'type',
                 component: Parent,
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/DancerType.vue')
+                        component: require('./views/dashboard/type/type.vue')
                     }
                 ]
             }

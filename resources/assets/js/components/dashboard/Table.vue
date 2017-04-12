@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="ibox-content">
-                        <table class="table table-hover table-striped">
+                        <table :class="tableClass" class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <template v-for="field in fields">
@@ -23,7 +23,7 @@
                                     <template v-for="field in fields">
                                         <template v-if="isSpecialField(field.name)">
                                             <template v-if="field.name == '__actions'">
-                                                <td :class="field.dataClass">
+                                                <td :class="field.dataClass" class="actions">
                                                     <template v-for="action in itemActions">
                                                         <a @click="callAction(action.name, item)" :class="action.class">
                                                             <i :class="action.icon"></i>
@@ -54,6 +54,9 @@
 <script>
     export default {
         props: {
+            tableClass: {
+                type: String,
+            },
             fields: {
                 type: Array,
                 required: true

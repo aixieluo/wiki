@@ -5,8 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-require('./config/common');
+require('./bootstrap')
+require('./config/common')
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,14 +18,17 @@ require('./config/common');
 
 import VueRouter from 'vue-router'
 import routes from './routes'
+import store from './vuex/store'
+import httpPlugin from './plugins/http/index'
 
 import App from './App.vue'
 
 
 Vue.use(VueRouter)
+Vue.use(httpPlugin)
 
-Vue.component('vue-head', require('./components/dashboard/Head.vue'));
-Vue.component('vue-table', require('./components/dashboard/Table.vue'));
+Vue.component('vue-head', require('./components/dashboard/Head.vue'))
+Vue.component('vue-table', require('./components/dashboard/Table.vue'))
 
 
 const router = new VueRouter({
@@ -35,5 +38,5 @@ const router = new VueRouter({
     routes: routes
 })
 
-new Vue(Vue.util.extend({ router }, App)).$mount('#app')
+new Vue(Vue.util.extend({ router, store }, App)).$mount('#app')
 

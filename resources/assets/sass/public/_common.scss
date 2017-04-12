@@ -6,7 +6,7 @@
 @import "variables";
 
 //SassCore
-@import "sassCore/function";
+@import "../sassCore/function";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
@@ -61,4 +61,17 @@ a{
 
 .mt5{
     margin-top: 5px;
+}
+
+.table-text-center{
+    th,td{
+        text-align: center;
+    }
+}
+
+.width-5-percent {
+    width:5%
+}
+.width-10-percent {
+    width:10%
 }

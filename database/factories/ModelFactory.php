@@ -23,7 +23,7 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
 });
 
 //舞姬类型表
-$factory->define(\App\Models\DancerType::class, function (Faker\Generator $faker) {
+$factory->define(\App\Models\Type::class, function (Faker\Generator $faker) {
     return [
         'type' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
     ];
@@ -48,7 +48,7 @@ $factory->define(\App\Models\Dancer::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'dance_outfit' => $faker->name,
-        'dancer_type_id' => $faker->randomElement(\App\Models\DancerType::pluck('id')->toArray()),
+        'type_id' => $faker->randomElement(\App\Models\Type::pluck('id')->toArray()),
         'country_id' => $faker->randomElement(\App\Models\Country::pluck('id')->toArray()),
         'rarity_id' => $faker->randomElement(\App\Models\Rarity::pluck('id')->toArray()),
         'subjection' => "S.V.S",

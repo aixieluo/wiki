@@ -56,6 +56,7 @@ Route::group(['namespace'=>'Api\Home'], function () {
     Route::match(['get', 'post'], 'skill/attributes', 'SkillController@skillAttributes');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Api\Admin'], function () {
-    Route::match(['get', 'post'], 'type/list', 'DancerTypeController@getList');
+Route::group(['namespace' => 'Api\Dashboard'], function () {
+//    Route::resource('type', 'TypeController');
+    Route::resource('/type', 'TypeController');
 });

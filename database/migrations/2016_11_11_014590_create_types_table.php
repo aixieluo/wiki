@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDancerTypesTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDancerTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dancer_types', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type')->comment('类型');
             $table->softDeletes();
@@ -28,6 +28,6 @@ class CreateDancerTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dancer_types');
+        Schema::dropIfExists('types');
     }
 }
