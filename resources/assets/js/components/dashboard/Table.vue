@@ -99,10 +99,10 @@
                     });
             },
             isSpecialField(name) {
-                return name.slice(0, 2) === '__';
+                return name.slice(0, 2) === '__'
             },
             callAction(action, data) {
-                this.$emit('table-action', action, data);
+                this.$emit('table-action', action, data)
             }
         }
     }

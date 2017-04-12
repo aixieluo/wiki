@@ -24295,10 +24295,10 @@ module.exports = function spread(callback) {
                 });
         },
         isSpecialField: function isSpecialField(name) {
-            return name.slice(0, 2) === '__';
+            return name.slice(0, 2) === '__'
         },
         callAction: function callAction(action, data) {
-            this.$emit('table-action', action, data);
+            this.$emit('table-action', action, data)
         }
     }
 };
