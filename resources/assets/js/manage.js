@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -23,6 +22,21 @@ import httpPlugin from './plugins/http/index'
 
 import App from './App.vue'
 
+window.toastr = require('toastr/build/toastr.min.js');
+window.innerHeight = 800;
+
+window.toastr.options = {
+    positionClass: "toast-top-right",
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "5000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut"
+};
+
 
 Vue.use(VueRouter)
 Vue.use(httpPlugin)
@@ -38,5 +52,5 @@ const router = new VueRouter({
     routes: routes
 })
 
-new Vue(Vue.util.extend({ router, store }, App)).$mount('#app')
+new Vue(Vue.util.extend({router, store}, App)).$mount('#app')
 

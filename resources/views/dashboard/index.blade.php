@@ -6,7 +6,6 @@
     <meta name="_token" content="{{ csrf_token() }}"/>
     <title>钢华Wiki - @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/reference.css') }}">
 
 
     <style>

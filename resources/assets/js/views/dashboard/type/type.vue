@@ -2,7 +2,8 @@
     <div>
         <vue-head headTitle="车型"></vue-head>
 
-        <vue-table :tableClass="tableClass" :fields="fields" :items="items" :itemActions="itemActions" @table-action="tableActions">
+        <vue-table apiUrl="type" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+                   @table-action="tableActions">
             <template slot="buttons">
                 <router-link to="/dashboard/dancer/create" class="btn btn-primary">创建</router-link>
             </template>
@@ -43,22 +44,17 @@
             }
         },
         mounted () {
-            this.ready();
         },
         methods: {
-            ready() {
-                this.$http.get('type', {}).then((response) => {
-                    this.items = response.data;
-                });
-            },
             tableActions(action, data) {
                 if (action == 'edit-item') {
                     this.$router.push('/dashboard/dancers/' + data.id + '/edit');
                 } else if (action == 'delete-item') {
                     this.$http.delete('type/' + data.id)
                         .then((response) => {
-                            console.log(1);
-                    })
+                            toastr.success('删除成功！')
+                            this.$emit('reload')
+                        })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');
                 }

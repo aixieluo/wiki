@@ -10,15 +10,15 @@ class TypeRepository {
     protected $model;
 
     public function __construct(Type $type) {
-        $model = $type;
+        $this->model = $type;
     }
 
     public function page($number = 10, $sort = 'asc', $sortColumn = 'created_at') {
-        return $this->model->all();
+        return $this->model->orderBy($sortColumn, $sort)->paginate($number);
     }
 
     public function getById($id) {
-        return $this->model->findOrFail($id);
+        return $this->model->findorfail($id);
     }
 
     public function destroy($id) {

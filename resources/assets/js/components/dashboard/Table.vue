@@ -36,6 +36,7 @@
                                         <template v-else>
                                             <td :class="field.dataClass">
                                                 {{ item[field.name] }}
+
                                             </td>
                                         </template>
                                     </template>
@@ -54,6 +55,10 @@
 <script>
     export default {
         props: {
+            apiUrl: {
+                type: String,
+                required: true
+            },
             tableClass: {
                 type: String,
             },
@@ -61,12 +66,38 @@
                 type: Array,
                 required: true
             },
-            items: {},
             itemActions: {
                 type: Array,
             }
         },
+        data() {
+            return {
+                items: [],
+                totalPage: 0,
+                currentPage: 0,
+                pagination: null
+            }
+        },
+        mounted() {
+            this.$parent.$on('reload', () => {
+                this.loadData()
+            })
+        },
+        created() {
+            this.loadData()
+        },
         methods: {
+            loadData() {
+                let url = this.apiUrl
+
+                this.$http.get(url)
+                    .then((response) => {
+                        this.pagination = response.data
+                        this.items = response.data.data
+                        this.totalPage = response.data.total
+                        this.currentPage = response.data.current_page
+                    });
+            },
             isSpecialField(name) {
                 return name.slice(0, 2) === '__';
             },

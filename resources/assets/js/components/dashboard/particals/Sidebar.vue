@@ -5,7 +5,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img class="img-circle" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491654452396&di=f014a7c1c29390ee1e933dc108307865&imgtype=0&src=http%3A%2F%2Fi1.hdslb.com%2Fvideo%2F4e%2F4ee6ac4c2b9ca29c97c0d32d29b0abed.jpg" />
+                            <img class="img-circle" src="http://img5q.duitang.com/uploads/item/201505/26/20150526033548_NjZxS.thumb.224_0.jpeg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Beaut-zihan</strong>
