@@ -32,6 +32,14 @@ export default [
                     {
                         path: '/',
                         component: require('./views/dashboard/type/type.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/type/create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/type/edit.vue')
                     }
                 ]
             }

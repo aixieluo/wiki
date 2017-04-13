@@ -13,7 +13,7 @@ class TypeRepository {
         $this->model = $type;
     }
 
-    public function page($number = 10, $sort = 'asc', $sortColumn = 'created_at') {
+    public function page($number = 10, $sort = 'desc', $sortColumn = 'id') {
         return $this->model->orderBy($sortColumn, $sort)->paginate($number);
     }
 

@@ -10814,6 +10814,11 @@ a {
   color: #FFFFFF;
 }
 
+.pagination-primary > li.active > a:hover, .pagination-primary > li.active > a:focus, .pagination-primary > li.active > span:hover, .pagination-primary > li.active > span:focus {
+  background-color: #1ab394;
+  border-color: #1ab394;
+}
+
 .toast-title {
   font-weight: 700;
 }

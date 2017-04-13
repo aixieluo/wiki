@@ -5,7 +5,7 @@
         <vue-table apiUrl="type" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/dancer/create" class="btn btn-primary">创建</router-link>
+                <router-link to="/dashboard/type/create" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
 
@@ -45,7 +45,7 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/dancers/' + data.id + '/edit');
+                    this.$router.push('/dashboard/type/' + data.id + '/edit');
                 } else if (action == 'delete-item') {
                     this.$http.delete('type/' + data.id)
                         .then((response) => {
