@@ -44,6 +44,8 @@
                             </template>
                             </tbody>
                         </table>
+
+                        <table-pagination ref="pagination" v-on:loadPage="loadPage" v-if="showPagination && items.length > 0"></table-pagination>
                     </div>
 
                 </div>
@@ -53,6 +55,8 @@
 </template>
 
 <script>
+    import TablePagination from './TablePagination.vue'
+
     export default {
         props: {
             apiUrl: {
@@ -68,6 +72,10 @@
             },
             itemActions: {
                 type: Array,
+            },
+            showPagination: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -84,19 +92,78 @@
             })
         },
         created() {
+            this.currentPage = this.$route.query.page
             this.loadData()
         },
+        watch: {
+            $route() {
+                let pageNum = 1
+
+                if (this.$route.query.page) {
+                    pageNum = this.$route.query.page
+                }
+
+                this.loadPage(pageNum)
+            }
+        },
+        components: {
+            TablePagination
+        },
         methods: {
+            loadPage(page) {
+                  if (page == 'prev') {
+                      this.goPreviousPage()
+                  } else if (page == 'next') {
+                      this.goNextPage()
+                  } else {
+                      this.goPage(page)
+                  }
+            },
             loadData() {
                 let url = this.apiUrl
+
+                if (this.currentPage) {
+                    let page = ''
+                    if (url.indexOf('?') != -1) {
+                        page = '&page='
+                    } else {
+                        page = '?page='
+                    }
+                    url = url + page + this.currentPage
+                    this.$router.push(page + this.currentPage)
+                }
 
                 this.$http.get(url)
                     .then((response) => {
                         this.pagination = response.data
                         this.items = response.data.data
-                        this.totalPage = response.data.total
+                        this.totalPage = response.data.last_page
                         this.currentPage = response.data.current_page
+
+                        if (this.showPagination && this.items.length > 0) {
+                            this.$nextTick(() => {
+                                this.$refs.pagination.$data.pagination = this.pagination
+                            })
+                        }
                     });
+            },
+            goPreviousPage() {
+                if (this.currentPage > 1) {
+                    this.currentPage--
+                    this.loadData()
+                }
+            },
+            goNextPage() {
+                if (this.currentPage < this.totalPage) {
+                    this.currentPage++
+                    this.loadData()
+                }
+            },
+            goPage(page) {
+                if (this.currentPage != page && (page > 0 && page <= this.totalPage)) {
+                    this.currentPage = page
+                    this.loadData()
+                }
             },
             isSpecialField(name) {
                 return name.slice(0, 2) === '__'

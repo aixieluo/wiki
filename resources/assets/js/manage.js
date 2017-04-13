@@ -41,9 +41,20 @@ window.toastr.options = {
 Vue.use(VueRouter)
 Vue.use(httpPlugin)
 
-Vue.component('vue-head', require('./components/dashboard/Head.vue'))
-Vue.component('vue-table', require('./components/dashboard/Table.vue'))
+Vue.component(
+    'vue-head',
+    require('./components/dashboard/Head.vue')
+)
 
+Vue.component(
+    'vue-table',
+    require('./components/dashboard/Table.vue')
+)
+
+Vue.component(
+    'vue-table-pagination',
+    require('./components/dashboard/TablePagination.vue')
+)
 
 const router = new VueRouter({
     mode: 'history',

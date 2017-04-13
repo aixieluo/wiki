@@ -3,7 +3,7 @@
         <vue-head headTitle="车型"></vue-head>
 
         <vue-table apiUrl="type" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
-                   @table-action="tableActions">
+                   @table-action="tableActions" showPagination>
             <template slot="buttons">
                 <router-link to="/dashboard/dancer/create" class="btn btn-primary">创建</router-link>
             </template>
@@ -16,7 +16,6 @@
 <script>
 
     export default {
-        props: {},
         data() {
             return {
                 tableClass: 'table-text-center',
@@ -36,14 +35,12 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info btn-sm'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
                 ],
                 items: {}
             }
-        },
-        mounted () {
         },
         methods: {
             tableActions(action, data) {

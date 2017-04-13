@@ -10794,6 +10794,26 @@ a {
   background-color: transparent;
 }
 
+.actions > a.btn {
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.pagination-primary > li > a, .pagination-primary > li > span {
+  color: #18a689;
+}
+
+.pagination-primary > li > a:hover, .pagination-primary > li > a:focus, .pagination-primary > li > a:active:hover, .pagination-primary > li > a:active:focus, .pagination-primary > li > span:hover, .pagination-primary > li > span:focus, .pagination-primary > li > span:active:hover, .pagination-primary > li > span:active:focus {
+  color: #1ab394;
+}
+
+.pagination-primary > li.active > a, .pagination-primary > li.active > span {
+  background-color: #1ab394;
+  border-color: #1ab394;
+  color: #FFFFFF;
+}
+
 .toast-title {
   font-weight: 700;
 }
@@ -14185,8 +14205,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 
 .btn-primary:hover,
 .btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
+.btn-primary:active:hover,
+.btn-primary.active:focus,
 .open .dropdown-toggle.btn-primary {
   background-color: #18a689;
   border-color: #18a689;
@@ -14226,8 +14246,8 @@ fieldset[disabled] .btn-primary.active {
 
 .btn-success:hover,
 .btn-success:focus,
-.btn-success:active,
-.btn-success.active,
+.btn-success:active:hover,
+.btn-success.active:focus,
 .open .dropdown-toggle.btn-success {
   background-color: #1a7bb9;
   border-color: #1a7bb9;
@@ -14267,8 +14287,8 @@ fieldset[disabled] .btn-success.active {
 
 .btn-info:hover,
 .btn-info:focus,
-.btn-info:active,
-.btn-info.active,
+.btn-info:active:hover,
+.btn-info.active:focus,
 .open .dropdown-toggle.btn-info {
   background-color: #21b9bb;
   border-color: #21b9bb;
@@ -14308,8 +14328,8 @@ fieldset[disabled] .btn-info.active {
 
 .btn-default:hover,
 .btn-default:focus,
-.btn-default:active,
-.btn-default.active,
+.btn-default:active:hover,
+.btn-default.active:focus,
 .open .dropdown-toggle.btn-default {
   background-color: #bababa;
   border-color: #bababa;
@@ -14349,8 +14369,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-warning:hover,
 .btn-warning:focus,
-.btn-warning:active,
-.btn-warning.active,
+.btn-warning:active:hover,
+.btn-warning.active:focus,
 .open .dropdown-toggle.btn-warning {
   background-color: #f7a54a;
   border-color: #f7a54a;
@@ -14390,8 +14410,8 @@ fieldset[disabled] .btn-warning.active {
 
 .btn-danger:hover,
 .btn-danger:focus,
-.btn-danger:active,
-.btn-danger.active,
+.btn-danger:active:hover,
+.btn-danger.active:focus,
 .open .dropdown-toggle.btn-danger {
   background-color: #ec4758;
   border-color: #ec4758;
@@ -14429,8 +14449,8 @@ fieldset[disabled] .btn-danger.active {
 
 .btn-link:hover,
 .btn-link:focus,
-.btn-link:active,
-.btn-link.active,
+.btn-link:active:hover,
+.btn-link.active:focus,
 .open .dropdown-toggle.btn-link {
   color: #1ab394;
   text-decoration: none;
@@ -14468,8 +14488,8 @@ fieldset[disabled] .btn-link.active {
 
 .btn-white:hover,
 .btn-white:focus,
-.btn-white:active,
-.btn-white.active,
+.btn-white:active:hover,
+.btn-white.active:focus,
 .open .dropdown-toggle.btn-white {
   color: inherit;
   border: 1px solid #d2d2d2;
@@ -14806,32 +14826,30 @@ button.dim:active:before {
 }
 
 /* PAGINATIN */
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
-  background-color: #f4f4f4;
-  border-color: #DDDDDD;
-  color: inherit;
-  cursor: default;
-  z-index: 2;
-}
-
-.pagination > li > a,
-.pagination > li > span {
-  background-color: #FFFFFF;
-  border: 1px solid #DDDDDD;
-  color: inherit;
-  float: left;
-  line-height: 1.42857;
-  margin-left: -1px;
-  padding: 4px 10px;
-  position: relative;
-  text-decoration: none;
-}
-
+/*.pagination > .active > a,*/
+/*.pagination > .active > span,*/
+/*.pagination > .active > a:hover,*/
+/*.pagination > .active > span:hover,*/
+/*.pagination > .active > a:focus,*/
+/*.pagination > .active > span:focus {*/
+/*background-color: #f4f4f4;*/
+/*border-color: #DDDDDD;*/
+/*color: inherit;*/
+/*cursor: default;*/
+/*z-index: 2;*/
+/*}*/
+/*.pagination > li > a,*/
+/*.pagination > li > span {*/
+/*background-color: #FFFFFF;*/
+/*border: 1px solid #DDDDDD;*/
+/*color: inherit;*/
+/*float: left;*/
+/*line-height: 1.42857;*/
+/*margin-left: -1px;*/
+/*padding: 4px 10px;*/
+/*position: relative;*/
+/*text-decoration: none;*/
+/*}*/
 /* TOOLTIPS */
 .tooltip-inner {
   background-color: #2F4050;
@@ -16840,7 +16858,7 @@ a.forum-item-title:hover {
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #2f4050;
-  font-size: 13px;
+  font-size: 14px;
   color: #676a6c;
   overflow-x: hidden;
 }
