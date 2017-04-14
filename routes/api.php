@@ -58,5 +58,5 @@ Route::group(['namespace'=>'Api\Home'], function () {
 
 Route::group(['namespace' => 'Api\Dashboard'], function () {
 //    Route::resource('type', 'TypeController');
-    Route::resource('/type', 'TypeController');
+    Route::resource('/type', 'TypeController', ['except' => ['show', 'create']]);
 });

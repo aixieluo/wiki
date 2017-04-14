@@ -11,6 +11,6 @@ class Type extends Model
 
     protected $dates = ['delete_at'];
 
-    protected $fillable = ['type'];
+    protected $fillable = ['content'];
 
 }

@@ -26,7 +26,7 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'type',
+                        name: 'content',
                         title: '车型'
                     },
                     {

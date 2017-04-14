@@ -17,6 +17,10 @@ class TypeRepository {
         return $this->model->orderBy($sortColumn, $sort)->paginate($number);
     }
 
+    public function store($data) {
+        $type = $this->model->create($data);
+    }
+
     public function getById($id) {
         return $this->model->findorfail($id);
     }

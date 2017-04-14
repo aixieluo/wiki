@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Dashboard;
 
+use App\Http\Requests\TypeRequest;
 use App\Repositories\TypeRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,23 +28,14 @@ class TypeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(TypeRequest $request) {
+        return $this->type->store($request->all());
     }
 
     /**
