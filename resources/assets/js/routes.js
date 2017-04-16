@@ -13,7 +13,7 @@ export default [
             },
             {
                 path: 'home',
-                component: require('./views/dashboard/home/home.vue')
+                component: require('./views/dashboard/home/Home.vue')
             },
             {
                 path: 'dancer',
@@ -21,7 +21,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/dancer/dancer.vue'),
+                        component: require('./views/dashboard/dancer/Dancer.vue'),
                     }
                 ]
             },
@@ -31,15 +31,15 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/type/type.vue')
+                        component: require('./views/dashboard/type/Type.vue')
                     },
                     {
                         path: 'create',
-                        component: require('./views/dashboard/type/create.vue')
+                        component: require('./views/dashboard/type/Create.vue')
                     },
                     {
                         path: ':id/edit',
-                        component: require('./views/dashboard/type/edit.vue')
+                        component: require('./views/dashboard/type/Edit.vue')
                     }
                 ]
             }

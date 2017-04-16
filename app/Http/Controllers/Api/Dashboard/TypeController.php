@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Api\Dashboard;
 
+use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\TypeRequest;
 use App\Repositories\TypeRepository;
+use App\Transformers\TypeTransformer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class TypeController extends Controller
+class TypeController extends ApiController
 {
 
     protected $type;
 
     public function __construct(TypeRepository $typeRepository) {
-//        parent::__construct();
+        parent::__construct();
 
         $this->type = $typeRepository;
     }
@@ -24,7 +25,7 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->type->page();
+        return $this->respondWithPaginator($this->type->page(10, 'desc'), new TypeTransformer);
     }
 
     /**
@@ -39,17 +40,6 @@ class TypeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id) {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
@@ -57,7 +47,7 @@ class TypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        return $this->type->getById($id);
     }
 
     /**
@@ -68,8 +58,10 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(TypeRequest $request, $id) {
+        $this->type->update($id, $request->all());
+
+        return $this->noContent();
     }
 
     /**

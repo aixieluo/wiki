@@ -4,7 +4,7 @@
 
         <vue-form>
             <template slot="buttons">
-                <router-link to="/dashboard/type" class="btn btn-primary" exact>返回</router-link>
+                <router-link to="/dashboard/type" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="create">
@@ -32,7 +32,7 @@
         methods: {
             create(event) {
                 let formData = new FormData(event.target)
-
+                
                 this.$http.post('type', formData)
                     .then(() => {
                         toastr.success('创建成功！')

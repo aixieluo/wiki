@@ -15,13 +15,13 @@
         },
         computed: {
             totalPage() {
-                return this.pagination == null ? 0 : this.pagination.last_page
+                return this.pagination == null ? 0 : this.pagination.total_pages
             },
             isOnFirstPage() {
                 return this.pagination == null ? false : this.pagination.current_page == 1
             },
             isOnLastPage() {
-                return this.pagination == null ?　false : this.pagination.current_page == this.pagination.last_page
+                return this.pagination == null ?　false : this.pagination.current_page == this.pagination.total_pages
             }
         },
         methods:　{

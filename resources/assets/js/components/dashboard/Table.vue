@@ -134,11 +134,11 @@
                 }
 
                 this.$http.get(url)
-                    .then((response) => {
-                        this.pagination = response.data
+                    .then(response => {
+                        this.pagination = response.data.meta.pagination
                         this.items = response.data.data
-                        this.totalPage = response.data.last_page
-                        this.currentPage = response.data.current_page
+                        this.totalPage = response.data.meta.pagination.total_pages
+                        this.currentPage = response.data.meta.pagination.current_page
 
                         if (this.showPagination && this.items.length > 0) {
                             this.$nextTick(() => {

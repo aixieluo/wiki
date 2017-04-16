@@ -33,11 +33,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\LoginController@login');
     Route::post('/logout', 'Auth\LoginController@logout');
-
-
-    Route::resource('/dancer', 'DancerController');
-
-    Route::resource('/type', 'DancerTypeController');
 });
 
 Route::get('/dashboard/{path?}', 'Admin\DashboardController@index')->where('path', '[\/\w\.-]+');

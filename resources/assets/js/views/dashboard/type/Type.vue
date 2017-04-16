@@ -8,13 +8,10 @@
                 <router-link to="/dashboard/type/create" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
-
-
     </div>
 </template>
 
 <script>
-
     export default {
         data() {
             return {
@@ -28,6 +25,10 @@
                     {
                         name: 'content',
                         title: '车型'
+                    },
+                    {
+                        name: 'created_at',
+                        title: '创建时间'
                     },
                     {
                         name: '__actions',
@@ -57,7 +58,5 @@
                 }
             }
         },
-        computed: {},
-        watch: {},
     }
 </script>
