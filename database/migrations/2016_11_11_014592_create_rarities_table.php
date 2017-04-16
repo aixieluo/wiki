@@ -15,8 +15,10 @@ class CreateRaritiesTable extends Migration
     {
         Schema::create('rarities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('rarity')->comment('稀有度');
+            $table->integer('level')->comment('稀有级别');
+            $table->string('content')->comment('稀有度');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

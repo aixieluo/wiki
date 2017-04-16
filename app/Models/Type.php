@@ -10,7 +10,14 @@ class Type extends Model
     use SoftDeletes;
 
     protected $dates = ['delete_at'];
-
     protected $fillable = ['content'];
 
+    /**
+     * 获取对应车型的舞姬列表
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dancers() {
+        return $this->hasMany('App\Models\Dancer');
+    }
 }

@@ -13,5 +13,15 @@ export default [
         label: '车型',
         url: '/dashboard/type',
         icon: 'fa fa-th-large'
+    },
+    {
+        label: '国籍',
+        url: '/dashboard/country',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '稀有度',
+        url: '/dashboard/rarity',
+        icon: 'fa fa-th-large'
     }
 ]

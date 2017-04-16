@@ -51,6 +51,10 @@ a{
     outline: 0 !important;
 }
 
+input[type="number"]{
+    -moz-appearance: textfield;
+}
+
 .noborder{
     border: 0;
 }

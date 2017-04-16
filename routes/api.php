@@ -17,7 +17,7 @@ Route::get('user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::group(['namespace'=>'Api\Home'], function () {
+Route::group(['namespace' => 'Api\Home'], function () {
     /*part dancer start*/
 
     //获取舞姬的基础属性
@@ -38,7 +38,6 @@ Route::group(['namespace'=>'Api\Home'], function () {
     /*part dancer end*/
 
 
-
     /*part equipment start*/
 
     //获取某位置的所有装备
@@ -57,5 +56,7 @@ Route::group(['namespace'=>'Api\Home'], function () {
 });
 
 Route::group(['namespace' => 'Api\Dashboard'], function () {
-    Route::resource('/type', 'TypeController', ['except' => ['show', 'create']]);
+    Route::resource('type', 'TypeController', ['except' => ['show', 'create']]);
+    Route::resource('country', 'CountryController', ['except' => ['show', 'create']]);
+    Route::resource('rarity', 'RarityController', ['except' => ['show', 'create']]);
 });

@@ -25,21 +25,22 @@ $factory->define(\App\Models\User::class, function (Faker\Generator $faker) {
 //舞姬类型表
 $factory->define(\App\Models\Type::class, function (Faker\Generator $faker) {
     return [
-        'type' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
+        'content' => $faker->randomElement(["重坦", "中坦", "轻坦", "自行", "轻歼", "突击"]),
     ];
 });
 
 //舞姬国籍表
 $factory->define(\App\Models\Country::class, function (Faker\Generator $faker) {
     return [
-        'country' => $faker->country,
+        'content' => $faker->country,
     ];
 });
 
 //舞姬稀有度表
 $factory->define(\App\Models\Rarity::class, function (Faker\Generator $faker) {
     return [
-        'rarity' => $faker->randomElement(["蓝", "紫", "橙"]),
+        'level' => $faker->numberBetween('1', '3'),
+        'content' => $faker->randomElement(["蓝", "紫", "橙"]),
     ];
 });
 

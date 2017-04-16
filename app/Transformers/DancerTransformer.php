@@ -20,4 +20,10 @@ class DancerTransformer extends TransformerAbstract
             'type' => $dancer->type->content,
         ];
     }
+
+    public function includeType(Dancer $dancer) {
+        $type = $dancer->type;
+
+        return $this->collection($type, new TypeTransformer);
+    }
 }

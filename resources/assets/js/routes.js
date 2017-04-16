@@ -42,6 +42,42 @@ export default [
                         component: require('./views/dashboard/type/Edit.vue')
                     }
                 ]
+            },
+            {
+                path: 'country',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/country/Country.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/country/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/country/Edit.vue')
+                    }
+                ]
+            },
+            {
+                path: 'rarity',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/rarity/Rarity.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/rarity/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/rarity/Edit.vue')
+                    }
+                ]
             }
         ]
     }

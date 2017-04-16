@@ -6,17 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rarity extends Model
 {
-    protected $fillable= [
-        'rarity'
-    ];
+    protected $fillable = ['level', 'content'];
 
     /**
-     * 获取舞姬的稀有度
+     * 获取对应稀有度的舞姬列表
      *
-     * @param $id 舞姬id
-     * @return mixed 舞姬稀有度
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function rarity($id) {
-        return $this->select('rarity')->findOrFail($id);
+    public function dancers() {
+        return $this->hasMany('App\Models\Dancer');
     }
 }

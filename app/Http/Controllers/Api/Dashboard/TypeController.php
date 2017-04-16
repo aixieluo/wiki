@@ -25,7 +25,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->type->page(10, 'desc'), new TypeTransformer);
+        return $this->respondWithPaginator($this->type->page(), new TypeTransformer);
     }
 
     /**
@@ -36,7 +36,9 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(TypeRequest $request) {
-        return $this->type->store($request->all());
+        $this->type->store($request->all());
+
+        return $this->noContent();
     }
 
     /**
@@ -73,5 +75,7 @@ class TypeController extends ApiController
      */
     public function destroy($id) {
         $this->type->destroy($id);
+
+        return $this->noContent();
     }
 }
