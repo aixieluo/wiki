@@ -15,9 +15,9 @@ class Dancer extends Model
     protected $fillable = [
         'name',
         'dance_outfit',
-        'type',
-        'country',
-        'rarity',
+        'type_id',
+        'country_id',
+        'rarity_id',
         'subjection',
         'introduction',
         'character',

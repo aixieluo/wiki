@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers\Api\Dashboard;
 
+use App\Http\Controllers\Api\ApiController;
+use App\Repositories\DancerRepository;
+use App\Transformers\DancerTransformer;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class DancerController extends Controller
+class DancerController extends ApiController
 {
+    protected $dancer;
+
+    public function __construct(DancerRepository $dancerRepository) {
+        parent::__construct();
+
+        $this->dancer = $dancerRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +24,7 @@ class DancerController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->respondWithPaginator($this->dancer->page(), new DancerTransformer);
     }
 
     /**
@@ -35,18 +35,7 @@ class DancerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $this->dancer->store($request->all());
     }
 
     /**
@@ -57,7 +46,7 @@ class DancerController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->dancer->getById($id);
     }
 
     /**
@@ -69,7 +58,7 @@ class DancerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->dancer->update($id, $request->all());
     }
 
     /**
@@ -80,6 +69,8 @@ class DancerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->dancer->destroy($id);
+
+        return $this->noContent();
     }
 }

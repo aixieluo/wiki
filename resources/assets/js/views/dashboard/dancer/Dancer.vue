@@ -2,10 +2,10 @@
     <div>
         <vue-head headTitle="钢舞姬"></vue-head>
 
-        <vue-table apiUrl="type" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table apiUrl="dancer" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/type/create" class="btn btn-primary">创建</router-link>
+                <router-link to="/dashboard/dancer/create" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -31,8 +31,16 @@
                         title: '舞装'
                     },
                     {
-                        name: 'dance_outfit',
-                        title: '舞装'
+                        name: 'type',
+                        title: '车型'
+                    },
+                    {
+                        name: 'country',
+                        title: '国籍'
+                    },
+                    {
+                        name: 'rarity',
+                        title: '稀有度'
                     },
                     {
                         name: '__actions',
@@ -40,7 +48,7 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
+                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
                     {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
                     {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
                 ],
@@ -50,15 +58,15 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/type/' + data.id + '/edit');
+                    this.$router.push('/dashboard/dancer/' + data.id + '/edit');
                 } else if (action == 'delete-item') {
-                    this.$http.delete('type/' + data.id)
+                    this.$http.delete('dancer/' + data.id)
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')
                         })
                 } else if (action == 'view-item') {
-                    window.open('/', '_blank');
+                    window.open('/dancer/' + data.id, '_blank');
                 }
             }
         },

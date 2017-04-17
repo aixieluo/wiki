@@ -59,4 +59,5 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::resource('type', 'TypeController', ['except' => ['show', 'create']]);
     Route::resource('country', 'CountryController', ['except' => ['show', 'create']]);
     Route::resource('rarity', 'RarityController', ['except' => ['show', 'create']]);
+    Route::resource('dancer', 'DancerController', ['except' => ['show', 'create']]);
 });

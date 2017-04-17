@@ -22,6 +22,14 @@ export default [
                     {
                         path: '/',
                         component: require('./views/dashboard/dancer/Dancer.vue'),
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/dancer/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/dancer/Edit.vue')
                     }
                 ]
             },

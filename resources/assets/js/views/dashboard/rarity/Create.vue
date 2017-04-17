@@ -11,13 +11,15 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">稀有级别</label>
                         <div class="col-sm-10">
-                            <input type="number" name="level" class="form-control">
+                            <input type="number" name="level" class="form-control" placeholder="例如1,2,3">
                         </div>
                     </div>
+                    <div class="hr-line-dashed"></div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">稀有度</label>
                         <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control">
+                            <input type="text" name="content" class="form-control" placeholder="例如蓝，紫，橙">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
