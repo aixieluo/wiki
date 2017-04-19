@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\DancerRequest;
 use App\Models\Dancer;
 
 class DancerRepository
@@ -14,21 +15,10 @@ class DancerRepository
         $this->model = $dancer;
     }
 
-    public function store($data) {
-        $dancer = $this->model->create($data);
-
-        $dancer->attributes()->create(json_decode($data['attributes'], true));
-
-//        if (is_array($data['attributes'])) {
-//            $this->syncAttributes($data['attributes']);
-//        } else {
-//            $this->syncAttributes(json_decode($data['attributes']));
-//        }
+    public function store(DancerRequest $request) {
+        $dancer = $this->model->create($request->all());
+//        $dancer->attributes()->create(json_decode($data['attributes'], true));
 
         return $dancer;
-    }
-
-    public function syncAttributes($data) {
-        $this->model->attributes()->sync($data);
     }
 }
