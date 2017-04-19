@@ -17,6 +17,8 @@ class DancerRepository
     public function store($data) {
         $dancer = $this->model->create($data);
 
+        $dancer->attributes()->create(json_decode($data['attributes'], true));
+
 //        if (is_array($data['attributes'])) {
 //            $this->syncAttributes($data['attributes']);
 //        } else {
