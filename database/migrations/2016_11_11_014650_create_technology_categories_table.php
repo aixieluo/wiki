@@ -17,6 +17,7 @@ class CreateTechnologyCategoriesTable extends Migration
             $table->increments('id');
             $table->string('category')->comment('科技类别');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

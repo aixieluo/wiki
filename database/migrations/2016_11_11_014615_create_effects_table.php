@@ -18,6 +18,7 @@ class CreateEffectsTable extends Migration
             $table->string('name')->comment('特效名称');
             $table->string('describe')->comment('特效描述');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

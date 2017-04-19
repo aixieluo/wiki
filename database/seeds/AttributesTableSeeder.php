@@ -11,6 +11,6 @@ class AttributesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Attribute::class, 500)->create();
+        factory(\App\Models\Attribute::class, 50)->create();
     }
 }

@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dancer extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['delete_at'];
+
     /**
      * The attributes that are mass assignable.
      *

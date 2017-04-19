@@ -50569,10 +50569,16 @@ new Vue(Vue.util.extend({router: router, store: __WEBPACK_IMPORTED_MODULE_2__vue
 
 /***/ },
 /* 139 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(140)
+
+/* template */
+var __vue_template__ = __webpack_require__(141)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -50585,10 +50591,135 @@ if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
 __vue_options__.__file = "E:\\workspace\\wiki\\resources\\assets\\js\\views\\dashboard\\equipment\\Equipment.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0e9eae1d", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-0e9eae1d", __vue_options__)
+  }
+})()}
 if (__vue_options__.functional) {console.error("[vue-loader] Equipment.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
 
+
+/***/ },
+/* 140 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+    /* harmony default export */ exports["default"] = {
+        data: function data() {
+            return {
+                tableClass: 'table-text-center',
+                fields: [
+                    {
+                        name: 'id',
+                        title: 'ID',
+                        titleClass: 'width-5-percent'
+                    },
+                    {
+                        name: 'name',
+                        title: '名称'
+                    },
+                    {
+                        name: 'lv',
+                        title: '等级'
+                    },
+                    {
+                        name: 'created_at',
+                        title: '创建时间'
+                    },
+                    {
+                        name: '__actions',
+                        title: '操作'
+                    }
+                ],
+                itemActions: [
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
+                ],
+                items: {}
+            }
+        },
+        methods: {
+            tableActions: function tableActions(action, data) {
+                var this$1 = this;
+
+                if (action == 'edit-item') {
+                    this.$router.push('/dashboard/equipment/' + data.id + '/edit');
+                } else if (action == 'delete-item') {
+                    this.$http.delete('equipment/' + data.id)
+                        .then(function (response) {
+                            toastr.success('删除成功！')
+                            this$1.$emit('reload')
+                        })
+                } else if (action == 'view-item') {
+                    window.open('/', '_blank');
+                }
+            }
+        },
+    };
+
+
+/***/ },
+/* 141 */
+/***/ function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('vue-head', {
+    attrs: {
+      "headTitle": "装备"
+    }
+  }), _vm._v(" "), _c('vue-table', {
+    attrs: {
+      "apiUrl": "equipment",
+      "tableClass": _vm.tableClass,
+      "fields": _vm.fields,
+      "itemActions": _vm.itemActions,
+      "showPagination": ""
+    },
+    on: {
+      "table-action": _vm.tableActions
+    }
+  }, [_c('template', {
+    slot: "buttons"
+  }, [_c('router-link', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "to": "/dashboard/equipment/create"
+    }
+  }, [_vm._v("创建")])], 1)], 2)], 1)
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-0e9eae1d", module.exports)
+  }
+}
 
 /***/ }
 /******/ ]);

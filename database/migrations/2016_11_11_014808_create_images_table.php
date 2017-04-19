@@ -20,6 +20,7 @@ class CreateImagesTable extends Migration
             $table->string('type')->comment('图片类型');
             $table->string('path')->comment('图片存储路径');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

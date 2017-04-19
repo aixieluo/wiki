@@ -140,14 +140,19 @@ $factory->define(\App\Models\Image::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(\App\Models\EquipmentName::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
 
 //装备表
 $factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'equipment_name_id' => $faker->randomElement(\App\Models\EquipmentName::pluck('id')->toArray()),
         'lv' => $faker->numberBetween(1, 10),
-        'rank' => $faker->boolean(),
-        'main_slot' => $faker->boolean(),
+//        'rank' => $faker->boolean(),
+        'main_slot' => $faker->name,
         'describe' => $faker->sentence(20),
         'price' => 450,
     ];

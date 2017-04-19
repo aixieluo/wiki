@@ -23,10 +23,10 @@ class CreateDancersTable extends Migration
             $table->string('subjection')->comment('隶属机构');
             $table->string('introduction')->comment('人物介绍');
             $table->string('character')->comment('人物性格');
-            $table->integer('grow_fire')->comment('成长火力');
-            $table->integer('grow_penetrate')->comment('成长穿甲');
-            $table->integer('grow_durable')->comment('成长耐久');
-            $table->integer('grow_armor')->comment('成长装甲');
+            $table->double('grow_fire', 8, 2)->comment('成长火力');
+            $table->double('grow_penetrate', 8, 2)->comment('成长穿甲');
+            $table->double('grow_durable', 8, 2)->comment('成长耐久');
+            $table->double('grow_armor', 8, 2)->comment('成长装甲');
             $table->integer('barbette')->comment('炮座');
             $table->integer('refit')->comment('改装');
             $table->integer('outside')->comment('外身');
@@ -38,6 +38,7 @@ class CreateDancersTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('rarity_id')->references('id')->on('rarities')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
