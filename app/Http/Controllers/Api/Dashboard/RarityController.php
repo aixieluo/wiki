@@ -22,19 +22,23 @@ class RarityController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return $this->respondWithPaginator($this->rarity->page(), new RarityTransformer);
+    }
+
+    public function getList() {
+
+        return $this->respondWithCollection($this->rarity->page(), new RarityTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(RarityRequest $request)
-    {
+    public function store(RarityRequest $request) {
         $this->rarity->store($request->all());
 
         return $this->noContent();
@@ -43,23 +47,23 @@ class RarityController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        return $this->rarity->getById($id);
+    public function edit($id) {
+        return $this->respondWithItem($this->rarity->getById($id), new RarityTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(RarityRequest $request, $id)
-    {
+    public function update(RarityRequest $request, $id) {
         $this->rarity->update($id, $request->all());
 
         return $this->noContent();
@@ -68,11 +72,11 @@ class RarityController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $this->rarity->destroy($id);
 
         return $this->noContent();

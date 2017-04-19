@@ -23,5 +23,10 @@ export default [
         label: '稀有度',
         url: '/dashboard/rarity',
         icon: 'fa fa-th-large'
+    },
+    {
+        label: '装备',
+        url: '/dashboard/equipment',
+        icon: 'fa fa-th-large'
     }
 ]

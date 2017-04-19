@@ -28,6 +28,11 @@ class TypeController extends ApiController
         return $this->respondWithPaginator($this->type->page(), new TypeTransformer);
     }
 
+    public function getList() {
+
+        return $this->respondWithCollection($this->type->page(), new TypeTransformer);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +54,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->type->getById($id);
+        return $this->respondWithItem($this->type->getById($id), new TypeTransformer);
     }
 
     /**

@@ -57,7 +57,14 @@ Route::group(['namespace' => 'Api\Home'], function () {
 
 Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::resource('type', 'TypeController', ['except' => ['show', 'create']]);
+    Route::get('types', 'TypeController@getList');
+
     Route::resource('country', 'CountryController', ['except' => ['show', 'create']]);
+    Route::get('countries', 'CountryController@getList');
+
     Route::resource('rarity', 'RarityController', ['except' => ['show', 'create']]);
+    Route::get('rarities', 'RarityController@getList');
+
     Route::resource('dancer', 'DancerController', ['except' => ['show', 'create']]);
+    Route::get('dancer/attributes/{id}', 'DancerController@getByAttributes');
 });

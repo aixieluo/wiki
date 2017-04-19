@@ -37,7 +37,7 @@
         mounted() {
             this.$http.get('type/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.type = response.data
+                    this.type = response.data.data
                 })
         },
         methods: {

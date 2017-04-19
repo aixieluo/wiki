@@ -14,10 +14,12 @@ trait BaseRepository
      * @return mixed
      */
     public function getById($id) {
+
         return $this->model->findOrFail($id);
     }
 
     public function all() {
+
         return $this->model->all();
     }
 
@@ -29,14 +31,16 @@ trait BaseRepository
      * @return mixed
      */
     public function page($number = 10, $sort = 'desc', $sortColumn = 'id') {
+
         return $this->model->orderBy($sortColumn, $sort)->paginate($number);
     }
 
     /**
      * @param $data
      */
-    public function store($data) {
-        return $this->model->create($data);
+    public function store($input) {
+
+        return $this->save($this->model, $input);
     }
 
     /**
@@ -45,10 +49,15 @@ trait BaseRepository
      *
      * @return mixed
      */
-    public function update($id, $data) {
-        $type = $this->getById($id);
+    public function update($id, $input) {
+        $this->model = $this->getById($id);
 
-        return $type->update($data);
+        return $this->save($this->model, $input);
+    }
+
+    public function save($model, $input) {
+
+        return $model->fill($input)->save();
     }
 
     /**

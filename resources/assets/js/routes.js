@@ -86,6 +86,24 @@ export default [
                         component: require('./views/dashboard/rarity/Edit.vue')
                     }
                 ]
+            },
+            {
+                path: 'equipment',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/equipment/Equipment.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/equipment/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/equipment/Edit.vue')
+                    }
+                ]
             }
         ]
     }

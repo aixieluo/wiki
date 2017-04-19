@@ -43,7 +43,7 @@
         mounted() {
             this.$http.get('rarity/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.rarity = response.data
+                    this.rarity = response.data.data
                 })
         },
         methods: {

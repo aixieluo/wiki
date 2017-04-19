@@ -132,6 +132,7 @@
                             <input type="number" name="concealment" class="form-control" v-model="attributes.concealment">
                         </div>
                     </div>
+
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">

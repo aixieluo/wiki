@@ -27,6 +27,11 @@ class CountryController extends ApiController
         return $this->respondWithPaginator($this->country->page(), new CountryTransformer);
     }
 
+    public function getList() {
+
+        return $this->respondWithCollection($this->country->page(), new CountryTransformer);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,7 +53,7 @@ class CountryController extends ApiController
      */
     public function edit($id)
     {
-        return $this->country->getById($id);
+        return $this->respondWithItem($this->country->getById($id), new CountryTransformer);
     }
 
     /**

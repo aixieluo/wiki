@@ -37,7 +37,7 @@
         mounted() {
             this.$http.get('country/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.country = response.data
+                    this.country = response.data.data
                 })
         },
         methods: {
