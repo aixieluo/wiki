@@ -140,21 +140,10 @@ $factory->define(\App\Models\Image::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(\App\Models\EquipmentName::class, function (Faker\Generator $faker) {
+$factory->define(\App\Models\EquipmentInfo::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-    ];
-});
-
-//装备表
-$factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker) {
-    return [
-        'equipment_name_id' => $faker->randomElement(\App\Models\EquipmentName::pluck('id')->toArray()),
-        'lv' => $faker->numberBetween(1, 10),
-//        'rank' => $faker->boolean(),
-        'main_slot' => $faker->name,
-        'describe' => $faker->sentence(20),
-        'price' => 450,
+        'describe' => $faker->sentence(20)
     ];
 });
 
@@ -165,11 +154,21 @@ $factory->define(\App\Models\Slot::class, function (Faker\Generator $faker) {
     ];
 });
 
+//装备表
+$factory->define(\App\Models\Equipment::class, function (Faker\Generator $faker) {
+    return [
+        'equipment_info_id' => $faker->randomElement(\App\Models\EquipmentInfo::pluck('id')->toArray()),
+        'lv' => $faker->numberBetween(1, 10),
+        'price' => 450,
+    ];
+});
+
 //装备与装备槽中间表,多对多
 $factory->define(\App\Models\EquipmentSlot::class, function (Faker\Generator $faker) {
     return [
         'equipment_id' => $faker->randomElement(\App\Models\Equipment::pluck('id')->toArray()),
         'slot_id' => $faker->randomElement(\App\Models\Slot::pluck('id')->toArray()),
+        'main' => $faker->boolean()
     ];
 });
 

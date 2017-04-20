@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class EquipmentNamesTableSeeder extends Seeder
+class EquipmentInfosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class EquipmentNamesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\EquipmentName::class, 10)->create();
+        factory(\App\Models\EquipmentInfo::class, 10)->create();
     }
 }

@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AttributesTableSeeder::class);
         $this->call(DancerTechnologiesTableSeeder::class);
         $this->call(ImagesTableSeeder::class);
-        $this->call(EquipmentNamesTableSeeder::class);
-        $this->call(EquipmentsTableSeeder::class);
+        $this->call(EquipmentInfosTableSeeder::class);
         $this->call(SlotsTableSeeder::class);
+        $this->call(EquipmentsTableSeeder::class);
         $this->call(EquipmentSlotsTableSeeder::class);
         $this->call(EffectsTableSeeder::class);
         $this->call(EffectablesTableSeeder::class);
