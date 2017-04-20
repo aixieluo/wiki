@@ -25,7 +25,17 @@ export default [
         icon: 'fa fa-th-large'
     },
     {
-        label: '装备',
+        label: '装备槽',
+        url: '/dashboard/slot',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '装备信息',
+        url: '/dashboard/equipmentInfo',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '装备属性',
         url: '/dashboard/equipment',
         icon: 'fa fa-th-large'
     }

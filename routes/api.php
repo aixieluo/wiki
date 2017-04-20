@@ -69,4 +69,7 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('dancer/attributes/{id}', 'DancerController@getByAttributes');
 
     Route::resource('equipment', 'EquipmentController', ['except' => ['show','create']]);
+    Route::resource('equipmentInfo', 'EquipmentInfoController', ['except' => ['show','create']]);
+
+    Route::resource('slot', 'SlotController', ['except' => ['show', 'create']]);
 });

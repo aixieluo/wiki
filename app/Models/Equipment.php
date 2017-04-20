@@ -16,7 +16,7 @@ class Equipment extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'lv', 'describe', 'price'];
+    protected $fillable = ['name', 'lv', 'price'];
 
     /**
      * 获取装备槽位
@@ -25,6 +25,10 @@ class Equipment extends Model
      */
     public function slots() {
         return $this->belongsToMany('App\Models\Slot')->withPivot('main');
+    }
+
+    public function equipmentInfo() {
+        return $this->belongsTo('App\Models\EquipmentInfo');
     }
 
     /**

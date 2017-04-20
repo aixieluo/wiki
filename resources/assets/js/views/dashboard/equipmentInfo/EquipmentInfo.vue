@@ -1,11 +1,11 @@
 <template>
     <div>
-        <vue-head headTitle="装备属性"></vue-head>
+        <vue-head headTitle="装备信息"></vue-head>
 
-        <vue-table apiUrl="equipment" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table apiUrl="equipmentInfo" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/equipment/create" class="btn btn-primary">创建</router-link>
+                <router-link to="/dashboard/equipmentInfo/create" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -27,10 +27,6 @@
                         title: '名称'
                     },
                     {
-                        name: 'lv',
-                        title: '等级'
-                    },
-                    {
                         name: 'created_at',
                         title: '创建时间'
                     },
@@ -50,9 +46,9 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/equipment/' + data.id + '/edit');
+                    this.$router.push('/dashboard/equipmentInfo/' + data.id + '/edit');
                 } else if (action == 'delete-item') {
-                    this.$http.delete('equipment/' + data.id)
+                    this.$http.delete('equipmentInfo/' + data.id)
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')

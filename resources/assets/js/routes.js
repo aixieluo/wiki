@@ -88,6 +88,24 @@ export default [
                 ]
             },
             {
+                path: 'slot',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/slot/Slot.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/slot/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/slot/Edit.vue')
+                    }
+                ]
+            },
+            {
                 path: 'equipment',
                 component: Parent,
                 children: [
@@ -102,6 +120,24 @@ export default [
                     {
                         path: ':id/edit',
                         component: require('./views/dashboard/equipment/Edit.vue')
+                    }
+                ]
+            },
+            {
+                path: 'equipmentInfo',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/equipmentInfo/EquipmentInfo.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/equipmentInfo/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/equipmentInfo/Edit.vue')
                     }
                 ]
             }
