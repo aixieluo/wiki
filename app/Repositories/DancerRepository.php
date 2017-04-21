@@ -23,13 +23,14 @@ class DancerRepository
         } else {
             $this->createAttributes($dancer, json_decode($data['attributes'], true));
         }
-//        $dancer->attributes()->create(json_decode($data['attributes'], true));
+
+        //        $dancer->attributes()->create(json_decode($data['attributes'], true));
 
         return $dancer;
     }
 
     public function update($id, $data) {
-        $dancer = $this->model->findOrFail($id);
+        $dancer = $this->getById($id);
 
         if (is_array($data['attributes'])) {
             $this->updateAttributes($dancer, $data['attributes']);
@@ -39,12 +40,20 @@ class DancerRepository
 
         $dancer->fill($data['dancer']);
         $dancer->save();
+
         return $dancer;
-//        return $dancer->updata($data['dancer']);
+    }
+
+    public function destroy($id) {
+        $dancer = $this->getById($id);
+        $dancer->delete();
+        $this->deleteAttributes($dancer);
+
+        return $dancer;
     }
 
     public function getByAttributes($id) {
-        $dancer = $this->model->findOrFail($id);
+        $dancer = $this->getById($id);
 
         return $dancer->attributes()->first();
     }
@@ -57,5 +66,9 @@ class DancerRepository
     public function updateAttributes(Dancer $dancer, $attributes) {
 
         return $dancer->attributes()->update($attributes);
+    }
+
+    public function deleteAttributes(Dancer $dancer) {
+        return $dancer->attributes()->delete();
     }
 }
