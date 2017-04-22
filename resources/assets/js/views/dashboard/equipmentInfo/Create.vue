@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-10">
-                            <input type="text" name="describe" class="form-control">
+                            <input type="text" name="describe" class="form-control" placeholder="不填即暂无">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>

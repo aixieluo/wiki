@@ -68,4 +68,25 @@ trait BaseRepository
     public function destroy($id) {
         return $this->getById($id)->delete();
     }
+
+    public function getByAttributes($id) {
+        $this->model = $this->getById($id);
+
+        return $this->model->attributes()->first();
+    }
+
+    public function createAttributes($attributes) {
+
+        return $this->model->attributes()->create($attributes);
+    }
+
+    public function updateAttributes($attributes) {
+
+        return $this->model->attributes()->update($attributes);
+    }
+
+    public function deleteAttributes() {
+
+        return $this->model->attributes()->delete();
+    }
 }

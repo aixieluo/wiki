@@ -13,4 +13,8 @@ class EquipmentRepository
     public function __construct(Equipment $equipment) {
         $this->model = $equipment;
     }
+
+    public function store($data) {
+        $equipment = $this->model->create($data);
+    }
 }

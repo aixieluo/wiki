@@ -36,7 +36,7 @@ class EquipmentController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        $this->equipment->store($request->all());
     }
 
 
