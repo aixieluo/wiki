@@ -16,15 +16,15 @@ class Equipment extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'lv', 'price'];
+    protected $fillable = ['equipment_info_id', 'slot_id', 'main', 'lv', 'price'];
 
     /**
      * 获取装备槽位
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function slots() {
-        return $this->belongsToMany('App\Models\Slot')->withPivot('main');
+    public function slot() {
+        return $this->belongsTo('App\Models\Slot');
     }
 
     public function equipmentInfo() {

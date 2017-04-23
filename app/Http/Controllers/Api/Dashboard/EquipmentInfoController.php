@@ -12,6 +12,7 @@ class EquipmentInfoController extends ApiController
     protected $equipmentInfo;
 
     public function __construct(EquipmentInfoRepository $equipmentInfoRepository) {
+
         parent::__construct();
 
         $this->equipmentInfo = $equipmentInfoRepository;
@@ -22,19 +23,23 @@ class EquipmentInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         return $this->respondWithPaginator($this->equipmentInfo->page(), new EquipmentInfoTransformer);
+    }
+
+    public function getList() {
+        return $this->respondWithCollection($this->equipmentInfo->page(), new EquipmentInfoTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->equipmentInfo->store($request->all());
 
         return $this->noContent();
@@ -43,23 +48,25 @@ class EquipmentInfoController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+
         return $this->respondWithItem($this->equipmentInfo->getById($id), new EquipmentInfoTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
+
         $this->equipmentInfo->update($id, $request->all());
 
         return $this->noContent();
@@ -68,11 +75,12 @@ class EquipmentInfoController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
+
         $this->equipmentInfo->destroy($id);
 
         return $this->noContent();

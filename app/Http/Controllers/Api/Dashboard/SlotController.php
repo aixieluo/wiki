@@ -22,19 +22,22 @@ class SlotController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         return $this->respondWithPaginator($this->slot->page(), new SlotTransformer);
+    }
+
+    public function getList() {
+        return $this->respondWithCollection($this->slot->page(), new SlotTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->slot->store($request->all());
 
         return $this->noContent();
@@ -43,23 +46,23 @@ class SlotController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         return $this->respondWithItem($this->slot->getById($id), new SlotTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $this->slot->update($id, $request->all());
 
         return $this->noContent();
@@ -68,11 +71,11 @@ class SlotController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $this->slot->destroy($id);
 
         return $this->noContent();

@@ -27,9 +27,13 @@
                         title: '名称'
                     },
                     {
-                        name: 'lv',
-                        title: '等级'
+                        name: 'slot',
+                        title: '装备槽位'
                     },
+                    {
+                    name: 'lv',
+                    title: '等级'
+            },
                     {
                         name: 'created_at',
                         title: '创建时间'

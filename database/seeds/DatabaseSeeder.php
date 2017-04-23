@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EquipmentInfosTableSeeder::class);
         $this->call(SlotsTableSeeder::class);
         $this->call(EquipmentsTableSeeder::class);
-        $this->call(EquipmentSlotsTableSeeder::class);
         $this->call(EffectsTableSeeder::class);
         $this->call(EffectablesTableSeeder::class);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Repositories\EquipmentRepository;
+use App\Transformers\AttributeTransformer;
 use App\Transformers\EquipmentTransformer;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class EquipmentController extends ApiController
      */
     public function edit($id)
     {
-        //
+        return $this->respondWithItem($this->equipment->getById($id), new EquipmentTransformer);
     }
 
     /**
@@ -60,7 +61,9 @@ class EquipmentController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->equipment->update($id, $request->all());
+
+        return $this->noContent();
     }
 
     /**
@@ -74,5 +77,10 @@ class EquipmentController extends ApiController
         $this->equipment->destroy($id);
 
         return $this->noContent();
+    }
+
+    public function getByAttributes($id) {
+
+        return $this->respondWithItem($this->equipment->getByAttributes($id), new AttributeTransformer);
     }
 }

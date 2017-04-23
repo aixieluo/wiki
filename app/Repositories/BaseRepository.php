@@ -55,11 +55,6 @@ trait BaseRepository
         return $this->save($this->model, $input);
     }
 
-    public function save($model, $input) {
-
-        return $model->fill($input)->save();
-    }
-
     /**
      * @param $id
      *
@@ -67,6 +62,11 @@ trait BaseRepository
      */
     public function destroy($id) {
         return $this->getById($id)->delete();
+    }
+
+    public function save($model, $input) {
+
+        return $model->fill($input)->save();
     }
 
     public function getByAttributes($id) {

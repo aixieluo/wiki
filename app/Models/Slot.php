@@ -24,7 +24,7 @@ class Slot extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function equipment() {
-        return $this->belongsToMany('App\Models\Equipment')->withPivot('main');
+        return $this->hasMany('App\Models\Equipment');
     }
 
 

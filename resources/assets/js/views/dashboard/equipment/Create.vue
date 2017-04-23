@@ -19,6 +19,47 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">等级</label>
+                        <div class="col-sm-10">
+                            <select name="lv" class="form-control">
+                                <option v-for="n in 10" :value="n">Lv.{{ n }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">售价</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="price" class="form-control">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">装备槽位</label>
+                        <div class="col-sm-10">
+                            <select name="slot_id" class="form-control">
+                                <option v-for="slot in slots" :value="slot.id">{{ slot.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">是否为主槽位</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="main" value="0" checked>否
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="main" value="1">是
+                            </label>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">火力</label>
                         <div class="col-sm-10">
                             <input type="number" name="fire" class="form-control" v-model.number="attributes.fire">
@@ -99,20 +140,25 @@
         data() {
             return {
                 equipmentInfos: {},
+                slots: {},
                 attributes: {}
             }
         },
         mounted() {
-            this.$http.get('equipmentInfo')
-                .then((Response)=>{
-                    this.equipmentInfos = Response.data.data;
+            this.$http.get('equipmentInfos')
+                .then(Response => {
+                    this.equipmentInfos = Response.data.data
+                })
+            this.$http.get('slots')
+                .then(Response => {
+                    this.slots = Response.data.data
                 })
         },
         methods: {
             create(event) {
                 let formData = new FormData(event.target)
 
-                formData.append('attributes', this.attributes)
+                formData.append('attributes', JSON.stringify(this.attributes))
 
                 this.$http.post('equipment', formData)
                     .then(() => {
