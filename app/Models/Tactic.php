@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tactic extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['delete_at'];
+
     /**
      * 拒绝自动填充的字段名单
      *

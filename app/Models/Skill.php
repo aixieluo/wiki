@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['delete_at'];
+
     /**
      * 拒绝自动填充的字段名单
      *

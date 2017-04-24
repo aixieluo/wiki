@@ -20,6 +20,7 @@ class CreateTechnologiesTable extends Migration
             $table->integer('rank')->comment('阶级');
             $table->foreign('technology_type_id')->references('id')->on('technology_types')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

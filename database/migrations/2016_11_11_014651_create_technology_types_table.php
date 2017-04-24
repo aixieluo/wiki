@@ -19,6 +19,7 @@ class CreateTechnologyTypesTable extends Migration
             $table->string('type')->comment('科技类型');
             $table->foreign('technology_categorie_id')->references('id')->on('technology_categories')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

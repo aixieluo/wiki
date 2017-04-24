@@ -35,6 +35,7 @@ class CreateTacticsTable extends Migration
             $table->float('concealment_down', 5, 2)->default(0)->comment('降低装备隐蔽');
             $table->float('spy_down', 5, 2)->default(0)->comment('降低装备侦查');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

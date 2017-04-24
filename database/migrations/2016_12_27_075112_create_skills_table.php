@@ -27,6 +27,7 @@ class CreateSkillsTable extends Migration
             $table->float('concealment_up', 5, 2)->default(0)->comment('提升基础隐蔽');
             $table->float('spy_up', 5, 2)->default(0)->comment('提升基础侦查');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
