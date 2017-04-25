@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Skill extends Model
 {
@@ -11,11 +12,26 @@ class Skill extends Model
     protected $dates = ['delete_at'];
 
     /**
-     * 拒绝自动填充的字段名单
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'skill_info_id',
+        'lv',
+        'fire_up',
+        'penetrate_up',
+        'durable_up',
+        'armor_up',
+        'hit_up',
+        'dodge_up',
+        'concealment_up',
+        'spy_up',
+    ];
+
+    public function skillInfo() {
+        return $this->belongsTo('App\Models\SkillInfo');
+    }
 
     public function skillNames() {
         return $this->where('lv', 1)->select('name')->get();

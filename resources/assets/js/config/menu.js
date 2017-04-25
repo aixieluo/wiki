@@ -53,5 +53,25 @@ export default [
         label: '科技类型（二级）',
         url: '/dashboard/technologyType',
         icon: 'fa fa-th-large'
+    },
+    {
+        label: '战术信息',
+        url: '/dashboard/tacticInfo',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '战术',
+        url: '/dashboard/tactic',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '辎械信息',
+        url: '/dashboard/skillInfo',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '辎械',
+        url: '/dashboard/skill',
+        icon: 'fa fa-th-large'
     }
 ]

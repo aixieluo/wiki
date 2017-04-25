@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Effect extends Model
+class SkillInfo extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['delete_at'];
+
 
     /**
      * The attributes that are mass assignable.
@@ -21,11 +22,7 @@ class Effect extends Model
         'describe'
     ];
 
-    /**
-     * 特性
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function technologies() {
-        return $this->morphedByMany('App\Models\Technology', 'effectable');
+    public function skills() {
+        $this->hasMany('App\Models\Skill');
     }
 }

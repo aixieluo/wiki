@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="装备信息"></vue-head>
+        <vue-head headTitle="装备"></vue-head>
 
         <vue-form>
             <template slot="buttons">

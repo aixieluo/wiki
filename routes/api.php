@@ -85,4 +85,14 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
 
     Route::resource('technology', 'TechnologyController', ['except' => ['show', 'create']]);
     Route::get('technology/attributes/{id}', 'TechnologyController@getByAttributes');
+
+    Route::resource('tacticInfo', 'TacticInfoController', ['except' => ['show', 'create']]);
+    Route::get('tacticInfos', 'TacticInfoController@getList');
+
+    Route::resource('tactic', 'TacticController', ['except' => ['show', 'create']]);
+
+    Route::resource('skillInfo', 'SkillInfoController', ['except' => ['show', 'create']]);
+    Route::get('skillInfos', 'SkillInfoController@getList');
+
+    Route::resource('skill', 'SkillController', ['except' => ['show', 'create']]);
 });

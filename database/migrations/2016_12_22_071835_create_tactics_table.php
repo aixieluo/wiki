@@ -15,9 +15,8 @@ class CreateTacticsTable extends Migration
     {
         Schema::create('tactics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('战术名称');//瑕疵，战术名称重复，没有提取出来
+            $table->integer('tactic_info_id')->unsigned()->comment('战术信息外键');
             $table->integer('lv')->comment('战术等级');
-            $table->string('describe')->comment('战术描述');
             $table->float('fire_up', 5, 2)->default(0)->comment('提升基础火力');
             $table->float('penetrate_up', 5, 2)->default(0)->comment('提升基础穿甲');
             $table->float('durable_up', 5, 2)->default(0)->comment('提升基础耐久');
