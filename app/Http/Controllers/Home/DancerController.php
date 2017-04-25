@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\Home;
 
 use App\Models\Dancer;
+use App\Repositories\DancerRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DancerController extends Controller {
+class DancerController extends Controller
+{
+    protected $dancerRepository;
+
+    public function __construct(DancerRepository $dancerRepository) {
+        $this->dancerRepository = $dancerRepository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -50,12 +57,9 @@ class DancerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
+        $dancer = $this->dancerRepository->getByDetailInfo($id);
 
-        $mdancer = new Dancer();
-        $dancer = $mdancer->own($id);
-        $photos = $mdancer->photos($id);
-
-        return view('home.dancer.show', compact('dancer', 'photos'));
+        return view('home.dancer.show', compact('dancer'));
     }
 
     /**

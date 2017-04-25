@@ -45,4 +45,10 @@ class DancerRepository
 
         return $this->deleteAttributes();
     }
+
+    public function getByDetailInfo($id) {
+        $this->model = $this->model->with('country')->get();
+        dd($this->model->toArray());
+
+    }
 }
