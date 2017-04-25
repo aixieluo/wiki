@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 class TypeController extends ApiController
 {
 
-    protected $type;
+    protected $typeRepository;
 
     public function __construct(TypeRepository $typeRepository) {
         parent::__construct();
 
-        $this->type = $typeRepository;
+        $this->typeRepository = $typeRepository;
     }
 
     /**
@@ -25,12 +25,12 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->type->page(), new TypeTransformer);
+        return $this->respondWithPaginator($this->typeRepository->page(), new TypeTransformer);
     }
 
     public function getList() {
 
-        return $this->respondWithCollection($this->type->page(), new TypeTransformer);
+        return $this->respondWithCollection($this->typeRepository->page(), new TypeTransformer);
     }
 
     /**
@@ -41,7 +41,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(TypeRequest $request) {
-        $this->type->store($request->all());
+        $this->typeRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -54,7 +54,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->type->getById($id), new TypeTransformer);
+        return $this->respondWithItem($this->typeRepository->getById($id), new TypeTransformer);
     }
 
     /**
@@ -66,7 +66,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(TypeRequest $request, $id) {
-        $this->type->update($id, $request->all());
+        $this->typeRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -79,7 +79,7 @@ class TypeController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->type->destroy($id);
+        $this->typeRepository->destroy($id);
 
         return $this->noContent();
     }

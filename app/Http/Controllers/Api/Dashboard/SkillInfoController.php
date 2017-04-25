@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class SkillInfoController extends ApiController
 {
-    protected $skillInfo;
+    protected $skillInfoRepository;
 
     public function __construct(SkillInfoRepository $skillInfoRepository) {
         parent::__construct();
 
-        $this->skillInfo = $skillInfoRepository;
+        $this->skillInfoRepository = $skillInfoRepository;
     }
 
     /**
@@ -23,11 +23,11 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->skillInfo->page(), new SkillInfoTransformer);
+        return $this->respondWithPaginator($this->skillInfoRepository->page(), new SkillInfoTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->skillInfo->page(), new SkillInfoTransformer);
+        return $this->respondWithCollection($this->skillInfoRepository->page(), new SkillInfoTransformer);
     }
 
     /**
@@ -38,7 +38,7 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->skillInfo->store($request->all());
+        $this->skillInfoRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -51,7 +51,7 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->skillInfo->getById($id), new SkillInfoTransformer);
+        return $this->respondWithItem($this->skillInfoRepository->getById($id), new SkillInfoTransformer);
     }
 
     /**
@@ -63,7 +63,7 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->skillInfo->update($id, $request->all());
+        $this->skillInfoRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -76,7 +76,7 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->skillInfo->destroy($id);
+        $this->skillInfoRepository->destroy($id);
 
         return $this->noContent();
     }

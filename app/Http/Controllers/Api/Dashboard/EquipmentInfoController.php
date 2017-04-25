@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class EquipmentInfoController extends ApiController
 {
-    protected $equipmentInfo;
+    protected $equipmentInfoRepository;
 
     public function __construct(EquipmentInfoRepository $equipmentInfoRepository) {
 
         parent::__construct();
 
-        $this->equipmentInfo = $equipmentInfoRepository;
+        $this->equipmentInfoRepository = $equipmentInfoRepository;
     }
 
     /**
@@ -25,11 +25,11 @@ class EquipmentInfoController extends ApiController
      */
     public function index() {
 
-        return $this->respondWithPaginator($this->equipmentInfo->page(), new EquipmentInfoTransformer);
+        return $this->respondWithPaginator($this->equipmentInfoRepository->page(), new EquipmentInfoTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->equipmentInfo->page(), new EquipmentInfoTransformer);
+        return $this->respondWithCollection($this->equipmentInfoRepository->page(), new EquipmentInfoTransformer);
     }
 
     /**
@@ -40,7 +40,7 @@ class EquipmentInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->equipmentInfo->store($request->all());
+        $this->equipmentInfoRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -54,7 +54,7 @@ class EquipmentInfoController extends ApiController
      */
     public function edit($id) {
 
-        return $this->respondWithItem($this->equipmentInfo->getById($id), new EquipmentInfoTransformer);
+        return $this->respondWithItem($this->equipmentInfoRepository->getById($id), new EquipmentInfoTransformer);
     }
 
     /**
@@ -67,7 +67,7 @@ class EquipmentInfoController extends ApiController
      */
     public function update(Request $request, $id) {
 
-        $this->equipmentInfo->update($id, $request->all());
+        $this->equipmentInfoRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -81,7 +81,7 @@ class EquipmentInfoController extends ApiController
      */
     public function destroy($id) {
 
-        $this->equipmentInfo->destroy($id);
+        $this->equipmentInfoRepository->destroy($id);
 
         return $this->noContent();
     }

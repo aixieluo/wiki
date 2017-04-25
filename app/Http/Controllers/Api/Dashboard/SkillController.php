@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class SkillController extends ApiController
 {
-    protected $skill;
+    protected $skillRepository;
 
     public function __construct(SkillRepository $skillRepository) {
         parent::__construct();
 
-        $this->skill = $skillRepository;
+        $this->skillRepository = $skillRepository;
     }
 
     /**
@@ -24,7 +24,7 @@ class SkillController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPaginator($this->skill->page(), new SkillTransformer);
+        return $this->respondWithPaginator($this->skillRepository->page(), new SkillTransformer);
     }
 
     /**
@@ -35,7 +35,7 @@ class SkillController extends ApiController
      */
     public function store(Request $request)
     {
-        $this->skill->store($request->all());
+        $this->skillRepository->store($request->all());
     }
 
     /**
@@ -46,7 +46,7 @@ class SkillController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->skill->getById($id), new SkillTransformer);
+        return $this->respondWithItem($this->skillRepository->getById($id), new SkillTransformer);
     }
 
     /**
@@ -58,7 +58,7 @@ class SkillController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $this->skill->update($id, $request->all());
+        $this->skillRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -71,7 +71,7 @@ class SkillController extends ApiController
      */
     public function destroy($id)
     {
-        $this->skill->destroy($id);
+        $this->skillRepository->destroy($id);
 
         return $this->noContent();
     }

@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class DancerController extends ApiController
 {
-    protected $dancer;
+    protected $dancerRepository;
 
     public function __construct(DancerRepository $dancerRepository) {
         parent::__construct();
 
-        $this->dancer = $dancerRepository;
+        $this->dancerRepository = $dancerRepository;
     }
 
     /**
@@ -24,7 +24,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->dancer->page(), new DancerTransformer);
+        return $this->respondWithPaginator($this->dancerRepository->page(), new DancerTransformer);
     }
 
     /**
@@ -35,7 +35,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->dancer->store($request->all());
+        $this->dancerRepository->store($request->all());
     }
 
     /**
@@ -46,7 +46,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->dancer->getById($id), new DancerTransformer);
+        return $this->respondWithItem($this->dancerRepository->getById($id), new DancerTransformer);
     }
 
     /**
@@ -58,7 +58,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->dancer->update($id, $request->all());
+        $this->dancerRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -71,13 +71,13 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->dancer->destroy($id);
+        $this->dancerRepository->destroy($id);
 
         return $this->noContent();
     }
 
     public function getByAttributes($id) {
 
-        return $this->respondWithItem($this->dancer->getByAttributes($id), new AttributeTransformer);
+        return $this->respondWithItem($this->dancerRepository->getByAttributes($id), new AttributeTransformer);
     }
 }

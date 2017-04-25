@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class SlotController extends ApiController
 {
-    protected $slot;
+    protected $slotRepository;
 
     public function __construct(SlotRepository $slotRepository) {
         parent::__construct();
 
-        $this->slot = $slotRepository;
+        $this->slotRepository = $slotRepository;
     }
 
     /**
@@ -23,11 +23,11 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->slot->page(), new SlotTransformer);
+        return $this->respondWithPaginator($this->slotRepository->page(), new SlotTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->slot->page(), new SlotTransformer);
+        return $this->respondWithCollection($this->slotRepository->page(), new SlotTransformer);
     }
 
     /**
@@ -38,7 +38,7 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->slot->store($request->all());
+        $this->slotRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -51,7 +51,7 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->slot->getById($id), new SlotTransformer);
+        return $this->respondWithItem($this->slotRepository->getById($id), new SlotTransformer);
     }
 
     /**
@@ -63,7 +63,7 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->slot->update($id, $request->all());
+        $this->slotRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -76,7 +76,7 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->slot->destroy($id);
+        $this->slotRepository->destroy($id);
 
         return $this->noContent();
     }

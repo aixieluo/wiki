@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TechnologyController extends ApiController
 {
-    protected $technology;
+    protected $technologyRepository;
 
     public function __construct(TechnologyRepository $technologyRepository) {
         parent::__construct();
 
-        $this->technology = $technologyRepository;
+        $this->technologyRepository = $technologyRepository;
     }
 
     /**
@@ -23,7 +23,7 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->technology->page(), new TechnologyTransformer);
+        return $this->respondWithPaginator($this->technologyRepository->page(), new TechnologyTransformer);
     }
 
     /**
@@ -34,7 +34,7 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->technology->store($request->all());
+        $this->technologyRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -47,7 +47,7 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->technology->getById($id), new TechnologyTransformer);
+        return $this->respondWithItem($this->technologyRepository->getById($id), new TechnologyTransformer);
     }
 
     /**
@@ -59,7 +59,7 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->technology->update($id, $request->all());
+        $this->technologyRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -72,7 +72,7 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->technology->destroy($id);
+        $this->technologyRepository->destroy($id);
 
         return $this->noContent();
     }

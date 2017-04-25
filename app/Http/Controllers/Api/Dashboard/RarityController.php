@@ -9,12 +9,12 @@ use App\Transformers\RarityTransformer;
 
 class RarityController extends ApiController
 {
-    protected $rarity;
+    protected $rarityRepository;
 
     public function __construct(RarityRepository $rarityRepository) {
         parent::__construct();
 
-        $this->rarity = $rarityRepository;
+        $this->rarityRepository = $rarityRepository;
     }
 
     /**
@@ -23,12 +23,12 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->rarity->page(), new RarityTransformer);
+        return $this->respondWithPaginator($this->rarityRepository->page(), new RarityTransformer);
     }
 
     public function getList() {
 
-        return $this->respondWithCollection($this->rarity->page(), new RarityTransformer);
+        return $this->respondWithCollection($this->rarityRepository->page(), new RarityTransformer);
     }
 
     /**
@@ -39,7 +39,7 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(RarityRequest $request) {
-        $this->rarity->store($request->all());
+        $this->rarityRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -52,7 +52,7 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->rarity->getById($id), new RarityTransformer);
+        return $this->respondWithItem($this->rarityRepository->getById($id), new RarityTransformer);
     }
 
     /**
@@ -64,7 +64,7 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(RarityRequest $request, $id) {
-        $this->rarity->update($id, $request->all());
+        $this->rarityRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -77,7 +77,7 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->rarity->destroy($id);
+        $this->rarityRepository->destroy($id);
 
         return $this->noContent();
     }

@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TacticController extends ApiController
 {
-    protected $tactic;
+    protected $tacticRepository;
 
     public function __construct(TacticRepository $tacticRepository) {
         parent::__construct();
 
-        $this->tactic = $tacticRepository;
+        $this->tacticRepository = $tacticRepository;
     }
 
     /**
@@ -23,7 +23,7 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->tactic->page(), new TacticTransformer);
+        return $this->respondWithPaginator($this->tacticRepository->page(), new TacticTransformer);
     }
 
     /**
@@ -34,7 +34,7 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->tactic->store($request->all());
+        $this->tacticRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -47,7 +47,7 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->tactic->getById($id), new TacticTransformer);
+        return $this->respondWithItem($this->tacticRepository->getById($id), new TacticTransformer);
     }
 
     /**
@@ -59,7 +59,7 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->tactic->update($id, $request->all());
+        $this->tacticRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -72,7 +72,7 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->tactic->destroy($id);
+        $this->tacticRepository->destroy($id);
 
         return $this->noContent();
     }

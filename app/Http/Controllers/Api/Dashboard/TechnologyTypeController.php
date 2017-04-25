@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TechnologyTypeController extends ApiController
 {
-    protected $technologyType;
+    protected $technologyTypeRepository;
 
     public function __construct(TechnologyTypeRepository $technologyTypeRepository) {
         parent::__construct();
 
-        $this->technologyType = $technologyTypeRepository;
+        $this->technologyTypeRepository = $technologyTypeRepository;
     }
 
     /**
@@ -24,11 +24,11 @@ class TechnologyTypeController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPaginator($this->technologyType->page(), new TechnologyTypeTransformer);
+        return $this->respondWithPaginator($this->technologyTypeRepository->page(), new TechnologyTypeTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->technologyType->page(), new TechnologyTypeTransformer);
+        return $this->respondWithCollection($this->technologyTypeRepository->page(), new TechnologyTypeTransformer);
     }
 
     /**
@@ -39,7 +39,7 @@ class TechnologyTypeController extends ApiController
      */
     public function store(Request $request)
     {
-        $this->technologyType->store($request->all());
+        $this->technologyTypeRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -52,7 +52,7 @@ class TechnologyTypeController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->technologyType->getById($id), new TechnologyTypeTransformer);
+        return $this->respondWithItem($this->technologyTypeRepository->getById($id), new TechnologyTypeTransformer);
     }
 
     /**
@@ -64,7 +64,7 @@ class TechnologyTypeController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $this->technologyType->update($id, $request->all());
+        $this->technologyTypeRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -77,7 +77,7 @@ class TechnologyTypeController extends ApiController
      */
     public function destroy($id)
     {
-        $this->technologyType->destroy($id);
+        $this->technologyTypeRepository->destroy($id);
 
         return $this->noContent();
     }

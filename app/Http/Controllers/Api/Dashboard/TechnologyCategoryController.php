@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TechnologyCategoryController extends ApiController
 {
-    protected $technologyCategory;
+    protected $technologyCategoryRepository;
 
     public function __construct(TechnologyCategoryRepository $technologyCategoryRepository) {
         parent::__construct();
 
-        $this->technologyCategory = $technologyCategoryRepository;
+        $this->technologyCategoryRepository = $technologyCategoryRepository;
     }
 
     /**
@@ -23,11 +23,11 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->technologyCategory->page(), new TechnologyCategoryTransformer);
+        return $this->respondWithPaginator($this->technologyCategoryRepository->page(), new TechnologyCategoryTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->technologyCategory->page(), new TechnologyCategoryTransformer);
+        return $this->respondWithCollection($this->technologyCategoryRepository->page(), new TechnologyCategoryTransformer);
     }
 
     /**
@@ -38,7 +38,7 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->technologyCategory->store($request->all());
+        $this->technologyCategoryRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -51,7 +51,7 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->technologyCategory->getById($id), new TechnologyCategoryTransformer);
+        return $this->respondWithItem($this->technologyCategoryRepository->getById($id), new TechnologyCategoryTransformer);
     }
 
     /**
@@ -63,7 +63,7 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->technologyCategory->update($id, $request->all());
+        $this->technologyCategoryRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -76,7 +76,7 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->technologyCategory->destroy($id);
+        $this->technologyCategoryRepository->destroy($id);
 
         return $this->noContent();
     }

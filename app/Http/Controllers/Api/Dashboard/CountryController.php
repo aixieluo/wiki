@@ -9,12 +9,12 @@ use App\Transformers\CountryTransformer;
 
 class CountryController extends ApiController
 {
-    protected $country;
+    protected $countryRepository;
 
     public function __construct(CountryRepository $countryRepository) {
         parent::__construct();
 
-        $this->country = $countryRepository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -24,12 +24,12 @@ class CountryController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPaginator($this->country->page(), new CountryTransformer);
+        return $this->respondWithPaginator($this->countryRepository->page(), new CountryTransformer);
     }
 
     public function getList() {
 
-        return $this->respondWithCollection($this->country->page(), new CountryTransformer);
+        return $this->respondWithCollection($this->countryRepository->page(), new CountryTransformer);
     }
 
     /**
@@ -40,7 +40,7 @@ class CountryController extends ApiController
      */
     public function store(CountryRequest $request)
     {
-        $this->country->store($request->all());
+        $this->countryRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -53,7 +53,7 @@ class CountryController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->country->getById($id), new CountryTransformer);
+        return $this->respondWithItem($this->countryRepository->getById($id), new CountryTransformer);
     }
 
     /**
@@ -65,7 +65,7 @@ class CountryController extends ApiController
      */
     public function update(CountryRequest $request, $id)
     {
-        $this->country->update($id, $request->all());
+        $this->countryRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -78,7 +78,7 @@ class CountryController extends ApiController
      */
     public function destroy($id)
     {
-        $this->country->destroy($id);
+        $this->countryRepository->destroy($id);
 
         return $this->noContent();
     }

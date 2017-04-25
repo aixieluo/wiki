@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TacticInfoController extends ApiController
 {
-    protected $tacticInfo;
+    protected $tacticInfoRepository;
 
     public function __construct(TacticInfoRepository $tacticInfoRepository) {
         parent::__construct();
 
-        $this->tacticInfo = $tacticInfoRepository;
+        $this->tacticInfoRepository = $tacticInfoRepository;
     }
 
     /**
@@ -24,11 +24,11 @@ class TacticInfoController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPaginator($this->tacticInfo->page(), new TacticInfoTransformer);
+        return $this->respondWithPaginator($this->tacticInfoRepository->page(), new TacticInfoTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->tacticInfo->page(), new TacticInfoTransformer);
+        return $this->respondWithCollection($this->tacticInfoRepository->page(), new TacticInfoTransformer);
     }
 
     /**
@@ -39,7 +39,7 @@ class TacticInfoController extends ApiController
      */
     public function store(Request $request)
     {
-        $this->tacticInfo->store($request->all());
+        $this->tacticInfoRepository->store($request->all());
 
         return $this->noContent();
     }
@@ -52,7 +52,7 @@ class TacticInfoController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->tacticInfo->getById($id), new TacticInfoTransformer);
+        return $this->respondWithItem($this->tacticInfoRepository->getById($id), new TacticInfoTransformer);
     }
 
     /**
@@ -64,7 +64,7 @@ class TacticInfoController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $this->tacticInfo->update($id, $request->all());
+        $this->tacticInfoRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -77,7 +77,7 @@ class TacticInfoController extends ApiController
      */
     public function destroy($id)
     {
-        $this->tacticInfo->destroy($id);
+        $this->tacticInfoRepository->destroy($id);
 
         return $this->noContent();
     }

@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 class EquipmentController extends ApiController
 {
 
-    protected $equipment;
+    protected $equipmentRepository;
 
     public function __construct(EquipmentRepository $equipmentRepository) {
         parent::__construct();
 
-        $this->equipment = $equipmentRepository;
+        $this->equipmentRepository = $equipmentRepository;
     }
 
     /**
@@ -26,7 +26,7 @@ class EquipmentController extends ApiController
      */
     public function index()
     {
-        return $this->respondWithPaginator($this->equipment->page(), new EquipmentTransformer);
+        return $this->respondWithPaginator($this->equipmentRepository->page(), new EquipmentTransformer);
     }
 
     /**
@@ -37,7 +37,7 @@ class EquipmentController extends ApiController
      */
     public function store(Request $request)
     {
-        $this->equipment->store($request->all());
+        $this->equipmentRepository->store($request->all());
     }
 
 
@@ -49,7 +49,7 @@ class EquipmentController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->equipment->getById($id), new EquipmentTransformer);
+        return $this->respondWithItem($this->equipmentRepository->getById($id), new EquipmentTransformer);
     }
 
     /**
@@ -61,7 +61,7 @@ class EquipmentController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $this->equipment->update($id, $request->all());
+        $this->equipmentRepository->update($id, $request->all());
 
         return $this->noContent();
     }
@@ -74,13 +74,13 @@ class EquipmentController extends ApiController
      */
     public function destroy($id)
     {
-        $this->equipment->destroy($id);
+        $this->equipmentRepository->destroy($id);
 
         return $this->noContent();
     }
 
     public function getByAttributes($id) {
 
-        return $this->respondWithItem($this->equipment->getByAttributes($id), new AttributeTransformer);
+        return $this->respondWithItem($this->equipmentRepository->getByAttributes($id), new AttributeTransformer);
     }
 }
