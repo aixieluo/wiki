@@ -11,6 +11,6 @@ class RaritiesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Rarity::class, 10)->create();
+        factory(\App\Models\Rarity::class, 3)->create();
     }
 }

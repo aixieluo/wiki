@@ -40,6 +40,71 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">火力</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="fire" class="form-control" v-model.number="attributes.fire">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">穿甲</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="penetrate" class="form-control" v-model.number="attributes.penetrate">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">耐久</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="durable" class="form-control" v-model.number="attributes.durable">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">装甲</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="armor" class="form-control" v-model.number="attributes.armor">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">命中</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="hit" class="form-control" v-model.number="attributes.hit">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">闪避</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="dodge" class="form-control" v-model.number="attributes.dodge">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">隐蔽</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="concealment" class="form-control" v-model.number="attributes.concealment">
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">侦查</label>
+                        <div class="col-sm-10">
+                            <input type="number" step="0.01" name="spy" class="form-control" v-model.number="attributes.spy">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary">保存内容</button>
                         </div>
@@ -54,7 +119,8 @@
     export default {
         data(){
             return {
-                technologyTypes: {}
+                technologyTypes: {},
+                attributes: {}
             }
         },
         mounted() {
@@ -66,6 +132,8 @@
         methods: {
             create(event) {
                 let formData = new FormData(event.target)
+
+                formData.append('attributes', JSON.stringify(this.attributes))
 
                 this.$http.post('technology', formData)
                     .then(() => {
