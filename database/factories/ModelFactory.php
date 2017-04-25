@@ -72,7 +72,7 @@ $factory->define(\App\Models\Dancer::class, function (Faker\Generator $faker) {
 //科技类别表
 $factory->define(\App\Models\TechnologyCategory::class, function (Faker\Generator $faker) {
     return [
-        'category' => $faker->randomElement(["主炮", "防护", "车体", "引擎"]),
+        'content' => $faker->randomElement(["主炮", "防护", "车体", "引擎"]),
     ];
 });
 
@@ -85,8 +85,8 @@ $factory->define(\App\Models\TechnologyType::class, function (Faker\Generator $f
         "引擎" => array("综合引擎"),
     );
     return [
-        'technology_categorie_id' => $faker->randomElement(\App\Models\TechnologyCategory::pluck('id')->toArray()),
-        'type' => $faker->randomElement(["AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH", "标准防护", "重装防护", "轻薄防护", "综合车体", "综合引擎"]),
+        'technology_category_id' => $faker->randomElement(\App\Models\TechnologyCategory::pluck('id')->toArray()),
+        'content' => $faker->randomElement(["AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH", "标准防护", "重装防护", "轻薄防护", "综合车体", "综合引擎"]),
     ];
 });
 

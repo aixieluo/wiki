@@ -12,6 +12,14 @@ class TechnologyCategory extends Model
     protected $dates = ['delete_at'];
 
     protected $fillable = [
-        'category'
+        'content'
     ];
+
+    public function technologyTypes() {
+        return $this->hasMany('App\Models\TechnologyType');
+    }
+
+    public function technologies() {
+        return $this->hasManyThrough('App\Models\Technology', 'App\Models\TechnologyType');
+    }
 }

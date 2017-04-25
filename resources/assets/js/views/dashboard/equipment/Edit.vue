@@ -165,13 +165,12 @@
         },
         methods: {
             edit(event) {
-                console.log(this.equipment.main);
                 this.$http.put('equipment/' + this.$route.params.id, {
                     equipment: this.equipment,
                     attributes: this.attributes
                 })
                     .then(() => {
-                        toastr.success('创建成功！')
+                        toastr.success('修改成功！')
 
                         this.$router.push('/dashboard/equipment')
                     })

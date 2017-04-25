@@ -1,25 +1,17 @@
 <template>
     <div>
-        <vue-head headTitle="稀有度"></vue-head>
+        <vue-head headTitle="科技类别（一级）"></vue-head>
 
         <vue-form>
             <template slot="buttons">
-                <router-link to="/dashboard/rarity" class="btn btn-default" exact>返回</router-link>
+                <router-link to="/dashboard/technologyCategory" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="edit">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">稀有级别</label>
+                        <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="number" name="level" class="form-control" v-model="rarity.level">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">稀有度</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control" v-model="rarity.content">
+                            <input type="text" name="content" class="form-control" v-model="technologyCategory.content">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -39,23 +31,23 @@
     export default {
         data() {
             return {
-                rarity: {}
+                technologyCategory: {}
             }
         },
         mounted() {
-            this.$http.get('rarity/' + this.$route.params.id + '/edit')
+            this.$http.get('technologyCategory/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.rarity = response.data.data
+                    this.technologyCategory = response.data.data
                 })
         },
         methods: {
             edit(event) {
 
-                this.$http.put('rarity/' + this.$route.params.id, this.rarity)
+                this.$http.put('technologyCategory/' + this.$route.params.id, this.technologyCategory)
                     .then(() => {
                         toastr.success('修改成功！')
 
-                        this.$router.push('/dashboard/rarity')
+                        this.$router.push('/dashboard/technologyCategory')
                     })
             }
         }

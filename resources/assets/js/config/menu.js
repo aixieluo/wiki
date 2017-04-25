@@ -25,6 +25,11 @@ export default [
         icon: 'fa fa-th-large'
     },
     {
+        label: '装备',
+        url: '/dashboard/equipment',
+        icon: 'fa fa-th-large'
+    },
+    {
         label: '装备槽',
         url: '/dashboard/slot',
         icon: 'fa fa-th-large'
@@ -35,8 +40,18 @@ export default [
         icon: 'fa fa-th-large'
     },
     {
-        label: '装备属性',
-        url: '/dashboard/equipment',
+        label: '科技',
+        url: '/dashboard/technology',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '科技类别（一级）',
+        url: '/dashboard/technologyCategory',
+        icon: 'fa fa-th-large'
+    },
+    {
+        label: '科技类型（二级）',
+        url: '/dashboard/technologyType',
         icon: 'fa fa-th-large'
     }
 ]

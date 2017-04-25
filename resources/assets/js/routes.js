@@ -21,7 +21,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/dancer/Dancer.vue'),
+                        component: require('./views/dashboard/dancer/Index.vue'),
                     },
                     {
                         path: 'create',
@@ -39,7 +39,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/type/Type.vue')
+                        component: require('./views/dashboard/type/Index.vue')
                     },
                     {
                         path: 'create',
@@ -57,7 +57,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/country/Country.vue')
+                        component: require('./views/dashboard/country/Index.vue')
                     },
                     {
                         path: 'create',
@@ -75,7 +75,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/rarity/Rarity.vue')
+                        component: require('./views/dashboard/rarity/Index.vue')
                     },
                     {
                         path: 'create',
@@ -93,7 +93,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/slot/Slot.vue')
+                        component: require('./views/dashboard/slot/Index.vue')
                     },
                     {
                         path: 'create',
@@ -111,7 +111,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/equipment/Equipment.vue')
+                        component: require('./views/dashboard/equipment/Index.vue')
                     },
                     {
                         path: 'create',
@@ -129,7 +129,7 @@ export default [
                 children: [
                     {
                         path: '/',
-                        component: require('./views/dashboard/equipmentInfo/EquipmentInfo.vue')
+                        component: require('./views/dashboard/equipmentInfo/Index.vue')
                     },
                     {
                         path: 'create',
@@ -138,6 +138,60 @@ export default [
                     {
                         path: ':id/edit',
                         component: require('./views/dashboard/equipmentInfo/Edit.vue')
+                    }
+                ]
+            },
+            {
+                path: 'technologyCategory',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/technologyCategory/Index.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/technologyCategory/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/technologyCategory/Edit.vue')
+                    }
+                ]
+            },
+            {
+                path: 'technologyType',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/technologyType/Index.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/technologyType/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/technologyType/Edit.vue')
+                    }
+                ]
+            },
+            {
+                path: 'technology',
+                component: Parent,
+                children: [
+                    {
+                        path: '/',
+                        component: require('./views/dashboard/technology/Index.vue')
+                    },
+                    {
+                        path: 'create',
+                        component: require('./views/dashboard/technology/Create.vue')
+                    },
+                    {
+                        path: ':id/edit',
+                        component: require('./views/dashboard/technology/Edit.vue')
                     }
                 ]
             }

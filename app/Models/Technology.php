@@ -17,7 +17,7 @@ class Technology extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'category', 'type', 'rank'
+        'name', 'technology_type_id', 'rank'
     ];
 
     /**
@@ -27,6 +27,10 @@ class Technology extends Model
      */
     public function dancers() {
         return $this->belongsToMany('App\Models\Dancer');
+    }
+
+    public function technologyType() {
+        return $this->belongsTo('App\Models\TechnologyType');
     }
 
     /**

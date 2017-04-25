@@ -13,6 +13,14 @@ class TechnologyType extends Model
 
     protected $fillable = [
         'technology_category_id',
-        'type'
+        'content'
     ];
+
+    public function technologyCategory() {
+        return $this->belongsTo('App\Models\TechnologyCategory');
+    }
+
+    public function technologies() {
+        return $this->hasMany('App\Models\Technology');
+    }
 }

@@ -26,7 +26,7 @@ class Attribute extends Model
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function attributeable(){
-        return $this->morphTO();
+        return $this->morphTo();
     }
 
 

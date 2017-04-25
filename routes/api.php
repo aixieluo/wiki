@@ -76,4 +76,13 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
 
     Route::resource('slot', 'SlotController', ['except' => ['show', 'create']]);
     Route::get('slots', 'SlotController@getList');
+
+    Route::resource('technologyCategory', 'TechnologyCategoryController', ['except' => ['show', 'create']]);
+    Route::get('technologyCategories', 'TechnologyCategoryController@getList');
+
+    Route::resource('technologyType', 'TechnologyTypeController', ['except' => ['show', 'create']]);
+    Route::get('technologyTypes', 'TechnologyTypeController@getList');
+
+    Route::resource('technology', 'TechnologyController', ['except' => ['show', 'create']]);
+    Route::get('technology/attributes/{id}', 'TechnologyController@getByAttributes');
 });
