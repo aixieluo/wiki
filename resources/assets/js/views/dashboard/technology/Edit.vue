@@ -129,6 +129,10 @@
                 .then((Response) => {
                     this.technologyTypes = Response.data.data
                 })
+            this.$http.get('technology/attributes/'+ this.$route.params.id)
+                .then(Response => {
+                    this.attributes = Response.data.data
+                })
             this.$http.get('technology/' + this.$route.params.id + '/edit')
                 .then((response) => {
                     this.technology = response.data.data

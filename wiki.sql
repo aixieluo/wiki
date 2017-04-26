@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.1.19-MariaDB)
-# Date: 2017-04-26 01:00:36
+# Date: 2017-04-26 21:39:53
 # Generator: MySQL-Front 5.4  (Build 4.80) - http://www.mysqlfront.de/
 
 /*!40101 SET NAMES utf8 */;
@@ -47,13 +47,13 @@ CREATE TABLE `attributes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "attributes"
 #
 
-INSERT INTO `attributes` VALUES (1,1,'App\\Models\\Dancer',652.00,219.00,555.00,173.00,110.00,85.00,75.00,80.00,'2017-04-25 16:08:18','2017-04-25 16:08:42',NULL);
+INSERT INTO `attributes` VALUES (1,1,'App\\Models\\Dancer',652.00,219.00,555.00,173.00,110.00,85.00,75.00,80.00,'2017-04-25 16:08:18','2017-04-25 16:08:42',NULL),(2,1,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:18:56','2017-04-26 13:18:56',NULL),(3,2,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:20','2017-04-26 13:19:43',NULL),(4,3,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:34','2017-04-26 13:19:34',NULL),(5,4,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:56','2017-04-26 13:19:56',NULL),(6,5,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:08','2017-04-26 13:20:08',NULL),(7,6,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:21','2017-04-26 13:20:21',NULL),(8,7,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:35','2017-04-26 13:20:35',NULL),(9,8,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:54','2017-04-26 13:20:54',NULL),(10,9,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:04','2017-04-26 13:21:57',NULL),(11,10,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:28','2017-04-26 13:22:20',NULL),(12,11,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:08','2017-04-26 13:29:08',NULL),(13,12,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:24','2017-04-26 13:29:24',NULL),(14,1,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:34:57','2017-04-26 13:34:57',NULL),(15,2,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:29','2017-04-26 13:35:29',NULL),(16,3,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:45','2017-04-26 13:35:45',NULL),(17,4,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:57','2017-04-26 13:35:57',NULL),(18,5,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:15','2017-04-26 13:36:15',NULL),(19,6,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:35','2017-04-26 13:36:35',NULL),(20,7,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:47','2017-04-26 13:36:47',NULL);
 
 #
 # Structure for table "consumptions"
@@ -145,12 +145,13 @@ CREATE TABLE `equipment_infos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "equipment_infos"
 #
 
+INSERT INTO `equipment_infos` VALUES (1,'炮座','','2017-04-26 13:33:40','2017-04-26 13:33:40',NULL),(2,'改装','','2017-04-26 13:33:46','2017-04-26 13:33:46',NULL),(3,'外身','','2017-04-26 13:33:51','2017-04-26 13:33:51',NULL),(4,'内壁','','2017-04-26 13:33:57','2017-04-26 13:33:57',NULL),(5,'内仓','','2017-04-26 13:34:03','2017-04-26 13:34:03',NULL),(6,'炮架','','2017-04-26 13:34:09','2017-04-26 13:34:09',NULL),(7,'特殊','','2017-04-26 13:34:14','2017-04-26 13:34:14',NULL);
 
 #
 # Structure for table "images"
@@ -244,12 +245,13 @@ CREATE TABLE `skill_infos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "skill_infos"
 #
 
+INSERT INTO `skill_infos` VALUES (1,'辎械','','2017-04-26 13:39:09','2017-04-26 13:39:09',NULL);
 
 #
 # Structure for table "skills"
@@ -280,6 +282,7 @@ CREATE TABLE `skills` (
 # Data for table "skills"
 #
 
+INSERT INTO `skills` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:39:22','2017-04-26 13:39:22',NULL);
 
 #
 # Structure for table "slots"
@@ -293,12 +296,13 @@ CREATE TABLE `slots` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "slots"
 #
 
+INSERT INTO `slots` VALUES (1,'xx1','2017-04-25 17:07:45','2017-04-25 17:07:47','2017-04-25 17:07:47'),(2,'炮座','2017-04-26 13:30:11','2017-04-26 13:30:11',NULL),(3,'改装','2017-04-26 13:30:15','2017-04-26 13:30:15',NULL),(4,'外身','2017-04-26 13:30:20','2017-04-26 13:30:20',NULL),(5,'内壁','2017-04-26 13:30:24','2017-04-26 13:30:24',NULL),(6,'内仓','2017-04-26 13:30:28','2017-04-26 13:30:28',NULL),(7,'炮架','2017-04-26 13:30:32','2017-04-26 13:30:32',NULL),(8,'特殊','2017-04-26 13:30:37','2017-04-26 13:30:37',NULL);
 
 #
 # Structure for table "equipment"
@@ -320,12 +324,13 @@ CREATE TABLE `equipment` (
   KEY `equipment_slot_id_foreign` (`slot_id`),
   CONSTRAINT `equipment_equipment_info_id_foreign` FOREIGN KEY (`equipment_info_id`) REFERENCES `equipment_infos` (`id`) ON DELETE CASCADE,
   CONSTRAINT `equipment_slot_id_foreign` FOREIGN KEY (`slot_id`) REFERENCES `slots` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "equipment"
 #
 
+INSERT INTO `equipment` VALUES (1,1,2,1,1,0,'2017-04-26 13:34:57','2017-04-26 13:34:57',NULL),(2,2,3,1,1,0,'2017-04-26 13:35:29','2017-04-26 13:35:29',NULL),(3,3,4,1,1,0,'2017-04-26 13:35:45','2017-04-26 13:35:45',NULL),(4,4,5,1,1,0,'2017-04-26 13:35:57','2017-04-26 13:35:57',NULL),(5,5,6,1,1,0,'2017-04-26 13:36:15','2017-04-26 13:36:15',NULL),(6,6,7,1,1,0,'2017-04-26 13:36:35','2017-04-26 13:36:35',NULL),(7,7,8,1,1,0,'2017-04-26 13:36:47','2017-04-26 13:36:47',NULL);
 
 #
 # Structure for table "tactic_infos"
@@ -340,12 +345,13 @@ CREATE TABLE `tactic_infos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "tactic_infos"
 #
 
+INSERT INTO `tactic_infos` VALUES (1,'战术','','2017-04-26 13:38:37','2017-04-26 13:38:37',NULL);
 
 #
 # Structure for table "tactics"
@@ -376,12 +382,13 @@ CREATE TABLE `tactics` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "tactics"
 #
 
+INSERT INTO `tactics` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:38:54','2017-04-26 13:38:54',NULL);
 
 #
 # Structure for table "technology_categories"
@@ -395,12 +402,13 @@ CREATE TABLE `technology_categories` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "technology_categories"
 #
 
+INSERT INTO `technology_categories` VALUES (1,'主炮','2017-04-26 13:13:37','2017-04-26 13:13:37',NULL),(2,'防护','2017-04-26 13:13:41','2017-04-26 13:13:41',NULL),(3,'车体','2017-04-26 13:13:46','2017-04-26 13:13:46',NULL),(4,'引擎','2017-04-26 13:13:51','2017-04-26 13:13:51',NULL);
 
 #
 # Structure for table "technology_types"
@@ -417,12 +425,13 @@ CREATE TABLE `technology_types` (
   PRIMARY KEY (`id`),
   KEY `technology_types_technology_category_id_foreign` (`technology_category_id`),
   CONSTRAINT `technology_types_technology_category_id_foreign` FOREIGN KEY (`technology_category_id`) REFERENCES `technology_categories` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "technology_types"
 #
 
+INSERT INTO `technology_types` VALUES (1,1,'AP','2017-04-26 13:14:01','2017-04-26 13:14:01',NULL),(2,1,'APCR','2017-04-26 13:14:08','2017-04-26 13:14:08',NULL),(3,1,'APDS','2017-04-26 13:14:13','2017-04-26 13:14:13',NULL),(4,1,'HE','2017-04-26 13:14:20','2017-04-26 13:14:20',NULL),(5,1,'RP','2017-04-26 13:14:25','2017-04-26 13:14:25',NULL),(6,1,'HEAT','2017-04-26 13:14:33','2017-04-26 13:14:33',NULL),(7,1,'HESH','2017-04-26 13:14:38','2017-04-26 13:14:38',NULL),(8,2,'标准防护','2017-04-26 13:14:45','2017-04-26 13:14:45',NULL),(9,2,'重装防护','2017-04-26 13:14:51','2017-04-26 13:14:51',NULL),(10,2,'轻薄防护','2017-04-26 13:14:57','2017-04-26 13:14:57',NULL),(11,3,'综合车体','2017-04-26 13:15:03','2017-04-26 13:15:03',NULL),(12,4,'综合引擎','2017-04-26 13:15:09','2017-04-26 13:15:09',NULL);
 
 #
 # Structure for table "technologies"
@@ -440,12 +449,13 @@ CREATE TABLE `technologies` (
   PRIMARY KEY (`id`),
   KEY `technologies_technology_type_id_foreign` (`technology_type_id`),
   CONSTRAINT `technologies_technology_type_id_foreign` FOREIGN KEY (`technology_type_id`) REFERENCES `technology_types` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "technologies"
 #
 
+INSERT INTO `technologies` VALUES (1,1,'AP',1,'2017-04-26 13:18:56','2017-04-26 13:18:56',NULL),(2,2,'APCR',1,'2017-04-26 13:19:20','2017-04-26 13:19:43',NULL),(3,3,'APDS',1,'2017-04-26 13:19:34','2017-04-26 13:19:34',NULL),(4,4,'HE',1,'2017-04-26 13:19:56','2017-04-26 13:19:56',NULL),(5,5,'RP',1,'2017-04-26 13:20:08','2017-04-26 13:20:08',NULL),(6,6,'HEAT',1,'2017-04-26 13:20:21','2017-04-26 13:20:21',NULL),(7,7,'HESH',1,'2017-04-26 13:20:35','2017-04-26 13:20:35',NULL),(8,8,'标准防护',1,'2017-04-26 13:20:54','2017-04-26 13:20:54',NULL),(9,9,'重装防护',1,'2017-04-26 13:21:04','2017-04-26 13:21:57',NULL),(10,10,'轻薄防护',1,'2017-04-26 13:21:28','2017-04-26 13:22:20',NULL),(11,11,'综合车体',1,'2017-04-26 13:29:08','2017-04-26 13:29:08',NULL),(12,12,'综合引擎',1,'2017-04-26 13:29:24','2017-04-26 13:29:24',NULL);
 
 #
 # Structure for table "types"

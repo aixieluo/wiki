@@ -19,7 +19,7 @@
                     <tbody>
                     <tr>
                         <td width="1px">火力</td>
-                        <td width="1px">{{ 1 }}</td>
+                        <td width="1px">{{ sumFire }}</td>
                         <td width="1px">穿甲</td>
                         <td width="1px">{{ 1 }}</td>
                         <td width="1px">命中</td>
@@ -46,16 +46,44 @@
                 </table>
             </div>
         </div>
+
+        <div class="page-header">
+            <h3>装备槽</h3>
+        </div>
+        <div class="row">
+            <template v-for="n in 1">
+                <div class="col-md-2">
+                    <label>ceshi</label>
+                </div>
+                <div class="col-md-10">
+                    <multiselect
+                            v-model="value"
+                            :options="equipment"
+                            :multiple="true"
+                            :searchable="true"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            :hide-selected="true"
+                            :max="n"
+                            placeholder="Pick some"
+                            label="name"
+                            track-by="name">
+                    </multiselect>
+                </div>
+            </template>
+        </div>
+
     </div>
 </template>
 
 <script>
-    //域名路由
     import {host, starIncrease} from "../../config/variables"
     import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
     import {technologyInitia} from "../../config/initia"
+    import Multiselect from 'vue-multiselect'
 
     export default {
+        components: { Multiselect },
         props: {
             'dancerId': {
                 required: true,
@@ -64,14 +92,29 @@
         data() {
             return {
                 selectRarity: 1,
-                lv: 0
+                lv: 0,
+                value: null,
+                equipment: []
             }
         },
         mounted() {
             this.$http.get('simulator/dancerInfo/' + this.dancerId)
                 .then((Response) => {
-                    this.$store.state.dancer = Response.data.data;
+                    this.$store.commit('setDancerInfo', Response.data.data)
                 })
+            this.$http.get('simulator/equipment')
+                .then((Response) => {
+                    this.equipment = Response.data.data
+                    this.$store.commit('setEquipment', Response.data.data)
+                })
+        },
+        computed: {
+            attributes() {
+                return this.$store.state.dancer.attributes
+            },
+            equipment_number() {
+                return this.$store.state.dancer.equipment_number
+            }
         }
     }
 </script>

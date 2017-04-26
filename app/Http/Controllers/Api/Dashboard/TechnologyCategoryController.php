@@ -27,7 +27,7 @@ class TechnologyCategoryController extends ApiController
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->technologyCategoryRepository->page(), new TechnologyCategoryTransformer);
+        return $this->respondWithCollection($this->technologyCategoryRepository->all(), new TechnologyCategoryTransformer);
     }
 
     /**

@@ -26,4 +26,10 @@ class SimulatorRepository
 
         return $this->getById($id);
     }
+
+    public function getByEquipment() {
+        $this->model = $this->equipment;
+
+        return $this->all();
+    }
 }

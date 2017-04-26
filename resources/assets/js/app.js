@@ -25,7 +25,7 @@ Vue.component(
 
 Vue.component(
     'equipment',
-    require('./components/home/Equipment.vue')
+    require('./components/simulator/Equipment.vue')
 )
 
 Vue.component(

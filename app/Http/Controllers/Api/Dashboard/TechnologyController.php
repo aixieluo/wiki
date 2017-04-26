@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Repositories\TechnologyRepository;
+use App\Transformers\AttributeTransformer;
 use App\Transformers\TechnologyTransformer;
 use Illuminate\Http\Request;
 
@@ -75,5 +76,10 @@ class TechnologyController extends ApiController
         $this->technologyRepository->destroy($id);
 
         return $this->noContent();
+    }
+
+    public function getByAttributes($id) {
+
+        return $this->respondWithItem($this->technologyRepository->getByAttributes($id), new AttributeTransformer);
     }
 }

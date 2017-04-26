@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Repositories\SimulatorRepository;
 use App\Transformers\SimulatorDancerTransformer;
+use App\Transformers\SimulatorEquipmentTransformer;
 
 class SimulatorController extends ApiController
 {
@@ -17,5 +18,9 @@ class SimulatorController extends ApiController
 
     public function getByDancerInfo($id) {
         return $this->respondWithItem($this->simulator->getByDancerInfo($id), new SimulatorDancerTransformer);
+    }
+
+    public function getByEquipment() {
+        return $this->respondWithCollection($this->simulator->getByEquipment(), new SimulatorEquipmentTransformer);
     }
 }

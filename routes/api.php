@@ -57,6 +57,7 @@ Route::group(['namespace' => 'Api\Home'], function () {
 
 Route::group(['namespace' => 'Api'], function () {
     Route::get('simulator/dancerInfo/{id}', 'SimulatorController@getByDancerInfo');
+    Route::get('simulator/equipment', 'SimulatorController@getByEquipment');
 });
 
 Route::group(['namespace' => 'Api\Dashboard'], function () {

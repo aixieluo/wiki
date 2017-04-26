@@ -17,7 +17,6 @@ class SimulatorDancerTransformer extends TransformerAbstract
     public function transform(Dancer $dancer) {
         return [
             'type' => $dancer->type->content,
-            'country' => $dancer->country->content,
             'rarity' => $dancer->rarity->level,
             'grow_attributes' => [
                 'grow_fire' => $dancer->grow_fire,
@@ -43,7 +42,7 @@ class SimulatorDancerTransformer extends TransformerAbstract
                 'dodge' => $dancer->attributes->first()->dodge,
                 'concealment' => $dancer->attributes->first()->concealment,
                 'spy' => $dancer->attributes->first()->spy
-            ],
+            ]
         ];
     }
 

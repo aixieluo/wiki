@@ -28,7 +28,7 @@ class TechnologyTypeController extends ApiController
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->technologyTypeRepository->page(), new TechnologyTypeTransformer);
+        return $this->respondWithCollection($this->technologyTypeRepository->all(), new TechnologyTypeTransformer);
     }
 
     /**
