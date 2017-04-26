@@ -25,8 +25,9 @@ Route::group(['namespace'=>'Home'], function (){
     //
     Route::get('/home', 'HomeController@index');
 
-    //dancer
-    Route::resource('/dancer', 'DancerController');
+    //Dancer
+    Route::get('/dancer', 'DancerController@index');
+    Route::get('/dancer/{id}', 'DancerController@show');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {

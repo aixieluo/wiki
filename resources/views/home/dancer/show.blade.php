@@ -21,21 +21,21 @@
                         </tr>
                         <tr>
                             <td>军阶</td>
-                            <td>{{ $dancer->rarity }}</td>
+                            <td>{{ $dancer->rarity->level }}</td>
                             <td>类型</td>
-                            <td>{{ $dancer->type }}</td>
+                            <td>{{ $dancer->type->content }}</td>
                         </tr>
                         <tr>
                             <td>国别</td>
-                            <td>{{ $dancer->country }}</td>
+                            <td>{{ $dancer->country->content }}</td>
                             <td>隶属机构</td>
                             <td>{{ $dancer->subjection }}</td>
                         </tr>
                         <tr>
                             <td>配音</td>
-                            <td>=-=</td>
+                            <td>(暂无)</td>
                             <td>画师</td>
-                            <td>=-=</td>
+                            <td>(暂无)</td>
                         </tr>
                     </table>
                 </div>

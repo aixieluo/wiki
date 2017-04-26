@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -9,6 +8,7 @@ require('./bootstrap');
 require('./config/common');
 
 import httpPlugin from './plugins/http/index'
+import store from './vuex/store'
 
 Vue.use(httpPlugin)
 
@@ -18,13 +18,33 @@ Vue.use(httpPlugin)
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('attributes', require('./components/home/Attributes.vue'));
-Vue.component('equipment', require('./components/home/Equipment.vue'));
-Vue.component('tactic', require('./components/home/Tactic.vue'));
-Vue.component('skill', require('./components/home/Skill.vue'));
-Vue.component('technology', require('./components/home/Technology.vue'));
+Vue.component(
+    'attributes',
+    require('./components/simulator/Attributes.vue')
+)
 
-const app = new Vue({
-    el: '#app',
-});
+Vue.component(
+    'equipment',
+    require('./components/home/Equipment.vue')
+)
 
+Vue.component(
+    'tactic',
+    require('./components/home/Tactic.vue')
+)
+
+Vue.component(
+    'skill',
+    require('./components/home/Skill.vue')
+)
+
+Vue.component(
+    'technology',
+    require('./components/home/Technology.vue')
+)
+
+// const app = new Vue({
+//     el: '#app',
+// });
+
+new Vue(Vue.util.extend({store})).$mount('#app')

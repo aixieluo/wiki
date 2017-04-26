@@ -44,7 +44,7 @@ class DancerController extends Controller
      * @return mixed
      */
     public function growAttributes(Request $request) {
-        return $this->dancer->growAttributes($request->id);
+        return $this->dancer->select('grow_fire', 'grow_penetrate', 'grow_durable', 'grow_armor')->findOrFail($request>id);
     }
 
     /**
@@ -64,7 +64,7 @@ class DancerController extends Controller
      * @return mixed
      */
     public function rarity(Request $request) {
-        return $this->rarity->rarity($request->id);
+        return $this->dancer->findOrFail($request->id)->rarity;
     }
 
     /**

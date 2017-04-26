@@ -6,9 +6,9 @@ import * as mutations from './mutations.js'
 Vue.use(Vuex)
 
 const state = {
-    sidebar: {
-        opened: false
-    }
+    dancer: {},
+    equipment: {},
+    technologies: {},
 }
 
 export default new Vuex.Store({

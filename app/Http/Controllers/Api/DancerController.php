@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Dashboard;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\ApiController;
 use App\Repositories\DancerRepository;
-use App\Transformers\AttributeTransformer;
-use App\Transformers\DancerTransformer;
+use App\Transformers\SimulatorDancerTransformer;
 use Illuminate\Http\Request;
 
 class DancerController extends ApiController
@@ -24,7 +22,16 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return $this->respondWithPaginator($this->dancerRepository->page(), new DancerTransformer);
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create() {
+        //
     }
 
     /**
@@ -35,7 +42,18 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $this->dancerRepository->store($request->all());
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id) {
+        //
     }
 
     /**
@@ -46,7 +64,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        return $this->respondWithItem($this->dancerRepository->getById($id), new DancerTransformer);
+        //
     }
 
     /**
@@ -58,9 +76,7 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        $this->dancerRepository->update($id, $request->all());
-
-        return $this->noContent();
+        //
     }
 
     /**
@@ -71,12 +87,10 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->dancerRepository->destroy($id);
-
-        return $this->noContent();
+        //
     }
 
-    public function getByAttributes($id) {
-        return $this->respondWithItem($this->dancerRepository->getByAttributes($id), new AttributeTransformer);
+    public function getByDetailInfo($id) {
+        return $this->respondWithItem($this->dancerRepository->getByDetailInfo($id), new SimulatorDancerTransformer);
     }
 }

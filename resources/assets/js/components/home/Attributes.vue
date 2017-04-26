@@ -189,6 +189,11 @@
             },
         },
         mounted() {
+            this.$http.get('simulator/dancerInfo/' + this.dancerId)
+                .then((Response) => {
+                    this.$store.state.dancer = Response.data.data;
+                    console.log(this.$store.state.dancer);
+                })
             this.ready();
         },
         data() {
@@ -293,10 +298,9 @@
         methods: {
             ready () {
                 //获取基础属性
-                this.$http.post(host+'/api/dancer/attributes', {
-                    id: this.dancerId,
-                }).then((response)=>{
-                    this.attributes = response.data;
+                this.$http.get('dancer/attributes/' + this.dancerId)
+                    .then((Response)=>{
+                    this.attributes = Response.data.data;
                 });
                 //获取成长属性
                 this.$http.post(host+'/api/dancer/growAttributes', {
@@ -314,7 +318,7 @@
                 this.$http.post(host+'/api/dancer/rarity', {
                     id: this.dancerId,
                 }).then((response)=>{
-                    this.rarity = response.data.rarity;
+                    this.rarity = response.data.level;
                 });
                 //获取舞姬科技大件最大GET个数
                 this.$http.post(host+'/api/dancer/technologyPartNumber', {
