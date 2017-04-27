@@ -19,7 +19,7 @@
                     <tbody>
                     <tr>
                         <td width="1px">火力</td>
-                        <td width="1px">{{ sumFire }}</td>
+                        <td width="1px">{{ 1 }}</td>
                         <td width="1px">穿甲</td>
                         <td width="1px">{{ 1 }}</td>
                         <td width="1px">命中</td>
@@ -93,6 +93,10 @@
             </div>
         </div>
 
+        <div class="page-header">
+            <h3>战术</h3>
+        </div>
+
     </div>
 </template>
 
@@ -114,8 +118,8 @@
             return {
                 selectRarity: 1,
                 lv: 0,
-                equipped: [],
-                equippedTechnology: []
+                equipped: new Array(7), //暂无很好解决办法，次数数组个数值传入方式待解决
+                equippedTechnology: new Array(5) //同上
             }
         },
         mounted() {
