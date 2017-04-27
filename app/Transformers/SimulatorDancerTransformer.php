@@ -25,13 +25,34 @@ class SimulatorDancerTransformer extends TransformerAbstract
                 'grow_armor' => $dancer->grow_armor,
             ],
             'equipment_number' => [
-                'barbette' => $dancer->barbette,
-                'refit' => $dancer->refit,
-                'outside' => $dancer->outside,
-                'inwall' => $dancer->inwall,
-                'inwarehouse' => $dancer->inwarehouse,
-                'carriage' => $dancer->carriage,
-                'special' => $dancer->special,
+                'barbette' => [
+                    'name' => '炮座',
+                    'num' => $dancer->barbette
+                ],
+                'refit' => [
+                    'name' => '改装',
+                    'num' => $dancer->refit
+                ],
+                'outside' => [
+                    'name' => '外身',
+                    'num' => $dancer->outside
+                ],
+                'inwall' => [
+                    'name' => '内壁',
+                    'num' => $dancer->inwall
+                ],
+                'inwarehouse' => [
+                    'name' => '内仓',
+                    'num' => $dancer->inwarehouse
+                ],
+                'carriage' => [
+                    'name' => '炮架',
+                    'num' => $dancer->carriage
+                ],
+                'special' => [
+                    'name' => '特殊',
+                    'num' => $dancer->special
+                ]
             ],
             'attributes' => [
                 'fire' => $dancer->attributes->first()->fire,

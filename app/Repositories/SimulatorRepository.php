@@ -32,4 +32,10 @@ class SimulatorRepository
 
         return $this->all();
     }
+
+    public function getByTechnologies() {
+        $this->model = $this->technology;
+
+        return $this->all();
+    }
 }

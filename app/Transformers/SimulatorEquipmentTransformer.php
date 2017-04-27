@@ -15,6 +15,7 @@ class SimulatorEquipmentTransformer extends TransformerAbstract
 
     public function transform(Equipment $equipment) {
         return [
+            'id' => $equipment->id,
             'name' => $equipment->equipmentInfo->name,
             'lv' => $equipment->lv,
             'slot' => $equipment->slot->name,

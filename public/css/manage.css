@@ -11132,6 +11132,10 @@ a {
   outline: 0 !important;
 }
 
+[v-cloak] {
+  display: none;
+}
+
 input, button {
   outline: none !important;
 }

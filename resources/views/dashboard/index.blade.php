@@ -7,10 +7,6 @@
     <title>钢华Wiki</title>
     <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
 
-    <style>
-        [v-cloak] { display: none; }
-    </style>
-
     <script>
         window.Laravel = {
             csrfToken: "{{ csrf_token() }}"

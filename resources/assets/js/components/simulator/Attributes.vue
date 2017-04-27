@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <div class="clearfix">
                     <div class="pull-left clearfix">
-                        <i v-for="n in this.$store.state.dancer.rarity" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
+                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
                     </div>
                     <div class="pull-right">
                         <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i></button>
@@ -48,39 +48,60 @@
         </div>
 
         <div class="page-header">
-            <h3>装备槽</h3>
+            <h3>装备</h3>
         </div>
-        <div class="row">
-            <template v-for="n in 1">
-                <div class="col-md-2">
-                    <label>ceshi</label>
-                </div>
+        <div class="form-horizontal">
+            <div v-for="(value, key, index) in equipment_number" v-if="value.num!=0 && value.num" class="form-group">
+                <label class="col-md-2 control-label">{{ `${value.name}(${value.num}个)` }}</label>
                 <div class="col-md-10">
                     <multiselect
-                            v-model="value"
-                            :options="equipment"
+                            v-model="equipped[index]"
+                            :options="filterEquipment(value.name)"
                             :multiple="true"
                             :searchable="true"
                             :close-on-select="false"
                             :clear-on-select="false"
                             :hide-selected="true"
-                            :max="n"
-                            placeholder="Pick some"
+                            :options-limit="5"
+                            :max="value.num"
+                            :custom-label="nameWithLang"
+                            placeholder=""
                             label="name"
-                            track-by="name">
+                            track-by="id">
                     </multiselect>
                 </div>
-            </template>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h3>科技</h3>
+        </div>
+        <div class="form-horizontal">
+            <div v-for="(technologyCategory, key) in technologyCategories" class="form-group">
+                <label class="col-md-2 control-label">{{ technologyCategory }}</label>
+                <div class="col-md-10">
+                    <multiselect
+                            v-model="equippedTechnology[key]"
+                            :options="filterTechnologies(technologyCategory)"
+                            :searchable="true"
+                            :options-limit="5"
+                            placeholder=""
+                            label="name"
+                            track-by="id">
+                    </multiselect>
+                </div>
+            </div>
         </div>
 
     </div>
 </template>
 
 <script>
-    import {host, starIncrease} from "../../config/variables"
-    import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
-    import {technologyInitia} from "../../config/initia"
+    import { host, starIncrease } from "../../config/variables"
+    import { numAdd, numSub, numMulti } from "../../plugins/arithmetic"
+    import { technologyInitia } from "../../config/initia"
     import Multiselect from 'vue-multiselect'
+    import { mapState } from 'vuex'
 
     export default {
         components: { Multiselect },
@@ -93,8 +114,8 @@
             return {
                 selectRarity: 1,
                 lv: 0,
-                value: null,
-                equipment: []
+                equipped: [],
+                equippedTechnology: []
             }
         },
         mounted() {
@@ -104,17 +125,26 @@
                 })
             this.$http.get('simulator/equipment')
                 .then((Response) => {
-                    this.equipment = Response.data.data
                     this.$store.commit('setEquipment', Response.data.data)
                 })
+            this.$http.get('simulator/technologies')
+                .then((Response) => {
+                    this.$store.commit('setTechnologies', Response.data.data)
+                })
+        },
+        methods: {
+            nameWithLang({ name, lv }) {
+                return `${name} - S${lv}`
+            },
+            filterEquipment(slot) {
+                return this.equipment.filter(equipment => equipment.slot == slot)
+            },
+            filterTechnologies(category) {
+                return this.technologies.filter(technology => technology.technology_category == category)
+            }
         },
         computed: {
-            attributes() {
-                return this.$store.state.dancer.attributes
-            },
-            equipment_number() {
-                return this.$store.state.dancer.equipment_number
-            }
+            ...mapState(['type', 'rarity', 'attributes', 'grow_attributes', 'equipment_number', 'equipment', 'technologies', 'technologyCategories']),
         }
     }
 </script>
