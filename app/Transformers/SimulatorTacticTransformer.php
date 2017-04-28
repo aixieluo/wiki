@@ -2,12 +2,14 @@
 
 namespace App\Transformers;
 
+use App\Models\Tactic;
 use League\Fractal\TransformerAbstract;
 
 class SimulatorTacticTransformer extends TransformerAbstract
 {
     public function transform(Tactic $tactic) {
         return [
+            'id' => $tactic->id,
             'name' => $tactic->tacticInfo->name,
             'lv' => $tactic->lv,
             'fire_up' => $tactic->fire_up,

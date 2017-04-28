@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Repositories\SimulatorRepository;
 use App\Transformers\SimulatorDancerTransformer;
 use App\Transformers\SimulatorEquipmentTransformer;
+use App\Transformers\SimulatorSkillTransformer;
+use App\Transformers\SimulatorTacticTransformer;
 use App\Transformers\SimulatorTechnologyTransformer;
 
 class SimulatorController extends ApiController
@@ -27,5 +29,13 @@ class SimulatorController extends ApiController
 
     public function getByTechnologies() {
         return $this->respondWithCollection($this->simulator->getByTechnologies(), new SimulatorTechnologyTransformer);
+    }
+
+    public function getByTactics() {
+        return $this->respondWithCollection($this->simulator->getByTactics(), new SimulatorTacticTransformer);
+    }
+
+    public function getBySkills() {
+        return $this->respondWithCollection($this->simulator->getBySkills(), new SimulatorSkillTransformer);
     }
 }

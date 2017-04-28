@@ -74,7 +74,7 @@
         </div>
 
         <div class="page-header">
-            <h3>科技</h3>
+            <h3 @click="filterTechnologies('主炮')">科技</h3>
         </div>
         <div class="form-horizontal">
             <div v-for="(technologyCategory, key) in technologyCategories" class="form-group">
@@ -95,6 +95,42 @@
 
         <div class="page-header">
             <h3>战术</h3>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">战术</label>
+                <div class="col-md-10">
+                    <multiselect
+                            v-model="equippedTactic"
+                            :options="tactics"
+                            :searchable="true"
+                            :options-limit="5"
+                            placeholder=""
+                            label="name"
+                            track-by="id">
+                    </multiselect>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-header">
+            <h3>辎械</h3>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">辎械</label>
+                <div class="col-md-10">
+                    <multiselect
+                            v-model="equippedSkill"
+                            :options="skills"
+                            :searchable="true"
+                            :options-limit="5"
+                            placeholder=""
+                            label="name"
+                            track-by="id">
+                    </multiselect>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -119,7 +155,9 @@
                 selectRarity: 1,
                 lv: 0,
                 equipped: new Array(7), //暂无很好解决办法，次数数组个数值传入方式待解决
-                equippedTechnology: new Array(5) //同上
+                equippedTechnology: new Array(5), //同上
+                equippedTactic: {},
+                equippedSkill: {}
             }
         },
         mounted() {
@@ -135,6 +173,14 @@
                 .then((Response) => {
                     this.$store.commit('setTechnologies', Response.data.data)
                 })
+            this.$http.get('simulator/tactics')
+                .then((Response) => {
+                    this.$store.commit('setTactics', Response.data.data)
+                })
+            this.$http.get('simulator/skills')
+                .then((Response) => {
+                    this.$store.commit('setSkills', Response.data.data)
+                })
         },
         methods: {
             nameWithLang({ name, lv }) {
@@ -148,7 +194,7 @@
             }
         },
         computed: {
-            ...mapState(['type', 'rarity', 'attributes', 'grow_attributes', 'equipment_number', 'equipment', 'technologies', 'technologyCategories']),
+            ...mapState(['type', 'rarity', 'attributes', 'grow_attributes', 'equipment_number', 'equipment', 'technologies', 'technologyCategories', 'tactics', 'skills']),
         }
     }
 </script>

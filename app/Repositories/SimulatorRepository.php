@@ -47,5 +47,13 @@ class SimulatorRepository
 
     public function getByTactics() {
         $this->model = $this->tactic;
+
+        return $this->all();
+    }
+
+    public function getBySkills() {
+        $this->model = $this->skill;
+
+        return $this->all();
     }
 }
