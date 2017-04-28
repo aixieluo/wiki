@@ -34,26 +34,18 @@ class SimulatorRepository
     }
 
     public function getByEquipment() {
-        $this->model = $this->equipment;
-
-        return $this->all();
+        return $this->all($this->equipment);
     }
 
     public function getByTechnologies() {
-        $this->model = $this->technology;
-
-        return $this->all();
+        return $this->all($this->technology);
     }
 
     public function getByTactics() {
-        $this->model = $this->tactic;
-
-        return $this->all();
+        return $this->all($this->tactic);
     }
 
     public function getBySkills() {
-        $this->model = $this->skill;
-
-        return $this->all();
+        return $this->all($this->skill);
     }
 }

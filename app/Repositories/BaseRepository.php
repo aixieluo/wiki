@@ -14,13 +14,11 @@ trait BaseRepository
      * @return mixed
      */
     public function getById($id) {
-
         return $this->model->findOrFail($id);
     }
 
-    public function all() {
-
-        return $this->model->all();
+    public function all($model=null) {
+        return $model ? $model->all() : $this->model->all();
     }
 
     /**
@@ -31,7 +29,6 @@ trait BaseRepository
      * @return mixed
      */
     public function page($number = 10, $sort = 'desc', $sortColumn = 'id') {
-
         return $this->model->orderBy($sortColumn, $sort)->paginate($number);
     }
 
@@ -39,7 +36,6 @@ trait BaseRepository
      * @param $data
      */
     public function store($input) {
-
         return $this->save($this->model, $input);
     }
 
@@ -65,7 +61,6 @@ trait BaseRepository
     }
 
     public function save($model, $input) {
-
         return $model->fill($input)->save();
     }
 
@@ -76,17 +71,14 @@ trait BaseRepository
     }
 
     public function createAttributes($attributes) {
-
         return $this->model->attributes()->create($attributes);
     }
 
     public function updateAttributes($attributes) {
-
         return $this->model->attributes()->update($attributes);
     }
 
     public function deleteAttributes() {
-
         return $this->model->attributes()->delete();
     }
 }

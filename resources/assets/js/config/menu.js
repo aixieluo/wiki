@@ -73,5 +73,10 @@ export default [
         label: '辎械',
         url: '/dashboard/skill',
         icon: 'fa fa-th-large'
+    },
+    {
+        label: '钢舞姬 - 科技',
+        url: '/dashboard/relation/dancer-technology',
+        icon: 'fa fa-th-large'
     }
 ]

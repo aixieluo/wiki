@@ -75,6 +75,9 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
 
     Route::resource('dancer', 'DancerController', ['except' => ['show', 'create']]);
     Route::get('dancer/attributes/{id}', 'DancerController@getByAttributes');
+    Route::get('dancer/danceOutfits', 'DancerController@getByDanceOutfits');
+    Route::get('relation/dancer/getTechnologies/{id}', 'DancerController@getByTechnologies');
+    Route::post('relation/dancer/technologies', 'DancerController@syncTechnologies');
 
     Route::resource('equipmentInfo', 'EquipmentInfoController', ['except' => ['show','create']]);
     Route::get('equipmentInfos', 'EquipmentInfoController@getList');
@@ -103,4 +106,5 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('skillInfos', 'SkillInfoController@getList');
 
     Route::resource('skill', 'SkillController', ['except' => ['show', 'create']]);
+
 });

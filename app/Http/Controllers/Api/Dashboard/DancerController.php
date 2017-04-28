@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\ApiController;
 use App\Repositories\DancerRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\DancerTransformer;
+use App\Transformers\SimulatorTechnologyTransformer;
+use App\Transformers\TechnologyTransformer;
 use Illuminate\Http\Request;
 
 class DancerController extends ApiController
@@ -78,5 +80,19 @@ class DancerController extends ApiController
 
     public function getByAttributes($id) {
         return $this->respondWithItem($this->dancerRepository->getByAttributes($id), new AttributeTransformer);
+    }
+
+    public function getByDanceOutfits() {
+        return $this->respondWithArray($this->dancerRepository->getByDanceOutfits()->toArray());
+    }
+
+    public function getByTechnologies($id) {
+        return $this->respondWithCollection($this->dancerRepository->getByTechnologies($id), new SimulatorTechnologyTransformer);
+    }
+
+    public function syncTechnologies(Request $request) {
+        $this->dancerRepository->syncTechnologies($request->id, $request->syncIds);
+
+        return $this->noContent();
     }
 }

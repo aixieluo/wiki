@@ -85,8 +85,8 @@ class ApiController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function respondWithArray(array $arrray, array $headers = []) {
-        return response()->json($arrray, $this->statusCode, $headers);
+    public function respondWithArray(array $array, array $headers = []) {
+        return response()->json($array, $this->statusCode, $headers);
     }
 
     /**

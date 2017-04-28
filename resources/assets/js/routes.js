@@ -266,6 +266,16 @@ export default [
                         component: require('./views/dashboard/skill/Edit.vue')
                     }
                 ]
+            },
+            {
+                path: 'relation',
+                component: Parent,
+                children: [
+                    {
+                        path: 'dancer-technology',
+                        component: require('./views/dashboard/relation/DancerTechnology.vue')
+                    }
+                ]
             }
         ]
     }

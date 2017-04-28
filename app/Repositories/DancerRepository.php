@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\DancerRequest;
 use App\Models\Dancer;
 
 class DancerRepository
@@ -13,6 +12,10 @@ class DancerRepository
 
     public function __construct(Dancer $dancer) {
         $this->model = $dancer;
+    }
+
+    public function getByDanceOutfits() {
+        return $this->model->select('id', 'name', 'dance_outfit')->get();
     }
 
     public function store($data) {
@@ -44,5 +47,13 @@ class DancerRepository
         $this->model->delete();
 
         return $this->deleteAttributes();
+    }
+
+    public function getByTechnologies($id) {
+        return $this->getById($id)->technologies()->get();
+    }
+
+    public function syncTechnologies($id, $syncIds) {
+        return $this->getById($id)->technologies()->sync($syncIds);
     }
 }
