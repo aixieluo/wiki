@@ -7,12 +7,15 @@
             <div class="col-md-6">
                 <div class="clearfix">
                     <div class="pull-left clearfix">
-                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left" :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
+                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left"
+                           :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
                     </div>
                     <div class="pull-right">
-                        <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i></button>
+                        <button class="btn-arrow" type="button" @click="lv>0?lv--:lv"><i class="fa fa-arrow-down"></i>
+                        </button>
                         <span>Lv.<input class="lv-ipt" type="number" v-model="lv" maxlength="2" max="99" min="0"></span>
-                        <button class="btn-arrow" type="button" @click="lv<99?lv++:lv"><i class="fa fa-arrow-up"></i></button>
+                        <button class="btn-arrow" type="button" @click="lv<99?lv++:lv"><i class="fa fa-arrow-up"></i>
+                        </button>
                     </div>
                 </div>
                 <table class="table table-bordered">
@@ -74,23 +77,94 @@
         </div>
 
         <div class="page-header">
-            <h3 @click="filterTechnologies('主炮')">科技</h3>
+            <h3>科技</h3>
         </div>
+
         <div class="form-horizontal">
-            <div v-for="(technologyCategory, key) in technologyCategories" class="form-group">
-                <label class="col-md-2 control-label">{{ technologyCategory }}</label>
+            <div class="form-group" v-for="(value, key) in technologyInitia">
+                <label class="col-md-2 control-label">{{ key }}</label>
                 <div class="col-md-10">
-                    <multiselect
-                            v-model="equippedTechnology[key]"
-                            :options="filterTechnologies(technologyCategory)"
-                            :searchable="true"
-                            :options-limit="5"
-                            placeholder=""
-                            label="name"
-                            track-by="id">
-                    </multiselect>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                初期Lv.{{ $store.state.technologyInitia[key].lv1 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10" @click="technologyInitia[key].lv1 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                get（{{ 1 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                二期Lv.{{ 1 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                get（{{ 1 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                三期Lv.{{ 1 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                get（{{ 1 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <template v-for="(technologyCategory, key) in technologyCategories">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">{{ technologyCategory }}</label>
+                    <div class="col-md-10">
+                        <multiselect
+                                v-model="equippedTechnology[key]"
+                                :options="filterTechnologies(technologyCategory)"
+                                :searchable="true"
+                                :options-limit="5"
+                                placeholder=""
+                                label="name"
+                                track-by="id">
+                        </multiselect>
+                    </div>
+                </div>
+            </template>
         </div>
 
         <div class="page-header">
@@ -137,14 +211,14 @@
 </template>
 
 <script>
-    import { host, starIncrease } from "../../config/variables"
-    import { numAdd, numSub, numMulti } from "../../plugins/arithmetic"
-    import { technologyInitia } from "../../config/initia"
+    import {host, starIncrease} from "../../config/variables"
+    import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
+    import {technologyInitia} from "../../config/initia"
     import Multiselect from 'vue-multiselect'
-    import { mapState } from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
-        components: { Multiselect },
+        components: {Multiselect},
         props: {
             'dancerId': {
                 required: true,
@@ -169,9 +243,13 @@
                 .then((Response) => {
                     this.$store.commit('setEquipment', Response.data.data)
                 })
-            this.$http.get('simulator/technologies')
+            this.$http.get('relation/dancer/getTechnologies/' + this.dancerId)
                 .then((Response) => {
                     this.$store.commit('setTechnologies', Response.data.data)
+                })
+            this.$http.get('simulator/technologyTypes')
+                .then((Response) => {
+                    this.$store.dispatch('setTechnologyTypes', Response.data.data)
                 })
             this.$http.get('simulator/tactics')
                 .then((Response) => {
@@ -183,7 +261,7 @@
                 })
         },
         methods: {
-            nameWithLang({ name, lv }) {
+            nameWithLang({name, lv}) {
                 return `${name} - S${lv}`
             },
             filterEquipment(slot) {
@@ -194,7 +272,20 @@
             }
         },
         computed: {
-            ...mapState(['type', 'rarity', 'attributes', 'grow_attributes', 'equipment_number', 'equipment', 'technologies', 'technologyCategories', 'tactics', 'skills']),
+            ...mapState([
+                'type',
+                'rarity',
+                'attributes',
+                'grow_attributes',
+                'equipment_number',
+                'equipment',
+                'technologies',
+                'technologyCategories',
+                'technologyTypes',
+                'technologyInitia',
+                'tactics',
+                'skills'
+            ]),
         }
     }
 </script>

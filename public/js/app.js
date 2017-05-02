@@ -12953,6 +12953,80 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12961,7 +13035,7 @@ module.exports = function spread(callback) {
 
 
 /* harmony default export */ exports["default"] = {
-    components: { Multiselect: __WEBPACK_IMPORTED_MODULE_3_vue_multiselect___default.a },
+    components: {Multiselect: __WEBPACK_IMPORTED_MODULE_3_vue_multiselect___default.a},
     props: {
         'dancerId': {
             required: true,
@@ -12988,9 +13062,13 @@ module.exports = function spread(callback) {
             .then(function (Response) {
                 this$1.$store.commit('setEquipment', Response.data.data)
             })
-        this.$http.get('simulator/technologies')
+        this.$http.get('relation/dancer/getTechnologies/' + this.dancerId)
             .then(function (Response) {
                 this$1.$store.commit('setTechnologies', Response.data.data)
+            })
+        this.$http.get('simulator/technologyTypes')
+            .then(function (Response) {
+                this$1.$store.dispatch('setTechnologyTypes', Response.data.data)
             })
         this.$http.get('simulator/tactics')
             .then(function (Response) {
@@ -13015,7 +13093,20 @@ module.exports = function spread(callback) {
             return this.technologies.filter(function (technology) { return technology.technology_category == category; })
         }
     },
-    computed: Object.assign({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapState */])(['type', 'rarity', 'attributes', 'grow_attributes', 'equipment_number', 'equipment', 'technologies', 'technologyCategories', 'tactics', 'skills']))
+    computed: Object.assign({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4_vuex__["b" /* mapState */])([
+            'type',
+            'rarity',
+            'attributes',
+            'grow_attributes',
+            'equipment_number',
+            'equipment',
+            'technologies',
+            'technologyCategories',
+            'technologyTypes',
+            'technologyInitia',
+            'tactics',
+            'skills'
+        ]))
 };
 
 
@@ -13109,7 +13200,7 @@ technologies.forEach(function (v){
         lv3: 0,
         get3: 0,
     }
-});
+})
 
 
 
@@ -13223,10 +13314,31 @@ function numDiv(num1, num2) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(exports, "toggle", function() { return toggle; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
 var toggle = function (ref) {
-	var commit = ref.commit;
+    var commit = ref.commit;
 
-	return commit('toggle');
+    return commit('toggle');
+}
+
+var setTechnologyTypes = function (ref , payload) {
+    var commit = ref.commit;
+    var state = ref.state;
+
+    commit('setTechnologyTypes', payload)
+    state.technologyTypes.forEach(function (v){
+        state.technologyInitia[v.content]={
+            lv1: 0,
+            get1: 0,
+            amount1: v.amount1,
+            lv2: 0,
+            get2: 0,
+            amount2: v.amount2,
+            lv3: 0,
+            get3: 0,
+            amount3: v.amount3,
+        }
+    })
 }
 
 /***/ },
@@ -13238,6 +13350,7 @@ var toggle = function (ref) {
 /* harmony export (binding) */ __webpack_require__.d(exports, "setDancerInfo", function() { return setDancerInfo; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setEquipment", function() { return setEquipment; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologies", function() { return setTechnologies; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTactics", function() { return setTactics; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setSkills", function() { return setSkills; });
 var toggle = function (state) {
@@ -13259,6 +13372,10 @@ var setEquipment = function (state, payload) {
 
 var setTechnologies = function (state, payload) {
     return state.technologies = payload
+}
+
+var setTechnologyTypes = function (state, payload) {
+    return state.technologyTypes = payload
 }
 
 var setTactics = function (state, payload) {
@@ -13305,6 +13422,8 @@ var setSkills = function (state, payload) {
     equipment: [],
     technologies: [],
     technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyTypes: [],
+    technologyInitia: {},
     tactics: [],
     skills: [],
 };
@@ -13332,7 +13451,7 @@ exports = module.exports = __webpack_require__(2)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43463,18 +43582,168 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         expression: "equipped[index]"
       }
     })], 1)]) : _vm._e()
-  })), _vm._v(" "), _c('div', {
-    staticClass: "page-header"
-  }, [_c('h3', {
-    on: {
-      "click": function($event) {
-        _vm.filterTechnologies('主炮')
-      }
-    }
-  }, [_vm._v("科技")])]), _vm._v(" "), _c('div', {
+  })), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "form-horizontal"
-  }, _vm._l((_vm.technologyCategories), function(technologyCategory, key) {
+  }, [_vm._l((_vm.technologyInitia), function(value, key) {
     return _c('div', {
+      staticClass: "form-group"
+    }, [_c('label', {
+      staticClass: "col-md-2 control-label"
+    }, [_vm._v(_vm._s(key))]), _vm._v(" "), _c('div', {
+      staticClass: "col-md-10"
+    }, [_c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group",
+        "aria-label": "..."
+      }
+    }, [_c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            初期Lv." + _vm._s(_vm.$store.state.technologyInitia[key].lv1) + "\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', {
+        on: {
+          "click": function($event) {
+            _vm.technologyInitia[key].lv1 = n
+          }
+        }
+      }, [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v("Lv." + _vm._s(n))])])
+    }))]), _vm._v(" "), _c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            get（" + _vm._s(1) + "个）\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v(_vm._s(n) + "个")])])
+    }))]), _vm._v(" "), _c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            二期Lv." + _vm._s(1) + "\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v("Lv." + _vm._s(n))])])
+    }))]), _vm._v(" "), _c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            get（" + _vm._s(1) + "个）\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v(_vm._s(n) + "个")])])
+    }))]), _vm._v(" "), _c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            三期Lv." + _vm._s(1) + "\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v("Lv." + _vm._s(n))])])
+    }))]), _vm._v(" "), _c('div', {
+      staticClass: "btn-group",
+      attrs: {
+        "role": "group"
+      }
+    }, [_c('button', {
+      staticClass: "btn btn-default dropdown-toggle",
+      attrs: {
+        "type": "button",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }
+    }, [_vm._v("\n                            get（" + _vm._s(1) + "个）\n                                "), _c('span', {
+      staticClass: "caret"
+    })]), _vm._v(" "), _c('ul', {
+      staticClass: "dropdown-menu"
+    }, _vm._l((10), function(n) {
+      return _c('li', [_c('a', {
+        attrs: {
+          "href": "javascript:void(0);"
+        }
+      }, [_vm._v(_vm._s(n) + "个")])])
+    }))])])])])
+  }), _vm._v(" "), _vm._l((_vm.technologyCategories), function(technologyCategory, key) {
+    return [_c('div', {
       staticClass: "form-group"
     }, [_c('label', {
       staticClass: "col-md-2 control-label"
@@ -43502,8 +43771,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         },
         expression: "equippedTechnology[key]"
       }
-    })], 1)])
-  })), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+    })], 1)])]
+  })], 2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "form-horizontal"
   }, [_c('div', {
     staticClass: "form-group"
@@ -43527,7 +43796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "equippedTactic"
     }
-  })], 1)])]), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
+  })], 1)])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "form-horizontal"
   }, [_c('div', {
     staticClass: "form-group"
@@ -43560,6 +43829,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "page-header"
   }, [_c('h3', [_vm._v("装备")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "page-header"
+  }, [_c('h3', [_vm._v("科技")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "page-header"

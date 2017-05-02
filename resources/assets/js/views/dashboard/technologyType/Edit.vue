@@ -30,6 +30,30 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">1级大件总数</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="amount1" class="form-control" v-model.number="technologyType.amount1">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">2级大件总数</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="amount2" class="form-control" v-model.number="technologyType.amount2">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">3级大件总数</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="amount3" class="form-control" v-model.number="technologyType.amount3">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary">保存内容</button>
                         </div>

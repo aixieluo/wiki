@@ -87,6 +87,9 @@ $factory->define(\App\Models\TechnologyType::class, function (Faker\Generator $f
     return [
         'technology_category_id' => $faker->randomElement(\App\Models\TechnologyCategory::pluck('id')->toArray()),
         'content' => $faker->randomElement(["AP", "APCR", "APDS", "HE", "RP", "HEAT", "HESH", "标准防护", "重装防护", "轻薄防护", "综合车体", "综合引擎"]),
+        'amount1' => $faker->numberBetween(0, 10),
+        'amount2' => $faker->numberBetween(0, 10),
+        'amount3' => $faker->numberBetween(0, 10)
     ];
 });
 

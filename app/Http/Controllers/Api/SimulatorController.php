@@ -8,6 +8,7 @@ use App\Transformers\SimulatorEquipmentTransformer;
 use App\Transformers\SimulatorSkillTransformer;
 use App\Transformers\SimulatorTacticTransformer;
 use App\Transformers\SimulatorTechnologyTransformer;
+use App\Transformers\SimulatorTechnologyTypeTransformer;
 
 class SimulatorController extends ApiController
 {
@@ -29,6 +30,10 @@ class SimulatorController extends ApiController
 
     public function getByTechnologies() {
         return $this->respondWithCollection($this->simulator->getByTechnologies(), new SimulatorTechnologyTransformer);
+    }
+
+    public function getByTechnologyTypes() {
+        return $this->respondWithCollection($this->simulator->getByTechnologyTypes(), new SimulatorTechnologyTypeTransformer);
     }
 
     public function getByTactics() {

@@ -29,6 +29,8 @@ export default {
     equipment: [],
     technologies: [],
     technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyTypes: [],
+    technologyInitia: {},
     tactics: [],
     skills: [],
 }

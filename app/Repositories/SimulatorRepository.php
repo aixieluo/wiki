@@ -7,6 +7,7 @@ use App\Models\Equipment;
 use App\Models\Skill;
 use App\Models\Tactic;
 use App\Models\Technology;
+use App\Models\TechnologyType;
 
 class SimulatorRepository
 {
@@ -15,14 +16,16 @@ class SimulatorRepository
     protected $dancer;
     protected $equipment;
     protected $technology;
+    protected $technologyType;
     protected $tactic;
     protected $skill;
     protected $model;
 
-    public function __construct(Dancer $dancer, Equipment $equipment, Technology $technology, Tactic $tactic, Skill $skill) {
+    public function __construct(Dancer $dancer, Equipment $equipment, Technology $technology, TechnologyType $technologyType, Tactic $tactic, Skill $skill) {
         $this->dancer = $dancer;
-        $this->equipment =$equipment;
+        $this->equipment = $equipment;
         $this->technology = $technology;
+        $this->technologyType = $technologyType;
         $this->tactic = $tactic;
         $this->skill = $skill;
     }
@@ -39,6 +42,10 @@ class SimulatorRepository
 
     public function getByTechnologies() {
         return $this->all($this->technology);
+    }
+
+    public function getByTechnologyTypes() {
+        return $this->all($this->technologyType);
     }
 
     public function getByTactics() {

@@ -12,5 +12,5 @@ technologies.forEach((v)=>{
         lv3: 0,
         get3: 0,
     }
-});
+})
 

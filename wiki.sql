@@ -1,8 +1,7 @@
-﻿# Host: localhost  (Version 5.5.5-10.1.19-MariaDB)
-# Date: 2017-04-26 21:39:53
-# Generator: MySQL-Front 5.4  (Build 4.80) - http://www.mysqlfront.de/
+﻿# Host: localhost  (Version 5.5.5-10.1.21-MariaDB)
+# Date: 2017-05-02 16:36:22
+# Generator: MySQL-Front 6.0  (Build 1.57)
 
-/*!40101 SET NAMES utf8 */;
 
 #
 # Structure for table "admins"
@@ -47,13 +46,13 @@ CREATE TABLE `attributes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "attributes"
 #
 
-INSERT INTO `attributes` VALUES (1,1,'App\\Models\\Dancer',652.00,219.00,555.00,173.00,110.00,85.00,75.00,80.00,'2017-04-25 16:08:18','2017-04-25 16:08:42',NULL),(2,1,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:18:56','2017-04-26 13:18:56',NULL),(3,2,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:20','2017-04-26 13:19:43',NULL),(4,3,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:34','2017-04-26 13:19:34',NULL),(5,4,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:56','2017-04-26 13:19:56',NULL),(6,5,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:08','2017-04-26 13:20:08',NULL),(7,6,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:21','2017-04-26 13:20:21',NULL),(8,7,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:35','2017-04-26 13:20:35',NULL),(9,8,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:54','2017-04-26 13:20:54',NULL),(10,9,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:04','2017-04-26 13:21:57',NULL),(11,10,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:28','2017-04-26 13:22:20',NULL),(12,11,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:08','2017-04-26 13:29:08',NULL),(13,12,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:24','2017-04-26 13:29:24',NULL),(14,1,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:34:57','2017-04-26 13:34:57',NULL),(15,2,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:29','2017-04-26 13:35:29',NULL),(16,3,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:45','2017-04-26 13:35:45',NULL),(17,4,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:57','2017-04-26 13:35:57',NULL),(18,5,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:15','2017-04-26 13:36:15',NULL),(19,6,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:35','2017-04-26 13:36:35',NULL),(20,7,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:47','2017-04-26 13:36:47',NULL);
+INSERT INTO `attributes` VALUES (1,1,'App\\Models\\Dancer',652.00,219.00,555.00,173.00,110.00,85.00,75.00,80.00,'2017-04-25 16:08:18','2017-04-25 16:08:42',NULL),(2,1,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:18:56','2017-04-26 13:18:56',NULL),(3,2,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:20','2017-04-26 13:19:43',NULL),(4,3,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:34','2017-04-26 13:19:34',NULL),(5,4,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:19:56','2017-04-26 13:19:56',NULL),(6,5,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:08','2017-04-26 13:20:08',NULL),(7,6,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:21','2017-04-26 13:20:21',NULL),(8,7,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:35','2017-04-26 13:20:35',NULL),(9,8,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:20:54','2017-04-26 13:20:54',NULL),(10,9,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:04','2017-04-26 13:21:57',NULL),(11,10,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:21:28','2017-04-26 13:22:20',NULL),(12,11,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:08','2017-04-26 13:29:08',NULL),(13,12,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:29:24','2017-04-26 13:29:24',NULL),(14,1,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:34:57','2017-04-26 13:34:57',NULL),(15,2,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:29','2017-04-26 13:35:29',NULL),(16,3,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:45','2017-04-26 13:35:45',NULL),(17,4,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:35:57','2017-04-26 13:35:57',NULL),(18,5,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:15','2017-04-26 13:36:15',NULL),(19,6,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:35','2017-04-26 13:36:35',NULL),(20,7,'App\\Models\\Equipment',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:36:47','2017-04-26 13:36:47',NULL),(21,7,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:05:56','2017-05-02 06:05:56',NULL),(22,8,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:06:22','2017-05-02 06:06:22',NULL),(23,9,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:06:40','2017-05-02 06:06:40',NULL),(24,10,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:07:08','2017-05-02 06:07:08',NULL),(25,11,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:07:23','2017-05-02 06:07:23',NULL),(26,12,'App\\Models\\Technology',1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:07:44','2017-05-02 06:07:44',NULL);
 
 #
 # Structure for table "consumptions"
@@ -185,13 +184,13 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "migrations"
 #
 
-INSERT INTO `migrations` VALUES (24,'2014_10_12_000000_create_users_table',1),(25,'2014_10_12_100000_create_password_resets_table',1),(26,'2016_11_11_014506_create_admins_table',1),(27,'2016_11_11_014590_create_types_table',1),(28,'2016_11_11_014591_create_countries_table',1),(29,'2016_11_11_014592_create_rarities_table',1),(30,'2016_11_11_014602_create_dancers_table',1),(31,'2016_11_11_014615_create_effects_table',1),(32,'2016_11_11_014633_create_attributes_table',1),(33,'2016_11_11_014650_create_technology_categories_table',1),(34,'2016_11_11_014651_create_technology_types_table',1),(35,'2016_11_11_014655_create_technologies_table',1),(36,'2016_11_11_014808_create_images_table',1),(37,'2016_11_24_054813_create_dancer_technology_table',1),(38,'2016_12_07_074347_create_effectables_table',1),(39,'2016_12_13_050022_create_equipment_infos_table',1),(40,'2016_12_13_050022_create_slots_table',1),(41,'2016_12_13_050023_create_equipment_table',1),(42,'2016_12_22_071834_create_tactic_infos_table',1),(43,'2016_12_22_071835_create_tactics_table',1),(44,'2016_12_23_075644_create_consumptions_table',1),(45,'2016_12_27_075111_create_skill_infos_table',1),(46,'2016_12_27_075112_create_skills_table',1);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_11_11_014506_create_admins_table',1),(4,'2016_11_11_014590_create_types_table',1),(5,'2016_11_11_014591_create_countries_table',1),(6,'2016_11_11_014592_create_rarities_table',1),(7,'2016_11_11_014602_create_dancers_table',1),(8,'2016_11_11_014615_create_effects_table',1),(9,'2016_11_11_014633_create_attributes_table',1),(10,'2016_11_11_014650_create_technology_categories_table',1),(11,'2016_11_11_014651_create_technology_types_table',1),(12,'2016_11_11_014655_create_technologies_table',1),(13,'2016_11_11_014808_create_images_table',1),(14,'2016_11_24_054813_create_dancer_technology_table',1),(15,'2016_12_07_074347_create_effectables_table',1),(16,'2016_12_13_050022_create_equipment_infos_table',1),(17,'2016_12_13_050022_create_slots_table',1),(18,'2016_12_13_050023_create_equipment_table',1),(19,'2016_12_22_071834_create_tactic_infos_table',1),(20,'2016_12_22_071835_create_tactics_table',1),(21,'2016_12_23_075644_create_consumptions_table',1),(22,'2016_12_27_075111_create_skill_infos_table',1),(23,'2016_12_27_075112_create_skills_table',1);
 
 #
 # Structure for table "password_resets"
@@ -251,7 +250,7 @@ CREATE TABLE `skill_infos` (
 # Data for table "skill_infos"
 #
 
-INSERT INTO `skill_infos` VALUES (1,'辎械','','2017-04-26 13:39:09','2017-04-26 13:39:09',NULL);
+INSERT INTO `skill_infos` VALUES (1,'辎械1','','2017-05-02 06:53:17','2017-05-02 06:53:17',NULL);
 
 #
 # Structure for table "skills"
@@ -282,7 +281,7 @@ CREATE TABLE `skills` (
 # Data for table "skills"
 #
 
-INSERT INTO `skills` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:39:22','2017-04-26 13:39:22',NULL);
+INSERT INTO `skills` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:53:26','2017-05-02 06:53:26',NULL);
 
 #
 # Structure for table "slots"
@@ -345,13 +344,13 @@ CREATE TABLE `tactic_infos` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "tactic_infos"
 #
 
-INSERT INTO `tactic_infos` VALUES (1,'战术','','2017-04-26 13:38:37','2017-04-26 13:38:37',NULL);
+INSERT INTO `tactic_infos` VALUES (1,'战术1','','2017-05-02 06:52:37','2017-05-02 06:52:37',NULL),(2,'战术1','','2017-05-02 06:52:48','2017-05-02 06:52:53','2017-05-02 06:52:53');
 
 #
 # Structure for table "tactics"
@@ -388,7 +387,7 @@ CREATE TABLE `tactics` (
 # Data for table "tactics"
 #
 
-INSERT INTO `tactics` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-04-26 13:38:54','2017-04-26 13:38:54',NULL);
+INSERT INTO `tactics` VALUES (1,1,1,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,'2017-05-02 06:53:08','2017-05-02 06:53:08',NULL);
 
 #
 # Structure for table "technology_categories"
@@ -419,19 +418,22 @@ CREATE TABLE `technology_types` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `technology_category_id` int(10) unsigned NOT NULL COMMENT '科技类别外键',
   `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '科技类型',
+  `amount1` int(11) NOT NULL COMMENT '一级科技大件总数目',
+  `amount2` int(11) NOT NULL COMMENT '二级科技大件总数目',
+  `amount3` int(11) NOT NULL COMMENT '三级科技大件总数目',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `technology_types_technology_category_id_foreign` (`technology_category_id`),
   CONSTRAINT `technology_types_technology_category_id_foreign` FOREIGN KEY (`technology_category_id`) REFERENCES `technology_categories` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "technology_types"
 #
 
-INSERT INTO `technology_types` VALUES (1,1,'AP','2017-04-26 13:14:01','2017-04-26 13:14:01',NULL),(2,1,'APCR','2017-04-26 13:14:08','2017-04-26 13:14:08',NULL),(3,1,'APDS','2017-04-26 13:14:13','2017-04-26 13:14:13',NULL),(4,1,'HE','2017-04-26 13:14:20','2017-04-26 13:14:20',NULL),(5,1,'RP','2017-04-26 13:14:25','2017-04-26 13:14:25',NULL),(6,1,'HEAT','2017-04-26 13:14:33','2017-04-26 13:14:33',NULL),(7,1,'HESH','2017-04-26 13:14:38','2017-04-26 13:14:38',NULL),(8,2,'标准防护','2017-04-26 13:14:45','2017-04-26 13:14:45',NULL),(9,2,'重装防护','2017-04-26 13:14:51','2017-04-26 13:14:51',NULL),(10,2,'轻薄防护','2017-04-26 13:14:57','2017-04-26 13:14:57',NULL),(11,3,'综合车体','2017-04-26 13:15:03','2017-04-26 13:15:03',NULL),(12,4,'综合引擎','2017-04-26 13:15:09','2017-04-26 13:15:09',NULL);
+INSERT INTO `technology_types` VALUES (1,1,'AP',5,6,7,'2017-05-02 03:22:28','2017-05-02 03:26:01',NULL),(2,1,'HE',2,3,4,'2017-05-02 06:00:41','2017-05-02 06:00:41',NULL),(3,2,'基础防护',2,3,4,'2017-05-02 06:00:57','2017-05-02 06:00:57',NULL),(4,2,'标准防护',3,4,5,'2017-05-02 06:01:07','2017-05-02 06:01:07',NULL),(5,3,'综合车体',3,4,5,'2017-05-02 06:01:23','2017-05-02 06:02:43',NULL),(6,4,'综合引擎',2,3,4,'2017-05-02 06:01:40','2017-05-02 06:02:37',NULL);
 
 #
 # Structure for table "technologies"
@@ -455,7 +457,7 @@ CREATE TABLE `technologies` (
 # Data for table "technologies"
 #
 
-INSERT INTO `technologies` VALUES (1,1,'AP',1,'2017-04-26 13:18:56','2017-04-26 13:18:56',NULL),(2,2,'APCR',1,'2017-04-26 13:19:20','2017-04-26 13:19:43',NULL),(3,3,'APDS',1,'2017-04-26 13:19:34','2017-04-26 13:19:34',NULL),(4,4,'HE',1,'2017-04-26 13:19:56','2017-04-26 13:19:56',NULL),(5,5,'RP',1,'2017-04-26 13:20:08','2017-04-26 13:20:08',NULL),(6,6,'HEAT',1,'2017-04-26 13:20:21','2017-04-26 13:20:21',NULL),(7,7,'HESH',1,'2017-04-26 13:20:35','2017-04-26 13:20:35',NULL),(8,8,'标准防护',1,'2017-04-26 13:20:54','2017-04-26 13:20:54',NULL),(9,9,'重装防护',1,'2017-04-26 13:21:04','2017-04-26 13:21:57',NULL),(10,10,'轻薄防护',1,'2017-04-26 13:21:28','2017-04-26 13:22:20',NULL),(11,11,'综合车体',1,'2017-04-26 13:29:08','2017-04-26 13:29:08',NULL),(12,12,'综合引擎',1,'2017-04-26 13:29:24','2017-04-26 13:29:24',NULL);
+INSERT INTO `technologies` VALUES (7,1,'AP1',1,'2017-05-02 06:05:55','2017-05-02 06:05:55',NULL),(8,2,'HE1',1,'2017-05-02 06:06:22','2017-05-02 06:06:22',NULL),(9,3,'标准防护1',1,'2017-05-02 06:06:40','2017-05-02 06:06:40',NULL),(10,3,'基础防护1',1,'2017-05-02 06:07:08','2017-05-02 06:07:08',NULL),(11,5,'综合车体1',1,'2017-05-02 06:07:23','2017-05-02 06:07:23',NULL),(12,6,'综合引擎1',1,'2017-05-02 06:07:44','2017-05-02 06:07:44',NULL);
 
 #
 # Structure for table "types"
@@ -535,12 +537,13 @@ CREATE TABLE `dancer_technology` (
   KEY `dancer_technology_technology_id_foreign` (`technology_id`),
   CONSTRAINT `dancer_technology_dancer_id_foreign` FOREIGN KEY (`dancer_id`) REFERENCES `dancers` (`id`) ON DELETE CASCADE,
   CONSTRAINT `dancer_technology_technology_id_foreign` FOREIGN KEY (`technology_id`) REFERENCES `technologies` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #
 # Data for table "dancer_technology"
 #
 
+INSERT INTO `dancer_technology` VALUES (1,1,7),(2,1,8),(3,1,9),(4,1,10),(5,1,11),(6,1,12);
 
 #
 # Structure for table "users"

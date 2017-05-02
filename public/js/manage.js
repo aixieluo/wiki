@@ -28383,6 +28383,30 @@ module.exports = function spread(callback) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ exports["default"] = {
     data: function data(){
@@ -28420,6 +28444,30 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29267,10 +29315,31 @@ var apiUrl = '/api/'
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(exports, "toggle", function() { return toggle; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
 var toggle = function (ref) {
-	var commit = ref.commit;
+    var commit = ref.commit;
 
-	return commit('toggle');
+    return commit('toggle');
+}
+
+var setTechnologyTypes = function (ref , payload) {
+    var commit = ref.commit;
+    var state = ref.state;
+
+    commit('setTechnologyTypes', payload)
+    state.technologyTypes.forEach(function (v){
+        state.technologyInitia[v.content]={
+            lv1: 0,
+            get1: 0,
+            amount1: v.amount1,
+            lv2: 0,
+            get2: 0,
+            amount2: v.amount2,
+            lv3: 0,
+            get3: 0,
+            amount3: v.amount3,
+        }
+    })
 }
 
 /***/ },
@@ -29282,6 +29351,7 @@ var toggle = function (ref) {
 /* harmony export (binding) */ __webpack_require__.d(exports, "setDancerInfo", function() { return setDancerInfo; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setEquipment", function() { return setEquipment; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologies", function() { return setTechnologies; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTactics", function() { return setTactics; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setSkills", function() { return setSkills; });
 var toggle = function (state) {
@@ -29303,6 +29373,10 @@ var setEquipment = function (state, payload) {
 
 var setTechnologies = function (state, payload) {
     return state.technologies = payload
+}
+
+var setTechnologyTypes = function (state, payload) {
+    return state.technologyTypes = payload
 }
 
 var setTactics = function (state, payload) {
@@ -29349,6 +29423,8 @@ var setSkills = function (state, payload) {
     equipment: [],
     technologies: [],
     technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyTypes: [],
+    technologyInitia: {},
     tactics: [],
     skills: [],
 };
@@ -29516,7 +29592,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -29656,7 +29732,7 @@ exports = module.exports = __webpack_require__(0)();
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56925,6 +57001,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hr-line-dashed"
   }), _vm._v(" "), _c('div', {
     staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("1级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount1"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("2级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount2"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("3级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount3"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm-4 col-sm-offset-2"
   }, [_c('button', {
@@ -58845,6 +58963,111 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.technologyType.content = $event.target.value
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("1级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.technologyType.amount1),
+      expression: "technologyType.amount1",
+      modifiers: {
+        "number": true
+      }
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount1"
+    },
+    domProps: {
+      "value": (_vm.technologyType.amount1)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.technologyType.amount1 = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("2级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.technologyType.amount2),
+      expression: "technologyType.amount2",
+      modifiers: {
+        "number": true
+      }
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount2"
+    },
+    domProps: {
+      "value": (_vm.technologyType.amount2)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.technologyType.amount2 = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
+      }
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "hr-line-dashed"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-sm-2 control-label"
+  }, [_vm._v("3级大件总数")]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-10"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model.number",
+      value: (_vm.technologyType.amount3),
+      expression: "technologyType.amount3",
+      modifiers: {
+        "number": true
+      }
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "amount3"
+    },
+    domProps: {
+      "value": (_vm.technologyType.amount3)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.technologyType.amount3 = _vm._n($event.target.value)
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
       }
     }
   })])]), _vm._v(" "), _c('div', {

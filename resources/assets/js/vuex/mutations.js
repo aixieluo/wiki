@@ -19,6 +19,10 @@ export const setTechnologies = (state, payload) => {
     return state.technologies = payload
 }
 
+export const setTechnologyTypes = (state, payload) => {
+    return state.technologyTypes = payload
+}
+
 export const setTactics = (state, payload) => {
     return state.tactics = payload
 }
