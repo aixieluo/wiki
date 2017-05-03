@@ -88,61 +88,67 @@
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                初期Lv.{{ $store.state.technologyInitia[key].lv1 }}
+                                初期Lv.{{ value.lv1 }}
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10" @click="technologyInitia[key].lv1 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                                <li @click="value.lv1 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv1 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                get（{{ 1 }}个）
+                                GET（{{ value.get1 }}个）
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                                <li @click="value.get1 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount1" @click="value.get1 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                二期Lv.{{ 1 }}
+                                二期Lv.{{ value.lv2 }}
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                                <li @click="value.lv2 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv2 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                get（{{ 1 }}个）
+                                GET（{{ value.get2 }}个）
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                                <li @click="value.get2 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount2" @click="value.get2 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                三期Lv.{{ 1 }}
+                                三期Lv.{{ value.lv3 }}
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                                <li @click="value.lv3 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv3 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
                             </ul>
                         </div>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                get（{{ 1 }}个）
+                                GET（{{ value.get3 }}个）
                                     <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li v-for="n in 10"><a href="javascript:void(0);">{{ n }}个</a></li>
+                                <li @click="value.get3 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount3" @click="value.get3 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
                             </ul>
                         </div>
                     </div>
