@@ -23,6 +23,23 @@ export const setTechnologyTypes = (state, payload) => {
     return state.technologyTypes = payload
 }
 
+export const setTechnologyInitia = (state) => {
+    state.technologyTypes.forEach((v)=>{
+        state.technologyInitia[v.content]={
+            lv1: 0,
+            get1: 0,
+            amount1: v.amount1,
+            lv2: 0,
+            get2: 0,
+            amount2: v.amount2,
+            lv3: 0,
+            get3: 0,
+            amount3: v.amount3,
+        }
+    })
+    return state.technologyInitia
+}
+
 export const setTactics = (state, payload) => {
     return state.tactics = payload
 }

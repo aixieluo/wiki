@@ -23,7 +23,6 @@
 
 <script>
     //域名路由
-    import {host} from "../../config/variables"
 
     export default {
         props: {

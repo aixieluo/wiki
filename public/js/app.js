@@ -71,7 +71,7 @@
 "use strict";
 'use strict';
 
-var bind = __webpack_require__(10);
+var bind = __webpack_require__(9);
 
 /*global toString:true*/
 
@@ -372,50 +372,6 @@ module.exports = {
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return host; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return starIncrease; });
-//服务器域名地址
-var host = "http://" + location.host;
-
-//亮星加成
-var starIncrease = [
-    {
-        fire: 0,
-        penetrate: 0,
-        durable: 0,
-        armor: 0,
-        hit: 0,
-        dodge: 0,
-        concealment: 0,
-        spy: 0,
-    },
-    {
-        fire: 0,
-        penetrate: 0.28,
-        durable: 0.78,
-        armor: 0.28,
-        hit: 0.42,
-        dodge: 0.32,
-        concealment: 0,
-        spy: 0,
-    },
-    {
-        fire: 0,
-        penetrate: 0.58,
-        durable: 1.59,
-        armor: 0.58,
-        hit: 1,
-        dodge: 0.82,
-        concealment: 0,
-        spy: 0,
-    }
-];
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 /*
@@ -471,7 +427,7 @@ module.exports = function() {
 
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 /*
@@ -693,7 +649,7 @@ function applyToTag(styleElement, obj) {
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -717,10 +673,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(6);
+    adapter = __webpack_require__(5);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(6);
+    adapter = __webpack_require__(5);
   }
   return adapter;
 }
@@ -791,10 +747,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 // shim for using process in browser
@@ -980,7 +936,7 @@ process.umask = function() { return 0; };
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -991,7 +947,7 @@ var settle = __webpack_require__(30);
 var buildURL = __webpack_require__(33);
 var parseHeaders = __webpack_require__(39);
 var isURLSameOrigin = __webpack_require__(37);
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(8);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(32);
 
 module.exports = function xhrAdapter(config) {
@@ -1162,10 +1118,10 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1191,7 +1147,7 @@ module.exports = Cancel;
 
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1203,7 +1159,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1227,7 +1183,7 @@ module.exports = function createError(message, config, code, response) {
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1243,6 +1199,52 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return starIncrease; });
+/* unused harmony export technologyIncrease */
+
+//亮星加成
+var starIncrease = [
+    {
+        fire: 0,
+        penetrate: 0,
+        durable: 0,
+        armor: 0,
+        hit: 0,
+        dodge: 0,
+        concealment: 0,
+        spy: 0,
+    },
+    {
+        fire: 0,
+        penetrate: 0.28,
+        durable: 0.78,
+        armor: 0.28,
+        hit: 0.42,
+        dodge: 0.32,
+        concealment: 0,
+        spy: 0,
+    },
+    {
+        fire: 0,
+        penetrate: 0.58,
+        durable: 1.59,
+        armor: 0.58,
+        hit: 1,
+        dodge: 0.82,
+        concealment: 0,
+        spy: 0,
+    }
+]
+
+var technologyIncrease = {
+
+}
 
 /***/ },
 /* 11 */
@@ -11813,9 +11815,9 @@ module.exports = __webpack_require__(24);
 'use strict';
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(10);
+var bind = __webpack_require__(9);
 var Axios = __webpack_require__(26);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(3);
 
 /**
  * Create an instance of Axios
@@ -11848,9 +11850,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(7);
+axios.Cancel = __webpack_require__(6);
 axios.CancelToken = __webpack_require__(25);
-axios.isCancel = __webpack_require__(8);
+axios.isCancel = __webpack_require__(7);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -11871,7 +11873,7 @@ module.exports.default = axios;
 "use strict";
 'use strict';
 
-var Cancel = __webpack_require__(7);
+var Cancel = __webpack_require__(6);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -11935,7 +11937,7 @@ module.exports = CancelToken;
 "use strict";
 'use strict';
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(3);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(27);
 var dispatchRequest = __webpack_require__(28);
@@ -12088,8 +12090,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(31);
-var isCancel = __webpack_require__(8);
-var defaults = __webpack_require__(4);
+var isCancel = __webpack_require__(7);
+var defaults = __webpack_require__(3);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -12198,7 +12200,7 @@ module.exports = function enhanceError(error, config, code, response) {
 "use strict";
 'use strict';
 
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(8);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -12645,7 +12647,6 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(1);
 //
 //
 //
@@ -12678,7 +12679,6 @@ module.exports = function spread(callback) {
 
 //域名路由
 
-
 /* harmony default export */ exports["default"] = {
     props: {
 
@@ -12698,14 +12698,14 @@ module.exports = function spread(callback) {
         ready: function ready() {
             var this$1 = this;
 
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__config_variables__["b" /* host */]+'/api/skill/names', {}).then(function (response){
+            this.$http.post(host+'/api/skill/names', {}).then(function (response){
                 this$1.skillNames = response.data;
             });
         },
         getAttributes: function getAttributes() {
             var this$1 = this;
 
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__config_variables__["b" /* host */]+'/api/skill/attributes', {
+            this.$http.post(host+'/api/skill/attributes', {
                 name: this.skillSelected,
                 lv: this.lv
             }).then(function (response){
@@ -12734,7 +12734,6 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(1);
 //
 //
 //
@@ -12766,8 +12765,6 @@ module.exports = function spread(callback) {
 
 
 //域名路由
-
-
 /* harmony default export */ exports["default"] = {
     props: {
 
@@ -12787,14 +12784,14 @@ module.exports = function spread(callback) {
         ready: function ready() {
             var this$1 = this;
 
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__config_variables__["b" /* host */]+'/api/tactic/names', {}).then(function (response){
+            this.$http.post(host+'/api/tactic/names', {}).then(function (response){
                 this$1.tacticNames = response.data;
             });
         },
         getAttributes: function getAttributes() {
             var this$1 = this;
 
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__config_variables__["b" /* host */]+'/api/tactic/attributes', {
+            this.$http.post(host+'/api/tactic/attributes', {
             name: this.tacticSelected,
             lv: this.lv
         }).then(function (response){
@@ -12823,7 +12820,6 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(1);
 //
 //
 //
@@ -12849,7 +12845,6 @@ module.exports = function spread(callback) {
 //
 
 //域名路由
-
 
 /* harmony default export */ exports["default"] = {
     props: {
@@ -12889,7 +12884,7 @@ module.exports = function spread(callback) {
             var this$1 = this;
 
             //根据装备的槽位获取该槽位所有的装备
-            this.$http.post(__WEBPACK_IMPORTED_MODULE_0__config_variables__["b" /* host */]+'/api/dancer/technologySlots', {
+            this.$http.post(host+'/api/dancer/technologySlots', {
                 id: this.dancerId,
                 category: this.category,
             }).then(function (response){
@@ -12922,11 +12917,12 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__plugins_arithmetic__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_multiselect__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_multiselect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(12);
+//
 //
 //
 //
@@ -13162,10 +13158,11 @@ module.exports = function spread(callback) {
             return {
                 selectRarity: 1,
                 lv: 1,
+                resetTechnologyLevelNum: 0, //科技等级无法即使刷新暂时解决办法
                 equipped: new Array(7), //暂无很好解决办法，次数数组个数值传入方式待解决
                 equippedTechnology: new Array(5), //同上
                 equippedTactic: {},
-                equippedSkill: {}
+                equippedSkill: {},
             }
         },
         mounted: function mounted() {
@@ -13267,16 +13264,31 @@ module.exports = function spread(callback) {
                     spy: 0,
                 }
                 this.equippedTechnology.forEach(function (item, key) {
-                    ta.fire += item.attributes.fire
-                    ta.penetrate += item.attributes.penetrate
-                    ta.durable += item.attributes.durable
-                    ta.armor += item.attributes.armor
-                    ta.hit += item.attributes.hit
-                    ta.dodge += item.attributes.dodge
-                    ta.concealment += item.attributes.concealment
-                    ta.spy += item.attributes.spy
+                    if (item) {
+                        ta.fire += item.attributes.fire
+                        ta.penetrate += item.attributes.penetrate
+                        ta.durable += item.attributes.durable
+                        ta.armor += item.attributes.armor
+                        ta.hit += item.attributes.hit
+                        ta.dodge += item.attributes.dodge
+                        ta.concealment += item.attributes.concealment
+                        ta.spy += item.attributes.spy
+                    }
                 })
                 return ta
+            },
+            equippedTechnologyTypes: function equippedTechnologyTypes() {
+                var ett = []
+                this.equippedTechnology.forEach(function (item, key) {
+                    if (item) {
+                        ett.push(item.technology_type)
+                    }
+                })
+                return ett
+            },
+            technologyLevels: function technologyLevels() {
+                var tl = this.technologyInitia
+                return tl
             },
             tacticAttributes: function tacticAttributes() {
                 return this.equippedTactic
@@ -13412,7 +13424,7 @@ module.exports = function spread(callback) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_variables__ = __webpack_require__(10);
 //
 //
 //
@@ -13599,19 +13611,7 @@ var setTechnologyTypes = function (ref , payload) {
     var state = ref.state;
 
     commit('setTechnologyTypes', payload)
-    state.technologyTypes.forEach(function (v){
-        state.technologyInitia[v.content]={
-            lv1: 0,
-            get1: 0,
-            amount1: v.amount1,
-            lv2: 0,
-            get2: 0,
-            amount2: v.amount2,
-            lv3: 0,
-            get3: 0,
-            amount3: v.amount3,
-        }
-    })
+    commit('setTechnologyInitia')
 }
 
 /***/ },
@@ -13624,6 +13624,7 @@ var setTechnologyTypes = function (ref , payload) {
 /* harmony export (binding) */ __webpack_require__.d(exports, "setEquipment", function() { return setEquipment; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologies", function() { return setTechnologies; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyInitia", function() { return setTechnologyInitia; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTactics", function() { return setTactics; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setSkills", function() { return setSkills; });
 var toggle = function (state) {
@@ -13649,6 +13650,23 @@ var setTechnologies = function (state, payload) {
 
 var setTechnologyTypes = function (state, payload) {
     return state.technologyTypes = payload
+}
+
+var setTechnologyInitia = function (state) {
+    state.technologyTypes.forEach(function (v){
+        state.technologyInitia[v.content]={
+            lv1: 0,
+            get1: 0,
+            amount1: v.amount1,
+            lv2: 0,
+            get2: 0,
+            amount2: v.amount2,
+            lv3: 0,
+            get3: 0,
+            amount3: v.amount3,
+        }
+    })
+    return state.technologyInitia
 }
 
 var setTactics = function (state, payload) {
@@ -13694,7 +13712,7 @@ var setSkills = function (state, payload) {
     },
     equipment: [],
     technologies: [],
-    technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyCategories: ["主炮", "防护", "车体", "引擎", "索敌"],
     technologyTypes: [],
     technologyInitia: {},
     tactics: [],
@@ -13705,12 +13723,12 @@ var setSkills = function (state, payload) {
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -13719,7 +13737,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
@@ -13733,7 +13751,7 @@ exports.push([module.i, "\n.technology-wrap{\n    padding-left: 5px;\n    paddin
 /* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
@@ -13747,7 +13765,7 @@ exports.push([module.i, "\n.xbtn-wrapper{\n    padding-bottom: 10px;\n}\n", ""])
 /* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
@@ -13761,7 +13779,7 @@ exports.push([module.i, "\n.panel a[data-toggle=\"collapse\"] {\n    text-decora
 /* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)();
+exports = module.exports = __webpack_require__(1)();
 // imports
 
 
@@ -13781,7 +13799,7 @@ exports.push([module.i, "\n.xbtn-wrapper{\n    padding-bottom: 10px;\n}\n", ""])
 var content = __webpack_require__(51);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(3)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -13807,7 +13825,7 @@ if(false) {
 var content = __webpack_require__(52);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(3)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -13833,7 +13851,7 @@ if(false) {
 var content = __webpack_require__(53);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(3)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -13859,7 +13877,7 @@ if(false) {
 var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(3)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -13885,7 +13903,7 @@ if(false) {
 var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(3)(content, {});
+var update = __webpack_require__(2)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -43806,8 +43824,57 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })], 1)]) : _vm._e()
   })), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "form-horizontal"
-  }, [_vm._l((_vm.technologyInitia), function(value, key) {
-    return _c('div', {
+  }, [_vm._l((_vm.technologyCategories), function(technologyCategory, key) {
+    return (_vm.filterTechnologies(technologyCategory).length > 0) ? [_c('div', {
+      staticClass: "form-group"
+    }, [_c('label', {
+      staticClass: "col-md-2 control-label"
+    }, [_vm._v(_vm._s(technologyCategory))]), _vm._v(" "), _c('div', {
+      staticClass: "col-md-10"
+    }, [_c('multiselect', {
+      attrs: {
+        "options": _vm.filterTechnologies(technologyCategory),
+        "searchable": true,
+        "options-limit": 5,
+        "placeholder": "",
+        "label": "name",
+        "track-by": "id"
+      },
+      model: {
+        value: (_vm.equippedTechnology[key]),
+        callback: function($$v) {
+          var $$exp = _vm.equippedTechnology,
+            $$idx = key;
+          if (!Array.isArray($$exp)) {
+            _vm.equippedTechnology[key] = $$v
+          } else {
+            $$exp.splice($$idx, 1, $$v)
+          }
+        },
+        expression: "equippedTechnology[key]"
+      }
+    })], 1)])] : _vm._e()
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.resetTechnologyLevelNum),
+      expression: "resetTechnologyLevelNum"
+    }],
+    attrs: {
+      "type": "hidden"
+    },
+    domProps: {
+      "value": (_vm.resetTechnologyLevelNum)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.resetTechnologyLevelNum = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _vm._l((_vm.technologyInitia), function(value, key) {
+    return (_vm.equippedTechnologyTypes.toString().indexOf(key) != -1) ? _c('div', {
       staticClass: "form-group"
     }, [_c('label', {
       staticClass: "col-md-2 control-label"
@@ -43839,7 +43906,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.lv1 = 0
+          value.lv1 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -43850,7 +43918,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.lv1 = n
+            value.lv1 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -43878,7 +43947,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.get1 = 0
+          value.get1 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -43889,7 +43959,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.get1 = n
+            value.get1 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -43917,7 +43988,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.lv2 = 0
+          value.lv2 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -43928,7 +44000,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.lv2 = n
+            value.lv2 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -43956,7 +44029,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.get2 = 0
+          value.get2 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -43967,7 +44041,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.get2 = n
+            value.get2 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -43995,7 +44070,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.lv3 = 0
+          value.lv3 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -44006,7 +44082,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.lv3 = n
+            value.lv3 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -44034,7 +44111,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('li', {
       on: {
         "click": function($event) {
-          value.get3 = 0
+          value.get3 = 0;
+          _vm.resetTechnologyLevelNum++
         }
       }
     }, [_c('a', {
@@ -44045,7 +44123,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('li', {
         on: {
           "click": function($event) {
-            value.get3 = n
+            value.get3 = n;
+            _vm.resetTechnologyLevelNum++
           }
         }
       }, [_c('a', {
@@ -44053,37 +44132,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "href": "javascript:void(0);"
         }
       }, [_vm._v(_vm._s(n) + "个")])])
-    })], 2)])])])])
-  }), _vm._v(" "), _vm._l((_vm.technologyCategories), function(technologyCategory, key) {
-    return [_c('div', {
-      staticClass: "form-group"
-    }, [_c('label', {
-      staticClass: "col-md-2 control-label"
-    }, [_vm._v(_vm._s(technologyCategory))]), _vm._v(" "), _c('div', {
-      staticClass: "col-md-10"
-    }, [_c('multiselect', {
-      attrs: {
-        "options": _vm.filterTechnologies(technologyCategory),
-        "searchable": true,
-        "options-limit": 5,
-        "placeholder": "",
-        "label": "name",
-        "track-by": "id"
-      },
-      model: {
-        value: (_vm.equippedTechnology[key]),
-        callback: function($$v) {
-          var $$exp = _vm.equippedTechnology,
-            $$idx = key;
-          if (!Array.isArray($$exp)) {
-            _vm.equippedTechnology[key] = $$v
-          } else {
-            $$exp.splice($$idx, 1, $$v)
-          }
-        },
-        expression: "equippedTechnology[key]"
-      }
-    })], 1)])]
+    })], 2)])])])]) : _vm._e()
   })], 2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "form-horizontal"
   }, [_c('div', {

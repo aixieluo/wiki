@@ -28,7 +28,7 @@ export default {
     },
     equipment: [],
     technologies: [],
-    technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyCategories: ["主炮", "防护", "车体", "引擎", "索敌"],
     technologyTypes: [],
     technologyInitia: {},
     tactics: [],

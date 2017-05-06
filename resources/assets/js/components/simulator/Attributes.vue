@@ -79,83 +79,8 @@
         <div class="page-header">
             <h3>科技</h3>
         </div>
-
         <div class="form-horizontal">
-            <div class="form-group" v-for="(value, key) in technologyInitia">
-                <label class="col-md-2 control-label">{{ key }}</label>
-                <div class="col-md-10">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                初期Lv.{{ value.lv1 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv1 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv1 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get1 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get1 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount1" @click="value.get1 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                二期Lv.{{ value.lv2 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv2 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv2 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get2 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get2 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount2" @click="value.get2 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                三期Lv.{{ value.lv3 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv3 = 0"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv3 = n"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get3 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get3 = 0"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount3" @click="value.get3 = n"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <template v-for="(technologyCategory, key) in technologyCategories">
+            <template v-for="(technologyCategory, key) in technologyCategories" v-if="filterTechnologies(technologyCategory).length > 0">
                 <div class="form-group">
                     <label class="col-md-2 control-label">{{ technologyCategory }}</label>
                     <div class="col-md-10">
@@ -171,6 +96,82 @@
                     </div>
                 </div>
             </template>
+
+            <input type="hidden" v-model="resetTechnologyLevelNum">
+            <div class="form-group" v-for="(value, key) in technologyInitia" v-if="equippedTechnologyTypes.toString().indexOf(key) != -1" >
+                <label class="col-md-2 control-label">{{ key }}</label>
+                <div class="col-md-10">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                初期Lv.{{ value.lv1 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.lv1 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv1 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                GET（{{ value.get1 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.get1 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount1" @click="value.get1 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                二期Lv.{{ value.lv2 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.lv2 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv2 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                GET（{{ value.get2 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.get2 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount2" @click="value.get2 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                三期Lv.{{ value.lv3 }}
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.lv3 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
+                                <li v-for="n in 16" @click="value.lv3 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                GET（{{ value.get3 }}个）
+                                    <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li @click="value.get3 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
+                                <li v-for="n in value.amount3" @click="value.get3 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="page-header">
@@ -233,10 +234,11 @@
             return {
                 selectRarity: 1,
                 lv: 1,
+                resetTechnologyLevelNum: 0, //科技等级无法即使刷新暂时解决办法
                 equipped: new Array(7), //暂无很好解决办法，次数数组个数值传入方式待解决
                 equippedTechnology: new Array(5), //同上
                 equippedTactic: {},
-                equippedSkill: {}
+                equippedSkill: {},
             }
         },
         mounted() {
@@ -334,16 +336,31 @@
                     spy: 0,
                 }
                 this.equippedTechnology.forEach((item, key) => {
-                    ta.fire += item.attributes.fire
-                    ta.penetrate += item.attributes.penetrate
-                    ta.durable += item.attributes.durable
-                    ta.armor += item.attributes.armor
-                    ta.hit += item.attributes.hit
-                    ta.dodge += item.attributes.dodge
-                    ta.concealment += item.attributes.concealment
-                    ta.spy += item.attributes.spy
+                    if (item) {
+                        ta.fire += item.attributes.fire
+                        ta.penetrate += item.attributes.penetrate
+                        ta.durable += item.attributes.durable
+                        ta.armor += item.attributes.armor
+                        ta.hit += item.attributes.hit
+                        ta.dodge += item.attributes.dodge
+                        ta.concealment += item.attributes.concealment
+                        ta.spy += item.attributes.spy
+                    }
                 })
                 return ta
+            },
+            equippedTechnologyTypes() {
+                let ett = []
+                this.equippedTechnology.forEach((item, key) => {
+                    if (item) {
+                        ett.push(item.technology_type)
+                    }
+                })
+                return ett
+            },
+            technologyLevels() {
+                let tl = this.technologyInitia
+                return tl
             },
             tacticAttributes() {
                 return this.equippedTactic

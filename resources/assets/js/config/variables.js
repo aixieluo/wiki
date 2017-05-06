@@ -1,8 +1,6 @@
-//服务器域名地址
-export var host = "http://" + location.host;
 
 //亮星加成
-export var starIncrease = [
+export const starIncrease = [
     {
         fire: 0,
         penetrate: 0,
@@ -33,4 +31,8 @@ export var starIncrease = [
         concealment: 0,
         spy: 0,
     }
-];
+]
+
+export const technologyIncrease = {
+
+}

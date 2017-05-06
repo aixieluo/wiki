@@ -29,8 +29,6 @@
 <script>
 
     //域名路由
-    import {host, starIncrease} from "../../config/variables"
-
     export default {
         props: {
 

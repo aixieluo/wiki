@@ -29473,19 +29473,7 @@ var setTechnologyTypes = function (ref , payload) {
     var state = ref.state;
 
     commit('setTechnologyTypes', payload)
-    state.technologyTypes.forEach(function (v){
-        state.technologyInitia[v.content]={
-            lv1: 0,
-            get1: 0,
-            amount1: v.amount1,
-            lv2: 0,
-            get2: 0,
-            amount2: v.amount2,
-            lv3: 0,
-            get3: 0,
-            amount3: v.amount3,
-        }
-    })
+    commit('setTechnologyInitia')
 }
 
 /***/ },
@@ -29498,6 +29486,7 @@ var setTechnologyTypes = function (ref , payload) {
 /* harmony export (binding) */ __webpack_require__.d(exports, "setEquipment", function() { return setEquipment; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologies", function() { return setTechnologies; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyTypes", function() { return setTechnologyTypes; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "setTechnologyInitia", function() { return setTechnologyInitia; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setTactics", function() { return setTactics; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "setSkills", function() { return setSkills; });
 var toggle = function (state) {
@@ -29523,6 +29512,23 @@ var setTechnologies = function (state, payload) {
 
 var setTechnologyTypes = function (state, payload) {
     return state.technologyTypes = payload
+}
+
+var setTechnologyInitia = function (state) {
+    state.technologyTypes.forEach(function (v){
+        state.technologyInitia[v.content]={
+            lv1: 0,
+            get1: 0,
+            amount1: v.amount1,
+            lv2: 0,
+            get2: 0,
+            amount2: v.amount2,
+            lv3: 0,
+            get3: 0,
+            amount3: v.amount3,
+        }
+    })
+    return state.technologyInitia
 }
 
 var setTactics = function (state, payload) {
@@ -29568,7 +29574,7 @@ var setSkills = function (state, payload) {
     },
     equipment: [],
     technologies: [],
-    technologyCategories: ["主炮", "防护", "车体", "引擎"],
+    technologyCategories: ["主炮", "防护", "车体", "引擎", "索敌"],
     technologyTypes: [],
     technologyInitia: {},
     tactics: [],
