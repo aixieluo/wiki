@@ -1,5 +1,6 @@
 export default {
     type: '',
+    selectRarity: 1,
     rarity: 1,
     attributes: {
         fire: 0,
@@ -28,9 +29,10 @@ export default {
     },
     equipment: [],
     technologies: [],
-    technologyCategories: ["主炮", "防护", "车体", "引擎", "索敌"],
+    technologyCategories: ["主炮", "防护", "车体", "引擎", "侦查"],
     technologyTypes: [],
-    technologyInitia: {},
+    technologyAmounts: [],
+    technologyLevels: {},
     tactics: [],
     skills: [],
 }

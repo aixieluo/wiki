@@ -11,6 +11,10 @@ export const setDancerInfo = (state, payload) => {
     return
 }
 
+export const changeRarity = (state, payload) => {
+    return state.selectRarity = payload
+}
+
 export const setEquipment = (state, payload) => {
     return state.equipment = payload
 }
@@ -23,21 +27,15 @@ export const setTechnologyTypes = (state, payload) => {
     return state.technologyTypes = payload
 }
 
-export const setTechnologyInitia = (state) => {
+export const setTechnologyAmounts = (state) => {
     state.technologyTypes.forEach((v)=>{
-        state.technologyInitia[v.content]={
-            lv1: 0,
-            get1: 0,
-            amount1: v.amount1,
-            lv2: 0,
-            get2: 0,
-            amount2: v.amount2,
-            lv3: 0,
-            get3: 0,
-            amount3: v.amount3,
-        }
+        state.technologyAmounts.push(v)
     })
-    return state.technologyInitia
+    return state.technologyAmounts
+}
+
+export const updateTechnologyLevels = (state, payload) => {
+    state.technologyLevels[payload.type] = payload.lv
 }
 
 export const setTactics = (state, payload) => {

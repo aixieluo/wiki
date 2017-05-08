@@ -16,7 +16,7 @@
 <body>
 <div id="app">
     <header>
-        {{--<h1>钢铁华尔兹资讯站</h1>--}}
+        <h1>钢铁华尔兹资讯站</h1>
     </header>
 
     <nav class="main-navigation">
@@ -40,6 +40,7 @@
                             <li role="presentation"><a href="#">资源与商店</a></li>
                             <li role="presentation"><a href="#">模拟器</a></li>
                             <li role="presentation"><a href="#">同人画馆</a></li>
+                            <li role="presentation"><a target="_blank" href="{{ asset('/dashboard/dancer') }}">后台临时链接</a></li>
                         </ul>
                     </div>
                 </div>

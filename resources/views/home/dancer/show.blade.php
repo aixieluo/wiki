@@ -7,8 +7,7 @@
             <div class="row">
                 <div class="col-md-2 col-md-offset-1">
                     <div class="d-avator text-center">
-                        {{--<img class="img-circle img-thumbnail" src="{{ $photos->get('avator') }}" />--}}
-                        <img class="img-circle img-thumbnail" src="https://imgsa.baidu.com/forum/w%3D580/sign=302efed240a98226b8c12b2fba83b97a/f6d8cb134954092306be1fd99158d109b2de492f.jpg" />
+                        <img class="img-circle img-thumbnail" style="width: 163px;height: 163px" src="{{ asset('images/erii.jpg') }}" />
                     </div>
                 </div>
                 <div class="col-md-6 col-md-offset-1">

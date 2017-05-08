@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <div class="clearfix">
                     <div class="pull-left clearfix">
-                        <i v-for="n in rarity" @click="selectRarity=n" class="fa fa-star pull-left"
+                        <i v-for="n in rarity" @click="changeRarity(n)" class="fa fa-star pull-left"
                            :class="[selectRarity<n?'fa-star-o':'']" aria-hidden="true"></i>
                     </div>
                     <div class="pull-right">
@@ -27,7 +27,6 @@
                         <td width="1px">{{ sumPenetrate }}</td>
                         <td width="1px">命中</td>
                         <td width="1px">{{ sumHit }}</td>
-
                     </tr>
                     <tr>
                         <td>耐久</td>
@@ -43,11 +42,25 @@
                         <td>侦查</td>
                         <td>{{ sumSpy }}</td>
                         <td>射程</td>
-                        <td>{{ 555 }}</td>
+                        <td>/</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <div class="page-header">
+            <h3>强殖</h3>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">{{ strongBondLv }}级</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li @click="strongBondLv = 0"><a href="JavaScript:void(0)">{{ 0 }}级</a></li>
+                <li v-for="n in 12" @click="strongBondLv = n"><a href="JavaScript:void(0)">{{ n }}级</a></li>
+            </ul>
         </div>
 
         <div class="page-header">
@@ -67,7 +80,7 @@
                             :hide-selected="true"
                             :options-limit="5"
                             :max="value.num"
-                            :custom-label="nameWithLang"
+                            :custom-label="nameWithEquipment"
                             placeholder=""
                             label="name"
                             track-by="id">
@@ -89,91 +102,16 @@
                                 :options="filterTechnologies(technologyCategory)"
                                 :searchable="true"
                                 :options-limit="5"
+                                :custom-label="nameWithTechnology"
                                 placeholder=""
                                 label="name"
                                 track-by="id">
                         </multiselect>
                     </div>
                 </div>
+                <technology-levels v-on:refreshTechnologyLevels="refreshTechnologyLevels" :type="equippedTechnology[key].technology_type" v-if="equippedTechnology[key]"></technology-levels>
             </template>
-
-            <technology-levels></technology-levels>
-
-            <input type="hidden" v-model="resetTechnologyLevelNum">
-            <div class="form-group" v-for="(value, key) in technologyInitia" v-if="equippedTechnologyTypes.toString().indexOf(key) != -1" >
-                <label class="col-md-2 control-label">{{ key }}</label>
-                <div class="col-md-10">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                初期Lv.{{ value.lv1 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv1 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv1 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get1 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get1 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount1" @click="value.get1 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                二期Lv.{{ value.lv2 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv2 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv2 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get2 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get2 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount2" @click="value.get2 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                三期Lv.{{ value.lv3 }}
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.lv3 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ 0 }}</a></li>
-                                <li v-for="n in 16" @click="value.lv3 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">Lv.{{ n }}</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                GET（{{ value.get3 }}个）
-                                    <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li @click="value.get3 = 0;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ 0 }}个</a></li>
-                                <li v-for="n in value.amount3" @click="value.get3 = n;resetTechnologyLevelNum++"><a href="javascript:void(0);">{{ n }}个</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <input type="hidden" v-model="lv1">
         </div>
 
         <div class="page-header">
@@ -188,6 +126,7 @@
                             :options="tactics"
                             :searchable="true"
                             :options-limit="5"
+                            :custom-label="nameWithTactic"
                             placeholder=""
                             label="name"
                             track-by="id">
@@ -208,6 +147,7 @@
                             :options="skills"
                             :searchable="true"
                             :options-limit="5"
+                            :custom-label="nameWithSkill"
                             placeholder=""
                             label="name"
                             track-by="id">
@@ -215,16 +155,15 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-    import {host, starIncrease} from "../../config/variables"
+    import {starIncrease, technologyIncrease, strongBond} from "../../config/variables"
     import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
     import Multiselect from 'vue-multiselect'
     import TechnologyLevels from './TechnologyLevels.vue'
-    import {mapState, mapGetters} from 'vuex'
+    import {mapState} from 'vuex'
 
     export default {
         components: {
@@ -238,13 +177,13 @@
         },
         data() {
             return {
-                selectRarity: 1,
                 lv: 1,
-                resetTechnologyLevelNum: 0, //科技等级无法即使刷新暂时解决办法
+                refreshAttributes: {},
                 equipped: new Array(7), //暂无很好解决办法，次数数组个数值传入方式待解决
                 equippedTechnology: new Array(5), //同上
-                equippedTactic: {},
-                equippedSkill: {},
+                equippedTactic: null,
+                equippedSkill: null,
+                strongBondLv: 0
             }
         },
         mounted() {
@@ -274,8 +213,31 @@
                 })
         },
         methods: {
-            nameWithLang({name, lv}) {
+            //vuex数据不能及时更新问题，暂时处理办法，待改进（急！！！！！！！！！）
+            refreshTechnologyLevels() {
+                for (var key in this.attributes) {
+                    this.attributes[key]++
+                    this.attributes[key]--
+                }
+            },
+            isEmpty(obj) {
+                for (var name in obj)
+                {
+                    return false;
+                }
+                return true;
+            },
+            nameWithEquipment({name, lv}) {
                 return `${name} - S${lv}`
+            },
+            nameWithTechnology({name, rank}) {
+                return `${name} - ${rank}阶`
+            },
+            nameWithTactic({name, lv}) {
+                return `${name} - ${lv}级`
+            },
+            nameWithSkill({name, lv}) {
+                return `${name} - ${lv}级`
             },
             filterEquipment(slot) {
                 return this.equipment.filter(equipment => equipment.slot == slot)
@@ -284,16 +246,20 @@
                 return this.technologies.filter(technology => technology.technology_category == category)
             },
             subLv() {
-                this.lv > 0 ? this.lv--: this.lv
+                this.lv > 0 ? this.lv-- : this.lv
             },
             addLv() {
                 this.lv < 99 ? this.lv++ : this.lv
+            },
+            changeRarity(n) {
+                this.$store.commit('changeRarity', n)
             }
         },
         computed: {
             ...mapState([
                 'type',
                 'rarity',
+                'selectRarity',
                 'attributes',
                 'grow_attributes',
                 'equipment_number',
@@ -301,12 +267,9 @@
                 'technologies',
                 'technologyCategories',
                 'technologyTypes',
-                'technologyInitia',
+                'technologyLevels',
                 'tactics',
                 'skills'
-            ]),
-            ...mapGetters([
-                'technologyLevels'
             ]),
             equipmentAttributes() {
                 let ea = {
@@ -359,28 +322,17 @@
                 return ta
             },
             equippedTechnologyTypes() {
-                let ett = []
+                let ett = {}
                 this.equippedTechnology.forEach((item, key) => {
                     if (item) {
-                        ett.push(item.technology_type)
+                        ett[item.technology_category] = item.technology_type
                     }
                 })
                 return ett
             },
-//            technologyLevels() {
-//                let tl = {}
-//                this.technologyTypes.forEach((item, key) => {
-//                    tl[item.content] = {
-//                        level1: 0,
-//                        level2: 0,
-//                        level3: 0
-//                    }
-//                })
-//                return tl
-//            },
             tacticAttributes() {
-                return this.equippedTactic
-                    ||
+                return !this.isEmpty(this.equippedTactic) ? this.equippedTactic
+                    :
                     {
                         fire_up: 0,
                         penetrate_up: 0,
@@ -401,8 +353,8 @@
                     }
             },
             skillAttributes() {
-                return this.equippedSkill
-                    ||
+                return !this.isEmpty(this.equippedSkill) ? this.equippedSkill
+                    :
                     {
                         fire_up: 0,
                         penetrate_up: 0,
@@ -422,9 +374,10 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.fire_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
                 sum = numAdd(sum, this.technologyAttributes.fire);
-                sum = numAdd(sum, numMulti(basic, numMulti(0.075, this.resetTechnologyLevelNum)))
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['主炮'] || "AP"].fire_up, this.technologyLevels[this.equippedTechnologyTypes['主炮']])))
 //                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
-                return sum;
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].fire, this.strongBondLv))
+                return Math.round(sum)
             },
             sumPenetrate () {
                 let basic = this.attributes.penetrate;
@@ -435,7 +388,9 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.penetrate_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.penetrate, this.tacticAttributes.penetrate_down));
                 sum = numAdd(sum, this.technologyAttributes.penetrate);
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['主炮'] || "AP"].penetrate_up, this.technologyLevels[this.equippedTechnologyTypes['主炮']])))
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].penetrate, this.strongBondLv))
+                return Math.round(sum)
             },
             sumDurable () {
                 let basic = this.attributes.durable;
@@ -446,7 +401,9 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.durable_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.durable, this.tacticAttributes.durable_down));
                 sum = numAdd(sum, this.technologyAttributes.durable);
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['防护'] || "重装防护"].durable_up, this.technologyLevels[this.equippedTechnologyTypes['防护']])))
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].durable, this.strongBondLv))
+                return Math.round(sum)
             },
             sumArmor () {
                 let basic = this.attributes.armor;
@@ -457,7 +414,9 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.armor_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.armor, this.tacticAttributes.armor_down));
                 sum = numAdd(sum, this.technologyAttributes.armor);
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['防护'] || "重装防护"].armor_up, this.technologyLevels[this.equippedTechnologyTypes['防护']])))
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].armor, this.strongBondLv))
+                return Math.round(sum)
             },
             sumHit () {
                 let basic = this.attributes.hit;
@@ -467,7 +426,9 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.hit_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.hit, this.tacticAttributes.hit_down));
                 sum = numAdd(sum, this.technologyAttributes.hit);
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['车体'] || "综合车体"].hit_up, this.technologyLevels[this.equippedTechnologyTypes['车体']])))
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].hit, this.strongBondLv))
+                return Math.round(sum)
             },
             sumDodge () {
                 let basic = this.attributes.dodge;
@@ -477,7 +438,9 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.dodge_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.dodge, this.tacticAttributes.dodge_down));
                 sum = numAdd(sum, this.technologyAttributes.dodge);
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['引擎'] || "综合引擎"].dodge_up, this.technologyLevels[this.equippedTechnologyTypes['引擎']])))
+                sum = numAdd(sum, numMulti(strongBond[this.type || "重型坦克"].dodge, this.strongBondLv))
+                return Math.round(sum)
             },
             sumConcealment () {
                 let basic = this.attributes.concealment;
@@ -487,7 +450,8 @@
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.concealment, this.tacticAttributes.concealment_down));
                 sum = numAdd(sum, this.technologyAttributes.concealment);
 //                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].concealment));
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['侦查'] || '综合索敌'].concealment_up, this.technologyLevels[this.equippedTechnologyTypes['侦查']])))
+                return Math.round(sum)
             },
             sumSpy () {
                 let basic = this.attributes.spy;
@@ -497,13 +461,14 @@
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.spy, this.tacticAttributes.spy_down));
                 sum = numAdd(sum, this.technologyAttributes.spy);
 //                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].spy));
-                return sum;
+                sum = numAdd(sum, numMulti(basic, numMulti(technologyIncrease[this.equippedTechnologyTypes['侦查'] || '综合索敌'].spy_up, this.technologyLevels[this.equippedTechnologyTypes['侦查']])))
+                return Math.round(sum)
             },
         },
         watch: {
             //监听lv的变化，当lv不是数字时，还原原先的值
             lv: function (val, oldVal) {
-                this.lv = !isNaN(val)&&val>=0?val:oldVal;
+                this.lv = !isNaN(val) && val >= 0 && val <= 99 ? val : oldVal;
             }
         }
     }
