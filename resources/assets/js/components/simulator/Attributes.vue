@@ -97,6 +97,8 @@
                 </div>
             </template>
 
+            <technology-levels></technology-levels>
+
             <input type="hidden" v-model="resetTechnologyLevelNum">
             <div class="form-group" v-for="(value, key) in technologyInitia" v-if="equippedTechnologyTypes.toString().indexOf(key) != -1" >
                 <label class="col-md-2 control-label">{{ key }}</label>
@@ -221,10 +223,14 @@
     import {host, starIncrease} from "../../config/variables"
     import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
     import Multiselect from 'vue-multiselect'
+    import TechnologyLevels from './TechnologyLevels.vue'
     import {mapState, mapGetters} from 'vuex'
 
     export default {
-        components: {Multiselect},
+        components: {
+            Multiselect,
+            TechnologyLevels
+        },
         props: {
             'dancerId': {
                 required: true,
@@ -239,31 +245,6 @@
                 equippedTechnology: new Array(5), //同上
                 equippedTactic: {},
                 equippedSkill: {},
-                gun: {
-                    lv1: 0,
-                    lv2: 0,
-                    lv3: 0
-                },
-                protect: {
-                    lv1: 0,
-                    lv2: 0,
-                    lv3: 0
-                },
-                carBody: {
-                    lv1: 0,
-                    lv2: 0,
-                    lv3: 0
-                },
-                engine: {
-                    lv1: 0,
-                    lv2: 0,
-                    lv3: 0
-                },
-                spy: {
-                    lv1: 0,
-                    lv2: 0,
-                    lv3: 0
-                }
             }
         },
         mounted() {
@@ -523,7 +504,7 @@
             //监听lv的变化，当lv不是数字时，还原原先的值
             lv: function (val, oldVal) {
                 this.lv = !isNaN(val)&&val>=0?val:oldVal;
-            },
+            }
         }
     }
 </script>

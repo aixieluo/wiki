@@ -24,11 +24,6 @@ Vue.component(
 )
 
 Vue.component(
-    'equipment',
-    require('./components/simulator/Equipment.vue')
-)
-
-Vue.component(
     'tactic',
     require('./components/home/Tactic.vue')
 )
