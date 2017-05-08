@@ -221,7 +221,7 @@
     import {host, starIncrease} from "../../config/variables"
     import {numAdd, numSub, numMulti} from "../../plugins/arithmetic"
     import Multiselect from 'vue-multiselect'
-    import {mapState} from 'vuex'
+    import {mapState, mapGetters} from 'vuex'
 
     export default {
         components: {Multiselect},
@@ -239,6 +239,31 @@
                 equippedTechnology: new Array(5), //同上
                 equippedTactic: {},
                 equippedSkill: {},
+                gun: {
+                    lv1: 0,
+                    lv2: 0,
+                    lv3: 0
+                },
+                protect: {
+                    lv1: 0,
+                    lv2: 0,
+                    lv3: 0
+                },
+                carBody: {
+                    lv1: 0,
+                    lv2: 0,
+                    lv3: 0
+                },
+                engine: {
+                    lv1: 0,
+                    lv2: 0,
+                    lv3: 0
+                },
+                spy: {
+                    lv1: 0,
+                    lv2: 0,
+                    lv3: 0
+                }
             }
         },
         mounted() {
@@ -299,6 +324,9 @@
                 'tactics',
                 'skills'
             ]),
+            ...mapGetters([
+                'technologyLevels'
+            ]),
             equipmentAttributes() {
                 let ea = {
                     fire: 0,
@@ -358,10 +386,17 @@
                 })
                 return ett
             },
-            technologyLevels() {
-                let tl = this.technologyInitia
-                return tl
-            },
+//            technologyLevels() {
+//                let tl = {}
+//                this.technologyTypes.forEach((item, key) => {
+//                    tl[item.content] = {
+//                        level1: 0,
+//                        level2: 0,
+//                        level3: 0
+//                    }
+//                })
+//                return tl
+//            },
             tacticAttributes() {
                 return this.equippedTactic
                     ||
@@ -406,6 +441,7 @@
                 sum = numAdd(sum, numMulti(basic, this.tacticAttributes.fire_up));
                 sum = numAdd(sum, numMulti(this.equipmentAttributes.fire, this.tacticAttributes.fire_down));
                 sum = numAdd(sum, this.technologyAttributes.fire);
+                sum = numAdd(sum, numMulti(basic, numMulti(0.075, this.resetTechnologyLevelNum)))
 //                sum = numAdd(sum, numMulti(basic, starIncrease[this.selectRarity-1].fire));
                 return sum;
             },
@@ -487,7 +523,7 @@
             //监听lv的变化，当lv不是数字时，还原原先的值
             lv: function (val, oldVal) {
                 this.lv = !isNaN(val)&&val>=0?val:oldVal;
-            }
+            },
         }
     }
 </script>
