@@ -26,9 +26,4 @@ class Slot extends Model
     public function equipment() {
         return $this->hasMany('App\Models\Equipment');
     }
-
-
-    public function equipmentList($slot) {
-        return $this->where('name', $slot)->first()->equipment()->where('lv', 1)->get();
-    }
 }

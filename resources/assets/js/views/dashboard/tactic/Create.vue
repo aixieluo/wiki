@@ -33,9 +33,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="fire_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备火力</label>
+                        <label class="col-sm-2 control-label">降低装备火力至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="fire_down" class="form-control">
+                            <input type="number" step="0.01" name="fire_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -45,9 +45,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="penetrate_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备穿甲</label>
+                        <label class="col-sm-2 control-label">降低装备穿甲至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="penetrate_down" class="form-control">
+                            <input type="number" step="0.01" name="penetrate_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -57,9 +57,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="durable_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备耐久</label>
+                        <label class="col-sm-2 control-label">降低装备耐久至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="durable_down" class="form-control">
+                            <input type="number" step="0.01" name="durable_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -69,9 +69,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="armor_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备装甲</label>
+                        <label class="col-sm-2 control-label">降低装备装甲至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="armor_down" class="form-control">
+                            <input type="number" step="0.01" name="armor_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -81,9 +81,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="hit_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备命中</label>
+                        <label class="col-sm-2 control-label">降低装备命中至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="hit_down" class="form-control">
+                            <input type="number" step="0.01" name="hit_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -93,9 +93,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="dodge_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备闪避</label>
+                        <label class="col-sm-2 control-label">降低装备闪避至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="dodge_down" class="form-control">
+                            <input type="number" step="0.01" name="dodge_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -105,9 +105,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="concealment_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备隐蔽</label>
+                        <label class="col-sm-2 control-label">降低装备隐蔽至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="concealment_down" class="form-control">
+                            <input type="number" step="0.01" name="concealment_down" class="form-control"  placeholder="不降低则填1">
                         </div>
                     </div>
 
@@ -118,9 +118,9 @@
                         <div class="col-sm-4">
                             <input type="number" step="0.01" name="spy_up" class="form-control">
                         </div>
-                        <label class="col-sm-2 control-label">降低装备侦查</label>
+                        <label class="col-sm-2 control-label">降低装备侦查至</label>
                         <div class="col-sm-4">
-                            <input type="number" step="0.01" name="spy_down" class="form-control">
+                            <input type="number" step="0.01" name="spy_down" class="form-control" placeholder="不降低则填1">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>

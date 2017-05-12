@@ -18,8 +18,7 @@ class TacticInfo extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'describe'
+        'name'
     ];
 
     public function tactics() {

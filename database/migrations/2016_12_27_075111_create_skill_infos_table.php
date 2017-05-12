@@ -16,7 +16,6 @@ class CreateSkillInfosTable extends Migration
         Schema::create('skill_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment('辎械名称');
-            $table->string('describe')->default('(暂无)')->comment('辎械描述');
             $table->timestamps();
             $table->softDeletes();
         });

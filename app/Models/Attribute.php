@@ -17,7 +17,16 @@ class Attribute extends Model
      * @var array
      */
     protected $fillable = [
-        'attributeable_id', 'attributeable_type', 'fire', 'penetrate', 'durable', 'armor', 'hit', 'dodge', 'concealment', 'spy'
+        'attributeable_id',
+        'attributeable_type',
+        'fire',
+        'penetrate',
+        'durable',
+        'armor',
+        'hit',
+        'dodge',
+        'concealment',
+        'spy'
     ];
 
     /**
@@ -25,7 +34,7 @@ class Attribute extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function attributeable(){
+    public function attributeable() {
         return $this->morphTo();
     }
 
