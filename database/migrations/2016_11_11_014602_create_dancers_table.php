@@ -34,9 +34,9 @@ class CreateDancersTable extends Migration
             $table->integer('inwarehouse')->default(0)->comment('内仓');
             $table->integer('carriage')->default(0)->comment('炮架');
             $table->integer('special')->default(0)->comment('特殊');
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->foreign('rarity_id')->references('id')->on('rarities')->onDelete('cascade');
+//            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+//            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+//            $table->foreign('rarity_id')->references('id')->on('rarities')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

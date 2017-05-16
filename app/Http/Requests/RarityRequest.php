@@ -24,7 +24,7 @@ class RarityRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => 'required',
+            'level' => 'required | numeric | between:1,3',
             'content' => 'required'
         ];
     }
