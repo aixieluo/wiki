@@ -16,7 +16,7 @@ class CreateEquipmentInfosTable extends Migration
         Schema::create('equipment_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->comment('装备名称');
-            $table->string('describe')->default('(暂无)')->comment('装备描述');
+            $table->string('describe')->default('暂无')->comment('装备描述');
             $table->timestamps();
             $table->softDeletes();
         });

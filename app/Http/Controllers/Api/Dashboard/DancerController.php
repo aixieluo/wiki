@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\DancerRequest;
 use App\Repositories\DancerRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\DancerTransformer;
@@ -36,7 +37,7 @@ class DancerController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(DancerRequest $request) {
         $this->dancerRepository->store($request->all());
     }
 
@@ -59,7 +60,7 @@ class DancerController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(DancerRequest $request, $id) {
         $this->dancerRepository->update($id, $request->all());
 
         return $this->noContent();

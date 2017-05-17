@@ -25,7 +25,7 @@ class CreateSkillsTable extends Migration
             $table->float('dodge_up', 5, 2)->default(0)->comment('提升基础闪避');
             $table->float('concealment_up', 5, 2)->default(0)->comment('提升基础隐蔽');
             $table->float('spy_up', 5, 2)->default(0)->comment('提升基础侦查');
-            $table->foreign('skill_info_id')->references('id')->on('skill_infos')->onDelete('cascade');
+//            $table->foreign('skill_info_id')->references('id')->on('skill_infos')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,7 +16,7 @@ class Equipment extends Model
      *
      * @var array
      */
-    protected $fillable = ['equipment_info_id', 'slot_id', 'main', 'lv', 'price'];
+    protected $fillable = ['lv', 'price'];
 
     /**
      * 获取装备槽位
@@ -36,17 +36,7 @@ class Equipment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function attributes(){
-        return $this->morphMany('App\Models\Attribute','attributeable');
-    }
-
-    public function equipmentAttributes($name, $lv, $rank) {
-        return $this->where('name', $name)
-            ->where('lv', $lv)
-            ->where('rank', $rank)
-            ->first()
-            ->attributes()
-            ->select('fire', 'penetrate', 'durable', 'armor', 'hit', 'dodge', 'concealment', 'spy')
-            ->first();
+    public function attributes() {
+        return $this->morphMany('App\Models\Attribute', 'attributeable');
     }
 }

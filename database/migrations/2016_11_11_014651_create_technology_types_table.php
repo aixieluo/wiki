@@ -20,7 +20,7 @@ class CreateTechnologyTypesTable extends Migration
             $table->integer('amount1')->comment('一级科技大件总数目');
             $table->integer('amount2')->comment('二级科技大件总数目');
             $table->integer('amount3')->comment('三级科技大件总数目');
-            $table->foreign('technology_category_id')->references('id')->on('technology_categories')->onDelete('cascade');
+//            $table->foreign('technology_category_id')->references('id')->on('technology_categories')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

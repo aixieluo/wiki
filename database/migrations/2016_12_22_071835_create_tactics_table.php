@@ -33,6 +33,7 @@ class CreateTacticsTable extends Migration
             $table->float('dodge_down', 5, 2)->default(0)->comment('降低装备闪避');
             $table->float('concealment_down', 5, 2)->default(0)->comment('降低装备隐蔽');
             $table->float('spy_down', 5, 2)->default(0)->comment('降低装备侦查');
+//            $table->foreign('tactic_info_id')->references('id')->on('tactic_infos')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
