@@ -9,7 +9,8 @@
         "laravel/framework": "5.3.*",
         "barryvdh/laravel-debugbar": "^2.3",
         "laravelcollective/html": "5.3.*",
-        "league/fractal": "^0.16.0"
+        "league/fractal": "^0.16.0",
+        "overtrue/laravel-lang": "~3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
