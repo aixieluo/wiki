@@ -5,18 +5,8 @@
 Homestead.json
 Homestead.yaml
 .env
-<<<<<<< HEAD
 /npm-debug.log
 /public/css/app.css
 /public/css/manage.css
 /public/js/app.js
 /public/js/manage.js
-app/Console/Commands/
-public/css/plugins/
-=======
-/public/js/app.js
-/public/js/manage.js
-/public/css/app.css
-/public/css/manage.css
-/npm-debug.log
->>>>>>> 8a123ff7d910accd6b891907d8b64d6cd175e12d
