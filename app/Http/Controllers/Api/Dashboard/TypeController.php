@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\TypeRequest;
+use App\Http\Requests\Dancer\TypeRequest;
 use App\Repositories\TypeRepository;
 use App\Transformers\TypeTransformer;
 use Illuminate\Http\Request;

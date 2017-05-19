@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Equipment\EquipmentInfoRequest;
 use App\Repositories\EquipmentInfoRepository;
 use App\Transformers\EquipmentInfoTransformer;
-use Illuminate\Http\Request;
 
 class EquipmentInfoController extends ApiController
 {
@@ -39,7 +39,7 @@ class EquipmentInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(EquipmentInfoRequest $request) {
         $this->equipmentInfoRepository->store($request->all());
 
         return $this->noContent();
@@ -65,7 +65,7 @@ class EquipmentInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(EquipmentInfoRequest $request, $id) {
 
         $this->equipmentInfoRepository->update($id, $request->all());
 

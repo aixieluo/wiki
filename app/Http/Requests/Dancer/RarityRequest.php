@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dancer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeRequest extends FormRequest
+class RarityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class TypeRequest extends FormRequest
     public function rules()
     {
         return [
+            'level' => 'required | numeric | between:1,3',
             'content' => 'required'
         ];
     }

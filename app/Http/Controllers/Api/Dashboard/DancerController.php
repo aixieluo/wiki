@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\DancerRequest;
+use App\Http\Requests\Dancer\DancerRequest;
 use App\Repositories\DancerRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\DancerTransformer;

@@ -15,7 +15,7 @@ class CreateTypesTable extends Migration
     {
         Schema::create('types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content')->comment('类型');
+            $table->string('name')->comment('类型名称');
             $table->timestamps();
             $table->softDeletes();
         });

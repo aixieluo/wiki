@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\RarityRequest;
+use App\Http\Requests\Dancer\RarityRequest;
 use App\Repositories\RarityRepository;
 use App\Transformers\RarityTransformer;
 

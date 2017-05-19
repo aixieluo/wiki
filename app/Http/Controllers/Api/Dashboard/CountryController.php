@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
-use App\Http\Requests\CountryRequest;
+use App\Http\Requests\Dancer\CountryRequest;
 use App\Repositories\CountryRepository;
 use App\Transformers\CountryTransformer;
 

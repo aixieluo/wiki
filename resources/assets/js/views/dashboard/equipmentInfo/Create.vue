@@ -25,6 +25,42 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group">
+                        <label class="col-sm-2 control-label">槽位</label>
+                        <div class="col-sm-10">
+                            <multiselect
+                                    v-model="activeSlots"
+                                    :options="slots"
+                                    :multiple="true"
+                                    :searchable="true"
+                                    :close-on-select="false"
+                                    :clear-on-select="false"
+                                    :hide-selected="true"
+                                    placeholder="匹配该装备的槽位"
+                                    label="name"
+                                    track-by="id"
+                                    @input="checkMain">
+                            </multiselect>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">主槽</label>
+                        <div class="col-sm-10">
+                            <multiselect
+                                    v-model="main"
+                                    :options="activeSlots"
+                                    :searchable="true"
+                                    :options-limit="5"
+                                    :placeholder="activeSlots.length == 0 ? '先匹配该装备的槽位':'设定该装备的主槽'"
+                                    label="name"
+                                    track-by="id">
+                            </multiselect>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary">保存内容</button>
                         </div>
@@ -36,8 +72,27 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect'
+
     export default {
+        components: { Multiselect },
+        data() {
+            return {
+                slots: [],
+                activeSlots: [],
+                main: ''
+            }
+        },
+        mounted() {
+            this.$http.get('slots')
+                .then(Response => {
+                    this.slots = Response.data.data
+                })
+        },
         methods: {
+            checkMain() {
+                if (!(this.main in this.activeSlots)) this.main = ''
+            },
             create(event) {
                 let formData = new FormData(event.target)
 

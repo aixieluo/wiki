@@ -15,7 +15,7 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content')->comment('国籍');
+            $table->string('name')->comment('国籍名称');
             $table->timestamps();
             $table->softDeletes();
         });

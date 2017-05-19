@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Equipment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RarityRequest extends FormRequest
+class EquipmentInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,10 @@ class RarityRequest extends FormRequest
     public function rules()
     {
         return [
-            'level' => 'required | numeric | between:1,3',
-            'content' => 'required'
+            'name' => 'required',
+            'describe' => 'required',
+            'activeSlots' => 'required',
+            'main' => 'required'
         ];
     }
 }
