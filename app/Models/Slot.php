@@ -23,7 +23,7 @@ class Slot extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function equipment() {
-        return $this->hasMany('App\Models\Equipment');
+    public function equipmentInfos() {
+        return $this->belongsToMany('App\Models\EquipmentInfo');
     }
 }

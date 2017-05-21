@@ -8,10 +8,11 @@
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="create">
-                    <div class="form-group">
+                    <div class="form-group" :class="{ 'has-error': errors.name }">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control" v-model="name">
+                            <span v-if="errors.name" class="help-block">{{ errors.name[0] }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -19,12 +20,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-10">
-                            <input type="text" name="describe" class="form-control" placeholder="不填即暂无">
+                            <input type="text" name="describe" class="form-control" placeholder="选填" v-model="describe">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
+                    <div class="form-group" :class="{ 'has-error': errors.activeSlots }">
                         <label class="col-sm-2 control-label">槽位</label>
                         <div class="col-sm-10">
                             <multiselect
@@ -40,11 +41,12 @@
                                     track-by="id"
                                     @input="checkMain">
                             </multiselect>
+                            <span v-if="errors.activeSlots" class="help-block">{{ errors.activeSlots[0] }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
+                    <div class="form-group" :class="{ 'has-error': errors.main }">
                         <label class="col-sm-2 control-label">主槽</label>
                         <div class="col-sm-10">
                             <multiselect
@@ -56,6 +58,7 @@
                                     label="name"
                                     track-by="id">
                             </multiselect>
+                            <span v-if="errors.main" class="help-block">{{ errors.main[0] }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -78,9 +81,13 @@
         components: { Multiselect },
         data() {
             return {
+                equipmentInfo: {},
                 slots: [],
+                describe: null,
                 activeSlots: [],
-                main: ''
+                name: null,
+                main: null,
+                errors: {}
             }
         },
         mounted() {
@@ -96,12 +103,24 @@
             create(event) {
                 let formData = new FormData(event.target)
 
-                this.$http.post('equipmentInfo', formData)
+                this.equipmentInfo = {
+                    name: this.name,
+                    describe: this.describe,
+                    main: this.main,
+                    activeSlots: this.activeSlots
+                }
+
+                formData.append('main', JSON.stringify(this.main))
+                formData.append('activeSlots', JSON.stringify(this.activeSlots))
+
+                this.$http.post('equipmentInfo', this.equipmentInfo)
                     .then(() => {
                         toastr.success('创建成功！')
 
-                        this.$router.push('/dashboard/equipmentInfo')
-                    })
+//                        this.$router.push('/dashboard/equipmentInfo')
+                    }).catch(({response}) => {
+                        this.errors = response.data
+                })
             }
         }
     }

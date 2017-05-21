@@ -25,7 +25,6 @@ class EquipmentInfoRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'describe' => 'required',
             'activeSlots' => 'required',
             'main' => 'required'
         ];

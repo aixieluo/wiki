@@ -15,4 +15,13 @@ class EquipmentInfo extends Model
     public function equipment() {
         return $this->hasMany('App\Models\Equipment');
     }
+
+    /**
+     * 获取装备槽位
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function slots() {
+        return $this->belongsToMany('App\Models\Slot');
+    }
 }

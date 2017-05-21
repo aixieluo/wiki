@@ -18,15 +18,6 @@ class Equipment extends Model
      */
     protected $fillable = ['lv', 'price'];
 
-    /**
-     * 获取装备槽位
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function slot() {
-        return $this->belongsTo('App\Models\Slot');
-    }
-
     public function equipmentInfo() {
         return $this->belongsTo('App\Models\EquipmentInfo');
     }
