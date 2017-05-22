@@ -1,35 +1,4 @@
-const {mix} = require('laravel-mix');
-// const Mix = require('laravel-mix').config;
-//
-// mix.webpackConfig({
-//     module: {
-//         rules: [
-//             {
-//                 test: /\.(png|jpe?g|gif)$/,
-//                 loaders: [
-//                     {
-//                         loader: 'file-loader',
-//                         options: {
-//                             name: path => {
-//                                 if (! /node_modules|bower_components/.test(path)) {
-//                                     return 'images/vendor/[name].[ext]?[hash]';
-//                                 }
-//
-//                                 return 'images/vendor/' + path
-//                                         .replace(/\\/g, '/')
-//                                         .replace(
-//                                             /((.*(node_modules|bower_components))|images|image|img|assets)\//g, ''
-//                                         ) + '?[hash]';
-//                             },
-//                             publicPath: Mix.options.resourceRoot
-//                         }
-//                     },
-//                     'img-loader'
-//                 ]
-//             }
-//         ]
-//     }
-// })
+const { mix } = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -42,6 +11,6 @@ const {mix} = require('laravel-mix');
  |
  */
 
-mix.sass('resources/assets/sass/app.scss', 'public/css')
-    // .js('resources/assets/js/app.js', 'public/js')
-    // .version();
+mix.js('resources/assets/js/app.js', 'public/js')
+   .sass('resources/assets/sass/app.scss', 'public/css')
+   .version();
