@@ -5,7 +5,7 @@
                 <li class="nav-header">
 
                     <div class="dropdown profile-element"> <span>
-                            <img class="img-circle" src="http://img5q.duitang.com/uploads/item/201505/26/20150526033548_NjZxS.thumb.224_0.jpeg" />
+                            <!--<img class="img-circle" src="" />-->
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Beaut-zihan</strong>
@@ -30,7 +30,7 @@
                     </div>
 
                 </li>
-                <router-link v-for="menu in menus" tag="li" :to="menu.url">
+                <router-link v-for="menu in menus" :key="menu.url" tag="li" :to="menu.url">
                     <a>
                         <i :class="menu.icon"></i>
                         <span class="nav-label">{{ menu.label }}</span>

@@ -11,13 +11,13 @@
 <script>
     import Sidebar from '../components/dashboard/particals/Sidebar.vue'
     import Navbar from  '../components/dashboard/particals/Navbar.vue'
-    import FooterBar from  '../components/dashboard/particals/FooterBar.vue'
+//    import FooterBar from  '../components/dashboard/particals/FooterBar.vue'
 
     export default {
         components: {
             Sidebar,
-            Navbar,
-            FooterBar
+            Navbar
+//            FooterBar
         },
 
     }

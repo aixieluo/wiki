@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta name="_token" content="{{ csrf_token() }}"/>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}"/>
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -52,6 +52,6 @@
 
     <a href="#" id="backToTop"><i class="fa fa-arrow-up"></i></a>
 </div>
-<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>
