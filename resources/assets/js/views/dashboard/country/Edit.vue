@@ -30,8 +30,14 @@
 
 <script>
     import {mapState} from 'vuex'
+    import Form from '../../../core/Form'
 
     export default {
+        data() {
+            form: new Form({
+                name: null
+            })
+        },
         mounted() {
             this.$http.get('country/' + this.$route.params.id + '/edit')
                 .then((response) => {
@@ -46,11 +52,11 @@
                 })
             }
         },
-        computed: {
-            ...mapState([
-                'form'
-            ])
-        }
+//        computed: {
+//            ...mapState([
+//                'form'
+//            ])
+//        }
     }
 </script>
 

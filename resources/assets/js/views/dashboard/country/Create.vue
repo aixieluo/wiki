@@ -30,8 +30,14 @@
 
 <script>
     import {mapState} from 'vuex'
+    import Form from '../../../core/Form'
 
     export default {
+        data() {
+            form: new Form({
+                name: null
+            })
+        },
         mounted() {
             this.$store.dispatch('setFormData', {
                 name: null
@@ -45,11 +51,11 @@
                 })
             }
         },
-        computed: {
-            ...mapState([
-                'form'
-            ])
-        }
+//        computed: {
+//            ...mapState([
+//                'form'
+//            ])
+//        }
     }
 </script>
 

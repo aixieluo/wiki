@@ -80,12 +80,19 @@
 <script>
     import {mapState} from 'vuex'
     import Multiselect from 'vue-multiselect'
+    import Form from '../../../core/Form'
 
     export default {
         components: { Multiselect },
         data() {
             return {
-                slots: []
+                slots: [],
+                form: new Form({
+                    name: '',
+                    describe: null,
+                    slots: [],
+                    main: ''
+                })
             }
         },
         mounted() {
@@ -111,11 +118,11 @@
                 })
             }
         },
-        computed: {
-            ...mapState([
-                'form'
-            ])
-        }
+//        computed: {
+//            ...mapState([
+//                'form'
+//            ])
+//        }
     }
 </script>
 
