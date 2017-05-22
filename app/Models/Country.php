@@ -11,7 +11,7 @@ class Country extends Model
 
     protected $dates = ['delete_at'];
 
-    protected $fillable = ['content'];
+    protected $fillable = ['name'];
 
     /**
      * 获取对应车型的舞姬列表

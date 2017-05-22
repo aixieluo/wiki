@@ -23,7 +23,7 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'content',
+                        name: 'name',
                         title: '国籍'
                     },
                     {

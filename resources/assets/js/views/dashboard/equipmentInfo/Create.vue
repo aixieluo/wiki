@@ -7,29 +7,30 @@
                 <router-link to="/dashboard/equipmentInfo" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="create">
-                    <div class="form-group" :class="{ 'has-error': errors.name }">
+                <form class="form-horizontal" @submit.prevent="create" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" v-model="name">
-                            <span v-if="errors.name" class="help-block">{{ errors.name[0] }}</span>
+                            <input type="text" name="name" class="form-control" v-model="form.name">
+                            <span class="help-block" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
+                    <div class="form-group" :class="{'has-error': form.errors.has('describe')}">
                         <label class="col-sm-2 control-label">描述</label>
                         <div class="col-sm-10">
-                            <input type="text" name="describe" class="form-control" placeholder="选填" v-model="describe">
+                            <input type="text" name="describe" class="form-control" placeholder="选填" v-model="form.describe">
+                            <span class="help-block" v-if="form.errors.has('describe')">{{ form.errors.get('describe') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group" :class="{ 'has-error': errors.activeSlots }">
+                    <div class="form-group" :class="{'has-error': form.errors.has('slots')}">
                         <label class="col-sm-2 control-label">槽位</label>
                         <div class="col-sm-10">
                             <multiselect
-                                    v-model="activeSlots"
+                                    v-model="form.slots"
                                     :options="slots"
                                     :multiple="true"
                                     :searchable="true"
@@ -39,26 +40,28 @@
                                     placeholder="匹配该装备的槽位"
                                     label="name"
                                     track-by="id"
-                                    @input="checkMain">
+                                    @input="checkMain"
+                                    @open="form.errors.clear('slots')">
                             </multiselect>
-                            <span v-if="errors.activeSlots" class="help-block">{{ errors.activeSlots[0] }}</span>
+                            <span class="help-block" v-if="form.errors.has('slots')">{{ form.errors.get('slots') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group" :class="{ 'has-error': errors.main }">
+                    <div class="form-group" :class="{'has-error': form.errors.has('main')}">
                         <label class="col-sm-2 control-label">主槽</label>
                         <div class="col-sm-10">
                             <multiselect
-                                    v-model="main"
-                                    :options="activeSlots"
+                                    v-model="form.main"
+                                    :options="form.slots || []"
                                     :searchable="true"
                                     :options-limit="5"
-                                    :placeholder="activeSlots.length == 0 ? '先匹配该装备的槽位':'设定该装备的主槽'"
+                                    :placeholder="form.slots && form.slots.length > 0 ? '设定该装备的主槽':'先匹配该装备的槽位'"
                                     label="name"
-                                    track-by="id">
+                                    track-by="id"
+                                    @open="form.errors.clear('main')">
                             </multiselect>
-                            <span v-if="errors.main" class="help-block">{{ errors.main[0] }}</span>
+                            <span class="help-block" v-if="form.errors.has('main')">{{ form.errors.get('main') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -75,22 +78,23 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     import Multiselect from 'vue-multiselect'
 
     export default {
         components: { Multiselect },
         data() {
             return {
-                equipmentInfo: {},
-                slots: [],
-                describe: null,
-                activeSlots: [],
-                name: null,
-                main: null,
-                errors: {}
+                slots: []
             }
         },
         mounted() {
+            this.$store.dispatch('setFormData', {
+                name: '',
+                describe: null,
+                slots: [],
+                main: ''
+            })
             this.$http.get('slots')
                 .then(Response => {
                     this.slots = Response.data.data
@@ -98,30 +102,19 @@
         },
         methods: {
             checkMain() {
-                if (!(this.main in this.activeSlots)) this.main = ''
+                if (this.form.main && !(this.form.main in this.form.slots)) this.$store.dispatch('resetForm', 'main')
             },
             create(event) {
-                let formData = new FormData(event.target)
-
-                this.equipmentInfo = {
-                    name: this.name,
-                    describe: this.describe,
-                    main: this.main,
-                    activeSlots: this.activeSlots
-                }
-
-                formData.append('main', JSON.stringify(this.main))
-                formData.append('activeSlots', JSON.stringify(this.activeSlots))
-
-                this.$http.post('equipmentInfo', this.equipmentInfo)
-                    .then(() => {
-                        toastr.success('创建成功！')
-
-//                        this.$router.push('/dashboard/equipmentInfo')
-                    }).catch(({response}) => {
-                        this.errors = response.data
+                this.form.post('equipmentInfo').then((response) => {
+                    toastr.success('创建成功！')
+                    this.$router.push('/dashboard/equipmentInfo')
                 })
             }
+        },
+        computed: {
+            ...mapState([
+                'form'
+            ])
         }
     }
 </script>

@@ -17,7 +17,7 @@ require('./config/common')
 
 import VueRouter from 'vue-router'
 import routes from './routes'
-import store from './vuex/store'
+import store from './vuex/dashboard/store'
 import httpPlugin from './plugins/http/index'
 
 import App from './App.vue'

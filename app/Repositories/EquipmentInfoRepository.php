@@ -18,11 +18,11 @@ class EquipmentInfoRepository
         $this->model = $this->model->create($data);
 
         $syncIds = [];
-        foreach ($data['activeSlots'] as $activeSlot) {
-            if ($activeSlot['id'] == $data['main']['id']) {
-                $syncIds[$activeSlot['id']] = ['main' => 1];
+        foreach ($data['slots'] as $slot) {
+            if ($slot['id'] == $data['main']['id']) {
+                $syncIds[$slot['id']] = ['main' => 1];
             } else {
-                $syncIds[] = $activeSlot['id'];
+                $syncIds[] = $slot['id'];
             }
         }
         $this->model->slots()->sync($syncIds);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Dashboard;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Dancer\CountryRequest;
 use App\Repositories\CountryRepository;
+use App\Transformers\Country\CountrySelectedTransformer;
 use App\Transformers\CountryTransformer;
 
 class CountryController extends ApiController
@@ -53,7 +54,7 @@ class CountryController extends ApiController
      */
     public function edit($id)
     {
-        return $this->respondWithItem($this->countryRepository->getById($id), new CountryTransformer);
+        return $this->respondWithItem($this->countryRepository->getById($id), new CountrySelectedTransformer);
     }
 
     /**

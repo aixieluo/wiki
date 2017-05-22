@@ -10,7 +10,7 @@ class CountryTransformer extends TransformerAbstract
     public function transform(Country $country) {
         return [
             'id' => $country->id,
-            'content' => $country->content,
+            'name' => $country->name,
             'created_at' => $country->created_at->diffForHumans()
         ];
     }
