@@ -28,14 +28,7 @@ class Dancer extends Model
         'grow_fire',
         'grow_penetrate',
         'grow_durable',
-        'grow_armor',
-        'barbette',
-        'refit',
-        'outside',
-        'inwall',
-        'inwarehouse',
-        'carriage',
-        'special'
+        'grow_armor'
     ];
 
     /**
@@ -81,6 +74,15 @@ class Dancer extends Model
      */
     public function technologies() {
         return $this->belongsToMany('App\Models\Technology');
+    }
+
+    /**
+     * 获取匹配的装备槽及个数
+     *
+     * @return $this
+     */
+    public function slots() {
+        return $this->belongsToMany('App\Models\Slot')->withPivot('count');
     }
 
     /**

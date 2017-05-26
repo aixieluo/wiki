@@ -65,14 +65,13 @@ INSERT INTO `attributes` (`id`, `attributeable_id`, `attributeable_type`, `fire`
 -- 转存表中的数据 `countries`
 --
 
-INSERT INTO `countries` (`id`, `content`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `countries` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '德系', '2017-05-03 05:13:33', '2017-05-03 05:13:33', NULL),
 (2, '英系', '2017-05-08 22:14:20', '2017-05-08 22:14:20', NULL),
 (3, '苏系', '2017-05-08 22:39:05', '2017-05-08 22:39:05', NULL),
 (4, '美系', '2017-05-09 05:32:25', '2017-05-09 05:32:25', NULL),
 (5, '中系', '2017-05-09 05:32:38', '2017-05-09 05:32:38', NULL),
 (6, '日系', '2017-05-09 05:32:46', '2017-05-09 05:32:46', NULL),
-(7, '日系', '2017-05-09 05:32:48', '2017-05-09 05:32:51', '2017-05-09 05:32:51'),
 (8, '法系', '2017-05-09 05:33:05', '2017-05-09 05:33:05', NULL);
 
 --
@@ -182,7 +181,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- 转存表中的数据 `rarities`
 --
 
-INSERT INTO `rarities` (`id`, `level`, `content`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `rarities` (`id`, `level`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 3, '橙', '2017-05-03 05:13:43', '2017-05-09 05:33:30', NULL),
 (3, 2, '紫', '2017-05-08 22:39:41', '2017-05-08 22:39:41', NULL),
 (4, 1, '蓝', '2017-05-09 05:33:41', '2017-05-09 05:33:41', NULL);
@@ -208,9 +207,6 @@ INSERT INTO `skill_infos` (`id`, `name`, `describe`, `created_at`, `updated_at`,
 --
 
 INSERT INTO `slots` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '外挂装甲', '2017-05-03 05:14:05', '2017-05-03 05:15:19', '2017-05-03 05:15:19'),
-(2, '增厚护甲片', '2017-05-03 05:14:21', '2017-05-03 05:15:18', '2017-05-03 05:15:18'),
-(3, '防崩落内衬', '2017-05-03 05:14:40', '2017-05-03 05:15:17', '2017-05-03 05:15:17'),
 (4, '炮座', '2017-05-03 05:15:48', '2017-05-03 05:15:48', NULL),
 (5, '改装', '2017-05-03 05:15:53', '2017-05-03 05:15:53', NULL),
 (6, '内壁', '2017-05-03 05:15:57', '2017-05-03 05:15:57', NULL),
@@ -264,19 +260,18 @@ INSERT INTO `technologies` (`id`, `technology_type_id`, `name`, `rank`, `created
 -- 转存表中的数据 `technology_categories`
 --
 
-INSERT INTO `technology_categories` (`id`, `content`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `technology_categories` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '主炮', '2017-05-03 05:56:37', '2017-05-03 05:56:37', NULL),
 (2, '防护', '2017-05-03 05:56:43', '2017-05-03 05:56:43', NULL),
 (3, '车体', '2017-05-03 05:56:47', '2017-05-03 05:56:47', NULL),
 (4, '引擎', '2017-05-03 05:56:51', '2017-05-03 05:56:51', NULL),
-(5, '侦查', '2017-05-03 05:57:07', '2017-05-03 05:57:07', NULL),
-(6, '引擎', '2017-05-03 06:00:29', '2017-05-03 06:00:35', '2017-05-03 06:00:35');
+(5, '侦查', '2017-05-03 05:57:07', '2017-05-03 05:57:07', NULL);
 
 --
 -- 转存表中的数据 `technology_types`
 --
 
-INSERT INTO `technology_types` (`id`, `technology_category_id`, `content`, `amount1`, `amount2`, `amount3`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `technology_types` (`id`, `technology_category_id`, `name`, `amount1`, `amount2`, `amount3`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 'AP', 13, 13, 11, '2017-05-03 05:57:18', '2017-05-03 08:50:13', NULL),
 (2, 1, 'APCR', 15, 12, 10, '2017-05-03 05:57:23', '2017-05-03 09:05:35', NULL),
 (3, 1, 'APDS', 13, 13, 13, '2017-05-03 05:57:27', '2017-05-03 09:06:36', NULL),

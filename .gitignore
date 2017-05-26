@@ -12,6 +12,5 @@ Homestead.yaml
 /public/js/manage.js
 /public/js/app.*.js
 /public/js/manage.*.js
-/public/mix-manifest.json
 /public/css/manage.*.css
 /public/css/app.*.css

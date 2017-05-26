@@ -15,7 +15,7 @@ class CreateTechnologyCategoriesTable extends Migration
     {
         Schema::create('technology_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('content')->comment('科技类别');
+            $table->string('name')->comment('科技类别名称');
             $table->timestamps();
             $table->softDeletes();
         });

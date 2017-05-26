@@ -22,6 +22,6 @@ class EquipmentInfo extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function slots() {
-        return $this->belongsToMany('App\Models\Slot');
+        return $this->belongsToMany('App\Models\Slot')->withPivot('main');
     }
 }

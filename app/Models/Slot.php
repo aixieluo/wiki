@@ -24,6 +24,10 @@ class Slot extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function equipmentInfos() {
-        return $this->belongsToMany('App\Models\EquipmentInfo');
+        return $this->belongsToMany('App\Models\EquipmentInfo')->withPivot('main');
+    }
+
+    public function dancers() {
+        return $this->belongsToMany('App\Models\Dancer')->withPivot('count');
     }
 }
