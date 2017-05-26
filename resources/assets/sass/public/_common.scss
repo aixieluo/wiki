@@ -1,19 +1,13 @@
-
 // Fonts
 //@import "fonts";
-
 // Variables
 @import "variables";
-
 //SassCore
 @import "../sassCore/function";
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "node_modules/font-awesome/scss/font-awesome";
-
 @import "node_modules/vue-multiselect/dist/vue-multiselect.min";
-
 
 //通用背景颜色表
 $hue: #ab2b2b;
@@ -37,7 +31,7 @@ $screen-md-min: 992px;
 $screen-md-max: 1199px;
 $screen-lg-min: 1200px;
 
-.xwrap{
+.xwrap {
     $wrap: 35px;
     background-color: #FFF;
     padding: $wrap;
@@ -45,74 +39,86 @@ $screen-lg-min: 1200px;
     @include border-radius(4px);
 }
 
-body{
+body {
     background-color: $bgc;
 }
 
-a{
+a {
     outline: 0 !important;
 }
 
-[v-cloak] { display: none; }
+[v-cloak] {
+    display: none;
+}
 
-input,button{
+input, button {
     outline: none !important;
 }
 
-input[type="number"]{
+input[type="number"] {
     -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
 }
 
-
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
-    　　color: #000 !important;
-}
-input:-moz-placeholder, textarea:-moz-placeholder{
-    　　color: #000 !important;
-}
-input::-moz-placeholder, textarea::-moz-placeholder{
-    　　color: #000 !important;
-}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder{
-    　　color: #000 !important;
+input.disabled, button.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    box-shadow: none;
 }
 
-.has-error{
-    .help-block{
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #D4D1D3;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #D4D1D3;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #D4D1D3;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #D4D1D3;
+}
+
+.has-error {
+    .help-block {
         color: #ed5565;
     }
-    .multiselect__tags{
+    .multiselect__tags {
         border-color: #ed5565;
     }
 }
 
-.noborder{
+.noborder {
     border: 0;
 }
 
-.noline{
+.noline {
     text-decoration: none !important;
 }
 
-.mt5{
+.mt5 {
     margin-top: 5px;
 }
 
-.table-text-center{
-    th,td{
+.table-text-center {
+    th, td {
         text-align: center;
     }
 }
 
 .width-5-percent {
-    width:5%
+    width: 5%
 }
+
 .width-10-percent {
-    width:10%
+    width: 10%
 }

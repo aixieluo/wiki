@@ -109,12 +109,14 @@
         },
         methods: {
             checkMain() {
-                if (this.form.main && !(this.form.main in this.form.slots)) this.$store.dispatch('resetForm', 'main')
+                if (this.form.main && this.form.slots && !(this.form.main in this.form.slots))
+//                    this.$store.dispatch('resetForm', 'main')
+                    this.form.main = ''
             },
             create(event) {
                 this.form.post('equipmentInfo').then((response) => {
                     toastr.success('创建成功！')
-                    this.$router.push('/dashboard/equipmentInfo')
+//                    this.$router.push('/dashboard/equipmentInfo')
                 })
             }
         },

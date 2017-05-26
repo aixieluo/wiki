@@ -15,6 +15,9 @@ class EquipmentInfoRepository
     }
 
     public function store($data) {
+        $data = array_filter($data, function ($var) {
+            return !empty($var);
+        });
         $this->model = $this->model->create($data);
 
         $syncIds = [];

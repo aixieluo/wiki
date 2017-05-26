@@ -22,6 +22,9 @@ import httpPlugin from './plugins/http/index'
 
 import App from './App.vue'
 
+Vue.use(VueRouter)
+Vue.use(httpPlugin)
+
 window.toastr = require('toastr/build/toastr.min.js');
 window.innerHeight = 800;
 
@@ -36,10 +39,6 @@ window.toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut"
 };
-
-
-Vue.use(VueRouter)
-Vue.use(httpPlugin)
 
 Vue.component(
     'vue-head',
