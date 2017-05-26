@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="display: flex;justify-content: space-between;align-items: center">
-                        <h5>基本属性</h5>
+                        <slot name="title"></slot>
                         <slot name="buttons"></slot>
                     </div>
 

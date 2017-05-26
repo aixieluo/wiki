@@ -290,7 +290,7 @@ INSERT INTO `technology_types` (`id`, `technology_category_id`, `name`, `amount1
 -- 转存表中的数据 `types`
 --
 
-INSERT INTO `types` (`id`, `content`, `created_at`, `updated_at`, `deleted_at`) VALUES
+INSERT INTO `types` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '中坦', '2017-05-03 05:13:25', '2017-05-09 05:31:29', NULL),
 (2, '轻歼', '2017-05-08 22:14:32', '2017-05-08 22:14:32', NULL),
 (3, '重坦', '2017-05-09 05:31:18', '2017-05-09 05:31:35', NULL),

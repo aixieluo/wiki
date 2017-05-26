@@ -15,11 +15,19 @@ class EquipmentInfoRepository
     }
 
     public function store($data) {
-        $data = array_filter($data, function ($var) {
-            return !empty($var);
-        });
-        $this->model = $this->model->create($data);
+        $data = $this->removeEmpty($data);
+        $this->model = $this->save($this->model, $data);
+        $this->model->slots()->sync($this->transformSyncIds($data));
+    }
 
+    public function update($id, $data) {
+        $data = $this->removeEmpty($data);
+        $this->model = $this->getById($id);
+        $this->save($this->model, $data);
+        $this->model->slots()->sync($this->transformSyncIds($data));
+    }
+
+    public function transformSyncIds($data) {
         $syncIds = [];
         foreach ($data['slots'] as $slot) {
             if ($slot['id'] == $data['main']['id']) {
@@ -28,6 +36,12 @@ class EquipmentInfoRepository
                 $syncIds[] = $slot['id'];
             }
         }
-        $this->model->slots()->sync($syncIds);
+        return $syncIds;
+    }
+
+    public function removeEmpty($data) {
+        return array_filter($data, function ($var) {
+            return !empty($var);
+        });
     }
 }

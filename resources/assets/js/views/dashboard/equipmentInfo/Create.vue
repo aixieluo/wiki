@@ -3,6 +3,9 @@
         <vue-head headTitle="装备信息"></vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>创建</h5>
+            </template>
             <template slot="buttons">
                 <router-link to="/dashboard/equipmentInfo" class="btn btn-default" exact>返回</router-link>
             </template>
@@ -55,7 +58,6 @@
                                     v-model="form.main"
                                     :options="form.slots || []"
                                     :searchable="true"
-                                    :options-limit="5"
                                     :placeholder="form.slots && form.slots.length > 0 ? '设定该装备的主槽':'先匹配该装备的槽位'"
                                     label="name"
                                     track-by="id"
@@ -91,7 +93,8 @@
                     name: '',
                     describe: null,
                     slots: [],
-                    main: ''
+                    main: '',
+                    resets: true
                 })
             }
         },
@@ -109,14 +112,11 @@
         },
         methods: {
             checkMain() {
-                if (this.form.main && this.form.slots && !(this.form.main in this.form.slots))
-//                    this.$store.dispatch('resetForm', 'main')
-                    this.form.main = ''
+//                if (!this.form.slots || this.form.main && (this.form.main in this.form.slots)) this.form.main = null
             },
             create(event) {
                 this.form.post('equipmentInfo').then((response) => {
                     toastr.success('创建成功！')
-//                    this.$router.push('/dashboard/equipmentInfo')
                 })
             }
         },

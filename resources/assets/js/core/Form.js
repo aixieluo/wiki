@@ -4,7 +4,7 @@ import { http } from '../plugins/http/index'
 class Form {
     constructor(data) {
         this.originalData = data
-        this.resets = true
+        this.resets = false
 
         for (let field in data) {
             this[field] = data[field]
@@ -70,7 +70,7 @@ class Form {
     }
 
     onSuccess(data){
-        this.reset()
+        if (this.resets) this.reset()
     }
 
     onFail(errors) {
