@@ -1,0 +1,98 @@
+// 插件scss
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~font-awesome/scss/font-awesome";
+@import "~vue-multiselect/dist/vue-multiselect.min";
+@import "~toastr/toastr";
+
+// 本地scss
+@import "./fonts";                  //字体
+@import "./variables";              //预设初始值
+@import "../css/animate";           //动画css
+
+.xwrap {
+    $wrap: 35px;
+    background-color: #FFF;
+    padding: $wrap;
+    margin-bottom: $wrap;
+    border-radius: 4px;
+}
+
+body {
+    background-color: $bgc;
+}
+
+a {
+    outline: 0 !important;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+input, button {
+    outline: none !important;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+input.disabled, button.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    box-shadow: none;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: $placeholder-color !important;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: $placeholder-color !important;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: $placeholder-color !important;
+}
+
+.has-error {
+    .help-block {
+        color: #ed5565;
+    }
+    .multiselect__tags {
+        border-color: #ed5565;
+    }
+}
+
+.noborder {
+    border: 0;
+}
+
+.noline {
+    text-decoration: none !important;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.table-text-center {
+    th, td {
+        text-align: center;
+    }
+}
+
+.width-5-percent {
+    width: 5%
+}
+
+.width-10-percent {
+    width: 10%
+}

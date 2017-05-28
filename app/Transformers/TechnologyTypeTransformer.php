@@ -13,14 +13,14 @@ class TechnologyTypeTransformer extends TransformerAbstract
 
     public function transform(TechnologyType $technologyType) {
         return [
-            'id' => $technologyType->id,
-            'technology_category' => $technologyType->technologyCategory->content,
+            'id'                     => $technologyType->id,
+            'technology_category'    => $technologyType->technologyCategory->content,
             'technology_category_id' => $technologyType->technology_category_id,
-            'content' => $technologyType->content,
-            'amount1' => $technologyType->amount1,
-            'amount2' => $technologyType->amount2,
-            'amount3' => $technologyType->amount3,
-            'created_at' => $technologyType->created_at->diffForHumans()
+            'content'                => $technologyType->content,
+            'amount1'                => $technologyType->amount1,
+            'amount2'                => $technologyType->amount2,
+            'amount3'                => $technologyType->amount3,
+            'created_at'             => $technologyType->created_at->diffForHumans()
         ];
     }
 

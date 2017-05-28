@@ -3,17 +3,36 @@
         <vue-head headTitle="装备"></vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>创建</h5>
+            </template>
             <template slot="buttons">
                 <router-link to="/dashboard/equipment" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="create">
-                    <div class="form-group">
+                    <div class="form-group" :class="{'has-error': form.errors.has('equipment_info_id')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <select name="equipment_info_id" class="form-control">
-                                <option v-for="equipmentInfo in equipmentInfos" :value="equipmentInfo.id">{{ equipmentInfo.name }}</option>
-                            </select>
+                            <multiselect
+                                    :options="equipmentInfos"
+                                    :searchable="true"
+                                    placeholder="选择一件装备"
+                                    label="name"
+                                    track-by="id"
+                                    @input="selectName"
+                                    @open="form.errors.clear('equipment_info_id')">
+                            </multiselect>
+                            <span class="help-block" v-if="form.errors.has('equipment_info_id')">{{ form.errors.get('equipment_info_id') }}</span>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+                    <div class="form-group" :class="{'has-error': form.errors.has('lv')}">
+                        <label class="col-sm-2 control-label">等级</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="lv" class="form-control" placeholder="选择输入一个1 - 10之间的数字" v-model="form.lv">
+                            <span class="help-block" v-if="form.errors.has('lv')">{{ form.errors.get('lv') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -42,19 +61,6 @@
                             <select name="slot_id" class="form-control">
                                 <option v-for="slot in slots" :value="slot.id">{{ slot.name }}</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">是否为主槽位</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="main" value="0" checked>否
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="main" value="1">是
-                            </label>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -136,12 +142,21 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+    import Multiselect from 'vue-multiselect'
+
     export default {
+        components: { Multiselect },
         data() {
             return {
-                equipmentInfos: {},
+                equipmentInfos: [],
                 slots: {},
-                attributes: {}
+                attributes: {},
+                form: new Form({
+                    equipment_info_id: '',
+                    lv: null,
+                    resets: true
+                })
             }
         },
         mounted() {
@@ -155,6 +170,13 @@
                 })
         },
         methods: {
+            selectName(value) {
+                if (value) {
+                    this.form.equipment_info_id = value.id
+                } else {
+                    this.form.equipment_info_id = null
+                }
+            },
             create(event) {
                 let formData = new FormData(event.target)
 
@@ -163,8 +185,6 @@
                 this.$http.post('equipment', formData)
                     .then(() => {
                         toastr.success('创建成功！')
-
-                        this.$router.push('/dashboard/equipment')
                     })
             }
         }

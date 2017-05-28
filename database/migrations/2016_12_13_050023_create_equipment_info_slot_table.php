@@ -20,8 +20,6 @@ class CreateEquipmentInfoSlotTable extends Migration
             $table->boolean('main')->default(0)->comment('是否为主要槽位');
 //            $table->foreign('equipment_info_id')->references('id')->on('equipment_infos')->onDelete('cascade');
 //            $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 

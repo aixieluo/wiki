@@ -112,7 +112,17 @@
         },
         methods: {
             checkMain() {
-//                if (!this.form.slots || this.form.main && (this.form.main in this.form.slots)) this.form.main = null
+                if (this.form.main) {
+                    let flag = true
+                    for (var slot of this.form.slots) {
+                        if (slot.id == this.form.main.id) {
+                            flag = false
+                        }
+                    }
+                    if (flag) {
+                        this.form.main = null
+                    }
+                }
             },
             create(event) {
                 this.form.post('equipmentInfo').then((response) => {

@@ -15,16 +15,16 @@ class EquipmentTransformer extends TransformerAbstract
 
     public function transform(Equipment $equipment) {
         return [
-            'id' => $equipment->id,
-            'name' => $equipment->equipmentInfo->name,
+            'id'                => $equipment->id,
+            'name'              => $equipment->equipmentInfo->name,
             'equipment_info_id' => $equipment->equipment_info_id,
-            'describe' => $equipment->equipmentInfo->describe,
-            'slot' => $equipment->slot->name,
-            'slot_id' => $equipment->slot_id,
-            'main' => $equipment->main,
-            'lv' => $equipment->lv,
-            'price' => $equipment->price,
-            'created_at' => $equipment->created_at->diffForHumans()
+            'describe'          => $equipment->equipmentInfo->describe,
+            'slot'              => $equipment->slot->name,
+            'slot_id'           => $equipment->slot_id,
+            'main'              => $equipment->main,
+            'lv'                => $equipment->lv,
+            'price'             => $equipment->price,
+            'created_at'        => $equipment->created_at->diffForHumans()
         ];
     }
 

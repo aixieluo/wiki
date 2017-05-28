@@ -20,8 +20,6 @@ class CreateDancerSlotTable extends Migration
             $table->integer('count')->comment('关联装备槽个数');
 //            $table->foreign('dancer_id')->references('id')->on('dancers')->onDelete('cascade');
 //            $table->foreign('slot_id')->references('id')->on('slots')->onDelete('cascade');
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 

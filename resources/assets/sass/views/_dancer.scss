@@ -1,0 +1,51 @@
+
+/*********************舞姬详情*********************/
+.xd-detail{
+    .nav-tabs{
+        margin-bottom: 15px;
+    }
+    .d-avator{
+        margin-bottom: 15px;
+        img{
+            display: inline-block;
+        }
+    }
+    .lv-ipt{
+        border: 0;
+        background-color: transparent;
+        width: 20px;
+    }
+    .btn-arrow{
+        background-color: transparent;
+        border: 0;
+    }
+    .fa-star,.fa-star-o{
+        font-size: 18px;
+        cursor: pointer;
+    }
+    #technologies{
+        .tec-name{
+            min-width: 82px;
+            text-align: center;
+        }
+        .btn-default.dropdown-toggle{
+            min-width: 112px;
+            text-align: center;
+        }
+    }
+}
+@media (max-width: 991px) {
+    .xwrap{
+        padding: 15px;
+    }
+}
+/*********************舞姬详情*********************/
+
+/*********************舞姬列表*********************/
+.xd-list{
+    .between{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+/*********************舞姬列表*********************/

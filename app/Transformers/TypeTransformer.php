@@ -9,8 +9,8 @@ class TypeTransformer extends TransformerAbstract
 {
     public function transform(Type $type) {
         return [
-            'id' => $type->id,
-            'content' => $type->content,
+            'id'         => $type->id,
+            'content'    => $type->content,
             'created_at' => $type->created_at->diffForHumans()
         ];
     }

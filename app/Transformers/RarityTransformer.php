@@ -9,9 +9,9 @@ class RarityTransformer extends TransformerAbstract
 {
     public function transform(Rarity $rarity) {
         return [
-            'id' => $rarity->id,
-            'level' => $rarity->level,
-            'content' => $rarity->content,
+            'id'         => $rarity->id,
+            'level'      => $rarity->level,
+            'content'    => $rarity->content,
             'created_at' => $rarity->created_at->diffForHumans()
         ];
     }

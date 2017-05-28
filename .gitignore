@@ -11,6 +11,7 @@ Homestead.yaml
 /public/js/app.js
 /public/js/manage.js
 /public/js/app.*.js
-/public/js/manage.*.js
-/public/css/manage.*.css
+/public/js/dashboard.*.js
+/public/css/dashboard.*.css
 /public/css/app.*.css
+/public/images/vendor/

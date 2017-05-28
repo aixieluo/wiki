@@ -17,12 +17,12 @@ trait BaseRepository
         return $this->model->findOrFail($id);
     }
 
-    public function all($model=null) {
+    public function all($model = null) {
         return $model ? $model->all() : $this->model->all();
     }
 
     /**
-     * @param int $number
+     * @param int    $number
      * @param string $sort
      * @param string $sortColumn
      *
@@ -80,5 +80,11 @@ trait BaseRepository
 
     public function deleteAttributes() {
         return $this->model->attributes()->delete();
+    }
+
+    public function removeEmpty($data) {
+        return array_filter($data, function ($var) {
+            return !empty($var);
+        });
     }
 }

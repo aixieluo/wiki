@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api\Dashboard;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Equipment\EquipmentInfoRequest;
 use App\Repositories\EquipmentInfoRepository;
-use App\Transformers\Equipment\EquipmentInfosTransformer;
-use App\Transformers\Equipment\EquipmentInfoTransformer;
+use App\Transformers\EquipmentInfoTransformer;
 
 class EquipmentInfoController extends ApiController
 {
@@ -26,11 +25,11 @@ class EquipmentInfoController extends ApiController
      */
     public function index() {
 
-        return $this->respondWithPaginator($this->equipmentInfoRepository->page(), new EquipmentInfosTransformer);
+        return $this->respondWithPaginator($this->equipmentInfoRepository->page(), new EquipmentInfoTransformer);
     }
 
     public function getList() {
-        return $this->respondWithCollection($this->equipmentInfoRepository->page(), new EquipmentInfosTransformer);
+        return $this->respondWithCollection($this->equipmentInfoRepository->page(), new EquipmentInfoTransformer);
     }
 
     /**

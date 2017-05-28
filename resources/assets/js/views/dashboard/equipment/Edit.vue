@@ -3,6 +3,9 @@
         <vue-head headTitle="装备"></vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>编辑</h5>
+            </template>
             <template slot="buttons">
                 <router-link to="/dashboard/equipment" class="btn btn-default" exact>返回</router-link>
             </template>

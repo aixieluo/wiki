@@ -15,19 +15,19 @@ class SimulatorEquipmentTransformer extends TransformerAbstract
 
     public function transform(Equipment $equipment) {
         return [
-            'id' => $equipment->id,
-            'name' => $equipment->equipmentInfo->name,
-            'lv' => $equipment->lv,
-            'slot' => $equipment->slot->name,
+            'id'         => $equipment->id,
+            'name'       => $equipment->equipmentInfo->name,
+            'lv'         => $equipment->lv,
+            'slot'       => $equipment->slot->name,
             'attributes' => [
-                'fire' => $equipment->attributes->first()->fire,
-                'penetrate' => $equipment->attributes->first()->penetrate,
-                'durable' => $equipment->attributes->first()->durable,
-                'armor' => $equipment->attributes->first()->armor,
-                'hit' => $equipment->attributes->first()->hit,
-                'dodge' => $equipment->attributes->first()->dodge,
+                'fire'        => $equipment->attributes->first()->fire,
+                'penetrate'   => $equipment->attributes->first()->penetrate,
+                'durable'     => $equipment->attributes->first()->durable,
+                'armor'       => $equipment->attributes->first()->armor,
+                'hit'         => $equipment->attributes->first()->hit,
+                'dodge'       => $equipment->attributes->first()->dodge,
                 'concealment' => $equipment->attributes->first()->concealment,
-                'spy' => $equipment->attributes->first()->spy
+                'spy'         => $equipment->attributes->first()->spy
             ],
         ];
     }

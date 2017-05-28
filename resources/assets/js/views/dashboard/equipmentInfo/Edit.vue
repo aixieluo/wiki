@@ -97,21 +97,32 @@
             }
         },
         mounted() {
-            this.$http.get('slots')
-                .then(Response => {
-                    this.slots = Response.data.data
-                })
-            this.$http.get('equipmentInfo/' + this.$route.params.id + '/edit')
+            this.$http.get('equipmentInfo/' + this.$route.params.id + '/edit?include=slots,main,allSlots')
                 .then((response) => {
-                    this.form = new Form(response.data.data)
-                    setTimeout(() => {
-                        this.form.main = response.data.data.main
-                    },100)
+                    this.form = new Form({
+                        name: response.data.data.name,
+                        describe: response.data.data.describe,
+                        slots: response.data.data.slots.data,
+                        main: response.data.data.main.data
+                    })
+                    this.slots = response.data.data.allSlots.data
+                }).catch(() => {
+                    toastr.error('未知错误')
                 })
         },
         methods: {
             checkMain() {
-//                if (!this.form.slots || this.form.main && (this.form.main in this.form.slots)) this.form.main = null
+                if (this.form.main) {
+                    let flag = true
+                    for (var slot of this.form.slots) {
+                        if (slot.id == this.form.main.id) {
+                            flag = false
+                        }
+                    }
+                    if (flag) {
+                        this.form.main = null
+                    }
+                }
             },
             edit(event) {
                 this.form.put('equipmentInfo/' + this.$route.params.id, this.equipmentInfo).then((response) => {
