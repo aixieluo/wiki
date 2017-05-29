@@ -15,34 +15,28 @@ class TechnologyRepository
     }
 
     public function store($data) {
-        $this->model = $this->model->create($data);
-
-        if (is_array($data['attributes'])) {
-            $this->createAttributes($data['attributes']);
-        } else {
-            $this->createAttributes(json_decode($data['attributes'], true));
+        if ($this->model->where('name', $data['name'])->count()) {
+            return $message = '该科技名称已存在';
         }
-
-        return $this->model;
+        $this->model = $this->model->create($data);
+        $this->createAttributes($data);
     }
 
     public function update($id, $data) {
-        $this->model = $this->getById($id);
-
-        if (is_array($data['attributes'])) {
-            $this->updateAttributes($data['attributes']);
-        } else {
-            $this->updateAttributes(json_decode($data['attributes'], true));
+        if ($this->model->where('name', $data['name'])->count() && $this->getById($id)->name != $data['name']) {
+            return $message = '该科技名称已存在';
         }
-
-        return $this->model->update($data['technology']);
+        $this->model = $this->getById($id);
+        $this->model->update($data);
+        $this->updateAttributes($data);
     }
 
     public function destroy($id) {
         $this->model = $this->getById($id);
+        if ($this->model->dancers()->count()) {
+            $this->model->dancers()->detach();
+        }
         $this->model->delete();
         $this->deleteAttributes();
-
-        return $this->model;
     }
 }

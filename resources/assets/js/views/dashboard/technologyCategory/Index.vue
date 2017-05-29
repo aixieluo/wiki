@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="科技类别"></vue-head>
+        <vue-head headTitle="科技类别（一级）"></vue-head>
 
         <vue-table apiUrl="technologyCategory" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
@@ -53,11 +53,18 @@
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')
+                        }).catch((error) => {
+                            toastr.error(error.response.data.error.message)
                         })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');
                 } else if (action == 'list-item') {
-                    this.$router.push(`/dashboard/technologyCategory/${data.name}/${data.id}/technologyType`);
+                    this.$router.push({
+                        path: `/dashboard/technologyCategory/${data.id}/technologyType`,
+                        query: {
+                            gName: data.name
+                        }
+                    });
                 }
             }
         },

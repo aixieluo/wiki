@@ -10,6 +10,7 @@ class Type extends Model
     use SoftDeletes;
 
     protected $dates = ['delete_at'];
+
     protected $fillable = ['content'];
 
     /**

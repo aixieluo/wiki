@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Equipment\SlotRequest;
 use App\Repositories\SlotRepository;
 use App\Transformers\SlotTransformer;
-use Illuminate\Http\Request;
 
 class SlotController extends ApiController
 {
@@ -23,10 +23,12 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
+
         return $this->respondWithPaginator($this->slotRepository->page(), new SlotTransformer);
     }
 
     public function getList() {
+
         return $this->respondWithCollection($this->slotRepository->page(), new SlotTransformer);
     }
 
@@ -37,8 +39,12 @@ class SlotController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->slotRepository->store($request->all());
+    public function store(SlotRequest $request) {
+        $message = $this->slotRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -51,6 +57,7 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+
         return $this->respondWithItem($this->slotRepository->getById($id), new SlotTransformer);
     }
 
@@ -62,8 +69,12 @@ class SlotController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $this->slotRepository->update($id, $request->all());
+    public function update(SlotRequest $request, $id) {
+        $message = $this->slotRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -76,7 +87,11 @@ class SlotController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->slotRepository->destroy($id);
+        $message = $this->slotRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

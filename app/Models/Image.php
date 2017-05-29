@@ -17,14 +17,17 @@ class Image extends Model
      * @var array
      */
     protected $fillable = [
-        'imageable_id', 'imageable_type', 'type', 'path'
+        'imageable_id',
+        'imageable_type',
+        'type',
+        'path'
     ];
 
     /**
      * 找到某图片对应的模型
      *
      */
-    public function imageable (){
+    public function imageable() {
         $this->morphTo();
     }
 }

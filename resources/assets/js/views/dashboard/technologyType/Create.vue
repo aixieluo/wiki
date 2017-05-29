@@ -1,54 +1,28 @@
 <template>
     <div>
-        <vue-head headTitle="科技类型（二级）"></vue-head>
+        <vue-head headTitle="科技类型（二级）">
+            <li>
+                <router-link to="/dashboard/technologyCategory">科技类别（一级）</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.gName }}</strong>
+            </li>
+        </vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>创建</h5>
+            </template>
             <template slot="buttons">
-                <router-link to="/dashboard/technologyType" class="btn btn-default" exact>返回</router-link>
+                <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType`, query: {gName: $route.query.gName}}" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="create">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">科技类别（一级）</label>
-                        <div class="col-sm-10">
-                            <select name="technology_category_id" class="form-control">
-                                <option v-for="technologyCategory in technologyCategories"
-                                        :value="technologyCategory.id">
-                                    {{ technologyCategory.content }}
-                            </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
+                <form class="form-horizontal" @submit.prevent="create" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">1级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount1" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">2级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount2" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">3级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount3" class="form-control">
+                            <input type="text" name="name" class="form-control" placeholder="如：AP" v-model="form.name">
+                            <span class="help-block" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -65,27 +39,26 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+
     export default {
-        data(){
+        data() {
             return {
-                technologyCategories: {}
-            }
-        },
-        mounted() {
-            this.$http.get('technologyCategories')
-                .then((Response) => {
-                    this.technologyCategories = Response.data.data
+                form: new Form({
+                    'technology_category_id': this.$route.params.gId,
+                    'name': '',
+                    'resets': true
                 })
+            }
         },
         methods: {
             create(event) {
-                let formData = new FormData(event.target)
-
-                this.$http.post('technologyType', formData)
-                    .then(() => {
+                this.form.post('technologyType')
+                    .then((response) => {
                         toastr.success('创建成功！')
-
-                        this.$router.push('/dashboard/technologyType')
+                        this.form.technology_category_id = this.$route.params.gId
+                    }).catch((error) => {
+                        toastr.error(error.error.message)
                     })
             }
         }

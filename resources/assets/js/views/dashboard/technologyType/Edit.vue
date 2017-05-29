@@ -1,54 +1,28 @@
 <template>
     <div>
-        <vue-head headTitle="科技类型（二级）"></vue-head>
+        <vue-head headTitle="科技类型（二级）">
+            <li>
+                <router-link to="/dashboard/technologyCategory">科技类别（一级）</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.gName }}</strong>
+            </li>
+        </vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>编辑</h5>
+            </template>
             <template slot="buttons">
-                <router-link to="/dashboard/technologyType" class="btn btn-default" exact>返回</router-link>
+                <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType`, query: {gName: $route.query.gName}}" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="edit">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">科技类别（一级）</label>
-                        <div class="col-sm-10">
-                            <select name="technology_category_id" class="form-control" v-model="technologyType.technology_category_id">
-                                <option v-for="technologyCategory in technologyCategories"
-                                        :value="technologyCategory.id">
-                                    {{ technologyCategory.content }}
-                            </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
+                <form class="form-horizontal" @submit.prevent="edit" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="content" class="form-control" v-model="technologyType.content">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">1级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount1" class="form-control" v-model.number="technologyType.amount1">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">2级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount2" class="form-control" v-model.number="technologyType.amount2">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">3级大件总数</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="amount3" class="form-control" v-model.number="technologyType.amount3">
+                            <input type="text" name="name" class="form-control" placeholder="如：AP" v-model="form.name">
+                            <span class="help-block" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -65,31 +39,30 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+
     export default {
         data() {
             return {
-                technologyCategories: {},
-                technologyType: {}
+                form: new Form({
+                    'name': ''
+                })
             }
         },
         mounted() {
-            this.$http.get('technologyCategories')
-                .then((Response) => {
-                    this.technologyCategories = Response.data.data
-                })
             this.$http.get('technologyType/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.technologyType = response.data.data
+                    let data = response.data.data
+                    this.form.name = data.name
                 })
         },
         methods: {
             edit(event) {
-
-                this.$http.put('technologyType/' + this.$route.params.id, this.technologyType)
-                    .then(() => {
+                this.form.put('technologyType/' + this.$route.params.id)
+                    .then((response) => {
                         toastr.success('修改成功！')
-
-                        this.$router.push('/dashboard/technologyType')
+                    }).catch((error) => {
+                        toastr.error(error.error.message)
                     })
             }
         }

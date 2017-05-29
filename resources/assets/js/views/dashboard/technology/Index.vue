@@ -1,11 +1,24 @@
 <template>
     <div>
-        <vue-head headTitle="科技"></vue-head>
+        <vue-head headTitle="科技">
+            <li>
+                <router-link to="/dashboard/technologyCategory">科技类别（一级）</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.gName }}</strong>
+            </li>
+            <li>
+                <router-link to="/dashboard/technologyCategory">科技类型（二级）</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.pName }}</strong>
+            </li>
+        </vue-head>
 
         <vue-table apiUrl="technology" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/technology/create" class="btn btn-primary">创建</router-link>
+                <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType/${$route.params.pId}/technology/create`, query: {gName: $route.query.gName, pName: $route.query.pName}}" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -31,12 +44,8 @@
                         title: '级别'
                     },
                     {
-                        name: 'technology_category',
-                        title: '科技类别（一级）'
-                    },
-                    {
-                        name: 'technology_type',
-                        title: '科技类型（二级）'
+                        name: 'place',
+                        title: '位置'
                     },
                     {
                         name: 'created_at',
@@ -58,7 +67,13 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/technology/' + data.id + '/edit');
+                    this.$router.push({
+                        path: `/dashboard/technologyCategory/${this.$route.params.gId}/technologyType/${this.$route.params.pId}/technology/${data.id}/edit`,
+                        query: {
+                            gName: this.$route.query.gName,
+                            pName: this.$route.query.pName
+                        }
+                    });
                 } else if (action == 'delete-item') {
                     this.$http.delete('technology/' + data.id)
                         .then((response) => {

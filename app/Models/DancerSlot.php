@@ -12,5 +12,6 @@ class DancerSlot extends Model
      * @var array
      */
     protected $fillable = ['dancer_id', 'slot_id'];
+
     protected $table = 'dancer_slot';
 }

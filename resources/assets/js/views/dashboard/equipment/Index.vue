@@ -5,14 +5,14 @@
                 <router-link to="/dashboard/equipmentInfo">装备</router-link>
             </li>
             <li>
-                <strong>{{ $route.params.pName }}</strong>
+                <strong>{{ $route.query.pName }}</strong>
             </li>
         </vue-head>
 
         <vue-table :apiUrl="`equipment/${$route.params.pId}`" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link :to="`/dashboard/equipmentInfo/${$route.params.pName}/${$route.params.pId}/equipment/create`" class="btn btn-primary">创建</router-link>
+                <router-link :to="{path: `/dashboard/equipmentInfo/${$route.params.pId}/equipment/create`, query: {pName: $route.query.pName}}" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -57,7 +57,12 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push(`/dashboard/equipmentInfo/${this.$route.params.pName}/${this.$route.params.pId}/equipment/${data.id}/edit`);
+                    this.$router.push({
+                        path: `/dashboard/equipmentInfo/${this.$route.params.pId}/equipment/${data.id}/edit`,
+                        query: {
+                            pName: this.$route.params.pName
+                        }
+                    });
                 } else if (action == 'delete-item') {
                     this.$http.delete('equipment/' + data.id)
                         .then((response) => {

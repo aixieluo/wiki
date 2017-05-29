@@ -78,9 +78,4 @@ class EquipmentController extends ApiController
 
         return $this->noContent();
     }
-
-    public function getByAttributes($id) {
-
-        return $this->respondWithItem($this->equipmentRepository->getByAttributes($id), new AttributeTransformer);
-    }
 }

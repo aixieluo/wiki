@@ -10,6 +10,7 @@ class Rarity extends Model
     use SoftDeletes;
 
     protected $dates = ['delete_at'];
+
     protected $fillable = ['level', 'content'];
 
     /**

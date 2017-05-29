@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Technology\TechnologyRequest;
 use App\Repositories\TechnologyRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\TechnologyTransformer;
-use Illuminate\Http\Request;
 
 class TechnologyController extends ApiController
 {
@@ -34,8 +34,12 @@ class TechnologyController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->technologyRepository->store($request->all());
+    public function store(TechnologyRequest $request) {
+        $message = $this->technologyRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -59,8 +63,12 @@ class TechnologyController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $this->technologyRepository->update($id, $request->all());
+    public function update(TechnologyRequest $request, $id) {
+        $message = $this->technologyRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -73,13 +81,12 @@ class TechnologyController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->technologyRepository->destroy($id);
+        $message = $this->technologyRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
-    }
-
-    public function getByAttributes($id) {
-
-        return $this->respondWithItem($this->technologyRepository->getByAttributes($id), new AttributeTransformer);
     }
 }

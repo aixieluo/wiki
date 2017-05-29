@@ -22,7 +22,7 @@ class EquipmentRequest extends FormRequest
      */
     public function rules() {
         return [
-            'equipment_info_id' => 'required|numeric',
+            'equipment_info_id' => 'required|numeric|exists:equipment_infos,id',
             'lv'                => 'required|numeric|min:1|max:10',
             'price'             => 'required|numeric',
             'fire'              => 'required|numeric',

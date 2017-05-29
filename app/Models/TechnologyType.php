@@ -13,7 +13,7 @@ class TechnologyType extends Model
 
     protected $fillable = [
         'technology_category_id',
-        'content',
+        'name',
         'amount1',
         'amount2',
         'amount3'

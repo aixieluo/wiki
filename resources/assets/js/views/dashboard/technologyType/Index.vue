@@ -1,11 +1,18 @@
 <template>
     <div>
-        <vue-head headTitle="科技类型（二级）"></vue-head>
+        <vue-head headTitle="科技类型（二级）">
+            <li>
+                <router-link to="/dashboard/technologyCategory">科技类别（一级）</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.gName }}</strong>
+            </li>
+        </vue-head>
 
-        <vue-table apiUrl="technologyType" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table :apiUrl="`technologyType/${$route.params.gId}`" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/technologyType/create" class="btn btn-primary">创建</router-link>
+                <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType/create`, query: {gName: $route.query.gName}}" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -23,11 +30,7 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'technology_category',
-                        title: '科技类别（一级）'
-                    },
-                    {
-                        name: 'content',
+                        name: 'name',
                         title: '科技类型（二级）'
                     },
                     {
@@ -51,15 +54,30 @@
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/technologyType/' + data.id + '/edit');
+                    this.$router.push({
+                        path: `/dashboard/technologyCategory/${this.$route.params.gId}/technologyType/${data.id}/edit`,
+                        query: {
+                            gName: this.$route.query.gName
+                        }
+                    });
                 } else if (action == 'delete-item') {
                     this.$http.delete('technologyType/' + data.id)
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')
+                        }).catch((error) => {
+                            toastr.error(error.response.data.error.message)
                         })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');
+                } else if (action == 'list-item') {
+                    this.$router.push({
+                        path: `/dashboard/technologyCategory/${this.$route.params.gId}/technologyType/${data.id}/technology`,
+                        query: {
+                            gName: this.$route.query.gName,
+                            pName: data.name
+                        }
+                    });
                 }
             }
         },

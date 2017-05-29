@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Equipment;
+namespace App\Http\Requests\Technology;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SlotRequest extends FormRequest
+class TechnologyTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class SlotRequest extends FormRequest
     public function rules()
     {
         return [
+            'technology_category_id' => 'required|numeric|exists:technology_categories,id',
             'name' => 'required'
         ];
     }

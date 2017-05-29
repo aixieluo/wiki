@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Technology\TechnologyTypeRequest;
 use App\Repositories\TechnologyTypeRepository;
 use App\Transformers\TechnologyTypeTransformer;
-use Illuminate\Http\Request;
 
 class TechnologyTypeController extends ApiController
 {
@@ -22,24 +22,29 @@ class TechnologyTypeController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return $this->respondWithPaginator($this->technologyTypeRepository->page(), new TechnologyTypeTransformer);
+    public function index($gId) {
+
+        return $this->respondWithPaginator($this->technologyTypeRepository->page($gId), new TechnologyTypeTransformer);
     }
 
     public function getList() {
+
         return $this->respondWithCollection($this->technologyTypeRepository->all(), new TechnologyTypeTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->technologyTypeRepository->store($request->all());
+    public function store(TechnologyTypeRequest $request) {
+        $message = $this->technologyTypeRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -47,24 +52,29 @@ class TechnologyTypeController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+
         return $this->respondWithItem($this->technologyTypeRepository->getById($id), new TechnologyTypeTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $this->technologyTypeRepository->update($id, $request->all());
+    public function update(TechnologyTypeRequest $request, $id) {
+        $message = $this->technologyTypeRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -72,12 +82,16 @@ class TechnologyTypeController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $this->technologyTypeRepository->destroy($id);
+    public function destroy($id) {
+        $message = $this->technologyTypeRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

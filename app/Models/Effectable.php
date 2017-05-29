@@ -11,5 +11,9 @@ class Effectable extends Model
      *
      * @var array
      */
-    protected $fillable = ['effect_id', 'effectable_id', 'effectable_type'];
+    protected $fillable = [
+        'effect_id',
+        'effectable_id',
+        'effectable_type',
+    ];
 }

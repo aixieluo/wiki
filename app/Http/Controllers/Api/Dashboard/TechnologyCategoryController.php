@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Technology\TechnologyCategoryRequest;
 use App\Repositories\TechnologyCategoryRepository;
 use App\Transformers\TechnologyCategoryTransformer;
-use Illuminate\Http\Request;
 
 class TechnologyCategoryController extends ApiController
 {
@@ -23,10 +23,17 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function index() {
+
         return $this->respondWithPaginator($this->technologyCategoryRepository->page(), new TechnologyCategoryTransformer);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getList() {
+
         return $this->respondWithCollection($this->technologyCategoryRepository->all(), new TechnologyCategoryTransformer);
     }
 
@@ -37,8 +44,12 @@ class TechnologyCategoryController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->technologyCategoryRepository->store($request->all());
+    public function store(TechnologyCategoryRequest $request) {
+        $message = $this->technologyCategoryRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -51,6 +62,7 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+
         return $this->respondWithItem($this->technologyCategoryRepository->getById($id), new TechnologyCategoryTransformer);
     }
 
@@ -58,12 +70,16 @@ class TechnologyCategoryController extends ApiController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  int                      $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $this->technologyCategoryRepository->update($id, $request->all());
+    public function update(TechnologyCategoryRequest $request, $id) {
+        $message = $this->technologyCategoryRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -76,7 +92,11 @@ class TechnologyCategoryController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->technologyCategoryRepository->destroy($id);
+        $message = $this->technologyCategoryRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

@@ -12,7 +12,7 @@ class TechnologyCategory extends Model
     protected $dates = ['delete_at'];
 
     protected $fillable = [
-        'content'
+        'name'
     ];
 
     public function technologyTypes() {

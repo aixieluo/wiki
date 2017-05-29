@@ -38,8 +38,9 @@ class Skill extends Model
     }
 
     public function skillAttributes($name, $lv) {
-        return $this->where(['name'=>$name, 'lv'=>$lv])
-            ->select('describe', 'fire_up', 'penetrate_up', 'durable_up', 'armor_up', 'hit_up', 'dodge_up', 'concealment_up', 'spy_up')
-            ->first();
+        return $this->where([
+            'name' => $name,
+            'lv'   => $lv
+        ])->select('describe', 'fire_up', 'penetrate_up', 'durable_up', 'armor_up', 'hit_up', 'dodge_up', 'concealment_up', 'spy_up')->first();
     }
 }

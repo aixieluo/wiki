@@ -5,7 +5,7 @@
                 <router-link to="/dashboard/equipmentInfo">装备</router-link>
             </li>
             <li>
-                <strong>{{ $route.params.pName }}</strong>
+                <strong>{{ $route.query.pName }}</strong>
             </li>
         </vue-head>
 
@@ -14,7 +14,7 @@
                 <h5>创建</h5>
             </template>
             <template slot="buttons">
-                <router-link :to="`/dashboard/equipmentInfo/${$route.params.pName}/${$route.params.pId}/equipment`" class="btn btn-default" exact>返回</router-link>
+                <router-link :to="{path: `/dashboard/equipmentInfo/${$route.params.pId}/equipment`, query: {pName: $route.query.pName}}" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="create" @keydown="form.errors.clear($event.target.name)">
@@ -60,11 +60,9 @@
 
 <script>
     import Form from '../../../core/Form'
-    import Multiselect from 'vue-multiselect'
     import {attributeLabels} from '../../../config/variables'
 
     export default {
-        components: { Multiselect },
         data() {
             return {
                 attributeLabels,

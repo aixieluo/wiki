@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Equipment;
+namespace App\Http\Requests\Technology;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SlotRequest extends FormRequest
+class TechnologyCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

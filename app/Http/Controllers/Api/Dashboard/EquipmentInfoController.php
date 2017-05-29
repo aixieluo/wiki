@@ -40,7 +40,11 @@ class EquipmentInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(EquipmentInfoRequest $request) {
-        $this->equipmentInfoRepository->store($request->all());
+        $message = $this->equipmentInfoRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -66,8 +70,11 @@ class EquipmentInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(EquipmentInfoRequest $request, $id) {
+        $message = $this->equipmentInfoRepository->update($id, $request->all());
+        if ($message) {
 
-        $this->equipmentInfoRepository->update($id, $request->all());
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -80,10 +87,10 @@ class EquipmentInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
+        $message = $this->equipmentInfoRepository->destroy($id);
+        if ($message) {
 
-        if ($this->equipmentInfoRepository->destroy($id)) {
-
-            return $this->errorForbidden('该装备条目下存在详细信息条目，无法删除~');
+            return $this->errorForbidden($message);
         }
 
         return $this->noContent();

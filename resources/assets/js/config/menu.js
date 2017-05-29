@@ -39,21 +39,21 @@ export default [
         url: '/dashboard/slot',
         icon: 'fa fa-th-large'
     },
+    // {
+    //     label: '科技',
+    //     url: '/dashboard/technology',
+    //     icon: 'fa fa-th-large'
+    // },
     {
         label: '科技',
-        url: '/dashboard/technology',
-        icon: 'fa fa-th-large'
-    },
-    {
-        label: '科技类别（一级）',
         url: '/dashboard/technologyCategory',
         icon: 'fa fa-th-large'
     },
-    {
-        label: '科技类型（二级）',
-        url: '/dashboard/technologyType',
-        icon: 'fa fa-th-large'
-    },
+    // {
+    //     label: '科技类型（二级）',
+    //     url: '/dashboard/technologyType',
+    //     icon: 'fa fa-th-large'
+    // },
     {
         label: '战术信息',
         url: '/dashboard/tacticInfo',

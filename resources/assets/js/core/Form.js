@@ -31,7 +31,9 @@ class Form {
         }
         
         for (let field in this.originalData) {
-            this[field] = null
+            if (field != 'resets') {
+                this[field] = null
+            }
         }
 
         this.errors.clear()

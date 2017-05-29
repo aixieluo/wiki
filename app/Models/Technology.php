@@ -17,7 +17,12 @@ class Technology extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'technology_type_id', 'rank'
+        'technology_type_id',
+        'name',
+        'rank',
+        'row',
+        'column',
+        'place'
     ];
 
     /**
@@ -39,7 +44,7 @@ class Technology extends Model
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function attributes() {
-        return $this->morphMany('App\Models\Attribute','attributeable');
+        return $this->morphMany('App\Models\Attribute', 'attributeable');
     }
 
     /**

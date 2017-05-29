@@ -14,7 +14,7 @@
                     <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" v-model="form.name">
+                            <input type="text" name="name" class="form-control" placeholder="如：外挂装甲" v-model="form.name">
                             <span class="help-block" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</span>
                         </div>
                     </div>
@@ -80,7 +80,6 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
     import Multiselect from 'vue-multiselect'
     import Form from '../../../core/Form'
 
@@ -127,6 +126,8 @@
             create(event) {
                 this.form.post('equipmentInfo').then((response) => {
                     toastr.success('创建成功！')
+                }).catch((error) => {
+                    toastr.error(error.error.message)
                 })
             }
         },

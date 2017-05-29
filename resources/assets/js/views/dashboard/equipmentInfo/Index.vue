@@ -59,7 +59,12 @@
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');
                 } else if (action == 'list-item') {
-                    this.$router.push(`/dashboard/equipmentInfo/${data.name}/${data.id}/equipment`);
+                    this.$router.push({
+                        path: `/dashboard/equipmentInfo/${data.id}/equipment`,
+                        query: {
+                            pName: data.name
+                        }
+                    });
                 }
             }
         },
