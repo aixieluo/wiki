@@ -1,131 +1,51 @@
 <template>
     <div>
-        <vue-head headTitle="装备"></vue-head>
+        <vue-head headTitle="装备">
+            <li>
+                <router-link to="/dashboard/equipmentInfo">装备</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.params.pName }}</strong>
+            </li>
+        </vue-head>
 
         <vue-form>
             <template slot="title">
                 <h5>编辑</h5>
             </template>
             <template slot="buttons">
-                <router-link to="/dashboard/equipment" class="btn btn-default" exact>返回</router-link>
+                <router-link :to="`/dashboard/equipmentInfo/${$route.params.pName}/${$route.params.pId}/equipment`" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="edit">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">名称</label>
-                        <div class="col-sm-10">
-                            <select name="equipment_info_id" class="form-control" v-model="equipment.equipment_info_id">
-                                <option v-for="equipmentInfo in equipmentInfos" :value="equipmentInfo.id">{{ equipmentInfo.name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
+                    <div class="form-group" :class="{'has-error': form.errors.has('lv')}">
                         <label class="col-sm-2 control-label">等级</label>
                         <div class="col-sm-10">
-                            <select name="lv" class="form-control" v-model="equipment.lv">
-                                <option v-for="n in 10" :value="n">Lv.{{ n }}</option>
-                            </select>
+                            <input type="number" name="lv" class="form-control" placeholder="输入一个1 - 10之间的数字" v-model="form.lv">
+                            <span class="help-block" v-if="form.errors.has('lv')">{{ form.errors.get('lv') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
+                    <div class="form-group" :class="{'has-error': form.errors.has('price')}">
                         <label class="col-sm-2 control-label">售价</label>
                         <div class="col-sm-10">
-                            <input type="number" name="price" class="form-control" v-model.number="equipment.price">
+                            <input type="number" name="price" class="form-control" placeholder="如:100" v-model="form.price">
+                            <span class="help-block" v-if="form.errors.has('price')">{{ form.errors.get('price') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">装备槽位</label>
-                        <div class="col-sm-10">
-                            <select name="slot_id" class="form-control" v-model="equipment.slot_id">
-                                <option v-for="slot in slots" :value="slot.id">{{ slot.name }}</option>
-                            </select>
+                    <template v-for="item in attributeLabels">
+                        <div class="form-group" :class="{'has-error': form.errors.has(item.name)}">
+                            <label class="col-sm-2 control-label">{{ item.label }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" step="0.01" :name="item.name" class="form-control" placeholder="如:100" v-model="form[item.name]">
+                                <span class="help-block" v-if="form.errors.has(item.name)">{{ form.errors.get(item.name) }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">是否为主槽位</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="main" value="0" v-model="equipment.main">否
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="main" value="1" v-model="equipment.main">是
-                            </label>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">火力</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="fire" class="form-control" v-model.number="attributes.fire">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">穿甲</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="penetrate" class="form-control" v-model.number="attributes.penetrate">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">耐久</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="durable" class="form-control" v-model.number="attributes.durable">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">装甲</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="armor" class="form-control" v-model.number="attributes.armor">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">命中</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="hit" class="form-control" v-model.number="attributes.hit">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">闪避</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="dodge" class="form-control" v-model.number="attributes.dodge">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">隐蔽</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="concealment" class="form-control" v-model.number="attributes.concealment">
-                        </div>
-                    </div>
-
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">侦查</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="spy" class="form-control" v-model.number="attributes.spy">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
+                        <div class="hr-line-dashed"></div>
+                    </template>
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -139,43 +59,51 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+    import Multiselect from 'vue-multiselect'
+    import {attributeLabels} from '../../../config/variables'
+
     export default {
+        components: { Multiselect },
         data() {
             return {
-                equipmentInfos: {},
-                attributes: {},
-                equipment: {},
-                slots: {}
+                attributeLabels,
+                form: new Form({
+                    equipment_info_id: this.$route.params.pId,
+                    lv: null,
+                    price: null,
+                    fire: null,
+                    penetrate: null,
+                    durable: null,
+                    armor: null,
+                    hit: null,
+                    dodge: null,
+                    concealment: null,
+                    spy: null
+                })
             }
         },
         mounted() {
-            this.$http.get('equipmentInfos')
-                .then(Response => {
-                    this.equipmentInfos = Response.data.data
-                })
-            this.$http.get('equipment/attributes/'+ this.$route.params.id)
-                .then(Response => {
-                    this.attributes = Response.data.data
-                })
-            this.$http.get('slots')
-                .then(Response => {
-                    this.slots = Response.data.data
-                })
-            this.$http.get('equipment/'+ this.$route.params.id + '/edit')
-                .then(Response => {
-                    this.equipment = Response.data.data
+            this.$http.get('equipment/'+ this.$route.params.id + '/edit?include=attributes')
+                .then(response => {
+                    let data = response.data.data
+                    this.form.lv = data.lv
+                    this.form.price = data.price
+                    this.form.fire = data.attributes.data.fire
+                    this.form.penetrate = data.attributes.data.penetrate
+                    this.form.durable = data.attributes.data.durable
+                    this.form.armor = data.attributes.data.armor
+                    this.form.hit = data.attributes.data.hit
+                    this.form.dodge = data.attributes.data.dodge
+                    this.form.concealment = data.attributes.data.concealment
+                    this.form.spy = data.attributes.data.spy
                 })
         },
         methods: {
             edit(event) {
-                this.$http.put('equipment/' + this.$route.params.id, {
-                    equipment: this.equipment,
-                    attributes: this.attributes
-                })
+                this.form.put('equipment/' + this.$route.params.id)
                     .then(() => {
                         toastr.success('修改成功！')
-
-                        this.$router.push('/dashboard/equipment')
                     })
             }
         }

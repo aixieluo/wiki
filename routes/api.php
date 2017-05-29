@@ -80,10 +80,11 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('relation/dancer/getTechnologies/{id}', 'DancerController@getByTechnologies');
     Route::post('relation/dancer/technologies', 'DancerController@syncTechnologies');
 
-    Route::resource('equipmentInfo', 'EquipmentInfoController', ['except' => ['show','create']]);
+    Route::resource('equipmentInfo', 'EquipmentInfoController', ['except' => ['show', 'create']]);
     Route::get('equipmentInfos', 'EquipmentInfoController@getList');
 
-    Route::resource('equipment', 'EquipmentController', ['except' => ['show','create']]);
+    Route::resource('equipment', 'EquipmentController', ['except' => ['index', 'show', 'create']]);
+    Route::get('equipment/{pId}', 'EquipmentController@index');
     Route::get('equipment/attributes/{id}', 'EquipmentController@getByAttributes');
 
     Route::resource('slot', 'SlotController', ['except' => ['show', 'create']]);

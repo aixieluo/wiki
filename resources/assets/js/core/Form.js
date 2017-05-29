@@ -29,7 +29,7 @@ class Form {
 
             return
         }
-
+        
         for (let field in this.originalData) {
             this[field] = null
         }

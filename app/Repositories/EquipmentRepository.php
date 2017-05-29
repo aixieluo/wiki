@@ -14,28 +14,20 @@ class EquipmentRepository
         $this->model = $equipment;
     }
 
+    public function page($pId, $number = 10, $sort = 'desc', $sortColumn = 'id') {
+
+        return $this->model->where('equipment_info_id', $pId)->orderBy($sortColumn, $sort)->paginate($number);
+    }
+
     public function store($data) {
         $this->model = $this->model->create($data);
-
-        if (is_array($data['attributes'])) {
-            $this->createAttributes($data['attributes']);
-        } else {
-            $this->createAttributes(json_decode($data['attributes'], true));
-        }
-
-        return $this->model;
+        $this->createAttributes($data);
     }
 
     public function update($id, $data) {
         $this->model = $this->getById($id);
-
-        if (is_array($data['attributes'])) {
-            $this->updateAttributes($data['attributes']);
-        } else {
-            $this->updateAttributes(json_decode($data['attributes'], true));
-        }
-
-        return $this->model->update($data['equipment']);
+        $this->model->update($data);
+        $this->updateAttributes($data);
     }
 
     public function destroy($id) {

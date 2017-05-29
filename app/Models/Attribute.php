@@ -17,8 +17,6 @@ class Attribute extends Model
      * @var array
      */
     protected $fillable = [
-        'attributeable_id',
-        'attributeable_type',
         'fire',
         'penetrate',
         'durable',

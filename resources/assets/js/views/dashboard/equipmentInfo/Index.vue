@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="装备信息"></vue-head>
+        <vue-head headTitle="装备"></vue-head>
 
         <vue-table apiUrl="equipmentInfo" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
@@ -37,7 +37,8 @@
                 ],
                 itemActions: [
 //                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info btn-sm'},
+                    {name: 'list-item', icon: 'fa fa-bars', class: 'btn btn-info btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
                     {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
                 ],
                 items: {}
@@ -55,6 +56,8 @@
                         })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');
+                } else if (action == 'list-item') {
+                    this.$router.push(`/dashboard/equipmentInfo/${data.name}/${data.id}/equipment`);
                 }
             }
         },

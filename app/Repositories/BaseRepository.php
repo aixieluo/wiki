@@ -75,7 +75,7 @@ trait BaseRepository
     }
 
     public function updateAttributes($attributes) {
-        return $this->model->attributes()->update($attributes);
+        return $this->model->attributes()->first()->update($attributes);
     }
 
     public function deleteAttributes() {

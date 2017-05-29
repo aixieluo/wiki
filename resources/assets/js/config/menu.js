@@ -24,19 +24,19 @@ export default [
         url: '/dashboard/rarity',
         icon: 'fa fa-th-large'
     },
+    // {
+    //     label: '装备',
+    //     url: '/dashboard/equipment',
+    //     icon: 'fa fa-th-large'
+    // },
     {
         label: '装备',
-        url: '/dashboard/equipment',
+        url: '/dashboard/equipmentInfo',
         icon: 'fa fa-th-large'
     },
     {
         label: '装备槽',
         url: '/dashboard/slot',
-        icon: 'fa fa-th-large'
-    },
-    {
-        label: '装备信息',
-        url: '/dashboard/equipmentInfo',
         icon: 'fa fa-th-large'
     },
     {

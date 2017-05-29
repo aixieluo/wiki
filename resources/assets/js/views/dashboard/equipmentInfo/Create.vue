@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="装备信息"></vue-head>
+        <vue-head headTitle="装备"></vue-head>
 
         <vue-form>
             <template slot="title">
@@ -99,12 +99,12 @@
             }
         },
         mounted() {
-            this.$store.dispatch('setFormData', {
-                name: '',
-                describe: null,
-                slots: [],
-                main: ''
-            })
+//            this.$store.dispatch('setFormData', {
+//                name: '',
+//                describe: null,
+//                slots: [],
+//                main: ''
+//            })
             this.$http.get('slots')
                 .then(Response => {
                     this.slots = Response.data.data

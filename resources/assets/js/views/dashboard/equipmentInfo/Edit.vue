@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="装备信息"></vue-head>
+        <vue-head headTitle="装备"></vue-head>
 
         <vue-form>
             <template slot="title">
@@ -99,15 +99,14 @@
         mounted() {
             this.$http.get('equipmentInfo/' + this.$route.params.id + '/edit?include=slots,main,allSlots')
                 .then((response) => {
-                    this.form = new Form({
-                        name: response.data.data.name,
-                        describe: response.data.data.describe,
-                        slots: response.data.data.slots.data,
-                        main: response.data.data.main.data
-                    })
-                    this.slots = response.data.data.allSlots.data
+                    let data = response.data.data
+                    this.form.name = data.name
+                    this.form.describe = data.describe
+                    this.form.slots = data.slots.data
+                    this.form.main = data.main.data
+                    this.slots = data.allSlots.data
                 }).catch(() => {
-                    toastr.error('未知错误')
+                    toastr.error('未知错误，刷新试试~')
                 })
         },
         methods: {

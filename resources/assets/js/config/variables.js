@@ -1,4 +1,3 @@
-
 //亮星加成
 export const starIncrease = [
     {
@@ -228,3 +227,14 @@ export const strongBond = {
         spy: 0,
     },
 }
+
+export const attributeLabels = [
+    {label: '火力', name: 'fire'},
+    {label: '穿甲', name: 'penetrate'},
+    {label: '耐久', name: 'durable'},
+    {label: '装甲', name: 'armor'},
+    {label: '命中', name: 'hit'},
+    {label: '闪避', name: 'dodge'},
+    {label: '隐蔽', name: 'concealment'},
+    {label: '侦查', name: 'spy'},
+]

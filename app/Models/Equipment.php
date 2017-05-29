@@ -16,7 +16,7 @@ class Equipment extends Model
      *
      * @var array
      */
-    protected $fillable = ['lv', 'price'];
+    protected $fillable = ['equipment_info_id', 'lv', 'price'];
 
     public function equipmentInfo() {
         return $this->belongsTo('App\Models\EquipmentInfo');

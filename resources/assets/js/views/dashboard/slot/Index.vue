@@ -37,7 +37,7 @@
                 ],
                 itemActions: [
 //                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning'},
                     {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
                 ],
                 items: {}

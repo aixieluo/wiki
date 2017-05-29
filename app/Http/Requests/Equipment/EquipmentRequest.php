@@ -11,9 +11,8 @@ class EquipmentRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return false;
+    public function authorize() {
+        return true;
     }
 
     /**
@@ -21,10 +20,19 @@ class EquipmentRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            //
+            'equipment_info_id' => 'required|numeric',
+            'lv'                => 'required|numeric|min:1|max:10',
+            'price'             => 'required|numeric',
+            'fire'              => 'required|numeric',
+            'penetrate'         => 'required|numeric',
+            'durable'           => 'required|numeric',
+            'armor'             => 'required|numeric',
+            'hit'               => 'required|numeric',
+            'dodge'             => 'required|numeric',
+            'concealment'       => 'required|numeric',
+            'spy'               => 'required|numeric',
         ];
     }
 }

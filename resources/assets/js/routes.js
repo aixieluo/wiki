@@ -106,24 +106,6 @@ export default [
                 ]
             },
             {
-                path: 'equipment',
-                component: Parent,
-                children: [
-                    {
-                        path: '/',
-                        component: require('./views/dashboard/equipment/Index.vue')
-                    },
-                    {
-                        path: 'create',
-                        component: require('./views/dashboard/equipment/Create.vue')
-                    },
-                    {
-                        path: ':id/edit',
-                        component: require('./views/dashboard/equipment/Edit.vue')
-                    }
-                ]
-            },
-            {
                 path: 'equipmentInfo',
                 component: Parent,
                 children: [
@@ -138,6 +120,24 @@ export default [
                     {
                         path: ':id/edit',
                         component: require('./views/dashboard/equipmentInfo/Edit.vue')
+                    },
+                    {
+                        path: ':pName/:pId/equipment',
+                        component: Parent,
+                        children: [
+                            {
+                                path: '/',
+                                component: require('./views/dashboard/equipment/Index.vue')
+                            },
+                            {
+                                path: 'create',
+                                component: require('./views/dashboard/equipment/Create.vue')
+                            },
+                            {
+                                path: ':id/edit',
+                                component: require('./views/dashboard/equipment/Edit.vue')
+                            }
+                        ]
                     }
                 ]
             },

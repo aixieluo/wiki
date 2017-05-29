@@ -6,9 +6,11 @@
                 <li>
                     <router-link to="/dashboard/home">首页</router-link>
                 </li>
-                <li>
-                    <strong>{{ headTitle }}</strong>
-                </li>
+                <slot>
+                    <li>
+                        <strong>{{ headTitle }}</strong>
+                    </li>
+                </slot>
             </ol>
         </div>
         <div class="col-lg-2"></div>

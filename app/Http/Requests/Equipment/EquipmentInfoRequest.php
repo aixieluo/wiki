@@ -11,8 +11,7 @@ class EquipmentInfoRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,12 +20,12 @@ class EquipmentInfoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'name' => 'required',
-            'slots' => 'required',
-            'main' => 'required'
+            'name'     => 'required',
+            'describe' => 'nullable',
+            'slots'    => 'required',
+            'main'     => 'required'
         ];
     }
 }

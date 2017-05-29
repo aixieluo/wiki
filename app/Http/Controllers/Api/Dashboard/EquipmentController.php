@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Equipment\EquipmentRequest;
 use App\Repositories\EquipmentRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\EquipmentTransformer;
-use Illuminate\Http\Request;
 
 class EquipmentController extends ApiController
 {
@@ -24,9 +24,9 @@ class EquipmentController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pId)
     {
-        return $this->respondWithPaginator($this->equipmentRepository->page(), new EquipmentTransformer);
+        return $this->respondWithPaginator($this->equipmentRepository->page($pId), new EquipmentTransformer);
     }
 
     /**
@@ -35,7 +35,7 @@ class EquipmentController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EquipmentRequest $request)
     {
         $this->equipmentRepository->store($request->all());
     }
@@ -59,7 +59,7 @@ class EquipmentController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EquipmentRequest $request, $id)
     {
         $this->equipmentRepository->update($id, $request->all());
 
