@@ -29,6 +29,9 @@ class EquipmentInfoRepository
 
     public function destroy($id) {
         $this->model = $this->getById($id);
+        if ($this->model->equipment()->count()) {
+            return true;
+        }
         $this->model->slots()->detach();
         $this->model->delete();
     }

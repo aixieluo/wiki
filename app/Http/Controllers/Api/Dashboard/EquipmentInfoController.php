@@ -81,7 +81,10 @@ class EquipmentInfoController extends ApiController
      */
     public function destroy($id) {
 
-        $this->equipmentInfoRepository->destroy($id);
+        if ($this->equipmentInfoRepository->destroy($id)) {
+
+            return $this->errorForbidden('该装备条目下存在详细信息条目，无法删除~');
+        }
 
         return $this->noContent();
     }

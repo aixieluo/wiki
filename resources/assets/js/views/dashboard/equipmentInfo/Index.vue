@@ -53,6 +53,8 @@
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')
+                        }).catch((error) => {
+                            toastr.error(error.response.data.error.message)
                         })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');

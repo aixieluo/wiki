@@ -30,6 +30,29 @@ class ApiController extends Controller
     }
 
     /**
+     * Get the status code.
+     *
+     * @return int $statusCode
+     */
+    public function getStatusCode() {
+
+        return $this->statusCode;
+    }
+
+    /**
+     * Set the status code.
+     *
+     * @param $statusCode
+     *
+     * @return $this
+     */
+    public function setStatusCode($statusCode) {
+        $this->statusCode = $statusCode;
+
+        return $this;
+    }
+
+    /**
      * Respond the item data.
      * 单对象
      *
@@ -86,7 +109,7 @@ class ApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function respondWithArray(array $array, array $headers = []) {
-        return response()->json($array, $this->statusCode, $headers);
+        return response()->json($array, $this->getStatusCode(), $headers);
     }
 
     /**
@@ -95,6 +118,77 @@ class ApiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function noContent() {
+
         return response()->json(null, 204);
+    }
+
+    public function respondWithError($message) {
+
+        return $this->respondWithArray([
+            'error' => [
+                'message'   => $message,
+                'http_code' => $this->getStatusCode()
+            ]
+        ]);
+    }
+
+    /**
+     * Respond the error of 'Forbidden'
+     *
+     * @param  string $message
+     * @return json
+     */
+    public function errorForbidden($message = 'Forbidden') {
+
+        return $this->setStatusCode(403)
+                    ->respondWithError($message);
+    }
+
+    /**
+     * Respond the error of 'Internal Error'.
+     *
+     * @param  string $message
+     * @return json
+     */
+    public function errorInternalError($message = 'Internal Error') {
+
+        return $this->setStatusCode(500)
+                    ->respondWithError($message);
+    }
+
+    /**
+     * Respond the error of 'Resource Not Found'
+     *
+     * @param  string $message
+     * @return json
+     */
+    public function errorNotFound($message = 'Not Found') {
+
+        return $this->setStatusCode(404)
+                    ->respondWithError($message);
+    }
+
+    /**
+     * Respond the error of 'Unauthorized'.
+     *
+     * @param  string $message
+     * @return json
+     */
+    public function errorUnauthorized($message = 'Unauthorized') {
+
+        return $this->setStatusCode(401)
+                    ->respondWithError($message);
+    }
+
+    /**
+     * Respond the error of 'Wrong Arguments'.
+     *
+     * @param  string $message
+     * @return json
+     */
+    public function errorWrongArgs($message = 'Wrong Arguments') {
+
+        return $this->setStatusCode(400)
+                    ->respondWithError($message);
     }
 }
