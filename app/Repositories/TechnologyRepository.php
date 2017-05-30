@@ -3,20 +3,24 @@
 namespace App\Repositories;
 
 use App\Models\Technology;
+use App\Models\TechnologyType;
 
 class TechnologyRepository
 {
     use BaseRepository;
 
     protected $model;
+    protected $technology;
 
     public function __construct(Technology $technology) {
         $this->model = $technology;
+        $this->technology = $technology;
     }
 
     public function store($data) {
         $this->model = $this->model->create($data);
         $this->createAttributes($data);
+        $this->updateAmount();
     }
 
     public function update($id, $data) {
@@ -32,5 +36,13 @@ class TechnologyRepository
         }
         $this->model->delete();
         $this->deleteAttributes();
+        $this->updateAmount();
+    }
+
+    public function updateAmount() {
+        $this->model->technologyType->amount1 = $this->model->where('rank', 1)->count();
+        $this->model->technologyType->amount2 = $this->model->where('rank', 2)->count();
+        $this->model->technologyType->amount3 = $this->model->where('rank', 3)->count();
+        $this->model->technologyType->save();
     }
 }
