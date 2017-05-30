@@ -57,8 +57,6 @@
                     .then((response) => {
                         toastr.success('创建成功！')
                         this.form.technology_category_id = this.$route.params.gId
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

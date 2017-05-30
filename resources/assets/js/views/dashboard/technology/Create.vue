@@ -124,8 +124,6 @@
                     .then(() => {
                         toastr.success('创建成功！')
                         this.form.technology_type_id = this.$route.params.pId
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

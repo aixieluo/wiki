@@ -128,8 +128,16 @@
                     } else {
                         page = '?page='
                     }
+
+                    let params = ''
+                    for (let k in this.$route.query) {
+                        if (k != 'page') {
+                            params += `&${k}=${this.$route.query[k]}`
+                        }
+                    }
+
                     url = url + page + this.currentPage
-                    this.$router.push(page + this.currentPage)
+                    this.$router.push(page + this.currentPage + params)
                 }
 
                 this.$http.get(url)

@@ -40,8 +40,8 @@ trait BaseRepository
      * @param $data
      */
     public function store($input) {
-
-        return $this->save($this->model, $input);
+        $input = $this->removeEmpty($input);
+        $this->model->create($input);
     }
 
     /**
@@ -51,9 +51,8 @@ trait BaseRepository
      * @return mixed
      */
     public function update($id, $input) {
-        $this->model = $this->getById($id);
-
-        return $this->save($this->model, $input);
+        $input = $this->removeEmpty($input);
+        $this->getById($id)->update($input);
     }
 
     /**
@@ -62,8 +61,7 @@ trait BaseRepository
      * @return mixed
      */
     public function destroy($id) {
-
-        return $this->getById($id)->delete();
+        $this->getById($id)->delete();
     }
 
     public function save($model, $input) {

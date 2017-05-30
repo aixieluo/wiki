@@ -47,11 +47,10 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
-                ],
-                items: {}
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+                ]
             }
         },
         methods: {
@@ -60,7 +59,7 @@
                     this.$router.push({
                         path: `/dashboard/equipmentInfo/${this.$route.params.pId}/equipment/${data.id}/edit`,
                         query: {
-                            pName: this.$route.params.pName
+                            pName: this.$route.query.pName
                         }
                     });
                 } else if (action == 'delete-item') {

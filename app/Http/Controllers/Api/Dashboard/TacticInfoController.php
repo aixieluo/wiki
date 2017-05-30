@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Tactic\TacticInfoRequest;
 use App\Repositories\TacticInfoRepository;
 use App\Transformers\TacticInfoTransformer;
-use Illuminate\Http\Request;
 
 class TacticInfoController extends ApiController
 {
@@ -22,24 +22,29 @@ class TacticInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+
         return $this->respondWithPaginator($this->tacticInfoRepository->page(), new TacticInfoTransformer);
     }
 
     public function getList() {
+
         return $this->respondWithCollection($this->tacticInfoRepository->page(), new TacticInfoTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $this->tacticInfoRepository->store($request->all());
+    public function store(TacticInfoRequest $request) {
+        $message = $this->tacticInfoRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -47,24 +52,29 @@ class TacticInfoController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
+
         return $this->respondWithItem($this->tacticInfoRepository->getById($id), new TacticInfoTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $this->tacticInfoRepository->update($id, $request->all());
+    public function update(TacticInfoRequest $request, $id) {
+        $message = $this->tacticInfoRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -72,12 +82,16 @@ class TacticInfoController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $this->tacticInfoRepository->destroy($id);
+    public function destroy($id) {
+        $message = $this->tacticInfoRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

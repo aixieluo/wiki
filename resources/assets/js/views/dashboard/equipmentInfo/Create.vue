@@ -126,8 +126,6 @@
             create(event) {
                 this.form.post('equipmentInfo').then((response) => {
                     toastr.success('创建成功！')
-                }).catch((error) => {
-                    toastr.error(error.error.message)
                 })
             }
         },

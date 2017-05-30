@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Tactic\TacticRequest;
 use App\Repositories\TacticRepository;
 use App\Transformers\TacticTransformer;
-use Illuminate\Http\Request;
 
 class TacticController extends ApiController
 {
@@ -22,8 +22,8 @@ class TacticController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return $this->respondWithPaginator($this->tacticRepository->page(), new TacticTransformer);
+    public function index($pId) {
+        return $this->respondWithPaginator($this->tacticRepository->page($pId), new TacticTransformer);
     }
 
     /**
@@ -33,8 +33,12 @@ class TacticController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->tacticRepository->store($request->all());
+    public function store(TacticRequest $request) {
+        $message = $this->tacticRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -58,8 +62,12 @@ class TacticController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $this->tacticRepository->update($id, $request->all());
+    public function update(TacticRequest $request, $id) {
+        $message = $this->tacticRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -72,7 +80,11 @@ class TacticController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->tacticRepository->destroy($id);
+        $message = $this->tacticRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

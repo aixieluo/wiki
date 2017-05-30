@@ -1,11 +1,18 @@
 <template>
     <div>
-        <vue-head headTitle="战术"></vue-head>
+        <vue-head headTitle="战术">
+            <li>
+                <router-link to="/dashboard/tacticInfo">战术</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.pName }}</strong>
+            </li>
+        </vue-head>
 
-        <vue-table apiUrl="tactic" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table :apiUrl="`tactic/${$route.params.pId}`" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/tactic/create" class="btn btn-primary">创建</router-link>
+                <router-link :to="{path: `/dashboard/tacticInfo/${$route.params.pId}/tactic/create`, query: {pName: $route.query.pName}}" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -23,10 +30,6 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'name',
-                        title: '名称'
-                    },
-                    {
                         name: 'lv',
                         title: '等级'
                     },
@@ -40,17 +43,21 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
-                ],
-                items: {}
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+                ]
             }
         },
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/tactic/' + data.id + '/edit');
+                    this.$router.push({
+                        path: `/dashboard/tacticInfo/${this.$route.params.pId}/tactic/${data.id}/edit`,
+                        query: {
+                            pName: this.$route.query.pName
+                        }
+                    });
                 } else if (action == 'delete-item') {
                     this.$http.delete('tactic/' + data.id)
                         .then((response) => {

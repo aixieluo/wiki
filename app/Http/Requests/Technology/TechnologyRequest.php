@@ -21,9 +21,11 @@ class TechnologyRequest extends FormRequest
      * @return array
      */
     public function rules() {
+        $id = $this->route('technology');
+
         return [
             'technology_type_id' => 'required|numeric|exists:technology_types,id',
-            'name'               => 'required',
+            'name'               => 'required|unique:technologies,name,' . $id . ',id,deleted_at,NULL',
             'rank'               => 'required|numeric|min:1|max:3',
             'row'                => 'required|numeric|min:1|max:5',
             'column'             => 'required|numeric|min:1|max:6',

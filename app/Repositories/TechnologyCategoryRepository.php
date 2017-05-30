@@ -14,21 +14,6 @@ class TechnologyCategoryRepository
         $this->model = $technologyCategory;
     }
 
-    public function store($data) {
-        if ($this->model->where('name', $data['name'])->count()) {
-            return $message = '该科技类别（一级）名称已存在';
-        }
-        $this->model = $this->model->create($data);
-    }
-
-    public function update($id, $data) {
-        if ($this->model->where('name', $data['name'])->count() && $this->getById($id)->name != $data['name']) {
-            return $message = '该科技类别（一级）名称已存在';
-        }
-        $this->model = $this->getById($id);
-        $this->model->update($data);
-    }
-
     public function destroy($id) {
         $this->model = $this->getById($id);
         if ($this->model->technologyTypes()->count()) {

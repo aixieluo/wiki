@@ -48,8 +48,6 @@
                 this.form.post('technologyCategory')
                     .then((response) => {
                         toastr.success('创建成功！')
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

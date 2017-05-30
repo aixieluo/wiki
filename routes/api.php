@@ -63,10 +63,12 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::resource('tacticInfo', 'TacticInfoController', ['except' => ['show', 'create']]);
     Route::get('tacticInfos', 'TacticInfoController@getList');
 
-    Route::resource('tactic', 'TacticController', ['except' => ['show', 'create']]);
+    Route::resource('tactic', 'TacticController', ['except' => ['index', 'show', 'create']]);
+    Route::get('tactic/{pId}', 'TacticController@index');
 
     Route::resource('skillInfo', 'SkillInfoController', ['except' => ['show', 'create']]);
     Route::get('skillInfos', 'SkillInfoController@getList');
 
-    Route::resource('skill', 'SkillController', ['except' => ['show', 'create']]);
+    Route::resource('skill', 'SkillController', ['except' => ['index', 'show', 'create']]);
+    Route::get('skill/{pId}', 'SkillController@index');
 });

@@ -21,9 +21,11 @@ class EquipmentRequest extends FormRequest
      * @return array
      */
     public function rules() {
+        $id = $this->route('equipment');
+
         return [
             'equipment_info_id' => 'required|numeric|exists:equipment_infos,id',
-            'lv'                => 'required|numeric|min:1|max:10',
+            'lv'                => 'required|numeric|min:1|max:10|unique:equipment,lv,' . $id . ',id,deleted_at,NULL',
             'price'             => 'required|numeric',
             'fire'              => 'required|numeric',
             'penetrate'         => 'required|numeric',

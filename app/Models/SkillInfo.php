@@ -22,6 +22,6 @@ class SkillInfo extends Model
     ];
 
     public function skills() {
-        $this->hasMany('App\Models\Skill');
+        return $this->hasMany('App\Models\Skill');
     }
 }

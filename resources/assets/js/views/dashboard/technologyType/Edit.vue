@@ -45,6 +45,7 @@
         data() {
             return {
                 form: new Form({
+                    technology_category_id: this.$route.params.id,
                     'name': ''
                 })
             }
@@ -61,8 +62,6 @@
                 this.form.put('technologyType/' + this.$route.params.id)
                     .then((response) => {
                         toastr.success('修改成功！')
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

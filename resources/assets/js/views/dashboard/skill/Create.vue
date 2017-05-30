@@ -1,97 +1,42 @@
 <template>
     <div>
-        <vue-head headTitle="辎械"></vue-head>
+        <vue-head headTitle="辎械">
+            <li>
+                <router-link to="/dashboard/tacticInfo">辎械</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.pName }}</strong>
+            </li>
+        </vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>创建</h5>
+            </template>
             <template slot="buttons">
-                <router-link to="/dashboard/skill" class="btn btn-default" exact>返回</router-link>
+                <router-link :to="{path: `/dashboard/skillInfo/${$route.params.pId}/skill`, query: {pName: $route.query.pName}}" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="create">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">名称</label>
-                        <div class="col-sm-10">
-                            <select name="skill_info_id" class="form-control">
-                                <option v-for="skillInfo in skillInfos" :value="skillInfo.id">{{ skillInfo.name }}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
+                <form class="form-horizontal" @submit.prevent="create" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group" :class="{'has-error': form.errors.has('lv')}">
                         <label class="col-sm-2 control-label">等级</label>
                         <div class="col-sm-10">
-                            <select name="lv" class="form-control">
-                                <option v-for="n in 10" :value="n">Lv.{{ n }}</option>
-                            </select>
+                            <input type="number" name="lv" class="form-control" placeholder="输入一个1 - 10之间的数字" v-model="form.lv">
+                            <span class="help-block" v-if="form.errors.has('lv')">{{ form.errors.get('lv') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础火力</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="fire_up" class="form-control">
+                    <template v-for="item in attributeLabels">
+                        <div class="form-group" :class="{'has-error': form.errors.has(`${item.name}_up`)}">
+                            <label class="col-sm-2 control-label">提升基础{{ item.label }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" step="0.01" :name="`${item.name}_up`" class="form-control" placeholder="不填默认0，表示没有提升" v-model="form[`${item.name}_up`]">
+                                <span class="help-block" v-if="form.errors.has(`${item.name}_up`)">{{ form.errors.get(`${item.name}_up`) }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础穿甲</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="penetrate_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础耐久</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="durable_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础装甲</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="armor_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础命中</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="hit_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础闪避</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="dodge_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础隐蔽</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="concealment_up" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">提升基础侦查</label>
-                        <div class="col-sm-10">
-                            <input type="number" step="0.01" name="spy_up" class="form-control">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
+                        <div class="hr-line-dashed"></div>
+                    </template>
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -105,27 +50,34 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+    import {attributeLabels} from '../../../config/variables'
+
     export default {
         data() {
             return {
-                skillInfos: {},
-            }
-        },
-        mounted() {
-            this.$http.get('skillInfos')
-                .then(Response => {
-                    this.skillInfos = Response.data.data
+                attributeLabels,
+                form: new Form({
+                    skill_info_id: this.$route.params.pId,
+                    lv: null,
+                    fire_up: null,
+                    penetrate_up: null,
+                    durable_up: null,
+                    armor_up: null,
+                    hit_up: null,
+                    dodge_up: null,
+                    concealment_up: null,
+                    spy_up: null,
+                    resets: true
                 })
+            }
         },
         methods: {
             create(event) {
-                let formData = new FormData(event.target)
-
-                this.$http.post('skill', formData)
-                    .then(() => {
+                this.form.post('skill')
+                    .then((response) => {
                         toastr.success('创建成功！')
-
-                        this.$router.push('/dashboard/skill')
+                        this.form.skill_info_id = this.$route.params.pId
                     })
             }
         }

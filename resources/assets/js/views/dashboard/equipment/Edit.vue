@@ -17,7 +17,7 @@
                 <router-link :to="{path: `/dashboard/equipmentInfo/${$route.params.pId}/equipment`, query: {pName: $route.query.pName}}" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="edit">
+                <form class="form-horizontal" @submit.prevent="edit" @keydown="form.errors.clear($event.target.name)">
                     <div class="form-group" :class="{'has-error': form.errors.has('lv')}">
                         <label class="col-sm-2 control-label">等级</label>
                         <div class="col-sm-10">

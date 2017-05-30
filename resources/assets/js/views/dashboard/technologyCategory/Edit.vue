@@ -54,8 +54,6 @@
                 this.form.put('technologyCategory/' + this.$route.params.id)
                     .then((response) => {
                         toastr.success('修改成功！')
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Requests\Skill\SkillInfoRequest;
 use App\Repositories\SkillInfoRepository;
 use App\Transformers\SkillInfoTransformer;
-use Illuminate\Http\Request;
 
 class SkillInfoController extends ApiController
 {
@@ -37,8 +37,12 @@ class SkillInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $this->skillInfoRepository->store($request->all());
+    public function store(SkillInfoRequest $request) {
+        $message = $this->skillInfoRepository->store($request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -62,8 +66,12 @@ class SkillInfoController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        $this->skillInfoRepository->update($id, $request->all());
+    public function update(SkillInfoRequest $request, $id) {
+        $message = $this->skillInfoRepository->update($id, $request->all());
+        if ($message) {
+
+            return $this->errorWrongArgs($message);
+        }
 
         return $this->noContent();
     }
@@ -76,7 +84,11 @@ class SkillInfoController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->skillInfoRepository->destroy($id);
+        $message = $this->skillInfoRepository->destroy($id);
+        if ($message) {
+
+            return $this->errorForbidden($message);
+        }
 
         return $this->noContent();
     }

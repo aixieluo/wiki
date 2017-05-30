@@ -210,24 +210,24 @@ export default [
                     {
                         path: ':id/edit',
                         component: require('./views/dashboard/tacticInfo/Edit.vue')
-                    }
-                ]
-            },
-            {
-                path: 'tactic',
-                component: Parent,
-                children: [
-                    {
-                        path: '/',
-                        component: require('./views/dashboard/tactic/Index.vue')
                     },
                     {
-                        path: 'create',
-                        component: require('./views/dashboard/tactic/Create.vue')
-                    },
-                    {
-                        path: ':id/edit',
-                        component: require('./views/dashboard/tactic/Edit.vue')
+                        path: ':pId/tactic',
+                        component: Parent,
+                        children: [
+                            {
+                                path: '/',
+                                component: require('./views/dashboard/tactic/Index.vue')
+                            },
+                            {
+                                path: 'create',
+                                component: require('./views/dashboard/tactic/Create.vue')
+                            },
+                            {
+                                path: ':id/edit',
+                                component: require('./views/dashboard/tactic/Edit.vue')
+                            }
+                        ]
                     }
                 ]
             },
@@ -246,24 +246,24 @@ export default [
                     {
                         path: ':id/edit',
                         component: require('./views/dashboard/skillInfo/Edit.vue')
-                    }
-                ]
-            },
-            {
-                path: 'skill',
-                component: Parent,
-                children: [
-                    {
-                        path: '/',
-                        component: require('./views/dashboard/skill/Index.vue')
                     },
                     {
-                        path: 'create',
-                        component: require('./views/dashboard/skill/Create.vue')
-                    },
-                    {
-                        path: ':id/edit',
-                        component: require('./views/dashboard/skill/Edit.vue')
+                        path: ':pId/skill',
+                        component: Parent,
+                        children: [
+                            {
+                                path: '/',
+                                component: require('./views/dashboard/skill/Index.vue')
+                            },
+                            {
+                                path: 'create',
+                                component: require('./views/dashboard/skill/Create.vue')
+                            },
+                            {
+                                path: ':id/edit',
+                                component: require('./views/dashboard/skill/Edit.vue')
+                            }
+                        ]
                     }
                 ]
             },

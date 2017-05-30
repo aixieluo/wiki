@@ -14,10 +14,8 @@ class TacticTransformer extends TransformerAbstract
     public function transform(Tactic $tactic) {
         return [
             'id'               => $tactic->id,
-            'name'             => $tactic->tacticInfo->name,
-            'describe'         => $tactic->tacticInfo->desccribe,
-            'lv'               => $tactic->lv,
             'tactic_info_id'   => $tactic->tactic_info_id,
+            'lv'               => $tactic->lv,
             'fire_up'          => $tactic->fire_up,
             'penetrate_up'     => $tactic->penetrate_up,
             'durable_up'       => $tactic->durable_up,
@@ -34,13 +32,14 @@ class TacticTransformer extends TransformerAbstract
             'dodge_down'       => $tactic->dodge_down,
             'concealment_down' => $tactic->concealment_down,
             'spy_down'         => $tactic->spy_down,
-            'created_at'       => $tactic->created_at->diffForHumans()
+            'created_at'       => $tactic->created_at->diffForHumans(),
+            'updated_at'       => $tactic->updated_at->diffForHumans()
         ];
     }
 
     public function includeTacticInfo(Tactic $tactic) {
         $tacticInfo = $tactic->tacticInfo;
 
-        return $this->collection($tacticInfo, new TacticInfoTransformer);
+        return $this->item($tacticInfo, new TacticInfoTransformer);
     }
 }

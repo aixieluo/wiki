@@ -55,25 +55,25 @@ export default [
     //     icon: 'fa fa-th-large'
     // },
     {
-        label: '战术信息',
+        label: '战术',
         url: '/dashboard/tacticInfo',
         icon: 'fa fa-th-large'
     },
+    // {
+    //     label: '战术',
+    //     url: '/dashboard/tactic',
+    //     icon: 'fa fa-th-large'
+    // },
     {
-        label: '战术',
-        url: '/dashboard/tactic',
-        icon: 'fa fa-th-large'
-    },
-    {
-        label: '辎械信息',
+        label: '辎械',
         url: '/dashboard/skillInfo',
         icon: 'fa fa-th-large'
     },
-    {
-        label: '辎械',
-        url: '/dashboard/skill',
-        icon: 'fa fa-th-large'
-    },
+    // {
+    //     label: '辎械',
+    //     url: '/dashboard/skill',
+    //     icon: 'fa fa-th-large'
+    // },
     {
         label: '钢舞姬 - 科技',
         url: '/dashboard/relation/dancer-technology',

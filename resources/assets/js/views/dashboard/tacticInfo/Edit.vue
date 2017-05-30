@@ -1,25 +1,21 @@
 <template>
     <div>
-        <vue-head headTitle="战术信息"></vue-head>
+        <vue-head headTitle="战术"></vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>编辑</h5>
+            </template>
             <template slot="buttons">
                 <router-link to="/dashboard/tacticInfo" class="btn btn-default" exact>返回</router-link>
             </template>
             <template slot="content">
-                <form class="form-horizontal" @submit.prevent="edit">
-                    <div class="form-group">
+                <form class="form-horizontal" @submit.prevent="edit" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">名称</label>
                         <div class="col-sm-10">
-                            <input type="text" name="name" class="form-control" v-model="tacticInfo.name">
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">描述</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="describe" class="form-control" v-model="tacticInfo.describe">
+                            <input type="text" name="name" class="form-control" placeholder="如：泛用战法" v-model="form.name">
+                            <span class="help-block" v-if="form.errors.has('name')">{{ form.errors.get('name') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -36,26 +32,28 @@
 </template>
 
 <script>
+    import Form from '../../../core/Form'
+
     export default {
         data() {
             return {
-                tacticInfo: {}
+                form: new Form({
+                    'name': ''
+                })
             }
         },
         mounted() {
             this.$http.get('tacticInfo/' + this.$route.params.id + '/edit')
                 .then((response) => {
-                    this.tacticInfo = response.data.data
+                    let data = response.data.data
+                    this.form.name = data.name
                 })
         },
         methods: {
             edit(event) {
-
-                this.$http.put('tacticInfo/' + this.$route.params.id, this.tacticInfo)
-                    .then(() => {
+                this.form.put('tacticInfo/' + this.$route.params.id)
+                    .then((response) => {
                         toastr.success('修改成功！')
-
-                        this.$router.push('/dashboard/tacticInfo')
                     })
             }
         }

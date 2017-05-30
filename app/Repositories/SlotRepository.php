@@ -16,16 +16,10 @@ class SlotRepository
     }
 
     public function store($data) {
-        if ($this->model->where('name', $data['name'])->count()) {
-            return $message = '该装备槽位名称已存在';
-        }
         $this->model = $this->model->create($data);
     }
 
     public function update($id, $data) {
-        if ($this->model->where('name', $data['name'])->count() && $this->getById($id)->name != $data['name']) {
-            return $message = '该装备槽位名称已存在';
-        }
         $this->model = $this->getById($id);
         $this->model->update($data);
     }

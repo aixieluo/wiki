@@ -34,7 +34,5 @@ class EquipmentRepository
         $this->model = $this->getById($id);
         $this->model->delete();
         $this->deleteAttributes();
-
-        return $this->model;
     }
 }

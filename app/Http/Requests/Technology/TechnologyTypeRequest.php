@@ -11,8 +11,7 @@ class TechnologyTypeRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,11 +20,12 @@ class TechnologyTypeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
+        $id = $this->route('technologyType');
+
         return [
             'technology_category_id' => 'required|numeric|exists:technology_categories,id',
-            'name' => 'required'
+            'name'                   => 'required|unique:technology_types,name,' . $id . ',id,deleted_at,NULL'
         ];
     }
 }

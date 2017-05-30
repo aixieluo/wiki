@@ -141,8 +141,6 @@
                 this.form.put('technology/' + this.$route.params.id)
                     .then(() => {
                         toastr.success('创建成功！')
-                    }).catch((error) => {
-                        toastr.error(error.error.message)
                     })
             }
         }

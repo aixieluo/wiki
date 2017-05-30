@@ -22,6 +22,6 @@ class TacticInfo extends Model
     ];
 
     public function tactics() {
-        $this->hasMany('App\Models\Tactic');
+        return $this->hasMany('App\Models\Tactic');
     }
 }

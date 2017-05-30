@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Technology;
+namespace App\Http\Requests\Skill;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TechnologyCategoryRequest extends FormRequest
+class SkillInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,11 +21,12 @@ class TechnologyCategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
-        $id = $this->route('technologyCategory');
+    public function rules()
+    {
+        $id = $this->route('skillInfo');
 
         return [
-            'name' => 'required|unique:technology_categories,name,' . $id . ',id,deleted_at,NULL'
+            'name' => 'required|unique:skill_infos,name,' . $id . ',id,deleted_at,NULL'
         ];
     }
 }

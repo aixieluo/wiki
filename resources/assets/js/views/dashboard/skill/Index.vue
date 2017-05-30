@@ -1,11 +1,18 @@
 <template>
     <div>
-        <vue-head headTitle="辎械"></vue-head>
+        <vue-head headTitle="辎械">
+            <li>
+                <router-link to="/dashboard/skillInfo">辎械</router-link>
+            </li>
+            <li>
+                <strong>{{ $route.query.pName }}</strong>
+            </li>
+        </vue-head>
 
-        <vue-table apiUrl="skill" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table :apiUrl="`skill/${$route.params.pId}`" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
-                <router-link to="/dashboard/skill/create" class="btn btn-primary">创建</router-link>
+                <router-link :to="{path: `/dashboard/skillInfo/${$route.params.pId}/skill/create`, query: {pName: $route.query.pName}}" class="btn btn-primary">创建</router-link>
             </template>
         </vue-table>
     </div>
@@ -23,10 +30,6 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'name',
-                        title: '名称'
-                    },
-                    {
                         name: 'lv',
                         title: '等级'
                     },
@@ -40,17 +43,21 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
-                ],
-                items: {}
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+                ]
             }
         },
         methods: {
             tableActions(action, data) {
                 if (action == 'edit-item') {
-                    this.$router.push('/dashboard/skill/' + data.id + '/edit');
+                    this.$router.push({
+                        path: `/dashboard/skillInfo/${this.$route.params.pId}/skill/${data.id}/edit`,
+                        query: {
+                            pName: this.$route.query.pName
+                        }
+                    });
                 } else if (action == 'delete-item') {
                     this.$http.delete('skill/' + data.id)
                         .then((response) => {

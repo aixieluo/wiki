@@ -126,8 +126,6 @@
             edit(event) {
                 this.form.put('equipmentInfo/' + this.$route.params.id, this.equipmentInfo).then((response) => {
                     toastr.success('修改成功！')
-                }).catch((error) => {
-                    toastr.error(error.error.message)
                 })
             }
         }
