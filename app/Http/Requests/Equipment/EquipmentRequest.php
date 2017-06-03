@@ -25,7 +25,7 @@ class EquipmentRequest extends FormRequest
 
         return [
             'equipment_info_id' => 'required|numeric|exists:equipment_infos,id',
-            'lv'                => 'required|numeric|min:1|max:10|unique:equipment,lv,' . $id . ',id,deleted_at,NULL',
+            'lv'                => 'required|numeric|min:1|max:10|unique:equipment,lv,' . $id . ',id,equipment_info_id,' . $this->equipment_info_id,
             'price'             => 'required|numeric',
             'fire'              => 'required|numeric',
             'penetrate'         => 'required|numeric',

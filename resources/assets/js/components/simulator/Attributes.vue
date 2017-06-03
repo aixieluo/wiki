@@ -256,21 +256,21 @@
             }
         },
         computed: {
-            ...mapState([
-                'type',
-                'rarity',
-                'selectRarity',
-                'attributes',
-                'grow_attributes',
-                'equipment_number',
-                'equipment',
-                'technologies',
-                'technologyCategories',
-                'technologyTypes',
-                'technologyLevels',
-                'tactics',
-                'skills'
-            ]),
+//            ...mapState([
+//                'type',
+//                'rarity',
+//                'selectRarity',
+//                'attributes',
+//                'grow_attributes',
+//                'equipment_number',
+//                'equipment',
+//                'technologies',
+//                'technologyCategories',
+//                'technologyTypes',
+//                'technologyLevels',
+//                'tactics',
+//                'skills'
+//            ]),
             equipmentAttributes() {
                 let ea = {
                     fire: 0,

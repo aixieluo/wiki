@@ -24,7 +24,7 @@ class TacticInfoRequest extends FormRequest
         $id = $this->route('tacticInfo');
 
         return [
-            'name' => 'required|unique:tactic_infos,name,' . $id . ',id,deleted_at,NULL'
+            'name' => 'required|unique:tactic_infos,name,' . $id
         ];
     }
 }

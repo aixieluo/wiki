@@ -25,7 +25,7 @@ class SkillRequest extends FormRequest
 
         return [
             'skill_info_id'   => 'required|exists:skill_infos,id',
-            'lv'               => 'required|numeric|min:1|max:10|unique:skills,lv,' . $id . ',id,deleted_at,NULL',
+            'lv'               => 'required|numeric|min:1|max:10|unique:skills,lv,' . $id . ',id,skill_info_id,' . $this->skill_info_id,
             'fire_up'          => 'nullable|numeric',
             'penetrate_up'     => 'nullable|numeric',
             'durable_up'       => 'nullable|numeric',

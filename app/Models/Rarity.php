@@ -11,7 +11,7 @@ class Rarity extends Model
 
     protected $dates = ['delete_at'];
 
-    protected $fillable = ['level', 'content'];
+    protected $fillable = ['lv', 'name'];
 
     /**
      * 获取对应稀有度的舞姬列表

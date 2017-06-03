@@ -11,7 +11,8 @@ class CountryTransformer extends TransformerAbstract
         return [
             'id'         => $country->id,
             'name'       => $country->name,
-            'created_at' => $country->created_at->diffForHumans()
+            'created_at' => $country->created_at->diffForHumans(),
+            'updated_at' => $country->updated_at->diffForHumans()
         ];
     }
 }

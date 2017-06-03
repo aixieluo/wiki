@@ -24,7 +24,7 @@ class TechnologyCategoryRequest extends FormRequest
         $id = $this->route('technologyCategory');
 
         return [
-            'name' => 'required|unique:technology_categories,name,' . $id . ',id,deleted_at,NULL'
+            'name' => 'required|unique:technology_categories,name,' . $id
         ];
     }
 }

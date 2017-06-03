@@ -24,7 +24,7 @@ class SlotRequest extends FormRequest
         $id = $this->route('slot');
 
         return [
-            'name' => 'required|unique:slots,name,' . $id . ',id,deleted_at,NULL'
+            'name' => 'required|unique:slots,name,' . $id
         ];
     }
 }

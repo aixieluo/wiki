@@ -2,15 +2,18 @@
 
 namespace App\Transformers;
 
+use App\Models\Country;
 use App\Models\Dancer;
+use App\Models\Rarity;
+use App\Models\Type;
 use League\Fractal\TransformerAbstract;
 
 class DancerTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
-        'type',
-        'country',
-        'rarity',
+        'types',
+        'countries',
+        'rarities',
         'attributes'
     ];
 
@@ -19,11 +22,8 @@ class DancerTransformer extends TransformerAbstract
             'id'             => $dancer->id,
             'name'           => $dancer->name,
             'dance_outfit'   => $dancer->dance_outfit,
-            'type'           => $dancer->type->content,
             'type_id'        => $dancer->type_id,
-            'country'        => $dancer->country->content,
             'country_id'     => $dancer->country_id,
-            'rarity'         => $dancer->rarity->content,
             'rarity_id'      => $dancer->rarity_id,
             'subjection'     => $dancer->subjection,
             'introduction'   => $dancer->introduction,
@@ -32,14 +32,8 @@ class DancerTransformer extends TransformerAbstract
             'grow_penetrate' => $dancer->grow_penetrate,
             'grow_durable'   => $dancer->grow_durable,
             'grow_armor'     => $dancer->grow_armor,
-            'barbette'       => $dancer->barbette,
-            'refit'          => $dancer->refit,
-            'outside'        => $dancer->outside,
-            'inwall'         => $dancer->inwall,
-            'inwarehouse'    => $dancer->inwarehouse,
-            'carriage'       => $dancer->carriage,
-            'special'        => $dancer->special,
-            'created_at'     => $dancer->created_at->diffForHumans()
+            'created_at'     => $dancer->created_at->diffForHumans(),
+            'updated_at'     => $dancer->updated_at->diffForHumans()
         ];
     }
 
@@ -50,10 +44,10 @@ class DancerTransformer extends TransformerAbstract
      *
      * @return \League\Fractal\Resource\Collection
      */
-    public function includeType(Dancer $dancer) {
-        $type = $dancer->type;
+    public function includeTypes(Dancer $dancer) {
+        $types = Type::all();
 
-        return $this->collection($type, new TypeTransformer);
+        return $this->collection($types, new TypeTransformer);
     }
 
     /**
@@ -63,10 +57,10 @@ class DancerTransformer extends TransformerAbstract
      *
      * @return \League\Fractal\Resource\Collection
      */
-    public function includeCountry(Dancer $dancer) {
-        $country = $dancer->country;
+    public function includeCountries(Dancer $dancer) {
+        $countries = Country::all();
 
-        return $this->collection($country, new CountryTransformer);
+        return $this->collection($countries, new CountryTransformer);
     }
 
     /**
@@ -77,12 +71,12 @@ class DancerTransformer extends TransformerAbstract
      * @return \League\Fractal\Resource\Collection
      */
     public function includeRarity(Dancer $dancer) {
-        $rarity = $dancer->rarity;
+        $rarities = Rarity::all();
 
-        return $this->collection($rarity, new RarityTransformer);
+        return $this->collection($rarities, new RarityTransformer);
     }
 
-    public function includeAttribute(Dancer $dancer) {
+    public function includeAttributes(Dancer $dancer) {
         $attributes = $dancer->attributes;
 
         return $this->collection($attributes, new AttributeTransformer);

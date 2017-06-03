@@ -73,7 +73,7 @@
             }
         },
         computed: {
-            ...mapState(['technologyAmounts', 'selectRarity', 'technologyLevels']),
+//            ...mapState(['technologyAmounts', 'selectRarity', 'technologyLevels']),
             amount() {
                 return [
                     this.technologyAmounts == [] ? 1 : this.technologyAmounts.filter((ti) => ti.content == this.type)[0].amount1,

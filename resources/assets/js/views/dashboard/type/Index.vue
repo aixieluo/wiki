@@ -23,7 +23,7 @@
                         titleClass: 'width-5-percent'
                     },
                     {
-                        name: 'content',
+                        name: 'name',
                         title: '车型'
                     },
                     {
@@ -36,11 +36,10 @@
                     }
                 ],
                 itemActions: [
-//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
-                ],
-                items: {}
+//                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+                ]
             }
         },
         methods: {
@@ -52,6 +51,8 @@
                         .then((response) => {
                             toastr.success('删除成功！')
                             this.$emit('reload')
+                        }).catch((error) => {
+                            toastr.error(error.response.data.error.message)
                         })
                 } else if (action == 'view-item') {
                     window.open('/', '_blank');

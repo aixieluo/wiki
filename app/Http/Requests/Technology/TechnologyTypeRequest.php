@@ -25,7 +25,7 @@ class TechnologyTypeRequest extends FormRequest
 
         return [
             'technology_category_id' => 'required|numeric|exists:technology_categories,id',
-            'name'                   => 'required|unique:technology_types,name,' . $id . ',id,deleted_at,NULL'
+            'name'                   => 'required|unique:technology_types,name,' . $id . ',id,technology_category_id,' . $this->technology_category_id
         ];
     }
 }

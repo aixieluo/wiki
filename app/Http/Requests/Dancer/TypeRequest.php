@@ -11,8 +11,7 @@ class TypeRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,10 +20,11 @@ class TypeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
+        $id = $this->route('type');
+
         return [
-            'content' => 'required'
+            'name' => 'required|unique:types,name,' . $id
         ];
     }
 }

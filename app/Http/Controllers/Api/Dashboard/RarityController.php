@@ -39,9 +39,9 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(RarityRequest $request) {
-        $this->rarityRepository->store($request->all());
+        $message = $this->rarityRepository->store($request->all());
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -64,9 +64,9 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(RarityRequest $request, $id) {
-        $this->rarityRepository->update($id, $request->all());
+        $message = $this->rarityRepository->update($id, $request->all());
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -77,8 +77,8 @@ class RarityController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->rarityRepository->destroy($id);
+        $message = $this->rarityRepository->destroy($id);
 
-        return $this->noContent();
+        return $message ? $this->errorForbidden($message) : $this->noContent();
     }
 }

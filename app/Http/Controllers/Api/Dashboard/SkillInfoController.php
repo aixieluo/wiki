@@ -39,12 +39,7 @@ class SkillInfoController extends ApiController
      */
     public function store(SkillInfoRequest $request) {
         $message = $this->skillInfoRepository->store($request->all());
-        if ($message) {
-
-            return $this->errorWrongArgs($message);
-        }
-
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**

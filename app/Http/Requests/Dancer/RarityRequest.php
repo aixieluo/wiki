@@ -11,8 +11,7 @@ class RarityRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,11 +20,12 @@ class RarityRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
+        $id = $this->route('rarity');
+
         return [
-            'level' => 'required | numeric | between:1,3',
-            'content' => 'required'
+            'lv'   => 'required|numeric|unique:rarities,lv,' . $id,
+            'name' => 'required|unique:rarities,name,' . $id
         ];
     }
 }

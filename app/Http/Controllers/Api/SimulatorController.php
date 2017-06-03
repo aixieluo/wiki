@@ -29,7 +29,7 @@ class SimulatorController extends ApiController
     }
 
     public function getByTechnologies() {
-        return $this->respondWithCollection($this->simulator->getByTechnologies(), new SimulatorTechnologyTransformer);
+        return $this->respondWithCollection($thzis->simulator->getByTechnologies(), new SimulatorTechnologyTransformer);
     }
 
     public function getByTechnologyTypes() {

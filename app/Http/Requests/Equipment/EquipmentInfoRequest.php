@@ -24,10 +24,10 @@ class EquipmentInfoRequest extends FormRequest
         $id = $this->route('equipmentInfo');
 
         return [
-            'name'     => 'required|unique:equipment_infos,name,' . $id . ',id,deleted_at,NULL',
+            'name'     => 'required|unique:equipment_infos,name,' . $id,
             'describe' => 'nullable',
             'slots'    => 'required',
-            'main'     => 'required'
+            'main'     => 'required|in_array:slots'
         ];
     }
 }

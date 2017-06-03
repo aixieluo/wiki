@@ -3,6 +3,9 @@
         <vue-head headTitle="钢舞姬"></vue-head>
 
         <vue-form>
+            <template slot="title">
+                <h5>创建</h5>
+            </template>
             <template slot="buttons">
                 <router-link to="/dashboard/dancer" class="btn btn-default" exact>返回</router-link>
             </template>

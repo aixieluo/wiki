@@ -22,9 +22,10 @@ class TypeController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index() {
+
         return $this->respondWithPaginator($this->typeRepository->page(), new TypeTransformer);
     }
 
@@ -38,12 +39,12 @@ class TypeController extends ApiController
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Controllers\Api\json|\Illuminate\Http\JsonResponse
      */
     public function store(TypeRequest $request) {
-        $this->typeRepository->store($request->all());
+        $message = $this->typeRepository->store($request->all());
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -51,9 +52,10 @@ class TypeController extends ApiController
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id) {
+
         return $this->respondWithItem($this->typeRepository->getById($id), new TypeTransformer);
     }
 
@@ -63,12 +65,12 @@ class TypeController extends ApiController
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Controllers\Api\json|\Illuminate\Http\JsonResponse
      */
     public function update(TypeRequest $request, $id) {
-        $this->typeRepository->update($id, $request->all());
+        $message = $this->typeRepository->update($id, $request->all());
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -76,11 +78,11 @@ class TypeController extends ApiController
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \App\Http\Controllers\Api\json|\Illuminate\Http\JsonResponse
      */
     public function destroy($id) {
-        $this->typeRepository->destroy($id);
+        $message = $this->typeRepository->destroy($id);
 
-        return $this->noContent();
+        return $message ? $this->errorForbidden($message) : $this->noContent();
     }
 }

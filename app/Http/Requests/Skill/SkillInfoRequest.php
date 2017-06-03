@@ -11,8 +11,7 @@ class SkillInfoRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,12 +20,11 @@ class SkillInfoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         $id = $this->route('skillInfo');
 
         return [
-            'name' => 'required|unique:skill_infos,name,' . $id . ',id,deleted_at,NULL'
+            'name' => 'required|unique:skill_infos,name,' . $id
         ];
     }
 }

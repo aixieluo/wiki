@@ -11,8 +11,7 @@ class CountryRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,10 +20,11 @@ class CountryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
+        $id = $this->route('country');
+
         return [
-            'name' => 'required'
+            'name' => 'required|unique:countries,name,' . $id
         ];
     }
 }

@@ -25,7 +25,7 @@ class TacticRequest extends FormRequest
 
         return [
             'tactic_info_id'   => 'required|exists:tactic_infos,id',
-            'lv'               => 'required|numeric|min:1|max:10|unique:tactics,lv,' . $id . ',id,deleted_at,NULL',
+            'lv'               => 'required|numeric|min:1|max:10|unique:tactics,lv,' . $id . ',id,tactic_info_id,' . $this->tactic_info_id,
             'fire_up'          => 'nullable|numeric',
             'penetrate_up'     => 'nullable|numeric',
             'durable_up'       => 'nullable|numeric',

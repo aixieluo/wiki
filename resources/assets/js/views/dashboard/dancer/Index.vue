@@ -31,28 +31,15 @@
                         title: '舞装'
                     },
                     {
-                        name: 'type',
-                        title: '车型'
-                    },
-                    {
-                        name: 'country',
-                        title: '国籍'
-                    },
-                    {
-                        name: 'rarity',
-                        title: '稀有度'
-                    },
-                    {
                         name: '__actions',
                         title: '操作'
                     }
                 ],
                 itemActions: [
-                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success'},
-                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-info'},
-                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger'}
-                ],
-                items: {}
+                    {name: 'view-item', icon: 'fa fa-eye', class: 'btn btn-success btn-sm'},
+                    {name: 'edit-item', icon: 'fa fa-edit', class: 'btn btn-warning btn-sm'},
+                    {name: 'delete-item', icon: 'fa fa-trash', class: 'btn btn-danger btn-sm'}
+                ]
             }
         },
         methods: {
