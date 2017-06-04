@@ -15,7 +15,6 @@ class TacticRepository
     }
 
     public function page($pId, $number = 10, $sort = 'desc', $sortColumn = 'id') {
-
         return $this->model->where('tactic_info_id', $pId)->orderBy($sortColumn, $sort)->paginate($number);
     }
 }

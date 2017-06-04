@@ -238,3 +238,14 @@ export const attributeLabels = [
     {label: '隐蔽', name: 'concealment'},
     {label: '侦查', name: 'spy'},
 ]
+
+export const technologyLabel = [
+    {
+        label: 'name',
+        text: '科技名称'
+    },
+    {
+        label: 'place',
+        text: '科技位置'
+    }
+]

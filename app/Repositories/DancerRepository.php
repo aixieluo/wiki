@@ -14,39 +14,24 @@ class DancerRepository
         $this->model = $dancer;
     }
 
-    public function getByDanceOutfits() {
-        return $this->model->select('id', 'name', 'dance_outfit')->get();
-    }
-
     public function store($data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->model->create($data);
-
-        if (is_array($data['attributes'])) {
-            $this->createAttributes($data['attributes']);
-        } else {
-            $this->createAttributes(json_decode($data['attributes'], true));
-        }
-
-        return $this->model;
+        $this->createAttributes($data);
     }
 
     public function update($id, $data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->getById($id);
-
-        if (is_array($data['attributes'])) {
-            $this->updateAttributes($data['attributes']);
-        } else {
-            $this->updateAttributes(json_decode($data['attributes'], true));
-        }
-
-        return $this->model->update($data['dancer']);
+        $this->model->update($data);
+        $this->updateAttributes($data);
     }
 
     public function destroy($id) {
         $this->model = $this->getById($id);
         $this->model->delete();
-
-        return $this->deleteAttributes();
+        $this->deleteAttributes();
+        $this->model->technologies()->detach();
     }
 
     public function getByTechnologies($id) {
@@ -54,6 +39,10 @@ class DancerRepository
     }
 
     public function syncTechnologies($id, $syncIds) {
-        return $this->getById($id)->technologies()->sync($syncIds);
+        $this->getById($id)->technologies()->sync($syncIds);
+    }
+
+    public function syncSlots($id, $slots) {
+        dd($slots);
     }
 }

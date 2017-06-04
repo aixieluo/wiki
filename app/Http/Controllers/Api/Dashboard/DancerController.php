@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Api\Dashboard;
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Dancer\DancerRequest;
+use App\Http\Requests\Relation\DancerSlotRequest;
+use App\Http\Requests\Relation\DancerTechnologyRequest;
 use App\Repositories\DancerRepository;
 use App\Transformers\AttributeTransformer;
 use App\Transformers\DancerTransformer;
-use App\Transformers\SimulatorTechnologyTransformer;
 use App\Transformers\TechnologyTransformer;
-use Illuminate\Http\Request;
 
 class DancerController extends ApiController
 {
@@ -30,6 +30,10 @@ class DancerController extends ApiController
         return $this->respondWithPaginator($this->dancerRepository->page(), new DancerTransformer);
     }
 
+    public function getList() {
+        return $this->respondWithCollection($this->dancerRepository->all(), new DancerTransformer);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +42,9 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function store(DancerRequest $request) {
-        $this->dancerRepository->store($request->all());
+        $message = $this->dancerRepository->store($request->all());
+
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -61,9 +67,9 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(DancerRequest $request, $id) {
-        $this->dancerRepository->update($id, $request->all());
+        $message = $this->dancerRepository->update($id, $request->all());
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 
     /**
@@ -74,26 +80,28 @@ class DancerController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $this->dancerRepository->destroy($id);
+        $message = $this->dancerRepository->destroy($id);
 
-        return $this->noContent();
+        return $message ? $this->errorForbidden($message) : $this->noContent();
     }
 
     public function getByAttributes($id) {
         return $this->respondWithItem($this->dancerRepository->getByAttributes($id), new AttributeTransformer);
     }
 
-    public function getByDanceOutfits() {
-        return $this->respondWithArray($this->dancerRepository->getByDanceOutfits()->toArray());
-    }
-
     public function getByTechnologies($id) {
-        return $this->respondWithCollection($this->dancerRepository->getByTechnologies($id), new SimulatorTechnologyTransformer);
+        return $this->respondWithCollection($this->dancerRepository->getByTechnologies($id), new TechnologyTransformer);
     }
 
-    public function syncTechnologies(Request $request) {
-        $this->dancerRepository->syncTechnologies($request->id, $request->syncIds);
+    public function syncTechnologies(DancerTechnologyRequest $request) {
+        $message = $this->dancerRepository->syncTechnologies($request->id, $request->syncIds);
 
-        return $this->noContent();
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
+    }
+
+    public function syncSlots(DancerSlotRequest $request) {
+        $message = $this->dancerRepository->syncSlots($request->id, $request->slots);
+
+        return $message ? $this->errorWrongArgs($message) : $this->noContent();
     }
 }

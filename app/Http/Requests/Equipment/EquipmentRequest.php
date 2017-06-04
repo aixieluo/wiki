@@ -24,17 +24,17 @@ class EquipmentRequest extends FormRequest
         $id = $this->route('equipment');
 
         return [
-            'equipment_info_id' => 'required|numeric|exists:equipment_infos,id',
+            'equipment_info_id' => 'required|exists:equipment_infos,id',
             'lv'                => 'required|numeric|min:1|max:10|unique:equipment,lv,' . $id . ',id,equipment_info_id,' . $this->equipment_info_id,
             'price'             => 'required|numeric',
-            'fire'              => 'required|numeric',
-            'penetrate'         => 'required|numeric',
-            'durable'           => 'required|numeric',
-            'armor'             => 'required|numeric',
-            'hit'               => 'required|numeric',
-            'dodge'             => 'required|numeric',
-            'concealment'       => 'required|numeric',
-            'spy'               => 'required|numeric',
+            'fire'              => 'nullable|numeric',
+            'penetrate'         => 'nullable|numeric',
+            'durable'           => 'nullable|numeric',
+            'armor'             => 'nullable|numeric',
+            'hit'               => 'nullable|numeric',
+            'dodge'             => 'nullable|numeric',
+            'concealment'       => 'nullable|numeric',
+            'spy'               => 'nullable|numeric'
         ];
     }
 }

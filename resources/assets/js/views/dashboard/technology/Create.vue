@@ -73,7 +73,7 @@
                         <div class="form-group" :class="{'has-error': form.errors.has(item.name)}">
                             <label class="col-sm-2 control-label">{{ item.label }}</label>
                             <div class="col-sm-10">
-                                <input type="number" step="0.01" :name="item.name" class="form-control" placeholder="如:100" v-model="form[item.name]">
+                                <input type="number" step="0.01" :name="item.name" class="form-control" placeholder="如:100 (不填默认为0)" v-model="form[item.name]">
                                 <span class="help-block" v-if="form.errors.has(item.name)">{{ form.errors.get(item.name) }}</span>
                             </div>
                         </div>

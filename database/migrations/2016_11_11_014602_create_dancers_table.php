@@ -23,10 +23,10 @@ class CreateDancersTable extends Migration
             $table->string('subjection')->default('S.V.S')->comment('隶属机构');
             $table->string('introduction')->default('暂无')->comment('人物介绍');
             $table->string('character')->default('暂无')->comment('人物性格');
-            $table->double('grow_fire', 8, 2)->comment('成长火力');
-            $table->double('grow_penetrate', 8, 2)->comment('成长穿甲');
-            $table->double('grow_durable', 8, 2)->comment('成长耐久');
-            $table->double('grow_armor', 8, 2)->comment('成长装甲');
+            $table->double('grow_fire', 8, 2)->default(0)->comment('成长火力');
+            $table->double('grow_penetrate', 8, 2)->default(0)->comment('成长穿甲');
+            $table->double('grow_durable', 8, 2)->default(0)->comment('成长耐久');
+            $table->double('grow_armor', 8, 2)->default(0)->comment('成长装甲');
 //            $table->integer('barbette')->default(0)->comment('炮座');
 //            $table->integer('refit')->default(0)->comment('改装');
 //            $table->integer('outside')->default(0)->comment('外身');

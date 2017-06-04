@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-head headTitle="钢舞姬 - 科技"></vue-head>
+        <vue-head headTitle="钢舞姬 - 装备槽"></vue-head>
 
         <vue-form>
             <template slot="title">
@@ -22,7 +22,7 @@
                                     placeholder="选择一个钢舞姬"
                                     label="dance_outfit"
                                     track-by="id"
-                                    @input="changeTechnologies"
+                                    @input="changeEquipment"
                                     @open="form.errors.clear('id')">
                             </multiselect>
                             <span class="help-block" v-if="form.errors.has('id')">{{ form.errors.get('id') }}</span>
@@ -30,28 +30,39 @@
                     </div>
                     <div class="hr-line-dashed"></div>
 
-                    <div class="form-group" :class="{'has-error': form.errors.has('syncIds')}">
-                        <label class="col-sm-2 control-label">科技</label>
+                    <div class="form-group" :class="{'has-error': form.errors.has('slots')}">
+                        <label class="col-sm-2 control-label">装备槽</label>
                         <div class="col-sm-10">
                             <multiselect
-                                    v-model="technologies"
-                                    :options="technologyCollection"
+                                    v-model="form.slots"
+                                    :options="slots"
                                     :multiple="true"
                                     :searchable="true"
                                     :close-on-select="false"
                                     :clear-on-select="false"
                                     :hide-selected="true"
                                     placeholder="选择匹配的科技"
-                                    :custom-label="({name, place}) => `${name} ( ${place} )`"
                                     label="name"
                                     track-by="id"
-                                    @input="form.syncIds = technologies.map(technology => technology.id)"
-                                    @open="form.errors.clear('syncIds')">
+                                    @open="form.errors.clear('slots')">
                             </multiselect>
-                            <span class="help-block" v-if="form.errors.has('syncIds')">{{ form.errors.get('syncIds') }}</span>
+                            <span class="help-block" v-if="form.errors.has('slots')">{{ form.errors.get('slots') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
+
+                    <template v-for="item in form.slots">
+                        <div class="form-group" :class="{'has-error': form.errors.has(item.name)}">
+                            <label class="col-sm-2 control-label">{{ item.name }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" :name="item.name" class="form-control"
+                                       placeholder="输入舞姬拥有的装备槽数" v-model="item.count">
+                                <span class="help-block" v-if="form.errors.has(item.name)">{{ form.errors.get(item.name)
+                                    }}</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </template>
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -67,7 +78,6 @@
 <script>
     import Form from '../../../core/Form'
     import Multiselect from 'vue-multiselect'
-    import {technologyLabel} from '../../../config/variables'
 
     export default {
         components: { Multiselect },
@@ -75,14 +85,12 @@
             return {
                 dancer: null,
                 dancers: [],
-                technologies: [],
-                technologyCollection: [],
+                slots: [],
                 form: new Form({
                     id: null,
-                    syncIds: [],
-                    resets: true
-                }),
-                technologyLabelNum: 0
+                    slots: [],
+//                    resets: true
+                })
             }
         },
         mounted(){
@@ -90,31 +98,34 @@
                 .then((response) => {
                     this.dancers = response.data.data
                 });
-            this.$http.get('technologies')
+            this.$http.get('slots')
                 .then((response) => {
-                    this.technologyCollection = response.data.data
+                    let data = response.data.data
+                    data.forEach((v, k) => {
+                        v.count = null
+                    })
+                    this.slots = data
                 })
         },
         methods: {
-            changeTechnologies() {
+            changeEquipment() {
                 if (this.dancer) {
                     this.form.id = this.dancer.id
-                    this.$http.get(`relation/dancer/${this.dancer.id}/technology`)
-                        .then((response) => {
-                            let data = response.data.data
-                            this.technologies = data
-                            this.form.syncIds = data.map(item => item.id)
-                        })
+//                    this.$http.get(`relation/dancer/${this.dancer.id}/technology`)
+//                        .then((response) => {
+//                            let data = response.data.data
+//                            this.technologies = data
+//                            this.form.syncIds = data.map(item => item.id)
+//                        })
                 } else {
                     this.form.id = null
                 }
             },
             syncRelation(event) {
-                this.form.post('relation/dancer/technology')
+                this.form.post('relation/dancer/slot')
                     .then((response) => {
                         toastr.success('关联成功')
-                        this.dancer = null
-                        this.technologies = []
+//                        this.dancer = null
                     })
             }
         }

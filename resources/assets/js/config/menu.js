@@ -78,5 +78,10 @@ export default [
         label: '钢舞姬 - 科技',
         url: '/dashboard/relation/dancer-technology',
         icon: 'fa fa-th-large'
+    },
+    {
+        label: '钢舞姬 - 装备槽',
+        url: '/dashboard/relation/dancer-slot',
+        icon: 'fa fa-th-large'
     }
 ]

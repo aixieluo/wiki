@@ -27,6 +27,10 @@ class TechnologyController extends ApiController
         return $this->respondWithPaginator($this->technologyRepository->page(), new TechnologyTransformer);
     }
 
+    public function getList() {
+        return $this->respondWithCollection($this->technologyRepository->all(), new TechnologyTransformer);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

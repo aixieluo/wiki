@@ -30,10 +30,18 @@ class DancerRequest extends FormRequest
             'subjection'     => 'nullable',
             'introduction'   => 'nullable',
             'character'      => 'nullable',
-            'grow_fire'      => 'required|numeric',
-            'grow_penetrate' => 'required|numeric',
-            'grow_durable'   => 'required|numeric',
-            'grow_armor'     => 'required|numeric',
+            'grow_fire'      => 'nullable|numeric',
+            'grow_penetrate' => 'nullable|numeric',
+            'grow_durable'   => 'nullable|numeric',
+            'grow_armor'     => 'nullable|numeric',
+            'fire'           => 'nullable|numeric',
+            'penetrate'      => 'nullable|numeric',
+            'durable'        => 'nullable|numeric',
+            'armor'          => 'nullable|numeric',
+            'hit'            => 'nullable|numeric',
+            'dodge'          => 'nullable|numeric',
+            'concealment'    => 'nullable|numeric',
+            'spy'            => 'nullable|numeric'
         ];
     }
 }

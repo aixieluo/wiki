@@ -18,12 +18,14 @@ class TechnologyRepository
     }
 
     public function store($data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->model->create($data);
         $this->createAttributes($data);
         $this->updateAmount();
     }
 
     public function update($id, $data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->getById($id);
         $this->model->update($data);
         $this->updateAttributes($data);

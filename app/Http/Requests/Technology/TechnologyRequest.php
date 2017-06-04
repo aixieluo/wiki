@@ -30,14 +30,14 @@ class TechnologyRequest extends FormRequest
             'row'                => 'required|numeric|min:1|max:5',
             'column'             => 'required|numeric|min:1|max:6',
             'place'              => 'required',
-            'fire'               => 'required|numeric',
-            'penetrate'          => 'required|numeric',
-            'durable'            => 'required|numeric',
-            'armor'              => 'required|numeric',
-            'hit'                => 'required|numeric',
-            'dodge'              => 'required|numeric',
-            'concealment'        => 'required|numeric',
-            'spy'                => 'required|numeric',
+            'fire'               => 'nullable|numeric',
+            'penetrate'          => 'nullable|numeric',
+            'durable'            => 'nullable|numeric',
+            'armor'              => 'nullable|numeric',
+            'hit'                => 'nullable|numeric',
+            'dodge'              => 'nullable|numeric',
+            'concealment'        => 'nullable|numeric',
+            'spy'                => 'nullable|numeric'
         ];
     }
 }

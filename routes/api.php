@@ -37,10 +37,10 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('rarities', 'RarityController@getList');
 
     Route::resource('dancer', 'DancerController', ['except' => ['show', 'create']]);
-    Route::get('dancer/attributes/{id}', 'DancerController@getByAttributes');
-    Route::get('dancer/danceOutfits', 'DancerController@getByDanceOutfits');
-    Route::get('relation/dancer/getTechnologies/{id}', 'DancerController@getByTechnologies');
-    Route::post('relation/dancer/technologies', 'DancerController@syncTechnologies');
+    Route::get('dancers', 'DancerController@getList');
+    Route::get('relation/dancer/{id}/technology', 'DancerController@getByTechnologies');
+    Route::post('relation/dancer/technology', 'DancerController@syncTechnologies');
+    Route::post('relation/dancer/slot', 'DancerController@syncSlots');
 
     Route::resource('equipmentInfo', 'EquipmentInfoController', ['except' => ['show', 'create']]);
     Route::get('equipmentInfos', 'EquipmentInfoController@getList');
@@ -59,6 +59,7 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('technologyTypes', 'TechnologyTypeController@getList');
 
     Route::resource('technology', 'TechnologyController', ['except' => ['show', 'create']]);
+    Route::get('technologies', 'TechnologyController@getList');
 
     Route::resource('tacticInfo', 'TacticInfoController', ['except' => ['show', 'create']]);
     Route::get('tacticInfos', 'TacticInfoController@getList');

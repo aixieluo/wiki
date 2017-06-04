@@ -20,11 +20,13 @@ class EquipmentRepository
     }
 
     public function store($data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->model->create($data);
         $this->createAttributes($data);
     }
 
     public function update($id, $data) {
+        $data = $this->removeEmpty($data);
         $this->model = $this->getById($id);
         $this->model->update($data);
         $this->updateAttributes($data);

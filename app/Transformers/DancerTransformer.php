@@ -5,6 +5,7 @@ namespace App\Transformers;
 use App\Models\Country;
 use App\Models\Dancer;
 use App\Models\Rarity;
+use App\Models\Technology;
 use App\Models\Type;
 use League\Fractal\TransformerAbstract;
 
@@ -14,7 +15,9 @@ class DancerTransformer extends TransformerAbstract
         'types',
         'countries',
         'rarities',
-        'attributes'
+        'attributes',
+        'technologies',
+        'technologyCollection'
     ];
 
     public function transform(Dancer $dancer) {
@@ -70,15 +73,27 @@ class DancerTransformer extends TransformerAbstract
      *
      * @return \League\Fractal\Resource\Collection
      */
-    public function includeRarity(Dancer $dancer) {
+    public function includeRarities(Dancer $dancer) {
         $rarities = Rarity::all();
 
         return $this->collection($rarities, new RarityTransformer);
     }
 
     public function includeAttributes(Dancer $dancer) {
-        $attributes = $dancer->attributes;
+        $attributes = $dancer->attributes()->first();
 
-        return $this->collection($attributes, new AttributeTransformer);
+        return $this->item($attributes, new AttributeTransformer);
+    }
+
+    public function technologies(Dancer $dancer) {
+        $technologies = $dancer->technologies()->get();
+
+        return $this->collection($technologies, new TechnologyTransformer);
+    }
+
+    public function technologyCollection(Dancer $dancer) {
+        $technologyCollection = Technology::all();
+
+        return $this->collection($technologyCollection, new TechnologyTransformer);
     }
 }

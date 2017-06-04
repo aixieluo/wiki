@@ -274,6 +274,10 @@ export default [
                     {
                         path: 'dancer-technology',
                         component: require('./views/dashboard/relation/DancerTechnology.vue')
+                    },
+                    {
+                        path: 'dancer-slot',
+                        component: require('./views/dashboard/relation/DancerSlot.vue')
                     }
                 ]
             }

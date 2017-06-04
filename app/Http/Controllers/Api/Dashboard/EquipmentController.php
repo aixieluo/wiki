@@ -24,19 +24,18 @@ class EquipmentController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($pId)
-    {
+    public function index($pId) {
         return $this->respondWithPaginator($this->equipmentRepository->page($pId), new EquipmentTransformer);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(EquipmentRequest $request)
-    {
+    public function store(EquipmentRequest $request) {
         $this->equipmentRepository->store($request->all());
     }
 
@@ -44,23 +43,23 @@ class EquipmentController extends ApiController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         return $this->respondWithItem($this->equipmentRepository->getById($id), new EquipmentTransformer);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(EquipmentRequest $request, $id)
-    {
+    public function update(EquipmentRequest $request, $id) {
         $this->equipmentRepository->update($id, $request->all());
 
         return $this->noContent();
@@ -69,11 +68,11 @@ class EquipmentController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $this->equipmentRepository->destroy($id);
 
         return $this->noContent();
