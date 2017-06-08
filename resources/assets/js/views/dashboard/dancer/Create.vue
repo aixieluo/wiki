@@ -157,6 +157,17 @@
                         <div class="hr-line-dashed"></div>
                     </template>
 
+                    <template v-for="(item, key) in slots">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ `${item.name}个数` }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control"
+                                       placeholder="输入舞姬拥有的装备槽数(不填默认无该装备槽)" v-model="editedSlots[key].count">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </template>
+
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary">保存内容</button>
@@ -184,6 +195,8 @@
                 countries: [],
                 rarity: null,
                 rarities: [],
+                slots: [],
+                editedSlots: null,
                 form: new Form({
                     name: '',
                     dance_outfit: '',
@@ -205,32 +218,61 @@
                     dodge: null,
                     concealment: null,
                     spy: null,
+                    slots: null,
                     resets: true
                 })
             }
         },
         mounted(){
-            this.$http.get('type')
+            this.$http.get('types')
                 .then((Response) => {
-                    this.types = Response.data.data;
-                });
-            this.$http.get('country')
+                    this.types = Response.data.data
+                })
+            this.$http.get('countries')
                 .then((Response) => {
-                    this.countries = Response.data.data;
-                });
-            this.$http.get('rarity')
+                    this.countries = Response.data.data
+                })
+            this.$http.get('rarities')
                 .then((Response) => {
-                    this.rarities = Response.data.data;
-                });
+                    this.rarities = Response.data.data
+                })
+            this.$http.get('slots')
+                .then((Response) => {
+                    this.slots = Response.data.data
+                    this.editedSlots = []
+                    this.slots.forEach((v, k) => {
+                        this.editedSlots.push({
+                            id: v.id,
+                            name: v.name,
+                            count: null
+                        })
+                    })
+                })
         },
         methods: {
             create(event) {
+                this.form.grow_fire && (this.form.fire -= this.form.grow_fire)
+                this.form.grow_penetrate && (this.form.penetrate -= this.form.grow_penetrate)
+                this.form.grow_durable && (this.form.durable -= this.form.grow_durable)
+                this.form.grow_armor && (this.form.armor -= this.form.grow_armor)
+                this.form.slots = this.editedSlots
                 this.form.post('dancer')
                     .then(() => {
                         toastr.success('创建成功！')
-                        this.form.type_id = this.type.id
-                        this.form.country_id = this.country.id
-                        this.form.rarity_id = this.rarity.id
+                        this.type = null
+                        this.form.type_id = null
+                        this.country = null
+                        this.form.country_id = null
+                        this.rarity = null
+                        this.form.rarity_id = null
+                        this.editedSlots = []
+                        this.slots.forEach((v) => {
+                            this.editedSlots.push({
+                                id: v.id,
+                                name: v.name,
+                                count: null
+                            })
+                        })
                     })
             }
         }

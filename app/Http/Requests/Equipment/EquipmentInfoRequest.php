@@ -27,7 +27,7 @@ class EquipmentInfoRequest extends FormRequest
             'name'     => 'required|unique:equipment_infos,name,' . $id,
             'describe' => 'nullable',
             'slots'    => 'required',
-            'main'     => 'required|in_array:slots'
+            'main'     => 'required'
         ];
     }
 }

@@ -29,7 +29,7 @@ class SlotController extends ApiController
 
     public function getList() {
 
-        return $this->respondWithCollection($this->slotRepository->page(), new SlotTransformer);
+        return $this->respondWithCollection($this->slotRepository->page(10, 'asc'), new SlotTransformer);
     }
 
     /**

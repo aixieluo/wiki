@@ -17,14 +17,14 @@ class EquipmentInfoRepository
     public function store($data) {
         $data = $this->removeEmpty($data);
         $this->save($this->model, $data);
-        $this->model->slots()->sync($this->transformSyncIds($data));
+        $this->syncSlots($this->transformSyncIds($data));
     }
 
     public function update($id, $data) {
         $data = $this->removeEmpty($data);
         $this->model = $this->getById($id);
         $this->save($this->model, $data);
-        $this->model->slots()->sync($this->transformSyncIds($data));
+        $this->syncSlots($this->transformSyncIds($data));
     }
 
     public function destroy($id) {
@@ -48,5 +48,9 @@ class EquipmentInfoRepository
         }
 
         return $syncIds;
+    }
+
+    public function syncSlots($slots) {
+        $this->model->slots()->sync($slots);
     }
 }

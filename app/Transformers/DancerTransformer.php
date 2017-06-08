@@ -5,6 +5,7 @@ namespace App\Transformers;
 use App\Models\Country;
 use App\Models\Dancer;
 use App\Models\Rarity;
+use App\Models\Slot;
 use App\Models\Technology;
 use App\Models\Type;
 use League\Fractal\TransformerAbstract;
@@ -17,7 +18,9 @@ class DancerTransformer extends TransformerAbstract
         'rarities',
         'attributes',
         'technologies',
-        'technologyCollection'
+        'technologyCollection',
+        'slots',
+        'slotCollection'
     ];
 
     public function transform(Dancer $dancer) {
@@ -85,15 +88,27 @@ class DancerTransformer extends TransformerAbstract
         return $this->item($attributes, new AttributeTransformer);
     }
 
-    public function technologies(Dancer $dancer) {
+    public function includeTechnologies(Dancer $dancer) {
         $technologies = $dancer->technologies()->get();
 
         return $this->collection($technologies, new TechnologyTransformer);
     }
 
-    public function technologyCollection(Dancer $dancer) {
+    public function includeTechnologyCollection(Dancer $dancer) {
         $technologyCollection = Technology::all();
 
         return $this->collection($technologyCollection, new TechnologyTransformer);
+    }
+
+    public function includeSlots(Dancer $dancer) {
+        $slots = $dancer->slots()->withPivot('count')->get();
+
+        return $this->collection($slots, new SlotTransformer);
+    }
+
+    public function includeSlotCollection(Dancer $dancer) {
+        $slots = Slot::all();
+
+        return $this->collection($slots, new SlotTransformer);
     }
 }

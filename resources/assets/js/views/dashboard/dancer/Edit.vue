@@ -180,6 +180,17 @@
                         <div class="hr-line-dashed"></div>
                     </template>
 
+                    <template v-for="(item, key) in slots">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ `${item.name}个数` }}</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control"
+                                       placeholder="输入舞姬拥有的装备槽数(不填默认无该装备槽)" v-model="editedSlots[key].count">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </template>
+
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             <button type="submit" class="btn btn-primary">保存内容</button>
@@ -207,6 +218,9 @@
                 countries: [],
                 rarity: null,
                 rarities: [],
+                slots: [],
+                editedSlots: null,
+                relationSlots: [],
                 form: new Form({
                     name: '',
                     dance_outfit: '',
@@ -227,12 +241,13 @@
                     hit: null,
                     dodge: null,
                     concealment: null,
+                    slots: null,
                     spy: null
                 })
             }
         },
         mounted(){
-            this.$http.get('dancer/' + this.$route.params.id + '/edit?include=attributes,types,countries,rarities')
+            this.$http.get('dancer/' + this.$route.params.id + '/edit?include=attributes,types,countries,rarities,slots,slotCollection')
                 .then((response) => {
                     let data = response.data.data
                     this.types = data.types.data
@@ -261,10 +276,32 @@
                     this.type = this.types.filter(type => type.id === this.form.type_id)[0]
                     this.country = this.countries.filter(country => country.id === this.form.country_id)[0]
                     this.rarity = this.rarities.filter(rarity => rarity.id === this.form.rarity_id)[0]
+                    this.slots = data.slotCollection.data
+                    this.relationSlots = data.slots.data
+                    this.editedSlots = []
+                    let count = null
+                    this.slots.forEach((v, k) => {
+                        count = null
+                        this.relationSlots.forEach((v2, k2) => {
+                            if (!count) {
+                                count = (v.id == v2.id ? v2.pivot.count : null)
+                            }
+                        })
+                        this.editedSlots.push({
+                            id: v.id,
+                            name: v.name,
+                            count: count || null
+                        })
+                    })
                 });
         },
         methods: {
             edit(event) {
+                this.form.grow_fire && (this.form.fire -= this.form.grow_fire)
+                this.form.grow_penetrate && (this.form.penetrate -= this.form.grow_penetrate)
+                this.form.grow_durable && (this.form.durable -= this.form.grow_durable)
+                this.form.grow_armor && (this.form.armor -= this.form.grow_armor)
+                this.form.slots = this.editedSlots
                 this.form.put('dancer/' + this.$route.params.id)
                     .then(() => {
                         toastr.success('修改成功！')

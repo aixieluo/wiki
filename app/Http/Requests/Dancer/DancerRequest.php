@@ -41,7 +41,8 @@ class DancerRequest extends FormRequest
             'hit'            => 'nullable|numeric',
             'dodge'          => 'nullable|numeric',
             'concealment'    => 'nullable|numeric',
-            'spy'            => 'nullable|numeric'
+            'spy'            => 'nullable|numeric',
+            'slots'          => 'nullable'
         ];
     }
 }

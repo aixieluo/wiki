@@ -12,6 +12,7 @@ class SlotTransformer extends TransformerAbstract
         return [
             'id'         => $slot->id,
             'name'       => $slot->name,
+            'pivot'      => $slot->pivot,
             'created_at' => $slot->created_at->diffForHumans(),
             'updated_at' => $slot->updated_at->diffForHumans()
         ];
