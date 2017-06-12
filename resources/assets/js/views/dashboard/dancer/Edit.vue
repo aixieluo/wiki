@@ -123,46 +123,37 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_fire')}">
-                        <label class="col-sm-2 control-label">火力成长</label>
+                        <label class="col-sm-2 control-label">60级火力</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_fire" class="form-control"
-                                   placeholder="如:1.1 (不填默认为0)" v-model="form.grow_fire">
-                            <span class="help-block" v-if="form.errors.has('grow_fire')">{{ form.errors.get('grow_fire')
-                                }}</span>
+                            <input type="number" step="0.01" name="grow_fire" class="form-control" placeholder="如:100 (不填默认为0)" v-model="fire60">
+                            <span class="help-block" v-if="form.errors.has('grow_fire')">{{ form.errors.get('grow_fire') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_penetrate')}">
-                        <label class="col-sm-2 control-label">穿甲成长</label>
+                        <label class="col-sm-2 control-label">60级穿甲</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_penetrate" class="form-control"
-                                   placeholder="如:1.1 (不填默认为0)" v-model="form.grow_penetrate">
-                            <span class="help-block"
-                                  v-if="form.errors.has('grow_penetrate')">{{ form.errors.get('grow_penetrate')
-                                }}</span>
+                            <input type="number" step="0.01" name="grow_penetrate" class="form-control" placeholder="如:100 (不填默认为0)" v-model="penetrate60">
+                            <span class="help-block" v-if="form.errors.has('grow_penetrate')">{{ form.errors.get('grow_penetrate') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_durable')}">
-                        <label class="col-sm-2 control-label">耐久成长</label>
+                        <label class="col-sm-2 control-label">60级耐久</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_durable" class="form-control"
-                                   placeholder="如:1.1 (不填默认为0)" v-model="form.grow_durable">
-                            <span class="help-block"
-                                  v-if="form.errors.has('grow_durable')">{{ form.errors.get('grow_durable') }}</span>
+                            <input type="number" step="0.01" name="grow_durable" class="form-control" placeholder="如:100 (不填默认为0)" v-model="durable60">
+                            <span class="help-block" v-if="form.errors.has('grow_durable')">{{ form.errors.get('grow_durable') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_armor')}">
-                        <label class="col-sm-2 control-label">装甲成长</label>
+                        <label class="col-sm-2 control-label">60级装甲</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_armor" class="form-control"
-                                   placeholder="如:1.1 (不填默认为0)" v-model="form.grow_armor">
-                            <span class="help-block"
-                                  v-if="form.errors.has('grow_armor')">{{ form.errors.get('grow_armor') }}</span>
+                            <input type="number" step="0.01" name="grow_armor" class="form-control" placeholder="如:100 (不填默认为0)" v-model="armor60">
+                            <span class="help-block" v-if="form.errors.has('grow_armor')">{{ form.errors.get('grow_armor') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -220,7 +211,10 @@
                 rarities: [],
                 slots: [],
                 editedSlots: null,
-                relationSlots: [],
+                fire60: null,
+                penetrate60: null,
+                durable60: null,
+                armor60: null,
                 form: new Form({
                     name: '',
                     dance_outfit: '',
@@ -241,8 +235,8 @@
                     hit: null,
                     dodge: null,
                     concealment: null,
-                    slots: null,
-                    spy: null
+                    spy: null,
+                    slots: null
                 })
             }
         },
@@ -265,10 +259,10 @@
                     this.form.grow_penetrate = data.grow_penetrate
                     this.form.grow_durable = data.grow_durable
                     this.form.grow_armor = data.grow_armor
-                    this.form.fire = data.attributes.data.fire
-                    this.form.penetrate = data.attributes.data.penetrate
-                    this.form.durable = data.attributes.data.durable
-                    this.form.armor = data.attributes.data.armor
+                    this.form.fire = data.attributes.data.fire + data.grow_fire
+                    this.form.penetrate = data.attributes.data.penetrate + data.grow_penetrate
+                    this.form.durable = data.attributes.data.durable + data.grow_durable
+                    this.form.armor = data.attributes.data.armor + data.grow_armor
                     this.form.hit = data.attributes.data.hit
                     this.form.dodge = data.attributes.data.dodge
                     this.form.concealment = data.attributes.data.concealment
@@ -278,6 +272,10 @@
                     this.rarity = this.rarities.filter(rarity => rarity.id === this.form.rarity_id)[0]
                     this.slots = data.slotCollection.data
                     this.relationSlots = data.slots.data
+                    this.fire60 = data.attributes.data.fire + data.grow_fire * 60
+                    this.penetrate60 = data.attributes.data.penetrate + data.grow_penetrate * 60
+                    this.durable60 = data.attributes.data.durable + data.grow_durable * 60
+                    this.armor60 = data.attributes.data.armor + data.grow_armor * 60
                     this.editedSlots = []
                     let count = null
                     this.slots.forEach((v, k) => {
@@ -297,10 +295,14 @@
         },
         methods: {
             edit(event) {
-                this.form.grow_fire && (this.form.fire -= this.form.grow_fire)
-                this.form.grow_penetrate && (this.form.penetrate -= this.form.grow_penetrate)
-                this.form.grow_durable && (this.form.durable -= this.form.grow_durable)
-                this.form.grow_armor && (this.form.armor -= this.form.grow_armor)
+                this.form.grow_fire = ((this.fire60 - this.form.fire) / 59).toFixed(2)
+                this.form.grow_penetrate = ((this.penetrate60 - this.form.penetrate) / 59).toFixed(2)
+                this.form.grow_durable = ((this.durable60 - this.form.durable) / 59).toFixed(2)
+                this.form.grow_armor = ((this.armor60 - this.form.armor) / 59).toFixed(2)
+                this.form.fire -= this.form.grow_fire
+                this.form.penetrate -= this.form.grow_penetrate
+                this.form.durable -= this.form.grow_durable
+                this.form.armor -= this.form.grow_armor
                 this.form.slots = this.editedSlots
                 this.form.put('dancer/' + this.$route.params.id)
                     .then(() => {

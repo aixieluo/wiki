@@ -30,14 +30,14 @@
                     <template v-for="item in attributeLabels">
                         <div class="form-group">
                             <div class="col-sm-6" :class="{'has-error': form.errors.has(`${item.name}_up`)}">
-                                <label class="col-sm-4 control-label">提升基础{{ item.label }}</label>
+                                <label class="col-sm-4 control-label">提升基础{{ item.label }}（小数）</label>
                                 <div class="col-sm-8">
                                     <input type="number" step="0.01" :name="`${item.name}_up`" class="form-control" placeholder="不填默认0，表示没有提升" v-model="form[`${item.name}_up`]">
                                     <span class="help-block" v-if="form.errors.has(`${item.name}_up`)">{{ form.errors.get(`${item.name}_up`) }}</span>
                                 </div>
                             </div>
                             <div class="col-sm-6" :class="{'has-error': form.errors.has(`${item.name}_down`)}">
-                                <label class="col-sm-4 control-label">降低装备{{ item.label }}至</label>
+                                <label class="col-sm-4 control-label">降低装备{{ item.label }}至（小数）</label>
                                 <div class="col-sm-8">
                                     <input type="number" step="0.01" :name="`${item.name}_down`" class="form-control" placeholder="不填默认1，表示没有降低" v-model="form[`${item.name}_down`]">
                                     <span class="help-block" v-if="form.errors.has(`${item.name}_down`)">{{ form.errors.get(`${item.name}_down`) }}</span>

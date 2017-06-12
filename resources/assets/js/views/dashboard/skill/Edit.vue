@@ -29,7 +29,7 @@
 
                     <template v-for="item in attributeLabels">
                         <div class="form-group" :class="{'has-error': form.errors.has(`${item.name}_up`)}">
-                            <label class="col-sm-2 control-label">提升基础{{ item.label }}</label>
+                            <label class="col-sm-2 control-label">提升基础{{ item.label }}（小数）</label>
                             <div class="col-sm-10">
                                 <input type="number" step="0.01" :name="`${item.name}_up`" class="form-control" placeholder="不填默认0，表示没有提升" v-model="form[`${item.name}_up`]">
                                 <span class="help-block" v-if="form.errors.has(`${item.name}_up`)">{{ form.errors.get(`${item.name}_up`) }}</span>

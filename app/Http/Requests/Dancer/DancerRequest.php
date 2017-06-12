@@ -21,27 +21,29 @@ class DancerRequest extends FormRequest
      * @return array
      */
     public function rules() {
+        $id = $this->route('dancer');
+
         return [
-            'name'           => 'required',
-            'dance_outfit'   => 'required',
+            'name'           => 'required|unique:dancers,name,' . $id,
+            'dance_outfit'   => 'required|unique:dancers,dance_outfit,' . $id,
             'type_id'        => 'required|exists:types,id',
             'country_id'     => 'required|exists:countries,id',
             'rarity_id'      => 'required|exists:rarities,id',
             'subjection'     => 'nullable',
             'introduction'   => 'nullable',
             'character'      => 'nullable',
-            'grow_fire'      => 'nullable|numeric',
-            'grow_penetrate' => 'nullable|numeric',
-            'grow_durable'   => 'nullable|numeric',
-            'grow_armor'     => 'nullable|numeric',
-            'fire'           => 'nullable|numeric',
-            'penetrate'      => 'nullable|numeric',
-            'durable'        => 'nullable|numeric',
-            'armor'          => 'nullable|numeric',
-            'hit'            => 'nullable|numeric',
-            'dodge'          => 'nullable|numeric',
-            'concealment'    => 'nullable|numeric',
-            'spy'            => 'nullable|numeric',
+            'grow_fire'      => 'nullable|numeric|min:0',
+            'grow_penetrate' => 'nullable|numeric|min:0',
+            'grow_durable'   => 'nullable|numeric|min:0',
+            'grow_armor'     => 'nullable|numeric|min:0',
+            'fire'           => 'nullable|numeric|min:0',
+            'penetrate'      => 'nullable|numeric|min:0',
+            'durable'        => 'nullable|numeric|min:0',
+            'armor'          => 'nullable|numeric|min:0',
+            'hit'            => 'nullable|numeric|min:0',
+            'dodge'          => 'nullable|numeric|min:0',
+            'concealment'    => 'nullable|numeric|min:0',
+            'spy'            => 'nullable|numeric|min:0',
             'slots'          => 'nullable'
         ];
     }

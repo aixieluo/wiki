@@ -111,36 +111,36 @@
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_fire')}">
-                        <label class="col-sm-2 control-label">火力成长</label>
+                        <label class="col-sm-2 control-label">60级火力</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_fire" class="form-control" placeholder="如:1.1 (不填默认为0)" v-model="form.grow_fire">
+                            <input type="number" step="0.01" name="grow_fire" class="form-control" placeholder="如:100 (不填默认为0)" v-model="fire60">
                             <span class="help-block" v-if="form.errors.has('grow_fire')">{{ form.errors.get('grow_fire') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_penetrate')}">
-                        <label class="col-sm-2 control-label">穿甲成长</label>
+                        <label class="col-sm-2 control-label">60级穿甲</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_penetrate" class="form-control" placeholder="如:1.1 (不填默认为0)" v-model="form.grow_penetrate">
+                            <input type="number" step="0.01" name="grow_penetrate" class="form-control" placeholder="如:100 (不填默认为0)" v-model="penetrate60">
                             <span class="help-block" v-if="form.errors.has('grow_penetrate')">{{ form.errors.get('grow_penetrate') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_durable')}">
-                        <label class="col-sm-2 control-label">耐久成长</label>
+                        <label class="col-sm-2 control-label">60级耐久</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_durable" class="form-control" placeholder="如:1.1 (不填默认为0)" v-model="form.grow_durable">
+                            <input type="number" step="0.01" name="grow_durable" class="form-control" placeholder="如:100 (不填默认为0)" v-model="durable60">
                             <span class="help-block" v-if="form.errors.has('grow_durable')">{{ form.errors.get('grow_durable') }}</span>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
 
                     <div class="form-group" :class="{'has-error': form.errors.has('grow_armor')}">
-                        <label class="col-sm-2 control-label">装甲成长</label>
+                        <label class="col-sm-2 control-label">60级装甲</label>
                         <div class="col-sm-10">
-                            <input type="number" step="0.01" name="grow_armor" class="form-control" placeholder="如:1.1 (不填默认为0)" v-model="form.grow_armor">
+                            <input type="number" step="0.01" name="grow_armor" class="form-control" placeholder="如:100 (不填默认为0)" v-model="armor60">
                             <span class="help-block" v-if="form.errors.has('grow_armor')">{{ form.errors.get('grow_armor') }}</span>
                         </div>
                     </div>
@@ -197,6 +197,10 @@
                 rarities: [],
                 slots: [],
                 editedSlots: null,
+                fire60: null,
+                penetrate60: null,
+                durable60: null,
+                armor60: null,
                 form: new Form({
                     name: '',
                     dance_outfit: '',
@@ -251,10 +255,14 @@
         },
         methods: {
             create(event) {
-                this.form.grow_fire && (this.form.fire -= this.form.grow_fire)
-                this.form.grow_penetrate && (this.form.penetrate -= this.form.grow_penetrate)
-                this.form.grow_durable && (this.form.durable -= this.form.grow_durable)
-                this.form.grow_armor && (this.form.armor -= this.form.grow_armor)
+                this.form.grow_fire = ((this.fire60 - this.form.fire) / 59).toFixed(2)
+                this.form.grow_penetrate = ((this.penetrate60 - this.form.penetrate) / 59).toFixed(2)
+                this.form.grow_durable = ((this.durable60 - this.form.durable) / 59).toFixed(2)
+                this.form.grow_armor = ((this.armor60 - this.form.armor) / 5).toFixed(2)
+                this.form.fire -= this.form.grow_fire
+                this.form.penetrate -= this.form.grow_penetrate
+                this.form.durable -= this.form.grow_durable
+                this.form.armor -= this.form.grow_armor
                 this.form.slots = this.editedSlots
                 this.form.post('dancer')
                     .then(() => {
@@ -265,6 +273,10 @@
                         this.form.country_id = null
                         this.rarity = null
                         this.form.rarity_id = null
+                        this.fire60 = null
+                        this.penetrate60 = null
+                        this.durable60 = null
+                        this.armor60 = null
                         this.editedSlots = []
                         this.slots.forEach((v) => {
                             this.editedSlots.push({

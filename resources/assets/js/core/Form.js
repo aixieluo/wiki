@@ -5,6 +5,7 @@ class Form {
     constructor(data) {
         this.originalData = data
         this.resets = false
+        this.disabled = false
 
         for (let field in data) {
             this[field] = data[field]
@@ -31,7 +32,7 @@ class Form {
         }
         
         for (let field in this.originalData) {
-            if (field != 'resets') {
+            if (field != 'resets' && field != 'disabled') {
                 this[field] = null
             }
         }
@@ -56,6 +57,8 @@ class Form {
     }
 
     submit(requestType, url) {
+        if (this.disabled) return
+        this.disabled = true
         return new Promise((resolve, reject) => {
             http[requestType](url, this.data())
                 .then(response => {
@@ -73,10 +76,12 @@ class Form {
 
     onSuccess(data){
         if (this.resets) this.reset()
+        this.disabled = false
     }
 
     onFail(errors) {
         this.errors.record(errors)
+        this.disabled = false
     }
 }
 

@@ -51,7 +51,7 @@ class CountryController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      */
     public function edit($id) {
-        return $this->respondWithItem($this->countryRepository->getById($id), new CountrySelectedTransformer);
+        return $this->respondWithItem($this->countryRepository->getById($id), new CountryTransformer);
     }
 
     /**
