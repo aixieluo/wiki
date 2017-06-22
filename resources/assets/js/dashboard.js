@@ -19,11 +19,14 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './vuex/dashboard/store'
 import httpPlugin from './plugins/http/index'
+import vueImgInputer from 'vue-img-inputer'
+// import iView from 'iview'
 
 import App from './App.vue'
 
 Vue.use(VueRouter)
 Vue.use(httpPlugin)
+// Vue.use(iView)
 
 window.toastr = require('toastr/build/toastr.min.js');
 window.innerHeight = 800;
@@ -60,12 +63,26 @@ Vue.component(
     require('./components/dashboard/Form.vue')
 )
 
+Vue.component(
+    'vue-img-inputer',
+    vueImgInputer
+)
+
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
     linkActiveClass: 'active',
     routes: routes
 })
+
+// router.beforeEach((to, from, next) => {
+//     iView.LoadingBar.start();
+//     next();
+// });
+//
+// router.afterEach((to, from, next) => {
+//     iView.LoadingBar.finish();
+// });
 
 new Vue(Vue.util.extend({router, store}, App)).$mount('#app')
 

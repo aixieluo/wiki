@@ -20,21 +20,21 @@
                         </tr>
                         <tr>
                             <td>军阶</td>
-                            <td>{{ $dancer->rarity->level }}</td>
+                            <td>{{ $dancer->rarity->lv }}</td>
                             <td>类型</td>
-                            <td>{{ $dancer->type->content }}</td>
+                            <td>{{ $dancer->type->name }}</td>
                         </tr>
                         <tr>
                             <td>国别</td>
-                            <td>{{ $dancer->country->content }}</td>
+                            <td>{{ $dancer->country->name }}</td>
                             <td>隶属机构</td>
                             <td>{{ $dancer->subjection }}</td>
                         </tr>
                         <tr>
                             <td>配音</td>
-                            <td>(暂无)</td>
+                            <td>(暂无该信息)</td>
                             <td>画师</td>
-                            <td>(暂无)</td>
+                            <td>(暂无该信息)</td>
                         </tr>
                     </table>
                 </div>
@@ -47,7 +47,39 @@
                 <h3>性格设定</h3>
             </div>
             <p class="well">{{ $dancer->character }}</p>
-            <attributes dancer-id="{{ $dancer->id }}"></attributes>
+            <div class="page-header">
+                <h3>基础属性（0级）</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>火力</td>
+                            <td>{{ $dancer->attributes()->first()->fire }}</td>
+                            <td>穿甲</td>
+                            <td>{{ $dancer->attributes()->first()->penetrate }}</td>
+                        </tr>
+                        <tr>
+                            <td>耐久</td>
+                            <td>{{ $dancer->attributes()->first()->durable }}</td>
+                            <td>装甲</td>
+                            <td>{{ $dancer->attributes()->first()->armor }}</td>
+                        </tr>
+                        <tr>
+                            <td>命中</td>
+                            <td>{{ $dancer->attributes()->first()->hit }}</td>
+                            <td>闪避</td>
+                            <td>{{ $dancer->attributes()->first()->dodge }}</td>
+                        </tr>
+                        <tr>
+                            <td>隐蔽</td>
+                            <td>{{ $dancer->attributes()->first()->concealment }}</td>
+                            <td>侦查</td>
+                            <td>{{ $dancer->attributes()->first()->spy }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <div class="page-header">
                 <h3>属性成长</h3>
             </div>
@@ -68,6 +100,9 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            <div class="page-header">
+                <h3>装备槽位</h3>
             </div>
             <div class="page-header">
                 <h3>升星消耗</h3>

@@ -18,10 +18,10 @@ Vue.use(httpPlugin)
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component(
-    'attributes',
-    require('./components/simulator/Attributes.vue')
-)
+// Vue.component(
+//     'attributes',
+//     require('./components/simulator/Attributes.vue')
+// )
 
 Vue.component(
     'tactic',

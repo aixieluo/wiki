@@ -58,7 +58,8 @@ Route::group(['namespace' => 'Api\Dashboard'], function () {
     Route::get('technologyType/{gId}', 'TechnologyTypeController@index');
     Route::get('technologyTypes', 'TechnologyTypeController@getList');
 
-    Route::resource('technology', 'TechnologyController', ['except' => ['show', 'create']]);
+    Route::resource('technology', 'TechnologyController', ['except' => ['index', 'show', 'create']]);
+    Route::get('technology/{pId}', 'TechnologyController@index');
     Route::get('technologies', 'TechnologyController@getList');
 
     Route::resource('tacticInfo', 'TacticInfoController', ['except' => ['show', 'create']]);

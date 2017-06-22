@@ -61,4 +61,10 @@ class DancerRepository
     public function syncSlots($slots) {
         $this->model->slots()->sync($slots);
     }
+
+    public function getByInfo($id) {
+        $this->model = $this->getById($id);
+        $info = $this->model->with(['type', 'country', 'rarity', 'slots', 'technologies'])->first();
+        return $info;
+    }
 }

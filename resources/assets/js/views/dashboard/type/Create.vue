@@ -11,6 +11,15 @@
             </template>
             <template slot="content">
                 <form class="form-horizontal" @submit.prevent="create" @keydown="form.errors.clear($event.target.name)">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图标</label>
+                        <div class="col-sm-10">
+                            <vue-img-inputer v-model="form.avatar" accept="image/*" icon="img" theme="light"
+                                             size="small" @onChange="upDemo"></vue-img-inputer>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
                     <div class="form-group" :class="{'has-error': form.errors.has('name')}">
                         <label class="col-sm-2 control-label">车型</label>
                         <div class="col-sm-10">
@@ -39,11 +48,20 @@
             return {
                 form: new Form({
                     name: '',
+                    avatar: '',
                     resets: true
                 })
             }
         },
         methods: {
+            upDemo(file) {
+                let formData = new FormData()
+
+                formData.append('avatar', file)
+                this.$http.post('type', formData).then((response) => {
+
+                })
+            },
             create(event) {
                 this.form.post('type').then((response) => {
                     toastr.success('创建成功！')
@@ -53,6 +71,10 @@
     }
 </script>
 
-<style>
-
+<style lang="scss" scope>
+    .img-inputer--small{
+        $len: 130px;
+        width: $len !important;
+        height: $len !important;
+    }
 </style>

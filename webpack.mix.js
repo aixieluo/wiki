@@ -47,6 +47,7 @@ mix
     .js('resources/assets/js/dashboard.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/dashboard.scss', 'public/css')
+    // .less('resources/assets/less/index.less', 'public/css')
     // .browserSync({proxy: 'wiki.dev'})
     .version()
 

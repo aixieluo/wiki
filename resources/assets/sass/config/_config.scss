@@ -62,6 +62,18 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color: $placeholder-color !important;
 }
 
+.img-inputer--light{
+    border-color: $basic-color !important;
+}
+
+.img-inputer--light .img-inputer__icon{
+    color: $basic-color !important;
+}
+
+.img-inputer__placeholder{
+    //color: $placeholder-color !important;
+}
+
 .has-error {
     .help-block {
         color: #ed5565;

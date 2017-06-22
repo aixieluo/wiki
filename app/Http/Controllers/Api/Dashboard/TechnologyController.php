@@ -23,8 +23,8 @@ class TechnologyController extends ApiController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        return $this->respondWithPaginator($this->technologyRepository->page(), new TechnologyTransformer);
+    public function index($pId) {
+        return $this->respondWithPaginator($this->technologyRepository->page($pId), new TechnologyTransformer);
     }
 
     public function getList() {

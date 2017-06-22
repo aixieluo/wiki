@@ -27,9 +27,11 @@ Route::group(['namespace'=>'Home'], function (){
 
     //Dancer
     Route::get('/dancer', 'DancerController@index');
-    Route::get('/dancer/{id}', 'DancerController@show');
 });
 
+Route::resource('dancer', 'DancerController');
+
+//后台管理部分
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\LoginController@login');

@@ -17,6 +17,11 @@ class TechnologyRepository
         $this->technology = $technology;
     }
 
+    public function page($pId, $number = 10, $sort = 'desc', $sortColumn = 'id') {
+
+        return $this->model->where('technology_type_id', $pId)->orderBy($sortColumn, $sort)->paginate($number);
+    }
+
     public function store($data) {
         $data = $this->removeEmpty($data);
         $this->model = $this->model->create($data);

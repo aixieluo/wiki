@@ -18,7 +18,6 @@ class SimulatorEquipmentTransformer extends TransformerAbstract
             'id'         => $equipment->id,
             'name'       => $equipment->equipmentInfo->name,
             'lv'         => $equipment->lv,
-            'slot'       => $equipment->slot->name,
             'attributes' => [
                 'fire'        => $equipment->attributes->first()->fire,
                 'penetrate'   => $equipment->attributes->first()->penetrate,

@@ -8,14 +8,14 @@
                 <strong>{{ $route.query.gName }}</strong>
             </li>
             <li>
-                <router-link to="/dashboard/technologyCategory">科技类型（二级）</router-link>
+                <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType`, query: {gName: $route.query.gName}}">科技类型（二级）</router-link>
             </li>
             <li>
                 <strong>{{ $route.query.pName }}</strong>
             </li>
         </vue-head>
 
-        <vue-table apiUrl="technology" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
+        <vue-table :apiUrl="`technology/${$route.params.pId}`" :tableClass="tableClass" :fields="fields" :itemActions="itemActions"
                    @table-action="tableActions" showPagination>
             <template slot="buttons">
                 <router-link :to="{path: `/dashboard/technologyCategory/${$route.params.gId}/technologyType/${$route.params.pId}/technology/create`, query: {gName: $route.query.gName, pName: $route.query.pName}}" class="btn btn-primary">创建</router-link>
