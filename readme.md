@@ -25,7 +25,7 @@ cp .env.example .env
 	
 Edit the `.env` file and set the `database` and other config for the system after you copy the `.env`.example file.
 	
-### 2. Install the extended package dependency.
+### 3. Install the extended package dependency.
 	
 Install the `Laravel` extended repositories: 
 	
@@ -51,7 +51,7 @@ npm run watch
 npm run production
 ```
 
-## Run the migrate --seed command
+### 4. Run the migrate --seed command
 
 ```
 php artisan migrate --seed
