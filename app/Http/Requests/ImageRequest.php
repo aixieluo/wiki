@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Dancer;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TypeRequest extends FormRequest
+class ImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,12 +21,10 @@ class TypeRequest extends FormRequest
      *
      * @return array
      */
-    public function rules() {
-        $id = $this->route('type');
-
+    public function rules()
+    {
         return [
-            'uploadImgs' => 'nullable|array',
-            'name' => 'required|unique:types,name,' . $id
+            'avatar' => 'nullable|file|mimes:png,jpeg,jpg,bmp'
         ];
     }
 }

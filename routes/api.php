@@ -27,6 +27,9 @@ Route::group(['namespace' => 'Api'], function () {
 });
 
 Route::group(['namespace' => 'Api\Dashboard'], function () {
+    //上传图片
+    Route::post('img/upload', 'ImageController@uploadImg');
+
     Route::resource('type', 'TypeController', ['except' => ['show', 'create']]);
     Route::get('types', 'TypeController@getList');
 

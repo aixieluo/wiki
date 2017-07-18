@@ -14,8 +14,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">图标</label>
                         <div class="col-sm-10">
-                            <vue-img-inputer v-model="form.avatar" accept="image/*" icon="img" theme="light"
-                                             size="small" @onChange="upDemo"></vue-img-inputer>
+                            <vue-img-inputer accept="image/*" icon="img" theme="light" v-model="avatar"
+                                             size="small" @onChange="uploadImg"></vue-img-inputer>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -46,21 +46,24 @@
     export default {
         data() {
             return {
+                avatar: 0,
                 form: new Form({
                     name: '',
-                    avatar: '',
                     resets: true
                 })
             }
         },
         methods: {
-            upDemo(file) {
+            uploadImg(file) {
                 let formData = new FormData()
-
                 formData.append('avatar', file)
-                this.$http.post('type', formData).then((response) => {
-
-                })
+                this.$http.post('img/upload', formData)
+                    .then((response) => {
+                        this.form.uploadImages.push(response.data)
+                        this.avatar = null
+                    }).catch((error) => {
+                        toastr.error('图片上传失败，请重新上传')
+                    })
             },
             create(event) {
                 this.form.post('type').then((response) => {
@@ -72,7 +75,7 @@
 </script>
 
 <style lang="scss" scope>
-    .img-inputer--small{
+    .img-inputer--small {
         $len: 130px;
         width: $len !important;
         height: $len !important;

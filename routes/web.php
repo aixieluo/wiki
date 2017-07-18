@@ -16,8 +16,6 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-
-
 Route::group(['namespace'=>'Home'], function (){
     //auth login register
     Auth::routes();

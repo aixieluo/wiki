@@ -1,11 +1,12 @@
 import Errors from './Errors';
-import { http } from '../plugins/http/index'
+import {http} from '../plugins/http/index'
 
 class Form {
     constructor(data) {
         this.originalData = data
-        this.resets = false
-        this.disabled = false
+        this.resets = false         //判断是否要重置所有数据
+        this.disabled = false       //判断submit是否处于禁用状态
+        this.uploadImages = []      //存储上传的图片地址
 
         for (let field in data) {
             this[field] = data[field]
@@ -21,6 +22,8 @@ class Form {
             data[property] = this[property]
         }
 
+        if (this.uploadImages) data.uploadImages = this.uploadImages
+
         return data
     }
 
@@ -30,10 +33,12 @@ class Form {
 
             return
         }
-        
+
         for (let field in this.originalData) {
             if (field != 'resets' && field != 'disabled') {
                 this[field] = null
+            } else if (field == 'uploadImgs') {
+                this[field] = []
             }
         }
 
@@ -74,7 +79,7 @@ class Form {
         });
     }
 
-    onSuccess(data){
+    onSuccess(data) {
         if (this.resets) this.reset()
         this.disabled = false
     }

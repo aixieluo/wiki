@@ -14,6 +14,14 @@ class TypeRepository
         $this->model = $type;
     }
 
+    public function store($data) {
+        $data = $this->removeEmpty($data);
+        $this->model = $this->model->create($data);
+        if (array_key_exists('uploadImages', $data)) {
+            $this->updateImages($data['uploadImages']);
+        }
+    }
+
     public function destroy($id) {
         $this->model = $this->getById($id);
         if ($this->model->dancers()->count()) {

@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\Image;
+
 trait BaseRepository
 {
     public function getNumber() {
@@ -88,6 +90,14 @@ trait BaseRepository
     public function deleteAttributes() {
 
         return $this->model->attributes()->delete();
+    }
+
+    public function updateImages($images) {
+        foreach ($images as $image) {
+            $imgs[] = new Image($image);
+        }
+
+        return $this->model->images()->saveMany($imgs);
     }
 
     public function removeEmpty($data) {

@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Api\Dashboard;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Requests\Dancer\TypeRequest;
 use App\Repositories\TypeRepository;
+use App\Services\ImageService;
 use App\Transformers\TypeTransformer;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
 
 class TypeController extends ApiController
 {
@@ -42,10 +41,7 @@ class TypeController extends ApiController
      *
      * @return \App\Http\Controllers\Api\json|\Illuminate\Http\JsonResponse
      */
-    public function store(Request $request) {
-        $img = Image::make($request->avatar);
-        $img->save('/public/images/a.jpg');
-        dd($img);
+    public function store(TypeRequest $request) {
         $message = $this->typeRepository->store($request->all());
 
         return $message ? $this->errorWrongArgs($message) : $this->noContent();
