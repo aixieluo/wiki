@@ -10,46 +10,46 @@
 前台模拟器部分施工中。
 
 ## Install
+
+### 1. Clone the source code or create new project.
 	
-	### 1. Clone the source code or create new project.
+```
+git clone https://github.com/aixieluo/wiki.git
+```
 	
-	```
-	git clone https://github.com/aixieluo/wiki.git
-	```
+### 2. Set the basic config
 	
-	### 2. Set the basic config
+```
+cp .env.example .env
+```
 	
-	```
-	cp .env.example .env
-	```
+Edit the `.env` file and set the `database` and other config for the system after you copy the `.env`.example file.
 	
-	Edit the `.env` file and set the `database` and other config for the system after you copy the `.env`.example file.
+### 2. Install the extended package dependency.
 	
-	### 2. Install the extended package dependency.
+Install the `Laravel` extended repositories: 
 	
-	Install the `Laravel` extended repositories: 
+```
+composer update
+```
 	
-	```
-	composer update
-	```
+Install the `Vuejs` extended repositories: 
 	
-	Install the `Vuejs` extended repositories: 
+```
+npm install
+```
 	
-	```
-	npm install
-	```
-	
-	```
-	npm run dev
-	
-	// OR
-	
-	npm run watch
-	
-	// OR
-	
-	npm run production
-	```
+```
+npm run dev
+
+// OR
+
+npm run watch
+
+// OR
+
+npm run production
+```
 
 ## Run the migrate --seed command
 
